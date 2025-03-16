@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文學世界 | 最新消息</title>
+    <title>文學世界 | 首頁</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script>
@@ -18,7 +18,25 @@
                         'dark-text': '#E1E1E1',
                     },
                     animation: {
+                        'float': 'float 6s ease-in-out infinite',
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        glow: {
+                            '0%': { 
+                                'box-shadow': '0 0 5px rgba(187, 134, 252, 0.3)',
+                                'border-color': 'rgba(187, 134, 252, 0.3)'
+                            },
+                            '100%': { 
+                                'box-shadow': '0 0 20px rgba(187, 134, 252, 0.7), 0 0 30px rgba(187, 134, 252, 0.5)',
+                                'border-color': 'rgba(187, 134, 252, 0.8)'
+                            }
+                        }
                     }
                 }
             }
@@ -26,49 +44,107 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .news-card {
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .bg-gradient-radial {
+            background: radial-gradient(circle at center, rgba(187, 134, 252, 0.15) 0%, rgba(18, 18, 18, 0.95) 70%);
+        }
+        
+        .feature-card {
+            transition: all 0.4s ease;
+            transform: perspective(1000px) rotateY(0deg);
+            transform-style: preserve-3d;
+        }
+        
+        .feature-card:hover {
+            transform: perspective(1000px) rotateY(5deg) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(187, 134, 252, 0.3);
+        }
+        
+        .nav-tab {
+            position: relative;
+            overflow: hidden;
             transition: all 0.3s ease;
         }
-        .news-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        
+        .nav-tab:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #BB86FC;
+            transition: all 0.3s ease;
         }
-        .tag {
-            transition: all 0.2s ease;
+        
+        .nav-tab:hover:before {
+            width: 100%;
         }
-        .tag:hover {
-            transform: scale(1.05);
+        
+        .hero-text {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .glowing-border {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px rgba(187, 134, 252, 0.3);
+                border-color: rgba(187, 134, 252, 0.3);
+            }
+            to {
+                box-shadow: 0 0 20px rgba(187, 134, 252, 0.7), 0 0 30px rgba(187, 134, 252, 0.5);
+                border-color: rgba(187, 134, 252, 0.8);
+            }
+        }
+        
+        .slide-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        
+        .slide-in-section.show {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body class="bg-dark-primary text-dark-text min-h-screen">
-    <nav class="bg-dark-secondary shadow-md">
+    <!-- 頂部導航欄 -->
+    <nav class="fixed w-full z-50 bg-dark-primary bg-opacity-90 backdrop-filter backdrop-blur-lg shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
-                <div class="flex">
+                <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
                         <img src="/api/placeholder/40/40" alt="夢鈴" class="h-8 w-8 rounded-full mr-2">
-                        <span class="text-dark-accent text-xl font-bold">夢鈴幻境</span>
-                    </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="index.html" class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            小說介紹
-                        </a>
-                        <a href="tools.html" class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            工具發佈
-                        </a>
-                        <a href="news.html" class="border-dark-accent text-dark-accent inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            最新消息
-                        </a>
+                        <span class="text-dark-accent text-2xl font-bold">夢鈴幻境</span>
                     </div>
                 </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="nav-tab text-dark-accent font-medium px-1 py-2">首頁</a>
+                    <a href="index.html" class="nav-tab text-gray-300 hover:text-white font-medium px-1 py-2">小說介紹</a>
+                    <a href="tools.html" class="nav-tab text-gray-300 hover:text-white font-medium px-1 py-2">工具發佈</a>
+                    <a href="news.html" class="nav-tab text-gray-300 hover:text-white font-medium px-1 py-2">最新消息</a>
+                </div>
+                
                 <div class="flex items-center">
-                    <button class="bg-dark-accent hover:bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">
-                        訂閱通知
+                    <button class="bg-dark-accent hover:bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium transition-all hidden md:block">
+                        探索更多
                     </button>
                 </div>
-                <div class="-mr-2 flex items-center sm:hidden">
-                    <button type="button" class="mobile-menu-button bg-dark-secondary inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-expanded="false">
+                
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-dark-accent">
                         <span class="sr-only">打開主選單</span>
                         <i class="fas fa-bars"></i>
                     </button>
@@ -76,244 +152,236 @@
             </div>
         </div>
 
-        <div class="mobile-menu hidden sm:hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1">
+        <!-- 行動版選單 -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-dark-primary shadow-lg">
+                <a href="#" class="bg-dark-secondary text-dark-accent block px-3 py-2 rounded-md text-base font-medium">首頁</a>
                 <a href="index.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">小說介紹</a>
                 <a href="tools.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">工具發佈</a>
-                <a href="news.html" class="bg-dark-secondary text-dark-accent block px-3 py-2 rounded-md text-base font-medium">最新消息</a>
+                <a href="news.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">最新消息</a>
             </div>
         </div>
     </nav>
 
-    <main>
-        <!-- 頂部橫幅 -->
-        <div class="bg-dark-secondary py-12">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl font-bold mb-4">最新消息與公告</h1>
-                <p class="text-gray-400 max-w-2xl mx-auto">了解平台的最新動態，包括系統更新、新功能發布、活動公告以及其他重要信息。</p>
+    <!-- 英雄區域 -->
+    <div class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- 背景圖層 -->
+        <div class="absolute inset-0 bg-dark-primary">
+            <div class="absolute inset-0 bg-gradient-radial"></div>
+            <!-- 動態背景元素 -->
+            <div class="absolute inset-0 overflow-hidden opacity-20">
+                <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-dark-accent rounded-full filter blur-3xl animate-pulse-slow"></div>
+                <div class="absolute top-1/3 right-1/3 w-96 h-96 bg-purple-700 rounded-full filter blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-indigo-600 rounded-full filter blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
             </div>
         </div>
-
-        <!-- 內容主區域 -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <!-- 篩選區 -->
-            <div class="flex flex-wrap items-center justify-between mb-8 pb-4 border-b border-gray-700">
-                <div class="mb-4 sm:mb-0">
-                    <h2 class="text-xl font-semibold">篩選公告</h2>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <button class="tag bg-dark-accent text-white px-3 py-1 rounded-full text-sm">全部</button>
-                    <button class="tag bg-dark-secondary hover:bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">系統更新</button>
-                    <button class="tag bg-dark-secondary hover:bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">功能優化</button>
-                    <button class="tag bg-dark-secondary hover:bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">活動</button>
-                    <button class="tag bg-dark-secondary hover:bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">社區</button>
-                </div>
+        
+        <!-- 網格裝飾 -->
+        <div class="absolute inset-0 overflow-hidden opacity-10">
+            <div class="h-full w-full" style="background-image: linear-gradient(#BB86FC 1px, transparent 1px), linear-gradient(to right, #BB86FC 1px, transparent 1px); background-size: 40px 40px;"></div>
+        </div>
+        
+        <!-- 內容 -->
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 hero-text">
+                <span class="text-white">夢</span>
+                <span class="text-dark-accent">鈴</span>
+                <span class="text-white">幻境</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto hero-text">
+                在鈴聲迴盪的幻想國度，譜寫心靈深處的浪漫與奇想
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+                <a href="index.html" class="glowing-border bg-dark-accent hover:bg-opacity-90 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all flex items-center justify-center">
+                    <i class="fas fa-book mr-2"></i>探索小說
+                </a>
+                <a href="tools.html" class="border-2 border-dark-accent hover:bg-dark-accent hover:bg-opacity-20 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all flex items-center justify-center">
+                    <i class="fas fa-tools mr-2"></i>查看工具
+                </a>
             </div>
-
-            <!-- 搜索區 -->
-            <div class="mb-8">
-                <div class="relative">
-                    <input type="text" placeholder="搜尋公告..." class="w-full px-4 py-3 bg-dark-secondary text-dark-text rounded-md focus:outline-none focus:ring-2 focus:ring-dark-accent">
-                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2">
-                        <i class="fas fa-search text-gray-400"></i>
-                    </button>
-                </div>
+            
+            <!-- 向下滾動提示 -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <a href="#features" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fas fa-chevron-down text-2xl"></i>
+                </a>
             </div>
+        </div>
+        
+        <!-- 裝飾元素 - 浮動書本 -->
+        <div class="hidden md:block absolute top-1/4 right-10 animate-float" style="animation-delay: 0.5s;">
+            <div class="relative w-16 h-20 transform rotate-12">
+                <div class="absolute inset-0 bg-dark-accent rounded-r-md rounded-b-md"></div>
+                <div class="absolute inset-y-0 left-0 w-1/6 bg-purple-800 rounded-l-md"></div>
+                <div class="absolute inset-x-0 top-0 h-1/4 w-5/6 ml-auto bg-white bg-opacity-20 rounded-tr-md"></div>
+            </div>
+        </div>
+        
+        <div class="hidden md:block absolute bottom-1/3 left-10 animate-float" style="animation-delay: 1.5s;">
+            <div class="relative w-14 h-18 transform -rotate-6">
+                <div class="absolute inset-0 bg-purple-600 rounded-r-md rounded-b-md"></div>
+                <div class="absolute inset-y-0 left-0 w-1/6 bg-purple-900 rounded-l-md"></div>
+                <div class="absolute inset-x-0 top-0 h-1/4 w-5/6 ml-auto bg-white bg-opacity-20 rounded-tr-md"></div>
+            </div>
+        </div>
+    </div>
 
-            <!-- 置頂公告 -->
-            <div class="mb-12">
-                <div class="bg-dark-secondary border-l-4 border-dark-accent rounded-r-lg p-6 shadow-lg">
-                    <div class="flex items-center mb-2">
-                        <span class="bg-red-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded mr-2">置頂</span>
-                        <span class="bg-dark-accent bg-opacity-20 text-dark-accent text-xs font-semibold px-2.5 py-0.5 rounded">活動</span>
+    <!-- 特色區域 -->
+    <section id="features" class="py-20 bg-dark-secondary slide-in-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">夢鈴的文學殿堂</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    一位熱愛創作、思想豐富的作家，帶您穿越文字編織的夢幻國度
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 小說介紹卡片 -->
+                <div class="feature-card bg-dark-primary rounded-xl overflow-hidden shadow-xl border border-gray-800">
+                    <div class="h-48 overflow-hidden">
+                        <img src="/api/placeholder/600/400" alt="小說庫" class="w-full h-full object-cover transition-all duration-700 hover:scale-110">
                     </div>
-                    <h3 class="text-2xl font-bold mb-2">2025年春季文學創作大賽即將開始</h3>
-                    <p class="text-gray-400 mb-4">我們很高興宣布，2025年春季文學創作大賽將於4月1日正式開始接受投稿。本次比賽分為短篇小說、詩歌和散文三個類別，優勝者將獲得豐厚獎金和出版機會。</p>
-                    <div class="flex items-center justify-between">
-                        <div class="text-sm text-gray-500">
-                            <i class="far fa-calendar-alt mr-1"></i> 2025年3月15日
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-dark-accent rounded-full p-3 mr-4">
+                                <i class="fas fa-book text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold">小說介紹</h3>
                         </div>
-                        <a href="#" class="text-dark-accent hover:underline flex items-center text-sm">
-                            閱讀完整公告 <i class="fas fa-angle-right ml-1"></i>
+                        <p class="text-gray-400 mb-6">
+                            探索精選小說，從經典名著到最新佳作，豐富多樣的閱讀體驗等待您的發現。我們提供完整的小說資訊和追蹤功能。
+                        </p>
+                        <a href="index.html" class="inline-flex items-center text-dark-accent hover:underline">
+                            前往探索 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 工具發佈卡片 -->
+                <div class="feature-card bg-dark-primary rounded-xl overflow-hidden shadow-xl border border-gray-800">
+                    <div class="h-48 overflow-hidden">
+                        <img src="/api/placeholder/600/400" alt="工具庫" class="w-full h-full object-cover transition-all duration-700 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-dark-accent rounded-full p-3 mr-4">
+                                <i class="fas fa-tools text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold">工具發佈</h3>
+                        </div>
+                        <p class="text-gray-400 mb-6">
+                            發現各種創作輔助工具，從情節生成到格式轉換，專為提升您的創作體驗而設計。持續更新的工具庫助您創作無憂。
+                        </p>
+                        <a href="tools.html" class="inline-flex items-center text-dark-accent hover:underline">
+                            探索工具 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 最新消息卡片 -->
+                <div class="feature-card bg-dark-primary rounded-xl overflow-hidden shadow-xl border border-gray-800">
+                    <div class="h-48 overflow-hidden">
+                        <img src="/api/placeholder/600/400" alt="最新消息" class="w-full h-full object-cover transition-all duration-700 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-dark-accent rounded-full p-3 mr-4">
+                                <i class="fas fa-newspaper text-white text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold">最新消息</h3>
+                        </div>
+                        <p class="text-gray-400 mb-6">
+                            掌握平台的最新動態，包括系統更新、活動公告和社區亮點。訂閱通知，不錯過任何重要更新和精彩活動。
+                        </p>
+                        <a href="news.html" class="inline-flex items-center text-dark-accent hover:underline">
+                            查看消息 <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- 公告列表 -->
-            <div class="space-y-6">
-                <!-- 公告卡片 1 -->
-                <div class="bg-dark-secondary rounded-lg p-6 shadow-lg news-card">
-                    <div class="md:flex md:justify-between">
-                        <div class="md:flex-1 md:pr-8">
-                            <div class="flex items-center mb-2">
-                                <span class="bg-blue-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded mr-2">系統更新</span>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">平台更新：全新的閱讀追蹤功能</h3>
-                            <p class="text-gray-400 mb-4">我們很高興地宣布，平台現已推出全新的閱讀追蹤功能。您現在可以追蹤您喜愛的小說，獲取更新通知，並標記您的閱讀進度。此外，您還可以設置自動提醒，當有新章節發布時立即收到通知。</p>
-                            <div class="flex items-center">
-                                <div class="text-sm text-gray-500">
-                                    <i class="far fa-calendar-alt mr-1"></i> 2025年3月10日
-                                </div>
-                            </div>
-                        </div>
-                        <div class="md:w-1/4 mt-4 md:mt-0 flex justify-end items-center">
-                            <a href="#" class="text-dark-accent hover:underline flex items-center text-sm">
-                                閱讀完整公告 <i class="fas fa-angle-right ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
+    <!-- 統計數據區 -->
+    <section class="py-16 bg-dark-primary slide-in-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6 rounded-lg">
+                    <div class="text-4xl md:text-5xl font-bold text-dark-accent mb-2 counter-value" data-target="5000">0</div>
+                    <p class="text-gray-400">精選小說</p>
                 </div>
-
-                <!-- 公告卡片 2 -->
-                <div class="bg-dark-secondary rounded-lg p-6 shadow-lg news-card">
-                    <div class="md:flex md:justify-between">
-                        <div class="md:flex-1 md:pr-8">
-                            <div class="flex items-center mb-2">
-                                <span class="bg-green-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded mr-2">功能優化</span>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">性能提升：更快的頁面載入速度</h3>
-                            <p class="text-gray-400 mb-4">在過去的一個月中，我們對平台進行了多項性能優化，特別專注於提升頁面載入速度和整體響應性。根據我們的測試，頁面載入時間平均減少了40%，特別是在移動設備上的表現更加出色。</p>
-                            <div class="flex items-center">
-                                <div class="text-sm text-gray-500">
-                                    <i class="far fa-calendar-alt mr-1"></i> 2025年3月5日
-                                </div>
-                            </div>
-                        </div>
-                        <div class="md:w-1/4 mt-4 md:mt-0 flex justify-end items-center">
-                            <a href="#" class="text-dark-accent hover:underline flex items-center text-sm">
-                                閱讀完整公告 <i class="fas fa-angle-right ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
+                <div class="p-6 rounded-lg">
+                    <div class="text-4xl md:text-5xl font-bold text-dark-accent mb-2 counter-value" data-target="120">0</div>
+                    <p class="text-gray-400">創作工具</p>
                 </div>
-
-                <!-- 公告卡片 3 -->
-                <div class="bg-dark-secondary rounded-lg p-6 shadow-lg news-card">
-                    <div class="md:flex md:justify-between">
-                        <div class="md:flex-1 md:pr-8">
-                            <div class="flex items-center mb-2">
-                                <span class="bg-purple-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded mr-2">社區</span>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">社區亮點：二月最佳作者</h3>
-                            <p class="text-gray-400 mb-4">我們很榮幸地宣布二月份的最佳作者是林志遠，他的科幻系列《星際迷航者》獲得了讀者的高度評價。他的作品以細膩的人物塑造和引人入勝的情節贏得了社區成員的喜愛。我們邀請您閱讀他的作品並給予支持。</p>
-                            <div class="flex items-center">
-                                <div class="text-sm text-gray-500">
-                                    <i class="far fa-calendar-alt mr-1"></i> 2025年3月1日
-                                </div>
-                            </div>
-                        </div>
-                        <div class="md:w-1/4 mt-4 md:mt-0 flex justify-end items-center">
-                            <a href="#" class="text-dark-accent hover:underline flex items-center text-sm">
-                                閱讀完整公告 <i class="fas fa-angle-right ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
+                <div class="p-6 rounded-lg">
+                    <div class="text-4xl md:text-5xl font-bold text-dark-accent mb-2 counter-value" data-target="50000">0</div>
+                    <p class="text-gray-400">活躍用戶</p>
                 </div>
-
-                <!-- 公告卡片 4 -->
-                <div class="bg-dark-secondary rounded-lg p-6 shadow-lg news-card">
-                    <div class="md:flex md:justify-between">
-                        <div class="md:flex-1 md:pr-8">
-                            <div class="flex items-center mb-2">
-                                <span class="bg-yellow-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded mr-2">活動</span>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">線上寫作工作坊：角色塑造的藝術</h3>
-                            <p class="text-gray-400 mb-4">我們將於3月20日舉辦一場線上寫作工作坊，主題為「角色塑造的藝術」。本次工作坊將由知名作家王靜波主持，他將分享如何創造有深度和真實感的角色，以及如何通過角色推動故事發展。</p>
-                            <div class="flex items-center">
-                                <div class="text-sm text-gray-500">
-                                    <i class="far fa-calendar-alt mr-1"></i> 2025年2月25日
-                                </div>
-                            </div>
-                        </div>
-                        <div class="md:w-1/4 mt-4 md:mt-0 flex justify-end items-center">
-                            <a href="#" class="text-dark-accent hover:underline flex items-center text-sm">
-                                閱讀完整公告 <i class="fas fa-angle-right ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
+                <div class="p-6 rounded-lg">
+                    <div class="text-4xl md:text-5xl font-bold text-dark-accent mb-2 counter-value" data-target="25">0</div>
+                    <p class="text-gray-400">每日更新</p>
                 </div>
-
-                <!-- 公告卡片 5 -->
-                <div class="bg-dark-secondary rounded-lg p-6 shadow-lg news-card">
-                    <div class="md:flex md:justify-between">
-                        <div class="md:flex-1 md:pr-8">
-                            <div class="flex items-center mb-2">
-                                <span class="bg-blue-500 text-white text-xs font-semibold px-2.5 py-0.5 rounded mr-2">系統更新</span>
-                            </div>
-                            <h3 class="text-xl font-bold mb-2">新增多種閱讀主題與字體選項</h3>
-                            <p class="text-gray-400 mb-4">為了提升您的閱讀體驗，我們新增了多種閱讀主題和字體選項。現在您可以根據個人喜好自定義閱讀界面，包括日間/夜間模式、字體大小、行間距等。這些設置將自動保存，並在您的所有設備上同步。</p>
-                            <div class="flex items-center">
-                                <div class="text-sm text-gray-500">
-                                    <i class="far fa-calendar-alt mr-1"></i> 2025年2月20日
-                                </div>
-                            </div>
-                        </div>
-                        <div class="md:w-1/4 mt-4 md:mt-0 flex justify-end items-center">
-                            <a href="#" class="text-dark-accent hover:underline flex items-center text-sm">
-                                閱讀完整公告 <i class="fas fa-angle-right ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 分頁 -->
-            <div class="flex justify-center mt-10">
-                <nav class="inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-700 bg-dark-secondary text-sm font-medium text-gray-400 hover:bg-gray-700">
-                        <span class="sr-only">Previous</span>
-                        <i class="fas fa-chevron-left"></i>
-                    </a>
-                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-700 bg-dark-accent text-sm font-medium text-white">
-                        1
-                    </a>
-                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-700 bg-dark-secondary text-sm font-medium text-gray-400 hover:bg-gray-700">
-                        2
-                    </a>
-                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-700 bg-dark-secondary text-sm font-medium text-gray-400 hover:bg-gray-700">
-                        3
-                    </a>
-                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-700 bg-dark-secondary text-sm font-medium text-gray-400">
-                        ...
-                    </span>
-                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-700 bg-dark-secondary text-sm font-medium text-gray-400 hover:bg-gray-700">
-                        8
-                    </a>
-                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-700 bg-dark-secondary text-sm font-medium text-gray-400 hover:bg-gray-700">
-                        <span class="sr-only">Next</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </nav>
             </div>
         </div>
+    </section>
 
-        <!-- 通知訂閱區 -->
-        <div class="bg-dark-secondary py-16 mt-12">
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-dark-primary rounded-xl p-8 shadow-xl">
-                    <div class="md:flex md:items-center">
-                        <div class="md:w-2/3 mb-6 md:mb-0 md:pr-8">
-                            <h2 class="text-2xl font-bold mb-4">不錯過任何重要更新</h2>
-                            <p class="text-gray-400 mb-6">訂閱我們的通知，第一時間獲取平台最新動態、系統更新和活動信息。您可以自定義接收的通知類型，隨時取消訂閱。</p>
-                            <form class="flex flex-col sm:flex-row gap-4">
-                                <input type="email" placeholder="輸入您的電子郵件" class="flex-grow px-4 py-2 bg-dark-secondary text-dark-text rounded-md focus:outline-none focus:ring-2 focus:ring-dark-accent">
-                                <button type="submit" class="bg-dark-accent hover:bg-opacity-80 text-white px-6 py-2 rounded-md transition-all">
-                                    訂閱通知
-                                </button>
-                            </form>
-                        </div>
-                        <div class="md:w-1/3 flex justify-center">
-                            <div class="text-dark-accent text-8xl opacity-80">
-                                <i class="fas fa-bell"></i>
-                            </div>
-                        </div>
+    <!-- 自我介紹區 -->
+    <section class="py-20 bg-dark-secondary slide-in-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">關於夢鈴</h2>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                    在文字與夢想交織的邊界，我編織著情感的旋律
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="prose prose-lg text-gray-300 max-w-none">
+                        <p class="text-lg mb-6">在這鈴音迴盪的幻境中，我是夢鈴—一位行走在現實與幻想邊緣的文字編織者。手持筆尖，我勾勒出蘿莉系小說中那份純真與美好，將情感的細膩與浪漫凝結於字裡行間。</p>
+                        
+                        <p class="text-lg mb-6">白日裡，我穿梭於程式碼的森林、金融數據的洪流、政治議題的暗湧與醫藥學的殿堂，吸收現實世界的百態；而夜幕低垂時，我沉浸於 Galgame 的互動敘事，汲取創作的靈感，讓思緒在二次元與三次元之間自由徜徉。</p>
+                        
+                        <p class="text-lg">B站是我靈感的棲息地，小說是我靈魂的投影。在這裡，我邀請你一同探索夢與現實交織的奇妙國度，聆聽心靈深處那一聲清脆而遙遠的鈴響。</p>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-dark-accent rounded-lg opacity-10 blur-xl"></div>
+                    <div class="relative rounded-full overflow-hidden shadow-2xl border-4 border-dark-accent h-80 w-80 mx-auto">
+                        <img src="/api/placeholder/400/400" alt="夢鈴頭像" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -bottom-4 -right-4 bg-dark-accent rounded-full h-24 w-24 flex items-center justify-center shadow-xl">
+                        <i class="fas fa-bell text-white text-3xl animate-pulse-slow"></i>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
 
+    <!-- 號召行動區 -->
+    <section class="py-16 bg-gradient-to-b from-dark-primary to-dark-secondary slide-in-section">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6">準備好探索無盡的文學世界了嗎？</h2>
+            <p class="text-xl text-gray-400 mb-10 max-w-3xl mx-auto">
+                加入我們，開啟一段充滿創意和想像的旅程。無論您是讀者還是創作者，這裡都有適合您的內容。
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
+                <a href="index.html" class="bg-dark-accent hover:bg-opacity-90 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all flex items-center justify-center">
+                    <i class="fas fa-book-open mr-2"></i>開始閱讀之旅
+                </a>
+                <a href="tools.html" class="bg-transparent border-2 border-dark-accent hover:bg-dark-accent hover:bg-opacity-20 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all flex items-center justify-center">
+                    <i class="fas fa-magic mr-2"></i>探索創作工具
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁腳 -->
     <footer class="bg-dark-secondary text-gray-400 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -321,16 +389,16 @@
                     <h3 class="text-lg font-semibold text-white mb-4">文學世界</h3>
                     <p class="mb-4">探索無盡的文學世界，發現屬於你的閱讀樂趣。</p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
                             <i class="fab fa-facebook"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
                             <i class="fab fa-github"></i>
                         </a>
                     </div>
@@ -338,10 +406,10 @@
                 <div>
                     <h3 class="text-lg font-semibold text-white mb-4">快速連結</h3>
                     <ul class="space-y-2">
-                        <li><a href="index.html" class="hover:text-white">小說介紹</a></li>
-                        <li><a href="tools.html" class="hover:text-white">工具發佈</a></li>
-                        <li><a href="news.html" class="hover:text-white">最新消息</a></li>
-                        <li><a href="#" class="hover:text-white">關於我們</a></li>
+                        <li><a href="index.html" class="hover:text-white transition-colors">小說介紹</a></li>
+                        <li><a href="tools.html" class="hover:text-white transition-colors">工具發佈</a></li>
+                        <li><a href="news.html" class="hover:text-white transition-colors">最新消息</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">關於我們</a></li>
                     </ul>
                 </div>
                 <div>
@@ -351,10 +419,15 @@
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
-                <p>&copy; 2025 文學世界. 保留所有權利.</p>
+                <p>&copy; 2025 夢鈴幻境. 保留所有權利.</p>
             </div>
         </div>
     </footer>
+
+    <!-- 返回頂部按鈕 -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 p-3 rounded-full bg-dark-accent text-white shadow-lg opacity-0 invisible transition-all z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script>
         // 行動版選單切換
@@ -365,38 +438,70 @@
             mobileMenu.classList.toggle('hidden');
         });
         
-        // 標籤切換功能
-        const tags = document.querySelectorAll('.tag');
+        // 統計數字動畫
+        const runCounter = (counter) => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const speed = target / 200; // 調整速度
+            const count = parseInt(counter.innerText);
+            
+            if (count < target) {
+                counter.innerText = Math.ceil(count + speed);
+                setTimeout(() => runCounter(counter), 10);
+            } else {
+                counter.innerText = new Intl.NumberFormat().format(target);
+            }
+        };
         
-        tags.forEach(tag => {
-            tag.addEventListener('click', () => {
-                // 重置所有標籤
-                tags.forEach(t => {
-                    t.classList.remove('bg-dark-accent', 'text-white');
-                    t.classList.add('bg-dark-secondary', 'text-gray-300', 'hover:bg-gray-700');
+        // 滾動顯示動畫
+        const observeElements = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        
+                        // 如果是統計部分，啟動計數器
+                        if (entry.target.querySelectorAll('.counter-value').length > 0) {
+                            entry.target.querySelectorAll('.counter-value').forEach(counter => {
+                                runCounter(counter);
+                            });
+                        }
+                        
+                        observer.unobserve(entry.target);
+                    }
                 });
-                
-                // 設置當前選中的標籤
-                tag.classList.add('bg-dark-accent', 'text-white');
-                tag.classList.remove('bg-dark-secondary', 'text-gray-300', 'hover:bg-gray-700');
-                
-                // 這裡可以添加實際的篩選邏輯
-                // ...
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.slide-in-section').forEach(section => {
+                observer.observe(section);
+            });
+        };
+        
+        // 返回頂部按鈕
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        const toggleBackToTopButton = () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100');
+            } else {
+                backToTopButton.classList.remove('opacity-100');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        };
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
         
-        // 卡片動畫效果
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.news-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 100 + index * 100);
-            });
+        window.addEventListener('scroll', toggleBackToTopButton);
+        
+        // 頁面載入時執行動畫
+        document.addEventListener('DOMContentLoaded', () => {
+            observeElements();
+            toggleBackToTopButton();
         });
     </script>
 </body>
