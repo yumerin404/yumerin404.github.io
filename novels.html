@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,11 +31,11 @@
                             '50%': { transform: 'translateY(-10px)' },
                         },
                         glow: {
-                            '0%': { 
+                            '0%': {
                                 'box-shadow': '0 0 5px rgba(187, 134, 252, 0.3)',
                                 'border-color': 'rgba(187, 134, 252, 0.3)'
                             },
-                            '100%': { 
+                            '100%': {
                                 'box-shadow': '0 0 20px rgba(187, 134, 252, 0.7), 0 0 30px rgba(187, 134, 252, 0.5)',
                                 'border-color': 'rgba(187, 134, 252, 0.8)'
                             }
@@ -56,18 +57,22 @@
         .hover-zoom {
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
         .hover-zoom:hover {
             transform: scale(1.05);
         }
+
         .cover-gradient {
-            background: linear-gradient(180deg, rgba(18,18,18,0) 0%, rgba(18,18,18,0.8) 100%);
+            background: linear-gradient(180deg, rgba(18, 18, 18, 0) 0%, rgba(18, 18, 18, 0.8) 100%);
         }
+
         .magical-border {
             position: relative;
             z-index: 0;
             border-radius: inherit;
             overflow: hidden;
         }
+
         .magical-border::before {
             content: '';
             position: absolute;
@@ -82,6 +87,7 @@
             background-image: conic-gradient(transparent, rgba(187, 134, 252, 0.4), transparent 30%);
             animation: rotate 4s linear infinite;
         }
+
         .magical-border::after {
             content: '';
             position: absolute;
@@ -93,12 +99,15 @@
             background: #1E1E1E;
             border-radius: inherit;
         }
+
         .character-card {
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
         .character-card:hover {
             transform: translateY(-10px) scale(1.02);
         }
+
         .image-spotlight {
             position: fixed;
             top: 0;
@@ -114,10 +123,12 @@
             pointer-events: none;
             transition: opacity 0.3s ease;
         }
+
         .image-spotlight.active {
             opacity: 1;
             pointer-events: all;
         }
+
         .image-spotlight img {
             max-width: 90%;
             max-height: 90%;
@@ -125,6 +136,7 @@
             border: 2px solid #BB86FC;
             box-shadow: 0 0 20px rgba(187, 134, 252, 0.5);
         }
+
         .star {
             position: absolute;
             background-color: white;
@@ -132,22 +144,24 @@
             opacity: 0;
             animation: sparkle 1.5s ease-in-out infinite;
         }
+
         .grid-pattern {
-            background-image: 
+            background-image:
                 linear-gradient(rgba(187, 134, 252, 0.05) 1px, transparent 1px),
                 linear-gradient(to right, rgba(187, 134, 252, 0.05) 1px, transparent 1px);
             background-size: 30px 30px;
         }
-        
+
         @keyframes rotate {
             0% {
                 transform: rotate(0deg);
             }
+
             100% {
                 transform: rotate(360deg);
             }
         }
-        
+
         /* Tabs Animation */
         .tab-content {
             display: none;
@@ -155,6 +169,7 @@
             transform: translateY(10px);
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
+
         .tab-content.active {
             display: block;
             opacity: 1;
@@ -162,52 +177,49 @@
         }
     </style>
 </head>
+
 <body class="bg-dark-primary text-dark-text min-h-screen grid-pattern">
-    <nav class="bg-dark-secondary shadow-md backdrop-filter backdrop-blur-lg bg-opacity-90 sticky top-0 z-50">
+    <!-- 頂部導航欄 -->
+    <nav class="fixed w-full z-50 bg-dark-primary bg-opacity-90 backdrop-filter backdrop-blur-lg shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
-                <div class="flex">
+                <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
                         <a href="index.html" class="flex items-center">
                             <img src="images/avatar.png" alt="夢鈴" class="h-8 w-8 rounded-full mr-2">
-                            <span class="text-dark-accent text-xl font-bold">夢鈴幻境</span>
-                        </a>
-                    </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="novels.html" class="border-dark-accent text-dark-accent inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            小說介紹
-                        </a>
-                        <a href="tools.html" class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            工具發佈
-                        </a>
-                        <a href="news.html" class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                            最新消息
+                            <span class="text-dark-accent text-2xl font-bold">夢鈴幻境</span>
                         </a>
                     </div>
                 </div>
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-dark-accent hidden sm:block">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="12" y1="8" x2="12" y2="16"></line>
-                        <line x1="8" y1="12" x2="16" y2="12"></line>
-                    </svg>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="nav-tab text-dark-accent font-medium px-1 py-2">首頁</a>
+                    <a href="novels.html" class="nav-tab text-gray-300 hover:text-white font-medium px-1 py-2">小說介紹</a>
+                    <a href="tools.html" class="nav-tab text-gray-300 hover:text-white font-medium px-1 py-2">工具發佈</a>
+                    <a href="news.html" class="nav-tab text-gray-300 hover:text-white font-medium px-1 py-2">最新消息</a>
                 </div>
-                <div class="-mr-2 flex items-center sm:hidden">
-                    <button type="button" class="mobile-menu-button bg-dark-secondary inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-expanded="false">
+
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button"
+                        class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-dark-accent">
                         <span class="sr-only">打開主選單</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
+                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div class="mobile-menu hidden sm:hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="novels.html" class="bg-dark-secondary text-dark-accent block px-3 py-2 rounded-md text-base font-medium">小說介紹</a>
-                <a href="tools.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">工具發佈</a>
-                <a href="news.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">最新消息</a>
+        <!-- 行動版選單 -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-dark-primary shadow-lg">
+                <a href="#"
+                    class="bg-dark-secondary text-dark-accent block px-3 py-2 rounded-md text-base font-medium">首頁</a>
+                <a href="novels.html"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">小說介紹</a>
+                <a href="tools.html"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">工具發佈</a>
+                <a href="news.html"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">最新消息</a>
             </div>
         </div>
     </nav>
@@ -217,15 +229,14 @@
             <!-- 頂部標題和介紹 -->
             <div class="text-center mb-12 relative">
                 <!-- 裝飾性元素 -->
-                <div class="absolute top-0 left-1/4 w-2 h-2 rounded-full bg-dark-accent animate-sparkle" style="animation-delay: 0s;"></div>
-                <div class="absolute top-10 right-1/3 w-1 h-1 rounded-full bg-dark-accent animate-sparkle" style="animation-delay: 0.3s;"></div>
-                <div class="absolute bottom-0 right-1/4 w-3 h-3 rounded-full bg-dark-accent animate-sparkle" style="animation-delay: 0.7s;"></div>
-                
-                <h1 class="text-4xl font-bold mb-2 inline-block">
-                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-dark-accent to-purple-300">來自第二次人生</span>
-                </h1>
+                <div class="absolute top-0 left-1/4 w-2 h-2 rounded-full bg-dark-accent animate-sparkle"
+                    style="animation-delay: 0s;"></div>
+                <div class="absolute top-10 right-1/3 w-1 h-1 rounded-full bg-dark-accent animate-sparkle"
+                    style="animation-delay: 0.3s;"></div>
+                <div class="absolute bottom-0 right-1/4 w-3 h-3 rounded-full bg-dark-accent animate-sparkle"
+                    style="animation-delay: 0.7s;"></div>
                 <div class="h-1 w-40 bg-gradient-to-r from-dark-accent to-purple-400 rounded mx-auto mb-4"></div>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">～命運交織的重生之旅～</p>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto">來自第二次人生 ～命運交織的重生之旅～</p>
             </div>
 
             <!-- 選項卡導航 -->
@@ -233,17 +244,20 @@
                 <div class="border-b border-gray-700">
                     <ul class="flex flex-wrap -mb-px text-center">
                         <li class="mr-2 flex-grow">
-                            <button id="tab-info" class="tab-button inline-block p-4 border-b-2 border-dark-accent text-dark-accent font-medium">
+                            <button id="tab-info"
+                                class="tab-button inline-block p-4 border-b-2 border-dark-accent text-dark-accent font-medium">
                                 小說簡介
                             </button>
                         </li>
                         <li class="mr-2 flex-grow">
-                            <button id="tab-characters" class="tab-button inline-block p-4 border-b-2 border-transparent text-gray-400 hover:text-gray-300 font-medium">
+                            <button id="tab-characters"
+                                class="tab-button inline-block p-4 border-b-2 border-transparent text-gray-400 hover:text-gray-300 font-medium">
                                 角色畫廊
                             </button>
                         </li>
                         <li class="flex-grow">
-                            <button id="tab-links" class="tab-button inline-block p-4 border-b-2 border-transparent text-gray-400 hover:text-gray-300 font-medium">
+                            <button id="tab-links"
+                                class="tab-button inline-block p-4 border-b-2 border-transparent text-gray-400 hover:text-gray-300 font-medium">
                                 外部連結
                             </button>
                         </li>
@@ -259,33 +273,42 @@
                     <div class="md:col-span-1">
                         <div class="bg-dark-secondary rounded-lg overflow-hidden shadow-lg magical-border">
                             <img src="images/novels/featured.jpg" alt="小說封面" class="w-full h-auto object-cover">
-                            
+
                             <!-- 標籤列表 -->
                             <div class="flex flex-wrap gap-2 p-4">
-                                <span class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">原創</span>
-                                <span class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">異世界</span>
-                                <span class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">奇幻</span>
-                                <span class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">戀愛</span>
-                                <span class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">蘿莉</span>
-                                <span class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">獸耳</span>
-                                <span class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">青梅竹馬</span>
-                                <span class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">後宮</span>
-                                <span class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">魔法</span>
+                                <span
+                                    class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">原創</span>
+                                <span
+                                    class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">異世界</span>
+                                <span
+                                    class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">奇幻</span>
+                                <span
+                                    class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">戀愛</span>
+                                <span
+                                    class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">蘿莉</span>
+                                <span
+                                    class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">獸耳</span>
+                                <span
+                                    class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">青梅竹馬</span>
+                                <span
+                                    class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">後宮</span>
+                                <span
+                                    class="bg-dark-accent bg-opacity-20 text-dark-accent px-3 py-1 rounded-full text-sm">魔法</span>
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- 右側內容 -->
                     <div class="md:col-span-2">
                         <div class="bg-dark-secondary rounded-lg p-6 shadow-lg">
                             <h3 class="text-2xl font-bold mb-4 text-gradient">來自第二次人生～命運交織的重生之旅～</h3>
-                            
+
                             <div class="space-y-4">
                                 <div>
                                     <h4 class="text-dark-accent text-lg font-semibold mb-2">作者的話</h4>
                                     <p class="text-gray-300 italic">「如果我三個月以上沒有更新或動靜，表示我大概死了。」</p>
                                 </div>
-                                
+
                                 <div>
                                     <h4 class="text-dark-accent text-lg font-semibold mb-2">故事簡介</h4>
                                     <p class="text-gray-300 mb-2">如果有機會重來一次，你會選擇怎樣的人生？</p>
@@ -298,25 +321,33 @@
                                     <p class="text-gray-300 mb-2">穿越時間與空間的戀愛喜劇，交織著前世今生、不同視角與異世界的冒險。</p>
                                     <p class="text-gray-300">這不僅僅是關於愛情與回憶的故事，更是一場與命運抗衡的旅程。</p>
                                 </div>
-                                
+
                                 <div>
                                     <h4 class="text-dark-accent text-lg font-semibold mb-2">閱讀提示</h4>
-                                    <p class="text-gray-300">這是一部充滿戀愛與喜劇元素的作品，故事在不同的時間線、回憶與前世間穿梭，並涉及國家、異世界和多重視角的變換。讀者必須融入每個角色的內心世界，而非僅僅從自身的視角來理解故事。此外，請特別留意每一章節中的時間線和視角變換，感受這段跨越時空的動人故事。</p>
+                                    <p class="text-gray-300">
+                                        這是一部充滿戀愛與喜劇元素的作品，故事在不同的時間線、回憶與前世間穿梭，並涉及國家、異世界和多重視角的變換。讀者必須融入每個角色的內心世界，而非僅僅從自身的視角來理解故事。此外，請特別留意每一章節中的時間線和視角變換，感受這段跨越時空的動人故事。
+                                    </p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 閱讀按鈕 -->
                         <div class="mt-8 flex justify-center gap-4">
-                            <a href="https://www.pixiv.net/users/108590809/novels" target="_blank" class="bg-dark-accent hover:bg-opacity-80 text-white px-6 py-3 rounded-md font-medium transition-all inline-flex items-center group">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 group-hover:animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <a href="https://www.pixiv.net/users/108590809/novels" target="_blank"
+                                class="bg-dark-accent hover:bg-opacity-80 text-white px-6 py-3 rounded-md font-medium transition-all inline-flex items-center group">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 group-hover:animate-pulse"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                                 </svg>
                                 在 pixiv 閱讀
                             </a>
-                            <a href="https://masiro.me/admin/novelView?novel_id=711" target="_blank" class="bg-transparent border border-dark-accent hover:bg-dark-accent hover:bg-opacity-20 text-dark-accent px-6 py-3 rounded-md font-medium transition-all inline-flex items-center group">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 group-hover:animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <a href="https://masiro.me/admin/novelView?novel_id=711" target="_blank"
+                                class="bg-transparent border border-dark-accent hover:bg-dark-accent hover:bg-opacity-20 text-dark-accent px-6 py-3 rounded-md font-medium transition-all inline-flex items-center group">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 group-hover:animate-pulse"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                                     <polyline points="15 3 21 3 21 9"></polyline>
                                     <line x1="10" y1="14" x2="21" y2="3"></line>
@@ -335,15 +366,18 @@
                     <div class="character-card bg-dark-secondary rounded-lg overflow-hidden shadow-lg h-full">
                         <div class="p-1 h-full">
                             <div class="bg-gradient-to-br from-dark-primary to-dark-secondary h-full flex flex-col">
-                                <div class="relative overflow-hidden h-64 cursor-pointer character-image" data-image="images/char1.jpg">
-                                    <img src="images/char1.jpg" alt="角色" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark-secondary to-transparent p-3">
+                                <div class="relative overflow-hidden h-64 cursor-pointer character-image"
+                                    data-image="images/char1.jpg">
+                                    <img src="images/novels/char1.jpg" alt="角色"
+                                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                                    <div
+                                        class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark-secondary to-transparent p-3">
                                         <span class="text-dark-accent font-semibold">點擊放大</span>
                                     </div>
                                 </div>
                                 <div class="p-4 flex-grow">
-                                    <h3 class="text-xl font-bold mb-2">黃金角</h3>
-                                    <p class="text-gray-400 text-sm">金髮紅眼的惡魔少女，擁有超乎常人的智慧與力量，但內心深處隱藏著不為人知的秘密。</p>
+                                    <h3 class="text-xl font-bold mb-2">第一卷 - 封面 - 悠閒的雷娜</h3>
+                                    <p class="text-gray-400 text-sm">「哥哥，今天天氣真好～～」</p>
                                 </div>
                             </div>
                         </div>
@@ -353,13 +387,20 @@
                     <div class="character-card bg-dark-secondary rounded-lg overflow-hidden shadow-lg h-full">
                         <div class="p-1 h-full">
                             <div class="bg-gradient-to-br from-dark-primary to-dark-secondary h-full flex flex-col">
-                                <div class="relative overflow-hidden h-64 cursor-pointer character-image" data-image="images/char2.jpg">
-                                    <img src="images/char2.jpg" alt="角色" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark-secondary to-transparent p-3">
+                                <div class="relative overflow-hidden h-64 cursor-pointer character-image"
+                                    data-image="images/char2.jpg">
+                                    <img src="images/novels/char2.jpg" alt="角色"
+                                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                                    <div
+                                        class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark-secondary to-transparent p-3">
                                         <span class="text-dark-accent font-semibold">點擊放大</span>
                                     </div>
                                 </div>
                                 <div class="p-4 flex-grow">
+                                    <h3 class="text-xl font-bold mb-2">前傳 - 月之夢 - 封面 - 看著妳的月（指的是男主）</h3>
+                                    <p class="text-gray-400 text-sm">「……」『亞當……我想尿尿……』</p>
+                                    <p class="text-gray-400 text-sm">「月……說話好直接……」</p>
+                                    <p class="text-gray-400 text-sm">「……」『恩，只有亞當知道呢～』</p>
                                 </div>
                             </div>
                         </div>
@@ -369,13 +410,18 @@
                     <div class="character-card bg-dark-secondary rounded-lg overflow-hidden shadow-lg h-full">
                         <div class="p-1 h-full">
                             <div class="bg-gradient-to-br from-dark-primary to-dark-secondary h-full flex flex-col">
-                                <div class="relative overflow-hidden h-64 cursor-pointer character-image" data-image="images/char3.jpg">
-                                    <img src="images/char3.jpg" alt="角色" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark-secondary to-transparent p-3">
+                                <div class="relative overflow-hidden h-64 cursor-pointer character-image"
+                                    data-image="images/char3.jpg">
+                                    <img src="images/novels/char3.jpg" alt="角色"
+                                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                                    <div
+                                        class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark-secondary to-transparent p-3">
                                         <span class="text-dark-accent font-semibold">點擊放大</span>
                                     </div>
                                 </div>
                                 <div class="p-4 flex-grow">
+                                    <h3 class="text-xl font-bold mb-2">第二卷 - 封面圖 - 心裡不安的雷娜</h3>
+                                    <p class="text-gray-400 text-sm">（哥哥……）</p>
                                 </div>
                             </div>
                         </div>
@@ -385,13 +431,18 @@
                     <div class="character-card bg-dark-secondary rounded-lg overflow-hidden shadow-lg h-full">
                         <div class="p-1 h-full">
                             <div class="bg-gradient-to-br from-dark-primary to-dark-secondary h-full flex flex-col">
-                                <div class="relative overflow-hidden h-64 cursor-pointer character-image" data-image="images/char4.jpg">
-                                    <img src="images/char4.jpg" alt="角色" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark-secondary to-transparent p-3">
+                                <div class="relative overflow-hidden h-64 cursor-pointer character-image"
+                                    data-image="images/char4.jpg">
+                                    <img src="images/novels/char4.jpg" alt="角色"
+                                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                                    <div
+                                        class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark-secondary to-transparent p-3">
                                         <span class="text-dark-accent font-semibold">點擊放大</span>
                                     </div>
                                 </div>
                                 <div class="p-4 flex-grow">
+                                    <h3 class="text-xl font-bold mb-2"> 第二點五卷 - 結尾圖</h3>
+                                    <p class="text-gray-400 text-sm">最喜歡哥哥了！</p>
                                 </div>
                             </div>
                         </div>
@@ -401,19 +452,22 @@
                     <div class="character-card bg-dark-secondary rounded-lg overflow-hidden shadow-lg h-full">
                         <div class="p-1 h-full">
                             <div class="bg-gradient-to-br from-dark-primary to-dark-secondary h-full flex flex-col">
-                                <div class="relative overflow-hidden h-64 cursor-pointer character-image" data-image="images/char5.jpg">
-                                    <img src="images/char5.jpg" alt="角色" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
-                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark-secondary to-transparent p-3">
+                                <div class="relative overflow-hidden h-64 cursor-pointer character-image"
+                                    data-image="images/char5.jpg">
+                                    <img src="images/novels/char5.jpg" alt="角色"
+                                        class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                                    <div
+                                        class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-dark-secondary to-transparent p-3">
                                         <span class="text-dark-accent font-semibold">點擊放大</span>
                                     </div>
                                 </div>
                                 <div class="p-4 flex-grow">
+                                    <h3 class="text-xl font-bold mb-2">第三卷 - 封面 - 花嫁的雷娜</h3>
+                                    <p class="text-gray-400 text-sm">「哥哥，今天是婚～禮～唷～」</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- 更多角色卡片可以添加在這裡 -->
                 </div>
             </div>
 
@@ -421,23 +475,54 @@
             <div id="content-links" class="tab-content">
                 <div class="bg-dark-secondary rounded-lg p-8 shadow-lg">
                     <h3 class="text-2xl font-bold mb-6 text-center">閱讀平台</h3>
-                    
+
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- 真白萌連結 -->
+                        <a href="https://masiro.me/admin/novelView?novel_id=711" target="_blank"
+                            class="hover-zoom bg-dark-primary rounded-lg p-6 flex flex-col items-center text-center border border-gray-700 hover:border-dark-accent transition-colors">
+                            <div
+                                class="w-16 h-16 rounded-full bg-dark-accent bg-opacity-20 flex items-center justify-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-accent"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-xl font-semibold mb-2">真白萌(主力)</h4>
+                            <p class="text-gray-400 text-sm mb-4">我的主力平台，是輕小說專門平台，提供舒適的閱讀體驗與穩定的更新</p>
+                            <span class="text-dark-accent inline-flex items-center">
+                                前往閱讀
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </span>
+                        </a>
+
                         <!-- PixIV 連結 -->
-                        <a href="https://www.pixiv.net/users/108590809/novels" target="_blank" class="hover-zoom bg-dark-primary rounded-lg p-6 flex flex-col items-center text-center border border-gray-700 hover:border-dark-accent transition-colors">
-                            <div class="w-16 h-16 rounded-full bg-dark-accent bg-opacity-20 flex items-center justify-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <a href="https://www.pixiv.net/users/108590809/novels" target="_blank"
+                            class="hover-zoom bg-dark-primary rounded-lg p-6 flex flex-col items-center text-center border border-gray-700 hover:border-dark-accent transition-colors">
+                            <div
+                                class="w-16 h-16 rounded-full bg-dark-accent bg-opacity-20 flex items-center justify-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-accent"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M12 19l7-7 3 3-7 7-3-3z"></path>
                                     <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path>
                                     <path d="M2 2l7.586 7.586"></path>
                                     <circle cx="11" cy="11" r="2"></circle>
                                 </svg>
                             </div>
-                            <h4 class="text-xl font-semibold mb-2">PixIV</h4>
-                            <p class="text-gray-400 text-sm mb-4">最新章節與作者動態第一時間更新，支持插圖與評論功能</p>
+                            <h4 class="text-xl font-semibold mb-2">Pixiv</h4>
+                            <p class="text-gray-400 text-sm mb-4">歡迎評論跟私訊～</p>
                             <span class="text-dark-accent inline-flex items-center">
                                 前往閱讀
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
                                     <polyline points="12 5 19 12 12 19"></polyline>
                                 </svg>
@@ -445,37 +530,25 @@
                         </a>
 
                         <!-- Penana 連結 -->
-                        <a href="https://www.penana.com/story/162297/%E4%BE%86%E8%87%AA%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BA%BA%E7%94%9F-%E5%91%BD%E9%81%8B%E4%BA%A4%E7%B9%94%E7%9A%84%E9%87%8D%E7%94%9F%E4%B9%8B%E6%97%85/" target="_blank" class="hover-zoom bg-dark-primary rounded-lg p-6 flex flex-col items-center text-center border border-gray-700 hover:border-dark-accent transition-colors">
-                            <div class="w-16 h-16 rounded-full bg-dark-accent bg-opacity-20 flex items-center justify-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <a href="https://www.penana.com/story/162297/%E4%BE%86%E8%87%AA%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%BA%BA%E7%94%9F-%E5%91%BD%E9%81%8B%E4%BA%A4%E7%B9%94%E7%9A%84%E9%87%8D%E7%94%9F%E4%B9%8B%E6%97%85/"
+                            target="_blank"
+                            class="hover-zoom bg-dark-primary rounded-lg p-6 flex flex-col items-center text-center border border-gray-700 hover:border-dark-accent transition-colors">
+                            <div
+                                class="w-16 h-16 rounded-full bg-dark-accent bg-opacity-20 flex items-center justify-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-accent"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
                                     <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                                 </svg>
                             </div>
                             <h4 class="text-xl font-semibold mb-2">Penana</h4>
-                            <p class="text-gray-400 text-sm mb-4">富有互動性的閱讀平台，適合手機閱讀與社交分享</p>
+                            <p class="text-gray-400 text-sm mb-4">算是一個補充性的平台</p>
                             <span class="text-dark-accent inline-flex items-center">
                                 前往閱讀
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                    <polyline points="12 5 19 12 12 19"></polyline>
-                                </svg>
-                            </span>
-                        </a>
-
-                        <!-- 真白萌連結 -->
-                        <a href="https://masiro.me/admin/novelView?novel_id=711" target="_blank" class="hover-zoom bg-dark-primary rounded-lg p-6 flex flex-col items-center text-center border border-gray-700 hover:border-dark-accent transition-colors">
-                            <div class="w-16 h-16 rounded-full bg-dark-accent bg-opacity-20 flex items-center justify-center mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-dark-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                                </svg>
-                            </div>
-                            <h4 class="text-xl font-semibold mb-2">真白萌</h4>
-                            <p class="text-gray-400 text-sm mb-4">輕小說專門平台，提供舒適的閱讀體驗與穩定的更新</p>
-                            <span class="text-dark-accent inline-flex items-center">
-                                前往閱讀
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <line x1="5" y1="12" x2="19" y2="12"></line>
                                     <polyline points="12 5 19 12 12 19"></polyline>
                                 </svg>
@@ -502,15 +575,15 @@
         // 行動版選單切換
         const menuButton = document.querySelector('.mobile-menu-button');
         const mobileMenu = document.querySelector('.mobile-menu');
-        
+
         menuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-        
+
         // 選項卡切換功能
         const tabButtons = document.querySelectorAll('.tab-button');
         const tabContents = document.querySelectorAll('.tab-content');
-        
+
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 // 移除所有 tab 的活動狀態
@@ -518,27 +591,27 @@
                     btn.classList.remove('text-dark-accent', 'border-dark-accent');
                     btn.classList.add('text-gray-400', 'border-transparent');
                 });
-                
+
                 // 隱藏所有內容
                 tabContents.forEach(content => {
                     content.classList.remove('active');
                 });
-                
+
                 // 設置當前 tab 為活動狀態
                 button.classList.add('text-dark-accent', 'border-dark-accent');
                 button.classList.remove('text-gray-400', 'border-transparent');
-                
+
                 // 顯示對應的內容
                 const contentId = 'content-' + button.id.split('-')[1];
                 document.getElementById(contentId).classList.add('active');
             });
         });
-        
+
         // 圖片放大顯示功能
         const characterImages = document.querySelectorAll('.character-image');
         const imageSpotlight = document.getElementById('image-spotlight');
         const spotlightImage = document.getElementById('spotlight-image');
-        
+
         characterImages.forEach(img => {
             img.addEventListener('click', () => {
                 const imgSrc = img.getAttribute('data-image');
@@ -546,13 +619,13 @@
                 imageSpotlight.classList.add('active');
             });
         });
-        
+
         imageSpotlight.addEventListener('click', () => {
             imageSpotlight.classList.remove('active');
         });
-        
+
         // 滾動效果
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const elements = document.querySelectorAll('.character-card, .magical-border');
             elements.forEach((el, index) => {
                 el.style.opacity = '0';
@@ -566,4 +639,5 @@
         });
     </script>
 </body>
+
 </html>
