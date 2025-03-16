@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,11 +29,11 @@
                             '50%': { transform: 'translateY(-10px)' },
                         },
                         glow: {
-                            '0%': { 
+                            '0%': {
                                 'box-shadow': '0 0 5px rgba(187, 134, 252, 0.3)',
                                 'border-color': 'rgba(187, 134, 252, 0.3)'
                             },
-                            '100%': { 
+                            '100%': {
                                 'box-shadow': '0 0 20px rgba(187, 134, 252, 0.7), 0 0 30px rgba(187, 134, 252, 0.5)',
                                 'border-color': 'rgba(187, 134, 252, 0.8)'
                             }
@@ -50,28 +51,28 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
-        
+
         .bg-gradient-radial {
             background: radial-gradient(circle at center, rgba(187, 134, 252, 0.15) 0%, rgba(18, 18, 18, 0.95) 70%);
         }
-        
+
         .feature-card {
             transition: all 0.4s ease;
             transform: perspective(1000px) rotateY(0deg);
             transform-style: preserve-3d;
         }
-        
+
         .feature-card:hover {
             transform: perspective(1000px) rotateY(5deg) translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(187, 134, 252, 0.3);
         }
-        
+
         .nav-tab {
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
         }
-        
+
         .nav-tab:before {
             content: '';
             position: absolute;
@@ -82,11 +83,11 @@
             background-color: #BB86FC;
             transition: all 0.3s ease;
         }
-        
+
         .nav-tab:hover:before {
             width: 100%;
         }
-        
+
         .hero-text {
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
@@ -94,30 +95,32 @@
         .glowing-border {
             animation: glow 2s ease-in-out infinite alternate;
         }
-        
+
         @keyframes glow {
             from {
                 box-shadow: 0 0 5px rgba(187, 134, 252, 0.3);
                 border-color: rgba(187, 134, 252, 0.3);
             }
+
             to {
                 box-shadow: 0 0 20px rgba(187, 134, 252, 0.7), 0 0 30px rgba(187, 134, 252, 0.5);
                 border-color: rgba(187, 134, 252, 0.8);
             }
         }
-        
+
         .slide-in-section {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 1s ease, transform 1s ease;
         }
-        
+
         .slide-in-section.show {
             opacity: 1;
             transform: translateY(0);
         }
     </style>
 </head>
+
 <body class="bg-dark-primary text-dark-text min-h-screen">
     <!-- 頂部導航欄 -->
     <nav class="fixed w-full z-50 bg-dark-primary bg-opacity-90 backdrop-filter backdrop-blur-lg shadow-md">
@@ -129,22 +132,24 @@
                         <span class="text-dark-accent text-2xl font-bold">夢鈴幻境</span>
                     </div>
                 </div>
-                
+
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#" class="nav-tab text-dark-accent font-medium px-1 py-2">首頁</a>
                     <a href="novels.html" class="nav-tab text-gray-300 hover:text-white font-medium px-1 py-2">小說介紹</a>
                     <a href="tools.html" class="nav-tab text-gray-300 hover:text-white font-medium px-1 py-2">工具發佈</a>
                     <a href="news.html" class="nav-tab text-gray-300 hover:text-white font-medium px-1 py-2">最新消息</a>
                 </div>
-                
+
                 <div class="flex items-center">
-                    <button class="bg-dark-accent hover:bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium transition-all hidden md:block">
+                    <button
+                        class="bg-dark-accent hover:bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium transition-all hidden md:block">
                         探索更多
                     </button>
                 </div>
-                
+
                 <div class="-mr-2 flex items-center md:hidden">
-                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-dark-accent">
+                    <button type="button"
+                        class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-dark-accent">
                         <span class="sr-only">打開主選單</span>
                         <i class="fas fa-bars"></i>
                     </button>
@@ -155,10 +160,14 @@
         <!-- 行動版選單 -->
         <div class="mobile-menu hidden md:hidden">
             <div class="px-2 pt-2 pb-3 space-y-1 bg-dark-primary shadow-lg">
-                <a href="#" class="bg-dark-secondary text-dark-accent block px-3 py-2 rounded-md text-base font-medium">首頁</a>
-                <a href="novels.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">小說介紹</a>
-                <a href="tools.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">工具發佈</a>
-                <a href="news.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">最新消息</a>
+                <a href="#"
+                    class="bg-dark-secondary text-dark-accent block px-3 py-2 rounded-md text-base font-medium">首頁</a>
+                <a href="novels.html"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">小說介紹</a>
+                <a href="tools.html"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">工具發佈</a>
+                <a href="news.html"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">最新消息</a>
             </div>
         </div>
     </nav>
@@ -170,17 +179,23 @@
             <div class="absolute inset-0 bg-gradient-radial"></div>
             <!-- 動態背景元素 -->
             <div class="absolute inset-0 overflow-hidden opacity-20">
-                <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-dark-accent rounded-full filter blur-3xl animate-pulse-slow"></div>
-                <div class="absolute top-1/3 right-1/3 w-96 h-96 bg-purple-700 rounded-full filter blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
-                <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-indigo-600 rounded-full filter blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+                <div
+                    class="absolute top-1/4 left-1/4 w-64 h-64 bg-dark-accent rounded-full filter blur-3xl animate-pulse-slow">
+                </div>
+                <div class="absolute top-1/3 right-1/3 w-96 h-96 bg-purple-700 rounded-full filter blur-3xl animate-pulse-slow"
+                    style="animation-delay: 1s;"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-48 h-48 bg-indigo-600 rounded-full filter blur-3xl animate-pulse-slow"
+                    style="animation-delay: 2s;"></div>
             </div>
         </div>
-        
+
         <!-- 網格裝飾 -->
         <div class="absolute inset-0 overflow-hidden opacity-10">
-            <div class="h-full w-full" style="background-image: linear-gradient(#BB86FC 1px, transparent 1px), linear-gradient(to right, #BB86FC 1px, transparent 1px); background-size: 40px 40px;"></div>
+            <div class="h-full w-full"
+                style="background-image: linear-gradient(#BB86FC 1px, transparent 1px), linear-gradient(to right, #BB86FC 1px, transparent 1px); background-size: 40px 40px;">
+            </div>
         </div>
-        
+
         <!-- 內容 -->
         <div class="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 hero-text">
@@ -191,16 +206,18 @@
             <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto hero-text">
                 在鈴聲迴盪的幻想國度，譜寫心靈深處的浪漫與奇想
             </p>
-            
+
             <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-                <a href="novels.html" class="glowing-border bg-dark-accent hover:bg-opacity-90 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all flex items-center justify-center">
+                <a href="novels.html"
+                    class="glowing-border bg-dark-accent hover:bg-opacity-90 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all flex items-center justify-center">
                     <i class="fas fa-book mr-2"></i>探索小說
                 </a>
-                <a href="tools.html" class="border-2 border-dark-accent hover:bg-dark-accent hover:bg-opacity-20 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all flex items-center justify-center">
+                <a href="tools.html"
+                    class="border-2 border-dark-accent hover:bg-dark-accent hover:bg-opacity-20 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all flex items-center justify-center">
                     <i class="fas fa-tools mr-2"></i>查看工具
                 </a>
             </div>
-            
+
             <!-- 向下滾動提示 -->
             <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
                 <a href="#features" class="text-gray-400 hover:text-white transition-colors">
@@ -208,7 +225,7 @@
                 </a>
             </div>
         </div>
-        
+
         <!-- 裝飾元素 - 浮動書本 -->
         <div class="hidden md:block absolute top-1/4 right-10 animate-float" style="animation-delay: 0.5s;">
             <div class="relative w-16 h-20 transform rotate-12">
@@ -217,7 +234,7 @@
                 <div class="absolute inset-x-0 top-0 h-1/4 w-5/6 ml-auto bg-white bg-opacity-20 rounded-tr-md"></div>
             </div>
         </div>
-        
+
         <div class="hidden md:block absolute bottom-1/3 left-10 animate-float" style="animation-delay: 1.5s;">
             <div class="relative w-14 h-18 transform -rotate-6">
                 <div class="absolute inset-0 bg-purple-600 rounded-r-md rounded-b-md"></div>
@@ -236,12 +253,13 @@
                     一位熱愛創作、思想豐富的作家，帶您穿越文字編織的夢幻國度
                 </p>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- 小說介紹卡片 -->
                 <div class="feature-card bg-dark-primary rounded-xl overflow-hidden shadow-xl border border-gray-800">
                     <div class="h-48 overflow-hidden">
-                        <img src="/api/placeholder/600/400" alt="小說庫" class="w-full h-full object-cover transition-all duration-700 hover:scale-110">
+                        <img src="/api/placeholder/600/400" alt="小說庫"
+                            class="w-full h-full object-cover transition-all duration-700 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center mb-4">
@@ -258,11 +276,12 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- 工具發佈卡片 -->
                 <div class="feature-card bg-dark-primary rounded-xl overflow-hidden shadow-xl border border-gray-800">
                     <div class="h-48 overflow-hidden">
-                        <img src="/api/placeholder/600/400" alt="工具庫" class="w-full h-full object-cover transition-all duration-700 hover:scale-110">
+                        <img src="/api/placeholder/600/400" alt="工具庫"
+                            class="w-full h-full object-cover transition-all duration-700 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center mb-4">
@@ -279,11 +298,12 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- 最新消息卡片 -->
                 <div class="feature-card bg-dark-primary rounded-xl overflow-hidden shadow-xl border border-gray-800">
                     <div class="h-48 overflow-hidden">
-                        <img src="/api/placeholder/600/400" alt="最新消息" class="w-full h-full object-cover transition-all duration-700 hover:scale-110">
+                        <img src="/api/placeholder/600/400" alt="最新消息"
+                            class="w-full h-full object-cover transition-all duration-700 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center mb-4">
@@ -309,19 +329,23 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
                 <div class="p-6 rounded-lg">
-                    <div class="text-4xl md:text-5xl font-bold text-dark-accent mb-2 counter-value" data-target="5000">0</div>
+                    <div class="text-4xl md:text-5xl font-bold text-dark-accent mb-2 counter-value" data-target="5000">0
+                    </div>
                     <p class="text-gray-400">精選小說</p>
                 </div>
                 <div class="p-6 rounded-lg">
-                    <div class="text-4xl md:text-5xl font-bold text-dark-accent mb-2 counter-value" data-target="120">0</div>
+                    <div class="text-4xl md:text-5xl font-bold text-dark-accent mb-2 counter-value" data-target="120">0
+                    </div>
                     <p class="text-gray-400">創作工具</p>
                 </div>
                 <div class="p-6 rounded-lg">
-                    <div class="text-4xl md:text-5xl font-bold text-dark-accent mb-2 counter-value" data-target="50000">0</div>
+                    <div class="text-4xl md:text-5xl font-bold text-dark-accent mb-2 counter-value" data-target="50000">
+                        0</div>
                     <p class="text-gray-400">活躍用戶</p>
                 </div>
                 <div class="p-6 rounded-lg">
-                    <div class="text-4xl md:text-5xl font-bold text-dark-accent mb-2 counter-value" data-target="25">0</div>
+                    <div class="text-4xl md:text-5xl font-bold text-dark-accent mb-2 counter-value" data-target="25">0
+                    </div>
                     <p class="text-gray-400">每日更新</p>
                 </div>
             </div>
@@ -337,24 +361,28 @@
                     在文字與夢想交織的邊界，我編織著情感的旋律
                 </p>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
                     <div class="prose prose-lg text-gray-300 max-w-none">
-                        <p class="text-lg mb-6">在這鈴音迴盪的幻境中，我是夢鈴—一位行走在現實與幻想邊緣的文字編織者。手持筆尖，我勾勒出蘿莉系小說中那份純真與美好，將情感的細膩與浪漫凝結於字裡行間。</p>
-                        
-                        <p class="text-lg mb-6">白日裡，我穿梭於程式碼的森林、金融數據的洪流、政治議題的暗湧與醫藥學的殿堂，吸收現實世界的百態；而夜幕低垂時，我沉浸於 Galgame 的互動敘事，汲取創作的靈感，讓思緒在二次元與三次元之間自由徜徉。</p>
-                        
+                        <p class="text-lg mb-6">
+                            在這鈴音迴盪的幻境中，我是夢鈴—一位行走在現實與幻想邊緣的文字編織者。手持筆尖，我勾勒出蘿莉系小說中那份純真與美好，將情感的細膩與浪漫凝結於字裡行間。</p>
+
+                        <p class="text-lg mb-6">白日裡，我穿梭於程式碼的森林、金融數據的洪流、政治議題的暗湧與醫藥學的殿堂，吸收現實世界的百態；而夜幕低垂時，我沉浸於 Galgame
+                            的互動敘事，汲取創作的靈感，讓思緒在二次元與三次元之間自由徜徉。</p>
+
                         <p class="text-lg">B站是我靈感的棲息地，小說是我靈魂的投影。在這裡，我邀請你一同探索夢與現實交織的奇妙國度，聆聽心靈深處那一聲清脆而遙遠的鈴響。</p>
                     </div>
                 </div>
-                
+
                 <div class="relative">
                     <div class="absolute -inset-4 bg-dark-accent rounded-lg opacity-10 blur-xl"></div>
-                    <div class="relative rounded-full overflow-hidden shadow-2xl border-4 border-dark-accent h-80 w-80 mx-auto">
+                    <div
+                        class="relative rounded-full overflow-hidden shadow-2xl border-4 border-dark-accent h-80 w-80 mx-auto">
                         <img src="/api/placeholder/400/400" alt="夢鈴頭像" class="w-full h-full object-cover">
                     </div>
-                    <div class="absolute -bottom-4 -right-4 bg-dark-accent rounded-full h-24 w-24 flex items-center justify-center shadow-xl">
+                    <div
+                        class="absolute -bottom-4 -right-4 bg-dark-accent rounded-full h-24 w-24 flex items-center justify-center shadow-xl">
                         <i class="fas fa-bell text-white text-3xl animate-pulse-slow"></i>
                     </div>
                 </div>
@@ -369,12 +397,14 @@
             <p class="text-xl text-gray-400 mb-10 max-w-3xl mx-auto">
                 加入我們，開啟一段充滿創意和想像的旅程。無論您是讀者還是創作者，這裡都有適合您的內容。
             </p>
-            
+
             <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-                <a href="novels.html" class="bg-dark-accent hover:bg-opacity-90 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all flex items-center justify-center">
+                <a href="novels.html"
+                    class="bg-dark-accent hover:bg-opacity-90 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all flex items-center justify-center">
                     <i class="fas fa-book-open mr-2"></i>開始閱讀之旅
                 </a>
-                <a href="tools.html" class="bg-transparent border-2 border-dark-accent hover:bg-dark-accent hover:bg-opacity-20 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all flex items-center justify-center">
+                <a href="tools.html"
+                    class="bg-transparent border-2 border-dark-accent hover:bg-dark-accent hover:bg-opacity-20 text-white px-8 py-4 rounded-lg text-lg font-medium transition-all flex items-center justify-center">
                     <i class="fas fa-magic mr-2"></i>探索創作工具
                 </a>
             </div>
@@ -415,7 +445,8 @@
                 <div>
                     <h3 class="text-lg font-semibold text-white mb-4">聯絡我們</h3>
                     <p class="mb-2">有任何問題或建議？</p>
-                    <a href="mailto:contact@example.com" class="text-dark-accent hover:underline">contact@example.com</a>
+                    <a href="mailto:contact@example.com"
+                        class="text-dark-accent hover:underline">contact@example.com</a>
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
@@ -425,7 +456,8 @@
     </footer>
 
     <!-- 返回頂部按鈕 -->
-    <button id="back-to-top" class="fixed bottom-8 right-8 p-3 rounded-full bg-dark-accent text-white shadow-lg opacity-0 invisible transition-all z-50">
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 p-3 rounded-full bg-dark-accent text-white shadow-lg opacity-0 invisible transition-all z-50">
         <i class="fas fa-arrow-up"></i>
     </button>
 
@@ -433,17 +465,17 @@
         // 行動版選單切換
         const menuButton = document.querySelector('.mobile-menu-button');
         const mobileMenu = document.querySelector('.mobile-menu');
-        
+
         menuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-        
+
         // 統計數字動畫
         const runCounter = (counter) => {
             const target = parseInt(counter.getAttribute('data-target'));
             const speed = target / 200; // 調整速度
             const count = parseInt(counter.innerText);
-            
+
             if (count < target) {
                 counter.innerText = Math.ceil(count + speed);
                 setTimeout(() => runCounter(counter), 10);
@@ -451,34 +483,34 @@
                 counter.innerText = new Intl.NumberFormat().format(target);
             }
         };
-        
+
         // 滾動顯示動畫
         const observeElements = () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('show');
-                        
+
                         // 如果是統計部分，啟動計數器
                         if (entry.target.querySelectorAll('.counter-value').length > 0) {
                             entry.target.querySelectorAll('.counter-value').forEach(counter => {
                                 runCounter(counter);
                             });
                         }
-                        
+
                         observer.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.1 });
-            
+
             document.querySelectorAll('.slide-in-section').forEach(section => {
                 observer.observe(section);
             });
         };
-        
+
         // 返回頂部按鈕
         const backToTopButton = document.getElementById('back-to-top');
-        
+
         const toggleBackToTopButton = () => {
             if (window.pageYOffset > 300) {
                 backToTopButton.classList.remove('opacity-0', 'invisible');
@@ -488,16 +520,16 @@
                 backToTopButton.classList.add('opacity-0', 'invisible');
             }
         };
-        
+
         backToTopButton.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         });
-        
+
         window.addEventListener('scroll', toggleBackToTopButton);
-        
+
         // 頁面載入時執行動畫
         document.addEventListener('DOMContentLoaded', () => {
             observeElements();
@@ -505,4 +537,5 @@
         });
     </script>
 </body>
+
 </html>

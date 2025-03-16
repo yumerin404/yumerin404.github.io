@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>夢鈴幻境 | 小說介紹</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-primary': '#121212',
+                        'dark-secondary': '#1E1E1E',
+                        'dark-accent': '#BB86FC',
+                        'dark-text': '#E1E1E1',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hover-zoom {
+            transition: transform 0.3s ease;
+        }
+        .hover-zoom:hover {
+            transform: scale(1.03);
+        }
+        .cover-gradient {
+            background: linear-gradient(180deg, rgba(18,18,18,0) 0%, rgba(18,18,18,0.8) 100%);
+        }
+    </style>
+</head>
+<body class="bg-dark-primary text-dark-text min-h-screen">
+    <nav class="bg-dark-secondary shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img src="/api/placeholder/40/40" alt="夢鈴" class="h-8 w-8 rounded-full mr-2">
+                        <span class="text-dark-accent text-xl font-bold">夢鈴幻境</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="novels.html" class="border-dark-accent text-dark-accent inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            小說介紹
+                        </a>
+                        <a href="tools.html" class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            工具發佈
+                        </a>
+                        <a href="news.html" class="border-transparent text-gray-300 hover:border-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            最新消息
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <button class="bg-dark-accent hover:bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium transition-all">
+                        訂閱更新
+                    </button>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="mobile-menu-button bg-dark-secondary inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-expanded="false">
+                        <span class="sr-only">打開主選單</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-menu hidden sm:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="novels.html" class="bg-dark-secondary text-dark-accent block px-3 py-2 rounded-md text-base font-medium">小說介紹</a>
+                <a href="tools.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">工具發佈</a>
+                <a href="news.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">最新消息</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold mb-2">精選小說</h1>
+                <p class="text-gray-400">發掘引人入勝的故事世界，開啟閱讀之旅</p>
+            </div>
+
+            <!-- 精選小說輪播 -->
+            <div class="relative rounded-xl overflow-hidden mb-16 hover-zoom shadow-xl">
+                <img src="/api/placeholder/1200/500" alt="精選小說封面" class="w-full object-cover h-80 sm:h-96">
+                <div class="absolute inset-0 cover-gradient flex flex-col justify-end p-6">
+                    <div class="flex items-center mb-2">
+                        <span class="bg-dark-accent text-white text-xs font-semibold px-2.5 py-0.5 rounded-full mr-2">熱門推薦</span>
+                        <span class="bg-gray-700 text-gray-300 text-xs font-semibold px-2.5 py-0.5 rounded-full">奇幻冒險</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-2">星際旅人的奇幻冒險</h2>
+                    <p class="text-gray-300 mb-4 line-clamp-2 sm:line-clamp-3">在一個充滿未知與神秘的星際世界，主角開始了一段不可思議的旅程。穿越星系、遇見各種奇特生物，面對重重挑戰，最終尋找到自己的命運。</p>
+                    <div class="flex items-center space-x-4">
+                        <a href="#" class="bg-dark-accent hover:bg-opacity-80 text-white px-4 py-2 rounded-md text-sm font-medium transition-all inline-flex items-center">
+                            <i class="fas fa-bookmark mr-2"></i>追蹤小說
+                        </a>
+                        <a href="#" class="bg-transparent border border-white hover:bg-white hover:bg-opacity-10 text-white px-4 py-2 rounded-md text-sm font-medium transition-all inline-flex items-center">
+                            <i class="fas fa-info-circle mr-2"></i>了解更多
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 小說列表 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 小說卡片 1 -->
+                <div class="bg-dark-secondary rounded-lg overflow-hidden shadow-lg hover-zoom">
+                    <div class="relative">
+                        <img src="/api/placeholder/400/250" alt="小說封面" class="w-full h-48 object-cover">
+                        <div class="absolute top-2 left-2">
+                            <span class="bg-dark-accent text-white text-xs font-semibold px-2.5 py-0.5 rounded-full">科幻</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2">機械時代的覺醒</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-3">在一個被機械所統治的未來世界，人類的存在價值受到了挑戰。一位年輕工程師發現了一項可能改變一切的技術...</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                <span class="text-sm">4.7</span>
+                            </div>
+                            <a href="#" class="text-dark-accent hover:underline text-sm inline-flex items-center">
+                                追蹤閱讀 <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 小說卡片 2 -->
+                <div class="bg-dark-secondary rounded-lg overflow-hidden shadow-lg hover-zoom">
+                    <div class="relative">
+                        <img src="/api/placeholder/400/250" alt="小說封面" class="w-full h-48 object-cover">
+                        <div class="absolute top-2 left-2">
+                            <span class="bg-dark-accent text-white text-xs font-semibold px-2.5 py-0.5 rounded-full">奇幻</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2">龍之谷的秘密</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-3">傳說中的龍之谷隱藏著無盡的寶藏與神秘的力量。當一位平凡的村莊少年意外發現通往龍之谷的入口，一場驚險的冒險就此展開...</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                <span class="text-sm">4.9</span>
+                            </div>
+                            <a href="#" class="text-dark-accent hover:underline text-sm inline-flex items-center">
+                                追蹤閱讀 <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 小說卡片 3 -->
+                <div class="bg-dark-secondary rounded-lg overflow-hidden shadow-lg hover-zoom">
+                    <div class="relative">
+                        <img src="/api/placeholder/400/250" alt="小說封面" class="w-full h-48 object-cover">
+                        <div class="absolute top-2 left-2">
+                            <span class="bg-dark-accent text-white text-xs font-semibold px-2.5 py-0.5 rounded-full">懸疑</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold mb-2">沉默的真相</h3>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-3">一樁塵封多年的懸案重見天日，資深刑警李明陷入了一個錯綜複雜的謎團。隨著調查深入，他發現這個案件牽連著許多人的命運...</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                <span class="text-sm">4.8</span>
+                            </div>
+                            <a href="#" class="text-dark-accent hover:underline text-sm inline-flex items-center">
+                                追蹤閱讀 <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 查看更多按鈕 -->
+            <div class="text-center mt-10">
+                <button class="bg-dark-secondary hover:bg-gray-700 text-dark-text px-6 py-3 rounded-md font-medium transition-all inline-flex items-center border border-gray-700">
+                    查看更多小說
+                    <i class="fas fa-chevron-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 分類瀏覽區 -->
+        <div class="bg-dark-secondary py-12 mt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-2xl font-bold mb-8 text-center">探索小說分類</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <a href="#" class="bg-dark-primary p-4 rounded-lg text-center hover:bg-opacity-80 transition-all">
+                        <i class="fas fa-rocket text-dark-accent text-2xl mb-2"></i>
+                        <p>科幻</p>
+                    </a>
+                    <a href="#" class="bg-dark-primary p-4 rounded-lg text-center hover:bg-opacity-80 transition-all">
+                        <i class="fas fa-hat-wizard text-dark-accent text-2xl mb-2"></i>
+                        <p>奇幻</p>
+                    </a>
+                    <a href="#" class="bg-dark-primary p-4 rounded-lg text-center hover:bg-opacity-80 transition-all">
+                        <i class="fas fa-user-secret text-dark-accent text-2xl mb-2"></i>
+                        <p>懸疑</p>
+                    </a>
+                    <a href="#" class="bg-dark-primary p-4 rounded-lg text-center hover:bg-opacity-80 transition-all">
+                        <i class="fas fa-heart text-dark-accent text-2xl mb-2"></i>
+                        <p>愛情</p>
+                    </a>
+                    <a href="#" class="bg-dark-primary p-4 rounded-lg text-center hover:bg-opacity-80 transition-all">
+                        <i class="fas fa-dragon text-dark-accent text-2xl mb-2"></i>
+                        <p>玄幻</p>
+                    </a>
+                    <a href="#" class="bg-dark-primary p-4 rounded-lg text-center hover:bg-opacity-80 transition-all">
+                        <i class="fas fa-history text-dark-accent text-2xl mb-2"></i>
+                        <p>歷史</p>
+                    </a>
+                    <a href="#" class="bg-dark-primary p-4 rounded-lg text-center hover:bg-opacity-80 transition-all">
+                        <i class="fas fa-fist-raised text-dark-accent text-2xl mb-2"></i>
+                        <p>武俠</p>
+                    </a>
+                    <a href="#" class="bg-dark-primary p-4 rounded-lg text-center hover:bg-opacity-80 transition-all">
+                        <i class="fas fa-ellipsis-h text-dark-accent text-2xl mb-2"></i>
+                        <p>更多分類</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 訂閱區域 -->
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="bg-dark-secondary rounded-xl p-8 shadow-xl">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold mb-2">訂閱小說更新</h2>
+                    <p class="text-gray-400">獲取最新章節通知，不錯過任何精彩內容</p>
+                </div>
+                <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" placeholder="輸入您的電子郵件" class="flex-grow px-4 py-2 bg-dark-primary text-dark-text rounded-md focus:outline-none focus:ring-2 focus:ring-dark-accent">
+                    <button type="submit" class="bg-dark-accent hover:bg-opacity-80 text-white px-6 py-2 rounded-md transition-all">
+                        訂閱
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark-secondary text-gray-400 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">文學世界</h3>
+                    <p class="mb-4">探索無盡的文學世界，發現屬於你的閱讀樂趣。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">快速連結</h3>
+                    <ul class="space-y-2">
+                        <li><a href="novels.html" class="hover:text-white">小說介紹</a></li>
+                        <li><a href="tools.html" class="hover:text-white">工具發佈</a></li>
+                        <li><a href="news.html" class="hover:text-white">最新消息</a></li>
+                        <li><a href="#" class="hover:text-white">關於我們</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">聯絡我們</h3>
+                    <p class="mb-2">有任何問題或建議？</p>
+                    <a href="mailto:contact@example.com" class="text-dark-accent hover:underline">contact@example.com</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2025 文學世界. 保留所有權利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 行動版選單切換
+        const menuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 簡單的動畫效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.hover-zoom');
+            elements.forEach((el) => {
+                el.classList.add('opacity-0');
+                setTimeout(() => {
+                    el.classList.add('transition-opacity', 'duration-700');
+                    el.classList.remove('opacity-0');
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
