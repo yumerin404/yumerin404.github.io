@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Bell Fantasy | Professional Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'pro-dark-primary': '#0d1117',
+                        'pro-dark-secondary': '#161b22',
+                        'pro-dark-tertiary': '#21262d',
+                        'pro-accent-blue': '#58a6ff',
+                        'pro-accent-purple': '#a5a5ff',
+                        'pro-accent-green': '#7ce38a',
+                        'pro-accent-orange': '#ffa657',
+                        'pro-text-primary': '#f0f6fc',
+                        'pro-text-secondary': '#8b949e',
+                        'pro-text-muted': '#6e7681',
+                        'pro-border': '#30363d',
+                        'pro-border-muted': '#21262d',
+                    },
+                    animation: {
+                        'matrix-rain': 'matrix-rain 20s linear infinite',
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                        'slide-in-left': 'slide-in-left 0.6s ease-out',
+                        'slide-in-right': 'slide-in-right 0.6s ease-out',
+                        'fade-in-up': 'fade-in-up 0.8s ease-out',
+                        'hover-lift': 'hover-lift 0.3s ease-out',
+                        'tech-scan': 'tech-scan 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'matrix-rain': {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100vh)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { 
+                                'box-shadow': '0 0 5px rgba(88, 166, 255, 0.3), 0 0 10px rgba(88, 166, 255, 0.2), 0 0 15px rgba(88, 166, 255, 0.1)',
+                            },
+                            '50%': { 
+                                'box-shadow': '0 0 10px rgba(88, 166, 255, 0.6), 0 0 20px rgba(88, 166, 255, 0.4), 0 0 30px rgba(88, 166, 255, 0.3)',
+                            }
+                        },
+                        'slide-in-left': {
+                            '0%': { transform: 'translateX(-50px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        'slide-in-right': {
+                            '0%': { transform: 'translateX(50px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        'fade-in-up': {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        'hover-lift': {
+                            '0%': { transform: 'translateY(0)' },
+                            '100%': { transform: 'translateY(-5px)' },
+                        },
+                        'tech-scan': {
+                            '0%, 100%': { transform: 'translateX(-100%)' },
+                            '50%': { transform: 'translateX(100%)' },
+                        }
+                    },
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'monospace'],
+                        'tech': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
+                    fontSize: {
+                        'code': '0.9rem',
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+        }
+
+        .tech-bg {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #21262d 100%);
+            position: relative;
+        }
+
+        .tech-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(88, 166, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(165, 165, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .glass-pro {
+            backdrop-filter: blur(16px);
+            background: rgba(22, 27, 34, 0.8);
+            border: 1px solid rgba(48, 54, 61, 0.8);
+        }
+
+        .nav-link-pro {
+            position: relative;
+            transition: all 0.3s ease;
+            color: #8b949e;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        .nav-link-pro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(88, 166, 255, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 6px;
+        }
+
+        .nav-link-pro:hover {
+            color: #f0f6fc;
+        }
+
+        .nav-link-pro:hover::before {
+            opacity: 1;
+        }
+
+        .nav-link-pro.active {
+            color: #58a6ff;
+            background: rgba(88, 166, 255, 0.1);
+        }
+
+        .tech-gradient {
+            background: linear-gradient(135deg, #58a6ff 0%, #a5a5ff 50%, #7ce38a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-card-pro {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid #30363d;
+            background: linear-gradient(145deg, rgba(22, 27, 34, 0.9), rgba(33, 38, 45, 0.9));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card-pro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #58a6ff, #a5a5ff, #7ce38a);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .tool-card-pro:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tool-card-pro:hover {
+            transform: translateY(-8px);
+            border-color: rgba(88, 166, 255, 0.5);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(88, 166, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: tech-scan 3s ease-in-out infinite;
+        }
+
+        .icon-threads { background: linear-gradient(135deg, #000, #333); }
+        .icon-exhentai { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .icon-dlsite { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .icon-chatgpt { background: linear-gradient(135deg, #10a37f, #0d8b6b); }
+
+        .btn-primary-pro {
+            background: linear-gradient(135deg, #58a6ff, #a5a5ff);
+            color: #0d1117;
+            border: none;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary-pro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary-pro:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary-pro:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(88, 166, 255, 0.4);
+        }
+
+        .btn-secondary-pro {
+            border: 2px solid #58a6ff;
+            color: #58a6ff;
+            background: transparent;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-secondary-pro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, #58a6ff, #a5a5ff);
+            transition: width 0.4s ease;
+            z-index: 0;
+        }
+
+        .btn-secondary-pro:hover::before {
+            width: 100%;
+        }
+
+        .btn-secondary-pro:hover {
+            color: #0d1117;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(88, 166, 255, 0.3);
+        }
+
+        .btn-secondary-pro span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+        }
+
+        .code-header {
+            background: #161b22;
+            border-bottom: 1px solid #30363d;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: between;
+        }
+
+        .copy-btn {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #8b949e;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: #30363d;
+            color: #f0f6fc;
+        }
+
+        .feature-badge {
+            background: linear-gradient(135deg, rgba(88, 166, 255, 0.1), rgba(165, 165, 255, 0.1));
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            color: #58a6ff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.25rem 0.25rem 0.25rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(22, 27, 34, 0.5);
+            border: 1px solid #30363d;
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #58a6ff;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #8b949e;
+            margin-top: 0.25rem;
+        }
+
+        .mobile-menu-pro {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+
+        .mobile-menu-pro.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: rgba(88, 166, 255, 0.3);
+            pointer-events: none;
+            z-index: 1;
+            animation: matrix-rain 20s linear infinite;
+        }
+
+        .tech-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #58a6ff, transparent);
+            margin: 3rem 0;
+        }
+    </style>
+</head>
+
+<body class="tech-bg text-pro-text-primary min-h-screen font-tech">
+    <!-- Matrix Rain Effect -->
+    <div class="matrix-rain" style="left: 10%; animation-delay: 0s;">01010110</div>
+    <div class="matrix-rain" style="left: 30%; animation-delay: 2s;">11001010</div>
+    <div class="matrix-rain" style="left: 50%; animation-delay: 4s;">10101101</div>
+    <div class="matrix-rain" style="left: 70%; animation-delay: 6s;">01110101</div>
+    <div class="matrix-rain" style="left: 90%; animation-delay: 8s;">11010011</div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-pro">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="flex items-center group">
+                            <img src="images/avatar.png" alt="Dream Bell" 
+                                 class="h-10 w-10 rounded-full mr-3 transition-transform duration-300 group-hover:scale-110">
+                            <span class="tech-gradient text-xl font-bold">Dream Bell Fantasy</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" class="nav-link-pro">Home</a>
+                    <a href="novels.html" class="nav-link-pro">Novels</a>
+                    <a href="tools.html" class="nav-link-pro active">Tools</a>
+                    <a href="blog.html" class="nav-link-pro">Blog</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button type="button" id="mobile-menu-button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-pro-text-secondary hover:text-pro-text-primary hover:bg-pro-dark-tertiary transition-all duration-300">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu-pro hidden md:hidden">
+            <div class="px-4 pt-2 pb-3 space-y-1 glass-pro">
+                <a href="index.html" class="block nav-link-pro">Home</a>
+                <a href="novels.html" class="block nav-link-pro">Novels</a>
+                <a href="tools.html" class="block nav-link-pro active">Tools</a>
+                <a href="blog.html" class="block nav-link-pro">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-12 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 animate-fade-in-up">
+                    <span class="tech-gradient">Professional</span><br>
+                    <span class="text-pro-text-primary">Development Tools</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-pro-text-secondary max-w-4xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s;">
+                    Cutting-edge userscripts and utilities designed to enhance productivity, streamline workflows, and solve real-world problems
+                </p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid max-w-4xl mx-auto mb-16 animate-fade-in-up" style="animation-delay: 0.4s;">
+                <div class="stat-item">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Active Tools</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">100+</div>
+                    <div class="stat-label">Downloads</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">5★</div>
+                    <div class="stat-label">User Rating</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">2025</div>
+                    <div class="stat-label">Latest Update</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="py-12 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Tool 1: Threads Follower Manager -->
+                <div class="tool-card-pro rounded-xl p-8 animate-slide-in-left">
+                    <div class="flex items-start mb-6">
+                        <div class="tech-icon icon-threads mr-4">
+                            <i class="fab fa-threads"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-pro-text-primary mb-2">Threads Follower Manager</h3>
+                            <p class="text-pro-text-secondary">Advanced follower management and cleanup utility for Meta Threads</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="feature-badge">Social Media</div>
+                        <div class="feature-badge">Automation</div>
+                        <div class="feature-badge">Cleanup</div>
+                    </div>
+
+                    <p class="text-pro-text-secondary mb-6 leading-relaxed">
+                        Efficiently manage your Threads followers with bulk operations, smart filtering, and automated cleanup. 
+                        Remove inactive followers, manage follow-back ratios, and maintain a healthy follower ecosystem.
+                    </p>
+
+                    <div class="code-block mb-6">
+                        <div class="code-header">
+                            <span class="text-pro-text-secondary text-sm">Installation</span>
+                            <button class="copy-btn ml-auto" onclick="copyToClipboard('https://gist.github.com/yumerin404/2efad1c668a60b3dc4ab834a00d41435')">
+                                <i class="fas fa-copy mr-1"></i>Copy URL
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <code class="text-code text-pro-accent-green">
+                                // Install via Tampermonkey/Greasemonkey<br>
+                                // GitHub Gist URL ready to copy
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <a href="https://gist.github.com/yumerin404/2efad1c668a60b3dc4ab834a00d41435" target="_blank"
+                           class="btn-primary-pro px-6 py-3 rounded-lg inline-flex items-center">
+                            <i class="fab fa-github mr-2"></i>
+                            <span>View Source</span>
+                        </a>
+                        <button class="btn-secondary-pro px-6 py-3 rounded-lg inline-flex items-center"
+                                onclick="showInstallGuide('threads')">
+                            <span><i class="fas fa-download mr-2"></i>Install Guide</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tool 2: Enhanced ExHentai Script -->
+                <div class="tool-card-pro rounded-xl p-8 animate-slide-in-right">
+                    <div class="flex items-start mb-6">
+                        <div class="tech-icon icon-exhentai mr-4">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-pro-text-primary mb-2">Enhanced ExHentai Script</h3>
+                            <p class="text-pro-text-secondary">Advanced reading experience with optimized loading and progress tracking</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="feature-badge">Reading</div>
+                        <div class="feature-badge">Performance</div>
+                        <div class="feature-badge">UX Enhancement</div>
+                    </div>
+
+                    <p class="text-pro-text-secondary mb-6 leading-relaxed">
+                        Dramatically improves the ExHentai reading experience with background preloading, progress persistence, 
+                        enhanced navigation controls, and optimized image loading for smoother browsing.
+                    </p>
+
+                    <div class="code-block mb-6">
+                        <div class="code-header">
+                            <span class="text-pro-text-secondary text-sm">Features</span>
+                            <button class="copy-btn ml-auto" onclick="copyToClipboard('https://gist.github.com/yumerin404/bc23649a1423e835ecb1474f3b35664f')">
+                                <i class="fas fa-copy mr-1"></i>Copy URL
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <code class="text-code text-pro-accent-blue">
+                                ✓ Background preloading<br>
+                                ✓ Progress tracking<br>
+                                ✓ Enhanced navigation<br>
+                                ✓ Optimized performance
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <a href="https://gist.github.com/yumerin404/bc23649a1423e835ecb1474f3b35664f" target="_blank"
+                           class="btn-primary-pro px-6 py-3 rounded-lg inline-flex items-center">
+                            <i class="fab fa-github mr-2"></i>
+                            <span>View Source</span>
+                        </a>
+                        <button class="btn-secondary-pro px-6 py-3 rounded-lg inline-flex items-center"
+                                onclick="showInstallGuide('exhentai')">
+                            <span><i class="fas fa-download mr-2"></i>Install Guide</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tool 3: DLsite Records Manager -->
+                <div class="tool-card-pro rounded-xl p-8 animate-slide-in-left" style="animation-delay: 0.3s;">
+                    <div class="flex items-start mb-6">
+                        <div class="tech-icon icon-dlsite mr-4">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-pro-text-primary mb-2">DLsite Records Manager</h3>
+                            <p class="text-pro-text-secondary">Comprehensive library management with tagging and export functionality</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="feature-badge">Data Management</div>
+                        <div class="feature-badge">Export/Import</div>
+                        <div class="feature-badge">Light Theme</div>
+                    </div>
+
+                    <p class="text-pro-text-secondary mb-6 leading-relaxed">
+                        A sophisticated DLsite library management tool featuring time-based recording, advanced tagging system, 
+                        data export/import capabilities, and a clean light-themed interface for better usability.
+                    </p>
+
+                    <div class="code-block mb-6">
+                        <div class="code-header">
+                            <span class="text-pro-text-secondary text-sm">Capabilities</span>
+                            <button class="copy-btn ml-auto" onclick="copyToClipboard('https://gist.github.com/yumerin404/ed1426a90ef70e7f925afde8654f97ca')">
+                                <i class="fas fa-copy mr-1"></i>Copy URL
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <code class="text-code text-pro-accent-orange">
+                                ✓ Time-based recording<br>
+                                ✓ Advanced tagging<br>
+                                ✓ Export/Import data<br>
+                                ✓ Light theme UI
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <a href="https://gist.github.com/yumerin404/ed1426a90ef70e7f925afde8654f97ca" target="_blank"
+                           class="btn-primary-pro px-6 py-3 rounded-lg inline-flex items-center">
+                            <i class="fab fa-github mr-2"></i>
+                            <span>View Source</span>
+                        </a>
+                        <button class="btn-secondary-pro px-6 py-3 rounded-lg inline-flex items-center"
+                                onclick="showInstallGuide('dlsite')">
+                            <span><i class="fas fa-download mr-2"></i>Install Guide</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tool 4: ChatGPT Risk Monitor -->
+                <div class="tool-card-pro rounded-xl p-8 animate-slide-in-right" style="animation-delay: 0.3s;">
+                    <div class="flex items-start mb-6">
+                        <div class="tech-icon icon-chatgpt mr-4">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-pro-text-primary mb-2">ChatGPT Risk Monitor</h3>
+                            <p class="text-pro-text-secondary">Real-time risk level monitoring and security awareness enhancement</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <div class="feature-badge">Security</div>
+                        <div class="feature-badge">Real-time</div>
+                        <div class="feature-badge">Risk Assessment</div>
+                    </div>
+
+                    <p class="text-pro-text-secondary mb-6 leading-relaxed">
+                        An advanced security monitoring tool designed specifically for ChatGPT users, providing real-time risk level 
+                        assessment, connection monitoring, and enhanced security awareness for safer AI interactions.
+                    </p>
+
+                    <div class="code-block mb-6">
+                        <div class="code-header">
+                            <span class="text-pro-text-secondary text-sm">Security Features</span>
+                            <button class="copy-btn ml-auto" onclick="copyToClipboard('https://gist.github.com/yumerin404/23897d7fea9f6d061593b88ded5e1171')">
+                                <i class="fas fa-copy mr-1"></i>Copy URL
+                            </button>
+                        </div>
+                        <div class="p-4">
+                            <code class="text-code text-pro-accent-green">
+                                ✓ Real-time risk monitoring<br>
+                                ✓ Connection status display<br>
+                                ✓ Security awareness alerts<br>
+                                ✓ Enhanced user experience
+                            </code>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <a href="https://gist.github.com/yumerin404/23897d7fea9f6d061593b88ded5e1171" target="_blank"
+                           class="btn-primary-pro px-6 py-3 rounded-lg inline-flex items-center">
+                            <i class="fab fa-github mr-2"></i>
+                            <span>View Source</span>
+                        </a>
+                        <button class="btn-secondary-pro px-6 py-3 rounded-lg inline-flex items-center"
+                                onclick="showInstallGuide('chatgpt')">
+                            <span><i class="fas fa-download mr-2"></i>Install Guide</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Divider -->
+    <div class="tech-divider"></div>
+
+    <!-- Support Section -->
+    <section class="py-16 glass-pro">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-6 tech-gradient">Professional Support</h2>
+            <p class="text-xl text-pro-text-secondary mb-8 max-w-3xl mx-auto">
+                Need help with installation, customization, or have a feature request? I'm here to assist with professional development support.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://github.com/yumerin404" target="_blank"
+                   class="btn-primary-pro px-8 py-4 rounded-lg inline-flex items-center justify-center">
+                    <i class="fab fa-github mr-3"></i>
+                    <span>GitHub Profile</span>
+                </a>
+                <a href="https://www.threads.com/@yumerin.main.i" target="_blank"
+                   class="btn-secondary-pro px-8 py-4 rounded-lg inline-flex items-center justify-center">
+                    <span><i class="fab fa-threads mr-3"></i>Contact Support</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass-pro text-pro-text-secondary py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-pro-border pt-8 text-center">
+                <p>&copy; 2025 Dream Bell Fantasy. Professional tools crafted with precision.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 p-4 rounded-lg bg-gradient-to-br from-pro-accent-blue to-pro-accent-purple text-pro-dark-primary shadow-lg opacity-0 invisible transition-all duration-300 hover:scale-110 hover:shadow-xl animate-pulse-glow">
+        <i class="fas fa-arrow-up text-lg"></i>
+    </button>
+
+    <!-- Install Guide Modal -->
+    <div id="install-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="glass-pro rounded-xl max-w-2xl w-full mx-4 p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold tech-gradient">Installation Guide</h3>
+                <button onclick="closeInstallGuide()" class="text-pro-text-secondary hover:text-pro-text-primary">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div id="install-content" class="space-y-4">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (!mobileMenu.classList.contains('hidden')) {
+                setTimeout(() => mobileMenu.classList.add('show'), 10);
+            } else {
+                mobileMenu.classList.remove('show');
+            }
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+
+        const toggleBackToTopButton = () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100');
+            } else {
+                backToTopButton.classList.add('opacity-0', 'invisible');
+                backToTopButton.classList.remove('opacity-100');
+            }
+        };
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        window.addEventListener('scroll', toggleBackToTopButton);
+
+        // Copy to clipboard function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show feedback
+                const event = new CustomEvent('copied');
+                document.dispatchEvent(event);
+            });
+        }
+
+        // Install guide function
+        function showInstallGuide(tool) {
+            const modal = document.getElementById('install-modal');
+            const content = document.getElementById('install-content');
+            
+            const guides = {
+                threads: {
+                    title: 'Threads Follower Manager',
+                    steps: [
+                        'Install Tampermonkey or Greasemonkey browser extension',
+                        'Click "View Source" to open the GitHub Gist',
+                        'Click "Raw" button on the gist page',
+                        'Tampermonkey will automatically detect and prompt for installation',
+                        'Click "Install" to add the script to your browser'
+                    ]
+                },
+                exhentai: {
+                    title: 'Enhanced ExHentai Script',
+                    steps: [
+                        'Ensure you have userscript manager installed',
+                        'Visit the GitHub Gist link',
+                        'Copy the raw script content',
+                        'Create new script in your userscript manager',
+                        'Paste the code and save'
+                    ]
+                },
+                dlsite: {
+                    title: 'DLsite Records Manager',
+                    steps: [
+                        'Install browser userscript extension',
+                        'Navigate to the GitHub Gist',
+                        'Install script via "Raw" button',
+                        'Visit DLsite to see the enhanced interface',
+                        'Use the new features for library management'
+                    ]
+                },
+                chatgpt: {
+                    title: 'ChatGPT Risk Monitor',
+                    steps: [
+                        'Install Tampermonkey or similar extension',
+                        'Access the GitHub Gist for the script',
+                        'Install via the userscript manager',
+                        'Visit ChatGPT website',
+                        'Observe the new risk monitoring interface'
+                    ]
+                }
+            };
+
+            const guide = guides[tool];
+            content.innerHTML = `
+                <div class="mb-4">
+                    <h4 class="text-lg font-semibold text-pro-text-primary">${guide.title}</h4>
+                    <p class="text-pro-text-secondary">Follow these steps to install the userscript:</p>
+                </div>
+                <ol class="space-y-3">
+                    ${guide.steps.map((step, index) => `
+                        <li class="flex items-start">
+                            <span class="bg-pro-accent-blue text-pro-dark-primary rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">${index + 1}</span>
+                            <span class="text-pro-text-secondary">${step}</span>
+                        </li>
+                    `).join('')}
+                </ol>
+                <div class="mt-6 p-4 bg-pro-dark-tertiary rounded-lg">
+                    <p class="text-sm text-pro-text-secondary">
+                        <i class="fas fa-info-circle text-pro-accent-blue mr-2"></i>
+                        Need help? Contact me via Threads or GitHub for technical support.
+                    </p>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+        }
+
+        function closeInstallGuide() {
+            document.getElementById('install-modal').classList.add('hidden');
+        }
+
+        // Enhanced animations
+        const observeElements = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = entry.target.style.animation || 'fade-in-up 0.8s ease-out';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.tool-card-pro').forEach(card => {
+                observer.observe(card);
+            });
+        };
+
+        // Button animations
+        document.querySelectorAll('.btn-primary-pro, .btn-secondary-pro').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.6);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                `;
+                
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to { transform: scale(4); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            observeElements();
+            toggleBackToTopButton();
+        });
+
+        // Copy feedback
+        document.addEventListener('copied', () => {
+            const feedback = document.createElement('div');
+            feedback.className = 'fixed top-20 right-8 bg-pro-accent-green text-pro-dark-primary px-4 py-2 rounded-lg shadow-lg z-50';
+            feedback.textContent = 'URL copied to clipboard!';
+            document.body.appendChild(feedback);
+            
+            setTimeout(() => {
+                feedback.style.animation = 'fade-in-up 0.3s ease-out reverse';
+                setTimeout(() => feedback.remove(), 300);
+            }, 2000);
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeInstallGuide();
+            }
+        });
+
+        // Close modal on backdrop click
+        document.getElementById('install-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'install-modal') {
+                closeInstallGuide();
+            }
+        });
+    </script>
+</body>
+
+</html>
