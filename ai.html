@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>夢鈴幻想 | AI魔導</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'cyber-dark-primary': '#0a0a0f',
+                        'cyber-dark-secondary': '#1a1a2e',
+                        'cyber-dark-tertiary': '#16213e',
+                        'cyber-accent-blue': '#00d4ff',
+                        'cyber-accent-purple': '#a855f7',
+                        'cyber-accent-pink': '#ec4899',
+                        'cyber-accent-green': '#10b981',
+                        'cyber-text-primary': '#ffffff',
+                        'cyber-text-secondary': '#a1a1aa',
+                        'cyber-text-muted': '#6b7280',
+                        'cyber-border': '#374151',
+                    },
+                    animation: {
+                        'matrix-fall': 'matrix-fall 15s linear infinite',
+                        'neon-pulse': 'neon-pulse 2s ease-in-out infinite',
+                        'cyber-float': 'cyber-float 6s ease-in-out infinite',
+                        'hologram': 'hologram 3s ease-in-out infinite',
+                        'data-stream': 'data-stream 20s linear infinite',
+                        'glitch': 'glitch 0.3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'matrix-fall': {
+                            '0%': { transform: 'translateY(-100vh)' },
+                            '100%': { transform: 'translateY(100vh)' },
+                        },
+                        'neon-pulse': {
+                            '0%, 100%': { 
+                                'box-shadow': '0 0 5px rgba(0, 212, 255, 0.5), 0 0 10px rgba(0, 212, 255, 0.3), 0 0 15px rgba(0, 212, 255, 0.2)',
+                            },
+                            '50%': { 
+                                'box-shadow': '0 0 10px rgba(0, 212, 255, 0.8), 0 0 20px rgba(0, 212, 255, 0.6), 0 0 30px rgba(0, 212, 255, 0.4)',
+                            }
+                        },
+                        'cyber-float': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-10px) rotate(2deg)' },
+                        },
+                        'hologram': {
+                            '0%, 100%': { opacity: '0.8', transform: 'scale(1)' },
+                            '50%': { opacity: '1', transform: 'scale(1.02)' },
+                        },
+                        'data-stream': {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100vw)' },
+                        },
+                        'glitch': {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '10%': { transform: 'translateX(-2px)' },
+                            '20%': { transform: 'translateX(2px)' },
+                            '30%': { transform: 'translateX(-1px)' },
+                            '40%': { transform: 'translateX(1px)' },
+                            '50%': { transform: 'translateX(-1px)' },
+                            '60%': { transform: 'translateX(2px)' },
+                            '70%': { transform: 'translateX(-2px)' },
+                            '80%': { transform: 'translateX(1px)' },
+                            '90%': { transform: 'translateX(-1px)' },
+                        }
+                    },
+                    fontFamily: {
+                        'cyber': ['"Orbitron"', 'monospace'],
+                        'tech': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+        }
+
+        .cyber-bg {
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .glass-cyber {
+            backdrop-filter: blur(16px);
+            background: rgba(26, 26, 46, 0.7);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-link-cyber {
+            position: relative;
+            transition: all 0.3s ease;
+            color: #a1a1aa;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-link-cyber::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .nav-link-cyber:hover {
+            color: #ffffff;
+        }
+
+        .nav-link-cyber:hover::before {
+            opacity: 1;
+        }
+
+        .nav-link-cyber.active {
+            color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .cyber-gradient {
+            background: linear-gradient(135deg, #00d4ff 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ai-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.9));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #a855f7, #ec4899);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .ai-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .ai-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(0, 212, 255, 0.6);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(0, 212, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .cyber-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: data-stream 4s ease-in-out infinite;
+        }
+
+        .icon-comfyui { background: linear-gradient(135deg, #00d4ff, #a855f7); }
+        .icon-stable-diffusion { background: linear-gradient(135deg, #ec4899, #10b981); }
+        .icon-midjourney { background: linear-gradient(135deg, #a855f7, #00d4ff); }
+        .icon-chatgpt { background: linear-gradient(135deg, #10b981, #ec4899); }
+
+        .btn-cyber-primary {
+            background: linear-gradient(135deg, #00d4ff, #a855f7);
+            color: #0a0a0f;
+            border: none;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-cyber-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-cyber-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-cyber-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.4);
+        }
+
+        .matrix-text {
+            position: fixed;
+            font-family: 'Orbitron', monospace;
+            font-size: 12px;
+            color: rgba(0, 212, 255, 0.4);
+            pointer-events: none;
+            z-index: 1;
+            animation: matrix-fall 15s linear infinite;
+        }
+
+        .hologram-effect {
+            position: relative;
+        }
+
+        .hologram-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(0, 212, 255, 0.1) 50%,
+                transparent 100%
+            );
+            animation: hologram 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .mobile-menu-cyber {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+
+        .mobile-menu-cyber.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .cyber-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d4ff, #a855f7, #ec4899, transparent);
+            margin: 4rem 0;
+            position: relative;
+        }
+
+        .cyber-divider::after {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+            filter: blur(2px);
+        }
+
+        .coming-soon-glow {
+            animation: neon-pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body class="cyber-bg text-cyber-text-primary min-h-screen font-tech">
+    <!-- Matrix Rain Effect -->
+    <div class="matrix-text" style="left: 5%; animation-delay: 0s;">01001001</div>
+    <div class="matrix-text" style="left: 15%; animation-delay: 2s;">11010101</div>
+    <div class="matrix-text" style="left: 25%; animation-delay: 4s;">10101010</div>
+    <div class="matrix-text" style="left: 35%; animation-delay: 6s;">01110011</div>
+    <div class="matrix-text" style="left: 45%; animation-delay: 8s;">11001100</div>
+    <div class="matrix-text" style="left: 55%; animation-delay: 10s;">10010110</div>
+    <div class="matrix-text" style="left: 65%; animation-delay: 12s;">01100101</div>
+    <div class="matrix-text" style="left: 75%; animation-delay: 14s;">11100011</div>
+    <div class="matrix-text" style="left: 85%; animation-delay: 16s;">01011010</div>
+    <div class="matrix-text" style="left: 95%; animation-delay: 18s;">10111001</div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-cyber">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="index.html" class="flex items-center group">
+                            <img src="images/avatar.png" alt="Dream Bell" 
+                                 class="h-10 w-10 rounded-full mr-3 transition-transform duration-300 group-hover:scale-110 ring-2 ring-cyber-accent-blue ring-opacity-50">
+                            <span class="cyber-gradient text-xl font-bold font-cyber">夢鈴幻想</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="index.html" class="nav-link-cyber">首頁</a>
+                    <a href="novels.html" class="nav-link-cyber">奇幻小說</a>
+                    <a href="tools.html" class="nav-link-cyber">魔法工具</a>
+                    <a href="ai.html" class="nav-link-cyber active">AI魔導</a>
+                    <a href="blog.html" class="nav-link-cyber">心境筆記</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button type="button" id="mobile-menu-button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-cyber-text-secondary hover:text-cyber-text-primary hover:bg-cyber-dark-tertiary transition-all duration-300">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu-cyber hidden md:hidden">
+            <div class="px-4 pt-2 pb-3 space-y-1 glass-cyber">
+                <a href="index.html" class="block nav-link-cyber">首頁</a>
+                <a href="novels.html" class="block nav-link-cyber">奇幻小說</a>
+                <a href="tools.html" class="block nav-link-cyber">魔法工具</a>
+                <a href="ai.html" class="block nav-link-cyber active">AI魔導</a>
+                <a href="blog.html" class="block nav-link-cyber">心境筆記</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-12 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h1 class="text-6xl md:text-7xl font-black mb-6 animate-cyber-float font-cyber">
+                    <span class="cyber-gradient">AI</span><br>
+                    <span class="text-cyber-text-primary">魔導研究院</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-cyber-text-secondary max-w-4xl mx-auto leading-relaxed mb-8">
+                    探索人工智慧的無限可能，從 ComfyUI 工作流程到先進的生成模型，在此處發現 AI 魔法的奧秘
+                </p>
+                
+                <!-- Hologram Effect -->
+                <div class="hologram-effect inline-block">
+                    <div class="text-6xl mb-4">
+                        <i class="fas fa-robot cyber-gradient"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Tools Section -->
+    <section class="py-12 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Coming Soon Notice -->
+            <div class="text-center mb-16">
+                <div class="glass-cyber rounded-2xl p-12 max-w-4xl mx-auto coming-soon-glow">
+                    <div class="mb-8">
+                        <i class="fas fa-magic text-8xl cyber-gradient animate-hologram"></i>
+                    </div>
+                    <h2 class="text-4xl font-bold mb-6 cyber-gradient font-cyber">即將展開 AI 魔導之旅</h2>
+                    <p class="text-lg text-cyber-text-secondary mb-8 leading-relaxed max-w-3xl mx-auto">
+                        AI 魔導研究院正在構建中，將為你帶來：<br>
+                        • ComfyUI 工作流程與自定義節點<br>
+                        • Stable Diffusion 進階技巧與模型調優<br>
+                        • AI 藝術創作與風格轉換<br>
+                        • 機器學習實驗與創新應用<br>
+                        • 生成式 AI 的創意探索
+                    </p>
+                    <div class="inline-flex items-center text-cyber-accent-blue font-bold text-lg">
+                        <i class="fas fa-cogs mr-3 animate-spin"></i>
+                        <span class="animate-glitch">正在施展 AI 魔法中...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                
+                <!-- ComfyUI Card -->
+                <div class="ai-card rounded-2xl p-8">
+                    <div class="flex items-start mb-6">
+                        <div class="cyber-icon icon-comfyui mr-6">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-cyber-text-primary mb-2 font-cyber">ComfyUI 工作流程</h3>
+                            <p class="text-cyber-text-secondary">可視化節點編輯器，構建複雜的 AI 圖像生成流程</p>
+                        </div>
+                    </div>
+                    <p class="text-cyber-text-secondary mb-6 leading-relaxed">
+                        探索 ComfyUI 的強大功能，學習如何創建自定義工作流程、優化生成參數，以及開發專屬的 AI 藝術創作管道。
+                    </p>
+                    <div class="text-cyber-accent-blue text-sm font-medium">
+                        <i class="fas fa-clock mr-2"></i>即將推出
+                    </div>
+                </div>
+
+                <!-- Stable Diffusion Card -->
+                <div class="ai-card rounded-2xl p-8">
+                    <div class="flex items-start mb-6">
+                        <div class="cyber-icon icon-stable-diffusion mr-6">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-cyber-text-primary mb-2 font-cyber">Stable Diffusion 進階</h3>
+                            <p class="text-cyber-text-secondary">深度學習圖像生成模型的高級應用與調優技巧</p>
+                        </div>
+                    </div>
+                    <p class="text-cyber-text-secondary mb-6 leading-relaxed">
+                        從基礎概念到高級技巧，涵蓋模型微調、LoRA 訓練、ControlNet 應用等前沿技術，助你掌握 AI 藝術創作的精髓。
+                    </p>
+                    <div class="text-cyber-accent-purple text-sm font-medium">
+                        <i class="fas fa-clock mr-2"></i>即將推出
+                    </div>
+                </div>
+
+                <!-- AI Art Card -->
+                <div class="ai-card rounded-2xl p-8">
+                    <div class="flex items-start mb-6">
+                        <div class="cyber-icon icon-midjourney mr-6">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-cyber-text-primary mb-2 font-cyber">AI 藝術創作</h3>
+                            <p class="text-cyber-text-secondary">結合藝術美學與人工智慧的創意表達</p>
+                        </div>
+                    </div>
+                    <p class="text-cyber-text-secondary mb-6 leading-relaxed">
+                        探索 AI 在藝術創作中的無限可能，從風格轉換到概念設計，學習如何運用 AI 工具實現你的創意願景。
+                    </p>
+                    <div class="text-cyber-accent-pink text-sm font-medium">
+                        <i class="fas fa-clock mr-2"></i>即將推出
+                    </div>
+                </div>
+
+                <!-- Machine Learning Card -->
+                <div class="ai-card rounded-2xl p-8">
+                    <div class="flex items-start mb-6">
+                        <div class="cyber-icon icon-chatgpt mr-6">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-cyber-text-primary mb-2 font-cyber">機器學習實驗</h3>
+                            <p class="text-cyber-text-secondary">前沿的機器學習技術研究與實際應用</p>
+                        </div>
+                    </div>
+                    <p class="text-cyber-text-secondary mb-6 leading-relaxed">
+                        深入機器學習的核心概念，從神經網路架構到最新的研究成果，與我一同探索 AI 技術的前沿發展。
+                    </p>
+                    <div class="text-cyber-accent-green text-sm font-medium">
+                        <i class="fas fa-clock mr-2"></i>即將推出
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Cyber Divider -->
+    <div class="cyber-divider"></div>
+
+    <!-- Contact Section -->
+    <section class="py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6 cyber-gradient font-cyber">連接 AI 魔導網路</h2>
+            <p class="text-xl text-cyber-text-secondary mb-8 max-w-3xl mx-auto">
+                想要搶先體驗 AI 魔導研究院的最新內容？歡迎透過以下管道與我連結，獲取第一手的 AI 技術分享與創作靈感。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://github.com/yumerin404" target="_blank"
+                   class="btn-cyber-primary px-8 py-4 rounded-xl inline-flex items-center justify-center font-cyber">
+                    <i class="fab fa-github mr-3 text-xl"></i>
+                    <span>GitHub 實驗室</span>
+                </a>
+                <a href="https://www.threads.com/@yumerin.main.i" target="_blank"
+                   class="px-8 py-4 rounded-xl inline-flex items-center justify-center border border-cyber-accent-blue text-cyber-accent-blue hover:bg-cyber-accent-blue hover:text-cyber-dark-primary transition-all duration-300 font-cyber">
+                    <i class="fab fa-threads mr-3 text-xl"></i>
+                    <span>Threads 連結</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass-cyber text-cyber-text-secondary py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="border-t border-cyber-border pt-8 text-center">
+                <p class="font-cyber">&copy; 2025 夢鈴幻想. AI 魔導研究院構建中.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 p-4 rounded-xl bg-gradient-to-br from-cyber-accent-blue to-cyber-accent-purple text-cyber-dark-primary shadow-lg opacity-0 invisible transition-all duration-300 hover:scale-110 animate-neon-pulse">
+        <i class="fas fa-arrow-up text-lg"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (!mobileMenu.classList.contains('hidden')) {
+                setTimeout(() => mobileMenu.classList.add('show'), 10);
+            } else {
+                mobileMenu.classList.remove('show');
+            }
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('back-to-top');
+
+        const toggleBackToTopButton = () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100');
+            } else {
+                backToTopButton.classList.add('opacity-0', 'invisible');
+                backToTopButton.classList.remove('opacity-100');
+            }
+        };
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        window.addEventListener('scroll', toggleBackToTopButton);
+
+        // Enhanced animations
+        const observeElements = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'cyber-float 0.8s ease-out';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.ai-card').forEach(card => {
+                observer.observe(card);
+            });
+        };
+
+        // Matrix effect enhancement
+        function createMatrixChar() {
+            const chars = ['0', '1', 'A', 'I', '∞', '⚡', '◊', '※'];
+            const char = document.createElement('div');
+            char.className = 'matrix-text';
+            char.textContent = chars[Math.floor(Math.random() * chars.length)];
+            char.style.left = Math.random() * 100 + '%';
+            char.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            char.style.fontSize = (Math.random() * 8 + 10) + 'px';
+            char.style.opacity = Math.random() * 0.7 + 0.3;
+            document.body.appendChild(char);
+
+            setTimeout(() => {
+                char.remove();
+            }, 15000);
+        }
+
+        // Create matrix characters periodically
+        setInterval(createMatrixChar, 200);
+
+        // AI card hover effects
+        document.querySelectorAll('.ai-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 212, 255, 0.4)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '';
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            observeElements();
+            toggleBackToTopButton();
+        });
+
+        // Glitch effect for text
+        function addGlitchEffect() {
+            const glitchElements = document.querySelectorAll('.animate-glitch');
+            glitchElements.forEach(element => {
+                if (Math.random() > 0.95) {
+                    element.style.animation = 'glitch 0.3s ease-in-out';
+                    setTimeout(() => {
+                        element.style.animation = '';
+                    }, 300);
+                }
+            });
+        }
+
+        // Apply glitch effect randomly
+        setInterval(addGlitchEffect, 2000);
+    </script>
+</body>
+
+</html>
