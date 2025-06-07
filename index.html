@@ -241,15 +241,17 @@
 
         .social-button {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(200, 168, 233, 0.2);
-            background: rgba(26, 30, 46, 0.6);
+            border: 1px solid rgba(200, 168, 233, 0.3);
+            background: rgba(26, 30, 46, 0.8);
+            color: #c8a8e9;
         }
 
         .social-button:hover {
-            background: rgba(200, 168, 233, 0.1);
-            border-color: rgba(200, 168, 233, 0.4);
+            background: rgba(200, 168, 233, 0.2);
+            border-color: rgba(200, 168, 233, 0.6);
             transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(200, 168, 233, 0.2);
+            box-shadow: 0 8px 20px rgba(200, 168, 233, 0.3);
+            color: #f5f3f0;
         }
 
         .mobile-menu {
@@ -356,17 +358,17 @@
                     <a href="https://www.threads.com/@yumerin.main.i" target="_blank" 
                        class="social-button p-3 rounded-soft inline-flex items-center justify-center group">
                         <i class="fab fa-threads text-xl group-hover:scale-110 transition-transform"></i>
-                        <span class="ml-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity text-soft-text-primary">Threads</span>
+                        <span class="ml-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity text-soft-accent-primary">Threads</span>
                     </a>
                     <a href="https://www.pixiv.net/users/108590809/novels" target="_blank" 
                        class="social-button p-3 rounded-soft inline-flex items-center justify-center group">
                         <i class="fas fa-paint-brush text-xl group-hover:scale-110 transition-transform"></i>
-                        <span class="ml-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity text-soft-text-primary">Pixiv</span>
+                        <span class="ml-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity text-soft-accent-primary">Pixiv</span>
                     </a>
                     <a href="https://masiro.me/admin/novelView?novel_id=711" target="_blank" 
                        class="social-button p-3 rounded-soft inline-flex items-center justify-center group">
                         <i class="fas fa-book text-xl group-hover:scale-110 transition-transform"></i>
-                        <span class="ml-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity text-soft-text-primary">Masiro</span>
+                        <span class="ml-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity text-soft-accent-primary">Masiro</span>
                     </a>
                 </div>
             </div>
@@ -435,6 +437,56 @@
                         </p>
                         <a href="tools.html" class="inline-flex items-center text-soft-accent-primary hover:text-soft-accent-secondary transition-colors font-medium">
                             探索工具 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- AI Feature Card -->
+                <div class="feature-card rounded-extra-soft overflow-hidden shadow-xl">
+                    <div class="h-64 overflow-hidden bg-gradient-to-br from-soft-dark-secondary to-soft-dark-tertiary flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-robot text-6xl text-soft-accent-primary mb-4 animate-pulse-soft"></i>
+                            <div class="text-soft-accent-primary font-bold text-lg">AI 魔導研究院</div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-gradient-to-br from-soft-accent-primary to-soft-accent-tertiary rounded-full p-4 mr-4">
+                                <i class="fas fa-brain text-soft-dark-primary text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-soft-text-primary">AI魔導</h3>
+                        </div>
+                        <p class="text-soft-text-secondary mb-6 leading-relaxed">
+                            探索人工智慧的無限可能，從 ComfyUI 工作流程到先進的生成模型，
+                            在此處發現 AI 魔法的奧秘。
+                        </p>
+                        <a href="ai.html" class="inline-flex items-center text-soft-accent-primary hover:text-soft-accent-secondary transition-colors font-medium">
+                            進入研究院 <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Blog Feature Card -->
+                <div class="feature-card rounded-extra-soft overflow-hidden shadow-xl">
+                    <div class="h-64 overflow-hidden bg-gradient-to-br from-soft-dark-secondary to-soft-dark-tertiary flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-feather-alt text-6xl text-soft-accent-secondary mb-4 animate-pulse-soft"></i>
+                            <div class="text-soft-accent-secondary font-bold text-lg">創作心境</div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-gradient-to-br from-soft-accent-secondary to-soft-accent-primary rounded-full p-4 mr-4">
+                                <i class="fas fa-pencil-alt text-soft-dark-primary text-xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-soft-text-primary">心境筆記</h3>
+                        </div>
+                        <p class="text-soft-text-secondary mb-6 leading-relaxed">
+                            記錄創作路上的點點滴滴，分享在夢想與現實之間游走的心境感悟，
+                            與你一同探索創作者的內心世界。
+                        </p>
+                        <a href="blog.html" class="inline-flex items-center text-soft-accent-primary hover:text-soft-accent-secondary transition-colors font-medium">
+                            閱讀筆記 <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                     </div>
                 </div>

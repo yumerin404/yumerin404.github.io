@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dream Bell Fantasy | Records & Thoughts</title>
+    <title>夢鈴幻想 | 心境筆記</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script>
@@ -30,7 +30,6 @@
                         'bounce-soft': 'bounce-soft 1s ease-in-out',
                         'slide-up': 'slide-up 0.6s ease-out',
                         'scale-bounce': 'scale-bounce 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-                        'card-float': 'card-float 8s ease-in-out infinite',
                     },
                     keyframes: {
                         'float-gentle': {
@@ -62,10 +61,6 @@
                             '0%': { transform: 'scale(1)' },
                             '50%': { transform: 'scale(1.1)' },
                             '100%': { transform: 'scale(1)' },
-                        },
-                        'card-float': {
-                            '0%, 100%': { transform: 'translateY(0px) scale(1)' },
-                            '50%': { transform: 'translateY(-5px) scale(1.01)' },
                         }
                     },
                     fontFamily: {
@@ -140,94 +135,6 @@
             background-clip: text;
         }
 
-        .blog-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(200, 168, 233, 0.1);
-            background: rgba(26, 30, 46, 0.8);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .blog-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #c8a8e9, #f8b4d9, #a8e6cf);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .blog-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .blog-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            border-color: rgba(200, 168, 233, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
-            animation: card-float 8s ease-in-out infinite;
-        }
-
-        .tag {
-            background: linear-gradient(135deg, rgba(200, 168, 233, 0.2), rgba(248, 180, 217, 0.2));
-            border: 1px solid rgba(200, 168, 233, 0.3);
-            color: #c8a8e9;
-            transition: all 0.3s ease;
-        }
-
-        .tag:hover {
-            background: linear-gradient(135deg, rgba(200, 168, 233, 0.3), rgba(248, 180, 217, 0.3));
-            border-color: rgba(200, 168, 233, 0.5);
-            transform: scale(1.05);
-        }
-
-        .read-more-btn {
-            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 100%);
-            color: #0a0e1a;
-            border: none;
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .read-more-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .read-more-btn:hover::before {
-            left: 100%;
-        }
-
-        .read-more-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.4);
-        }
-
-        .hero-pattern {
-            background-image: radial-gradient(circle at 20% 50%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
-                             radial-gradient(circle at 80% 20%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
-                             radial-gradient(circle at 40% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%);
-        }
-
-        .floating-decoration {
-            position: absolute;
-            pointer-events: none;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(200, 168, 233, 0.15) 0%, transparent 70%);
-            animation: float-gentle 8s ease-in-out infinite;
-        }
-
         .mobile-menu {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             transform: translateY(-20px);
@@ -239,52 +146,18 @@
             opacity: 1;
         }
 
-        .meta-info {
-            color: #8a8680;
-            font-size: 0.875rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .meta-info i {
-            color: #c8a8e9;
-        }
-
-        .loading-more {
-            background: rgba(26, 30, 46, 0.9);
-            border: 2px solid #c8a8e9;
-            color: #c8a8e9;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .loading-more::before {
-            content: '';
+        .floating-decoration {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: linear-gradient(135deg, #c8a8e9, #f8b4d9);
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 0;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 168, 233, 0.15) 0%, transparent 70%);
+            animation: float-gentle 8s ease-in-out infinite;
         }
 
-        .loading-more:hover::before {
-            width: 100%;
-        }
-
-        .loading-more:hover {
-            color: #0a0e1a;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.3);
-        }
-
-        .loading-more span {
-            position: relative;
-            z-index: 1;
+        .hero-pattern {
+            background-image: radial-gradient(circle at 20% 50%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
+                             radial-gradient(circle at 80% 20%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
+                             radial-gradient(circle at 40% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%);
         }
 
         .sparkle {
@@ -300,6 +173,21 @@
             0%, 100% { opacity: 0; transform: scale(0); }
             50% { opacity: 1; transform: scale(1); }
         }
+
+        .social-button {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(200, 168, 233, 0.3);
+            background: rgba(26, 30, 46, 0.8);
+            color: #c8a8e9;
+        }
+
+        .social-button:hover {
+            background: rgba(200, 168, 233, 0.2);
+            border-color: rgba(200, 168, 233, 0.6);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(200, 168, 233, 0.3);
+            color: #f5f3f0;
+        }
     </style>
 </head>
 
@@ -313,16 +201,17 @@
                         <a href="index.html" class="flex items-center group">
                             <img src="images/avatar.png" alt="Dream Bell" 
                                  class="h-10 w-10 rounded-full mr-3 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                            <span class="text-gradient text-xl font-bold">Dream Bell Fantasy</span>
+                            <span class="text-gradient text-xl font-bold">夢鈴幻想</span>
                         </a>
                     </div>
                 </div>
 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="nav-link">Home</a>
-                    <a href="novels.html" class="nav-link">Novels</a>
-                    <a href="tools.html" class="nav-link">Tools</a>
-                    <a href="blog.html" class="nav-link active">Blog</a>
+                    <a href="index.html" class="nav-link">首頁</a>
+                    <a href="novels.html" class="nav-link">奇幻小說</a>
+                    <a href="tools.html" class="nav-link">魔法工具</a>
+                    <a href="ai.html" class="nav-link">AI魔導</a>
+                    <a href="blog.html" class="nav-link active">心境筆記</a>
                 </div>
 
                 <div class="md:hidden flex items-center">
@@ -338,10 +227,11 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="mobile-menu hidden md:hidden">
             <div class="px-4 pt-2 pb-3 space-y-1 glass-effect">
-                <a href="index.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">Home</a>
-                <a href="novels.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">Novels</a>
-                <a href="tools.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">Tools</a>
-                <a href="blog.html" class="block px-3 py-2 rounded-soft text-soft-accent-primary font-medium">Blog</a>
+                <a href="index.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">首頁</a>
+                <a href="novels.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">奇幻小說</a>
+                <a href="tools.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">魔法工具</a>
+                <a href="ai.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">AI魔導</a>
+                <a href="blog.html" class="block px-3 py-2 rounded-soft text-soft-accent-primary font-medium">心境筆記</a>
             </div>
         </div>
     </nav>
@@ -361,198 +251,35 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h1 class="text-5xl md:text-6xl font-bold mb-6">
-                    <span class="text-gradient">Records</span> & <span class="text-gradient">Thoughts</span>
+                    <span class="text-gradient">心境</span> & <span class="text-gradient">筆記</span>
                 </h1>
                 <p class="text-xl md:text-2xl text-soft-text-secondary max-w-3xl mx-auto leading-relaxed">
-                    A collection of creative musings, development insights, and heartfelt reflections from my journey
+                    在這裡記錄創作路上的點點滴滴，分享在夢想與現實之間游走的心境感悟
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Blog Posts -->
+    <!-- Content Section -->
     <section class="py-12 relative">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Featured Post -->
-            <div class="mb-16">
-                <div class="glass-effect rounded-extra-soft overflow-hidden shadow-2xl">
-                    <div class="p-8 md:p-12">
-                        <div class="flex items-center mb-4">
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium mr-3">Featured</span>
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium">Creative Process</span>
-                        </div>
-                        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gradient">The Magic Behind Storytelling</h2>
-                        <div class="meta-info mb-6">
-                            <span><i class="fas fa-calendar-alt mr-2"></i>March 15, 2025</span>
-                            <span><i class="fas fa-clock mr-2"></i>5 min read</span>
-                            <span><i class="fas fa-heart mr-2"></i>42 likes</span>
-                        </div>
-                        <p class="text-lg text-soft-text-secondary mb-8 leading-relaxed">
-                            Diving deep into the creative process that brings characters to life and worlds to existence. 
-                            In this post, I explore the delicate balance between planning and spontaneity that makes 
-                            storytelling such a magical art form. From character development to world-building, 
-                            discover the techniques that help create immersive narratives that resonate with readers.
-                        </p>
-                        <button class="read-more-btn px-8 py-3 rounded-soft font-medium inline-flex items-center">
-                            <span>Read Full Article</span>
-                            <i class="fas fa-arrow-right ml-3"></i>
-                        </button>
+            <!-- 空白占位 -->
+            <div class="text-center py-20">
+                <div class="glass-effect rounded-extra-soft p-12 max-w-2xl mx-auto">
+                    <div class="mb-8">
+                        <i class="fas fa-feather-alt text-6xl text-soft-accent-primary mb-6 animate-pulse-soft"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-6 text-gradient">心境筆記</h2>
+                    <p class="text-lg text-soft-text-secondary mb-8 leading-relaxed">
+                        這裡將記錄創作路上的點點滴滴，<br>
+                        分享在夢想與現實之間游走的心境感悟。
+                    </p>
+                    <div class="inline-flex items-center text-soft-accent-primary font-medium">
+                        <i class="fas fa-pencil-alt mr-2 animate-pulse-soft"></i>
+                        <span>內容撰寫中...</span>
                     </div>
                 </div>
-            </div>
-
-            <!-- Blog Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <!-- Blog Post 1 -->
-                <article class="blog-card rounded-extra-soft overflow-hidden shadow-xl">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium mr-2">Development</span>
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium">Tools</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 text-soft-text-primary">Building Better Userscripts</h3>
-                        <div class="meta-info mb-4">
-                            <span><i class="fas fa-calendar-alt mr-1"></i>Mar 10</span>
-                            <span><i class="fas fa-clock mr-1"></i>3 min</span>
-                        </div>
-                        <p class="text-soft-text-secondary mb-6 leading-relaxed">
-                            Lessons learned from developing various browser extensions and userscripts. 
-                            Best practices for creating maintainable and user-friendly tools.
-                        </p>
-                        <button class="read-more-btn px-6 py-2 rounded-soft text-sm font-medium inline-flex items-center">
-                            <span>Read More</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Blog Post 2 -->
-                <article class="blog-card rounded-extra-soft overflow-hidden shadow-xl">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium mr-2">Writing</span>
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium">Inspiration</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 text-soft-text-primary">Finding Beauty in Simplicity</h3>
-                        <div class="meta-info mb-4">
-                            <span><i class="fas fa-calendar-alt mr-1"></i>Mar 5</span>
-                            <span><i class="fas fa-clock mr-1"></i>4 min</span>
-                        </div>
-                        <p class="text-soft-text-secondary mb-6 leading-relaxed">
-                            Exploring how minimalism in storytelling can create more impactful narratives. 
-                            Sometimes less is truly more when crafting emotional connections.
-                        </p>
-                        <button class="read-more-btn px-6 py-2 rounded-soft text-sm font-medium inline-flex items-center">
-                            <span>Read More</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Blog Post 3 -->
-                <article class="blog-card rounded-extra-soft overflow-hidden shadow-xl">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium mr-2">Personal</span>
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium">Reflection</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 text-soft-text-primary">Journey Between Worlds</h3>
-                        <div class="meta-info mb-4">
-                            <span><i class="fas fa-calendar-alt mr-1"></i>Feb 28</span>
-                            <span><i class="fas fa-clock mr-1"></i>6 min</span>
-                        </div>
-                        <p class="text-soft-text-secondary mb-6 leading-relaxed">
-                            Balancing life between the digital realm of code and the imaginative world of storytelling. 
-                            A personal reflection on finding harmony in seemingly different passions.
-                        </p>
-                        <button class="read-more-btn px-6 py-2 rounded-soft text-sm font-medium inline-flex items-center">
-                            <span>Read More</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Blog Post 4 -->
-                <article class="blog-card rounded-extra-soft overflow-hidden shadow-xl">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium mr-2">Tutorial</span>
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium">Web Dev</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 text-soft-text-primary">Creating Smooth Animations</h3>
-                        <div class="meta-info mb-4">
-                            <span><i class="fas fa-calendar-alt mr-1"></i>Feb 20</span>
-                            <span><i class="fas fa-clock mr-1"></i>8 min</span>
-                        </div>
-                        <p class="text-soft-text-secondary mb-6 leading-relaxed">
-                            A deep dive into CSS animations and JavaScript transitions that create delightful user experiences. 
-                            Tips for performance optimization and accessibility.
-                        </p>
-                        <button class="read-more-btn px-6 py-2 rounded-soft text-sm font-medium inline-flex items-center">
-                            <span>Read More</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Blog Post 5 -->
-                <article class="blog-card rounded-extra-soft overflow-hidden shadow-xl">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium mr-2">Gaming</span>
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium">Review</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 text-soft-text-primary">Visual Novel Recommendations</h3>
-                        <div class="meta-info mb-4">
-                            <span><i class="fas fa-calendar-alt mr-1"></i>Feb 15</span>
-                            <span><i class="fas fa-clock mr-1"></i>5 min</span>
-                        </div>
-                        <p class="text-soft-text-secondary mb-6 leading-relaxed">
-                            A curated list of visual novels that have inspired my writing and captured my imagination. 
-                            From heartwarming slice-of-life to epic fantasy adventures.
-                        </p>
-                        <button class="read-more-btn px-6 py-2 rounded-soft text-sm font-medium inline-flex items-center">
-                            <span>Read More</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Blog Post 6 -->
-                <article class="blog-card rounded-extra-soft overflow-hidden shadow-xl">
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium mr-2">Life</span>
-                            <span class="tag px-3 py-1 rounded-full text-sm font-medium">Health</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-3 text-soft-text-primary">Wellness for Creators</h3>
-                        <div class="meta-info mb-4">
-                            <span><i class="fas fa-calendar-alt mr-1"></i>Feb 10</span>
-                            <span><i class="fas fa-clock mr-1"></i>7 min</span>
-                        </div>
-                        <p class="text-soft-text-secondary mb-6 leading-relaxed">
-                            Sharing insights on maintaining physical and mental health while pursuing creative endeavors. 
-                            Balance is key to sustainable creativity and long-term success.
-                        </p>
-                        <button class="read-more-btn px-6 py-2 rounded-soft text-sm font-medium inline-flex items-center">
-                            <span>Read More</span>
-                            <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                    </div>
-                </article>
-
-            </div>
-
-            <!-- Load More Button -->
-            <div class="mt-16 text-center">
-                <button class="loading-more px-8 py-4 rounded-extra-soft font-medium inline-flex items-center justify-center transition-all duration-300 transform hover:scale-105">
-                    <span class="flex items-center">
-                        <i class="fas fa-plus mr-3"></i>
-                        Load More Posts
-                    </span>
-                </button>
             </div>
 
         </div>
@@ -568,18 +295,14 @@
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
                     <a href="https://www.threads.com/@yumerin.main.i" target="_blank" 
-                       class="loading-more px-8 py-4 rounded-extra-soft font-medium inline-flex items-center justify-center">
-                        <span class="flex items-center">
-                            <i class="fab fa-threads mr-3"></i>
-                            在 Threads 上追蹤
-                        </span>
+                       class="social-button px-8 py-4 rounded-extra-soft font-medium inline-flex items-center justify-center">
+                        <i class="fab fa-threads mr-3"></i>
+                        <span>在 Threads 上追蹤</span>
                     </a>
                     <a href="https://www.pixiv.net/users/108590809/novels" target="_blank" 
-                       class="loading-more px-8 py-4 rounded-extra-soft font-medium inline-flex items-center justify-center">
-                        <span class="flex items-center">
-                            <i class="fas fa-paint-brush mr-3"></i>
-                            在 Pixiv 上追蹤
-                        </span>
+                       class="social-button px-8 py-4 rounded-extra-soft font-medium inline-flex items-center justify-center">
+                        <i class="fas fa-paint-brush mr-3"></i>
+                        <span>在 Pixiv 上追蹤</span>
                     </a>
                 </div>
             </div>
@@ -639,56 +362,8 @@
 
         window.addEventListener('scroll', toggleBackToTopButton);
 
-        // Intersection Observer for animations
-        const observeElements = () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'slide-up 0.6s ease-out';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.blog-card').forEach(card => {
-                observer.observe(card);
-            });
-        };
-
-        // Button feedback animations
-        document.querySelectorAll('.read-more-btn, .loading-more').forEach(button => {
-            button.addEventListener('click', function(e) {
-                this.style.animation = 'bounce-soft 0.3s ease';
-                setTimeout(() => this.style.animation = '', 300);
-            });
-        });
-
-        // Tag hover effects
-        document.querySelectorAll('.tag').forEach(tag => {
-            tag.addEventListener('mouseenter', function() {
-                this.style.animation = 'glow-soft 1s ease-in-out infinite alternate';
-            });
-            
-            tag.addEventListener('mouseleave', function() {
-                this.style.animation = '';
-            });
-        });
-
-        // Blog card hover enhancements
-        document.querySelectorAll('.blog-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                // Add subtle glow effect
-                this.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(200, 168, 233, 0.3)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.boxShadow = '';
-            });
-        });
-
-        // Initialize animations on page load
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            observeElements();
             toggleBackToTopButton();
         });
 
@@ -707,17 +382,6 @@
 
         // Create sparkles periodically
         setInterval(createSparkle, 3000);
-
-        // Enhanced scroll effects
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                if (Math.random() > 0.7) {
-                    createSparkle();
-                }
-            }, 100);
-        });
     </script>
 </body>
 
