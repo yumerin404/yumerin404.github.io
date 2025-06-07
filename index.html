@@ -239,27 +239,39 @@
             background-clip: text;
         }
 
-        .social-button {
+        .threads-button {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 100%);
+            color: #0a0e1a;
+            font-weight: 600;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(200, 168, 233, 0.3);
-            background: rgba(26, 30, 46, 0.8);
-            color: #c8a8e9;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            background-clip: padding-box;
         }
 
-        .social-button i {
-            color: #c8a8e9 !important;
+        .threads-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
         }
 
-        .social-button:hover {
-            background: rgba(200, 168, 233, 0.2);
-            border-color: rgba(200, 168, 233, 0.6);
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(200, 168, 233, 0.3);
-            color: #f5f3f0;
+        .threads-button:hover::before {
+            left: 100%;
         }
 
-        .social-button:hover i {
-            color: #f5f3f0 !important;
+        .threads-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(200, 168, 233, 0.4), 0 5px 15px rgba(248, 180, 217, 0.3);
+        }
+
+        .threads-button:active {
+            transform: translateY(-1px) scale(1.01);
         }
 
         .mobile-menu {
@@ -361,22 +373,16 @@
                     </a>
                 </div>
 
-                <!-- Social Links -->
-                <div class="flex justify-center space-x-6">
+                <!-- Threads Button -->
+                <div class="flex justify-center">
                     <a href="https://www.threads.com/@yumerin.main.i" target="_blank" 
-                       class="social-button p-3 rounded-soft inline-flex items-center justify-center group">
-                        <i class="fab fa-threads text-xl group-hover:scale-110 transition-transform"></i>
-                        <span class="ml-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">Threads</span>
-                    </a>
-                    <a href="https://www.pixiv.net/users/108590809/novels" target="_blank" 
-                       class="social-button p-3 rounded-soft inline-flex items-center justify-center group">
-                        <i class="fas fa-paint-brush text-xl group-hover:scale-110 transition-transform"></i>
-                        <span class="ml-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">Pixiv</span>
-                    </a>
-                    <a href="https://masiro.me/admin/novelView?novel_id=711" target="_blank" 
-                       class="social-button p-3 rounded-soft inline-flex items-center justify-center group">
-                        <i class="fas fa-book text-xl group-hover:scale-110 transition-transform"></i>
-                        <span class="ml-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">Masiro</span>
+                       class="threads-button px-8 py-4 rounded-extra-soft inline-flex items-center justify-center group transform hover:scale-105 transition-all duration-300">
+                        <i class="fab fa-threads text-2xl mr-4 group-hover:scale-110 transition-transform"></i>
+                        <div class="text-left">
+                            <div class="text-lg font-bold">追蹤我的創作</div>
+                            <div class="text-sm opacity-80">在 Threads 上與我連結</div>
+                        </div>
+                        <i class="fas fa-arrow-right ml-4 group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
             </div>
