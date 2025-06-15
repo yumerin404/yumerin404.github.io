@@ -265,6 +265,115 @@
             z-index: 1000;
             transition: width 0.3s ease;
         }
+
+        /* Search and filter styles */
+        .search-container {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .filter-tag {
+            background: rgba(200, 168, 233, 0.1);
+            border: 1px solid rgba(200, 168, 233, 0.3);
+            color: #c8a8e9;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .filter-tag:hover {
+            background: rgba(200, 168, 233, 0.2);
+            border-color: rgba(200, 168, 233, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .filter-tag.active {
+            background: linear-gradient(135deg, #c8a8e9, #f8b4d9);
+            color: #0a0e1a;
+            border-color: transparent;
+            font-weight: 600;
+        }
+
+        /* Sidebar styles */
+        .sidebar-container {
+            max-height: calc(100vh - 6rem);
+            overflow-y: auto;
+        }
+
+        .toc-link {
+            color: #e0ddd8;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: rgba(200, 168, 233, 0.1);
+            color: #c8a8e9;
+            border-left-color: rgba(200, 168, 233, 0.5);
+        }
+
+        .toc-link.active {
+            background: rgba(200, 168, 233, 0.15);
+            color: #c8a8e9;
+            border-left-color: #c8a8e9;
+            font-weight: 600;
+        }
+
+        /* Category animation */
+        .category-section {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            max-height: 0;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .category-show {
+            opacity: 1;
+            transform: translateY(0);
+            max-height: none;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar-container {
+                position: relative;
+                top: 0;
+                max-height: none;
+            }
+        }
+
+        /* Custom scrollbar for sidebar */
+        .sidebar-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-track {
+            background: rgba(42, 46, 62, 0.5);
+            border-radius: 10px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-thumb {
+            background: rgba(200, 168, 233, 0.5);
+            border-radius: 10px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(200, 168, 233, 0.7);
+        }
+
+        /* Search highlight effect */
+        .search-highlight {
+            background-color: rgba(200, 168, 233, 0.3);
+            border-radius: 4px;
+            padding: 0 2px;
+        }
     </style>
 </head>
 
@@ -344,12 +453,34 @@
         </div>
     </section>
 
+    <!-- Search Section -->
+    <section class="py-8 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="search-container glass-effect rounded-extra-soft p-6 shadow-lg">
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="搜尋政治思想內容..." 
+                           class="w-full px-6 py-4 pl-14 bg-transparent border border-soft-accent-primary border-opacity-30 rounded-soft text-soft-text-primary placeholder-soft-text-secondary focus:outline-none focus:border-soft-accent-primary focus:border-opacity-60 transition-all duration-300">
+                    <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-soft-accent-primary text-lg"></i>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <button class="filter-tag active" data-filter="all">全部</button>
+                    <button class="filter-tag" data-filter="crisis-management">危機處理</button>
+                    <button class="filter-tag" data-filter="political-strategy">政治鬥爭</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Content Section -->
     <section class="py-16 relative">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                
+                <!-- Main Content -->
+                <div class="flex-1" id="main-content">
             
             <!-- 政治人物危機處理能力分類 -->
-            <div class="content-section rounded-extra-soft p-8 md:p-12 shadow-2xl mb-12">
+            <div id="crisis-management" class="category-section content-section rounded-extra-soft p-8 md:p-12 shadow-2xl mb-12" data-category="crisis-management">
                 <div class="text-center mb-8">
                     <h2 class="text-3xl font-bold mb-4 text-gradient">
                         <i class="fas fa-crown mr-3"></i>政治人物危機處理能力分類
@@ -411,7 +542,7 @@
             </div>
 
             <!-- 政治鬥爭策略 -->
-            <div class="content-section rounded-extra-soft p-8 md:p-12 shadow-2xl">
+            <div id="political-strategy" class="category-section content-section rounded-extra-soft p-8 md:p-12 shadow-2xl" data-category="political-strategy">
                 <div class="text-center mb-8">
                     <h2 class="text-3xl font-bold mb-4 text-gradient">
                         <i class="fas fa-chess mr-3"></i>政治鬥爭的七步策略
@@ -487,6 +618,56 @@
                 </div>
             </div>
 
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="w-full lg:w-80 shrink-0">
+                    <div class="sidebar-container sticky top-24">
+                        
+                        <!-- Table of Contents -->
+                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg mb-6">
+                            <h3 class="text-xl font-bold text-gradient mb-4 flex items-center">
+                                <i class="fas fa-list mr-3"></i>目錄導航
+                            </h3>
+                            <nav class="space-y-2" id="toc-nav">
+                                <a href="#crisis-management" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="crisis-management">
+                                    <i class="fas fa-crown mr-3 text-soft-accent-primary"></i>
+                                    <span>危機處理分類</span>
+                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-crisis-management">4</span>
+                                </a>
+                                <a href="#political-strategy" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="political-strategy">
+                                    <i class="fas fa-chess mr-3 text-soft-accent-primary"></i>
+                                    <span>政治鬥爭策略</span>
+                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-political-strategy">7</span>
+                                </a>
+                            </nav>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg">
+                            <h3 class="text-lg font-bold text-gradient mb-4 flex items-center">
+                                <i class="fas fa-chart-bar mr-3"></i>統計資訊
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">總內容數</span>
+                                    <span class="text-soft-accent-primary font-bold" id="total-items">11</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">分類數</span>
+                                    <span class="text-soft-accent-secondary font-bold">2</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">顯示中</span>
+                                    <span class="text-soft-accent-tertiary font-bold" id="visible-items">11</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
         </div>
     </section>
 
@@ -557,9 +738,189 @@
             });
         };
 
-        // Initialize animations
+        // Search and filter functionality
+        const searchInput = document.getElementById('search-input');
+        const filterTags = document.querySelectorAll('.filter-tag');
+        const categoryElements = document.querySelectorAll('.category-section');
+        const tocLinks = document.querySelectorAll('.toc-link');
+        let currentFilter = 'all';
+
+        // Search functionality
+        function performSearch(searchTerm) {
+            const normalizedSearchTerm = searchTerm.toLowerCase().trim();
+            let visibleCount = 0;
+
+            categoryElements.forEach(category => {
+                const categoryName = category.getAttribute('data-category');
+                const content = category.textContent.toLowerCase();
+                const hasMatch = normalizedSearchTerm === '' || content.includes(normalizedSearchTerm);
+                
+                if (hasMatch && (currentFilter === 'all' || currentFilter === categoryName)) {
+                    category.classList.remove('category-hidden');
+                    category.classList.add('category-show');
+                    visibleCount++;
+                    
+                    // Highlight search term
+                    if (normalizedSearchTerm !== '') {
+                        highlightText(category, normalizedSearchTerm);
+                    } else {
+                        removeHighlight(category);
+                    }
+                } else {
+                    category.classList.add('category-hidden');
+                    category.classList.remove('category-show');
+                    removeHighlight(category);
+                }
+            });
+
+            // Update visible count
+            updateVisibleCount(visibleCount);
+            updateTocCounts();
+        }
+
+        // Filter functionality
+        function applyFilter(filter) {
+            currentFilter = filter;
+            performSearch(searchInput.value);
+            
+            // Update active filter tag
+            filterTags.forEach(tag => {
+                if (tag.getAttribute('data-filter') === filter) {
+                    tag.classList.add('active');
+                } else {
+                    tag.classList.remove('active');
+                }
+            });
+        }
+
+        // Highlight text function
+        function highlightText(element, searchTerm) {
+            // First remove existing highlights
+            removeHighlight(element);
+            
+            // Get all text nodes
+            const walker = document.createTreeWalker(
+                element,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            
+            const textNodes = [];
+            let node;
+            while (node = walker.nextNode()) {
+                textNodes.push(node);
+            }
+            
+            // Highlight matching text
+            textNodes.forEach(textNode => {
+                const text = textNode.textContent;
+                const lowerText = text.toLowerCase();
+                const searchIndex = lowerText.indexOf(searchTerm);
+                
+                if (searchIndex !== -1) {
+                    const beforeText = text.substring(0, searchIndex);
+                    const matchText = text.substring(searchIndex, searchIndex + searchTerm.length);
+                    const afterText = text.substring(searchIndex + searchTerm.length);
+                    
+                    const highlightSpan = document.createElement('span');
+                    highlightSpan.className = 'search-highlight';
+                    highlightSpan.textContent = matchText;
+                    
+                    const fragment = document.createDocumentFragment();
+                    if (beforeText) fragment.appendChild(document.createTextNode(beforeText));
+                    fragment.appendChild(highlightSpan);
+                    if (afterText) fragment.appendChild(document.createTextNode(afterText));
+                    
+                    textNode.parentNode.replaceChild(fragment, textNode);
+                }
+            });
+        }
+
+        // Remove highlight function
+        function removeHighlight(element) {
+            const highlights = element.querySelectorAll('.search-highlight');
+            highlights.forEach(highlight => {
+                const parent = highlight.parentNode;
+                parent.replaceChild(document.createTextNode(highlight.textContent), highlight);
+                parent.normalize();
+            });
+        }
+
+        // Update visible count
+        function updateVisibleCount(count) {
+            const visibleItemsElement = document.getElementById('visible-items');
+            if (visibleItemsElement) {
+                visibleItemsElement.textContent = count;
+            }
+        }
+
+        // Update TOC counts
+        function updateTocCounts() {
+            const crisisCount = document.querySelector('#crisis-management').classList.contains('category-hidden') ? 0 : 4;
+            const strategyCount = document.querySelector('#political-strategy').classList.contains('category-hidden') ? 0 : 7;
+            
+            document.getElementById('count-crisis-management').textContent = crisisCount;
+            document.getElementById('count-political-strategy').textContent = strategyCount;
+        }
+
+        // Scroll spy functionality
+        function updateActiveSection() {
+            const sections = document.querySelectorAll('.category-section');
+            const scrollPosition = window.scrollY + 200;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                const tocLink = document.querySelector(`a[href="#${sectionId}"]`);
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    tocLinks.forEach(link => link.classList.remove('active'));
+                    if (tocLink) tocLink.classList.add('active');
+                }
+            });
+        }
+
+        // Event listeners
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                performSearch(e.target.value);
+            });
+        }
+
+        filterTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const filter = tag.getAttribute('data-filter');
+                applyFilter(filter);
+            });
+        });
+
+        // TOC smooth scrolling
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Scroll spy
+        window.addEventListener('scroll', updateActiveSection);
+
+        // Initialize animations and functionality
         document.addEventListener('DOMContentLoaded', () => {
             observeElements();
+            updateActiveSection();
+            updateTocCounts();
+        });
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            updateActiveSection();
         });
     </script>
 </body>

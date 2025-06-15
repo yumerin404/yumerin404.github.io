@@ -246,6 +246,106 @@
             margin-top: 2rem;
             font-size: 1.1rem;
         }
+
+        /* Search and Filter Styles */
+        .search-container {
+            background: rgba(26, 30, 46, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+        }
+
+        .filter-tag {
+            padding: 0.5rem 1rem;
+            background: rgba(26, 30, 46, 0.6);
+            border: 1px solid rgba(200, 168, 233, 0.3);
+            border-radius: 20px;
+            color: #e0ddd8;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .filter-tag:hover {
+            background: rgba(200, 168, 233, 0.2);
+            border-color: rgba(200, 168, 233, 0.5);
+            color: #f5f3f0;
+        }
+
+        .filter-tag.active {
+            background: rgba(200, 168, 233, 0.3);
+            border-color: #c8a8e9;
+            color: #f5f3f0;
+            font-weight: 600;
+        }
+
+        /* Sidebar Styles */
+        .sidebar-container {
+            max-height: calc(100vh - 6rem);
+            overflow-y: auto;
+        }
+
+        .toc-link {
+            color: #e0ddd8;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: rgba(200, 168, 233, 0.1);
+            border-color: rgba(200, 168, 233, 0.3);
+            color: #c8a8e9;
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            background: rgba(200, 168, 233, 0.2);
+            border-color: rgba(200, 168, 233, 0.4);
+            color: #c8a8e9;
+            font-weight: 600;
+        }
+
+        /* Hide/Show Animation */
+        .category-hidden {
+            display: none !important;
+        }
+
+        .category-show {
+            animation: slide-up 0.6s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1023px) {
+            .sidebar-container {
+                position: static !important;
+                max-height: none;
+            }
+        }
+
+        /* Custom scrollbar for sidebar */
+        .sidebar-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-track {
+            background: rgba(26, 30, 46, 0.3);
+            border-radius: 10px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-thumb {
+            background: rgba(200, 168, 233, 0.5);
+            border-radius: 10px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(200, 168, 233, 0.7);
+        }
+
+        /* Search highlight effect */
+        .search-highlight {
+            background-color: rgba(200, 168, 233, 0.3);
+            border-radius: 4px;
+            padding: 0 2px;
+        }
     </style>
 </head>
 
@@ -330,13 +430,35 @@
         </div>
     </section>
 
+    <!-- Search Section -->
+    <section class="py-8 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="search-container glass-effect rounded-extra-soft p-6 shadow-lg">
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="搜尋金融內容..." 
+                           class="w-full px-6 py-4 pl-14 bg-transparent border border-soft-accent-primary border-opacity-30 rounded-soft text-soft-text-primary placeholder-soft-text-secondary focus:outline-none focus:border-soft-accent-primary focus:border-opacity-60 transition-all duration-300">
+                    <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-soft-accent-primary text-lg"></i>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <button class="filter-tag active" data-filter="all">全部</button>
+                    <button class="filter-tag" data-filter="capital">資本理論</button>
+                    <button class="filter-tag" data-filter="coming-soon">即將推出</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Content Section -->
     <section class="py-16 relative">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                
+                <!-- Main Content -->
+                <div class="flex-1" id="main-content">
             
             <!-- 資本的利潤驅動 -->
-            <div class="quote-section rounded-extra-soft p-10 md:p-16 shadow-2xl mb-12">
-                <div class="text-center mb-10">
+            <div id="capital" class="category-section quote-section rounded-extra-soft p-10 md:p-16 shadow-2xl mb-12" data-category="capital">
+                <div class="category-title">
                     <h2 class="text-3xl font-bold mb-4 text-gradient">
                         <i class="fas fa-coins mr-3"></i>資本的利潤驅動
                     </h2>
@@ -344,6 +466,7 @@
                         來自馬克思《資本論》中的經典論述
                     </p>
                 </div>
+                <div class="text-center mb-10">
 
                 <div class="space-y-6">
                     <div class="profit-item">
@@ -426,12 +549,16 @@
             </div>
 
             <!-- Coming Soon Section -->
-            <div class="text-center py-12">
+            <div id="coming-soon" class="category-section text-center py-12" data-category="coming-soon">
+                <div class="category-title">
+                    <h2 class="text-3xl font-bold mb-6 text-gradient">
+                        <i class="fas fa-chart-area mr-3"></i>更多金融洞察
+                    </h2>
+                </div>
                 <div class="glass-effect rounded-extra-soft p-12 max-w-3xl mx-auto">
                     <div class="mb-8">
                         <i class="fas fa-chart-area text-6xl text-soft-accent-primary mb-6 animate-pulse-soft"></i>
                     </div>
-                    <h2 class="text-3xl font-bold mb-6 text-gradient">更多金融洞察</h2>
                     <p class="text-lg text-soft-text-secondary mb-8 leading-relaxed">
                         更多關於金融市場、經濟原理、投資策略的深度思考正在整理中<br>
                         從宏觀經濟學到行為金融學，從價值投資到風險管理
@@ -443,6 +570,56 @@
                 </div>
             </div>
 
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="w-full lg:w-80 shrink-0">
+                    <div class="sidebar-container sticky top-24">
+                        
+                        <!-- Table of Contents -->
+                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg mb-6">
+                            <h3 class="text-xl font-bold text-gradient mb-4 flex items-center">
+                                <i class="fas fa-list mr-3"></i>目錄導航
+                            </h3>
+                            <nav class="space-y-2" id="toc-nav">
+                                <a href="#capital" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="capital">
+                                    <i class="fas fa-coins mr-3 text-soft-accent-primary"></i>
+                                    <span>資本的利潤驅動</span>
+                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-capital">1</span>
+                                </a>
+                                <a href="#coming-soon" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="coming-soon">
+                                    <i class="fas fa-chart-area mr-3 text-soft-accent-primary"></i>
+                                    <span>更多金融洞察</span>
+                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-coming-soon">1</span>
+                                </a>
+                            </nav>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg">
+                            <h3 class="text-lg font-bold text-gradient mb-4 flex items-center">
+                                <i class="fas fa-chart-bar mr-3"></i>統計資訊
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">總內容數</span>
+                                    <span class="text-soft-accent-primary font-bold" id="total-content">2</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">分類數</span>
+                                    <span class="text-soft-accent-secondary font-bold">2</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">顯示中</span>
+                                    <span class="text-soft-accent-tertiary font-bold" id="visible-content">2</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
@@ -508,14 +685,157 @@
                 });
             }, { threshold: 0.1 });
 
-            document.querySelectorAll('.quote-section, .profit-item').forEach(section => {
+            document.querySelectorAll('.quote-section, .profit-item, .category-section').forEach(section => {
                 observer.observe(section);
             });
         };
 
-        // Initialize animations
+        // Search and filter functionality
+        const searchInput = document.getElementById('search-input');
+        const filterTags = document.querySelectorAll('.filter-tag');
+        const categoryElements = document.querySelectorAll('.category-section');
+        const tocLinks = document.querySelectorAll('.toc-link');
+        let currentFilter = 'all';
+
+        // Search functionality
+        function performSearch(searchTerm) {
+            const normalizedSearchTerm = searchTerm.toLowerCase().trim();
+            let visibleCount = 0;
+
+            categoryElements.forEach(category => {
+                const categoryName = category.getAttribute('data-category');
+                const text = category.textContent.toLowerCase();
+                const hasMatch = normalizedSearchTerm === '' || text.includes(normalizedSearchTerm);
+                
+                if (hasMatch && (currentFilter === 'all' || currentFilter === categoryName)) {
+                    category.classList.remove('category-hidden');
+                    category.classList.add('category-show');
+                    visibleCount++;
+                    
+                    // Highlight search term
+                    if (normalizedSearchTerm !== '') {
+                        highlightText(category, normalizedSearchTerm);
+                    } else {
+                        removeHighlight(category);
+                    }
+                } else {
+                    category.classList.add('category-hidden');
+                    category.classList.remove('category-show');
+                    removeHighlight(category);
+                }
+            });
+
+            // Update visible count
+            document.getElementById('visible-content').textContent = visibleCount;
+        }
+
+        // Highlight search terms
+        function highlightText(element, searchTerm) {
+            const textElements = element.querySelectorAll('p, h2, h3, .profit-item');
+            
+            textElements.forEach(textEl => {
+                const originalText = textEl.getAttribute('data-original') || textEl.innerHTML;
+                if (!textEl.getAttribute('data-original')) {
+                    textEl.setAttribute('data-original', originalText);
+                }
+                
+                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                const highlightedText = originalText.replace(regex, '<span class="search-highlight">$1</span>');
+                textEl.innerHTML = highlightedText;
+            });
+        }
+
+        // Remove highlight
+        function removeHighlight(element) {
+            const textElements = element.querySelectorAll('[data-original]');
+            
+            textElements.forEach(textEl => {
+                const originalText = textEl.getAttribute('data-original');
+                if (originalText) {
+                    textEl.innerHTML = originalText;
+                }
+            });
+        }
+
+        // Filter functionality
+        function applyFilter(filter) {
+            currentFilter = filter;
+            
+            // Update filter tags
+            filterTags.forEach(tag => {
+                if (tag.getAttribute('data-filter') === filter) {
+                    tag.classList.add('active');
+                } else {
+                    tag.classList.remove('active');
+                }
+            });
+
+            // Reapply search with new filter
+            performSearch(searchInput.value);
+        }
+
+        // Smooth scroll to section
+        function scrollToSection(targetId) {
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Update active TOC link based on scroll position
+        function updateActiveTocLink() {
+            let currentSection = '';
+            
+            categoryElements.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 150 && rect.bottom >= 150) {
+                    currentSection = section.id;
+                }
+            });
+
+            tocLinks.forEach(link => {
+                const targetId = link.getAttribute('href').substring(1);
+                if (targetId === currentSection) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        // Event listeners
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                performSearch(e.target.value);
+            });
+        }
+
+        filterTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const filter = tag.getAttribute('data-filter');
+                applyFilter(filter);
+            });
+        });
+
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+
+        // Scroll spy for TOC
+        window.addEventListener('scroll', updateActiveTocLink);
+
+        // Initialize animations and functionality
         document.addEventListener('DOMContentLoaded', () => {
             observeElements();
+            performSearch(''); // Initialize search
+            updateActiveTocLink();
         });
     </script>
 </body>

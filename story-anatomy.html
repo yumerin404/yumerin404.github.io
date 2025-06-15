@@ -214,6 +214,110 @@
             z-index: 1000;
             transition: width 0.3s ease;
         }
+
+        /* Search and Filter Styles */
+        .search-container {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .search-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(200, 168, 233, 0.2);
+        }
+
+        .filter-tag {
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            background: rgba(26, 30, 46, 0.6);
+            border: 1px solid rgba(200, 168, 233, 0.3);
+            color: #e0ddd8;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .filter-tag:hover {
+            background: rgba(200, 168, 233, 0.2);
+            border-color: rgba(200, 168, 233, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .filter-tag.active {
+            background: linear-gradient(135deg, #c8a8e9, #f8b4d9);
+            color: #0a0e1a;
+            border-color: #c8a8e9;
+            font-weight: 600;
+        }
+
+        /* Sidebar Styles */
+        .sidebar-container {
+            max-height: calc(100vh - 6rem);
+            overflow-y: auto;
+        }
+
+        .toc-link {
+            color: #e0ddd8;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: rgba(200, 168, 233, 0.1);
+            border-color: rgba(200, 168, 233, 0.3);
+            color: #c8a8e9;
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            background: rgba(200, 168, 233, 0.2);
+            border-color: rgba(200, 168, 233, 0.4);
+            color: #c8a8e9;
+            font-weight: 600;
+        }
+
+        /* Hide/Show Animation */
+        .content-hidden {
+            display: none !important;
+        }
+
+        .content-show {
+            animation: slide-up 0.6s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1023px) {
+            .sidebar-container {
+                position: static !important;
+                max-height: none;
+            }
+        }
+
+        /* Custom scrollbar for sidebar */
+        .sidebar-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-track {
+            background: rgba(26, 30, 46, 0.3);
+            border-radius: 10px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-thumb {
+            background: rgba(200, 168, 233, 0.5);
+            border-radius: 10px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(200, 168, 233, 0.7);
+        }
+
+        /* Search highlight effect */
+        .search-highlight {
+            background-color: rgba(200, 168, 233, 0.3);
+            border-radius: 4px;
+            padding: 0 2px;
+        }
     </style>
 </head>
 
@@ -292,18 +396,45 @@
         </div>
     </section>
 
+    <!-- Search Section -->
+    <section class="py-8 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="search-container glass-effect rounded-extra-soft p-6 shadow-lg">
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="搜尋故事解剖內容..." 
+                           class="w-full px-6 py-4 pl-14 bg-transparent border border-soft-accent-primary border-opacity-30 rounded-soft text-soft-text-primary placeholder-soft-text-secondary focus:outline-none focus:border-soft-accent-primary focus:border-opacity-60 transition-all duration-300">
+                    <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-soft-accent-primary text-lg"></i>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <button class="filter-tag active" data-filter="all">全部</button>
+                    <button class="filter-tag" data-filter="writing-techniques">寫作技法</button>
+                    <button class="filter-tag" data-filter="character-development">角色塑造</button>
+                    <button class="filter-tag" data-filter="story-structure">故事結構</button>
+                    <button class="filter-tag" data-filter="creative-process">創作心法</button>
+                    <button class="filter-tag" data-filter="genre-understanding">類型理解</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Content Section -->
     <section class="py-16 relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="content-section rounded-extra-soft p-8 md:p-12 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
                 
-                <div class="content-item">
+                <!-- Main Content -->
+                <div class="flex-1" id="main-content">
+                    <div class="content-section rounded-extra-soft p-8 md:p-12 shadow-2xl">
+                
+                <div id="writing-focus" class="content-item" data-category="writing-techniques">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">寫作焦點的掌握</h3>
                     <p class="text-lg leading-relaxed text-soft-text-secondary">
                         在故事中，那些應該強調與深入的描寫，那些應該一筆帶過，要是能掌握好，能從千篇一律的故事中脫穎而出。
                     </p>
                 </div>
 
-                <div class="content-item">
+                <div id="originality-credibility" class="content-item" data-category="creative-process">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">原創性與可信度</h3>
                     <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
                         原創創意的出現，有賴於致力追求可信度而非追求特立獨行。
                     </p>
@@ -315,7 +446,8 @@
                     </p>
                 </div>
 
-                <div class="content-item">
+                <div id="story-opening" class="content-item" data-category="story-structure">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">故事開場的陷阱</h3>
                     <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
                         身為作者的我們，在設計和安排觸發事件時如果有所謂的通病，那就是我們經常會延遲中心劇情出現的時機，在開場的場景段落塞進太多背景說明。
                     </p>
@@ -324,7 +456,8 @@
                     </p>
                 </div>
 
-                <div class="content-item">
+                <div id="character-vs-characterization" class="content-item" data-category="character-development">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">角色與角色塑造的區別</h3>
                     <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
                         <strong class="text-soft-accent-primary">角色跟角色塑造是兩個不同的概念。</strong>
                     </p>
@@ -342,7 +475,8 @@
                     </p>
                 </div>
 
-                <div class="content-item">
+                <div id="scene-creation-method" class="content-item" data-category="writing-techniques">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">場景創作的十倍法則</h3>
                     <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
                         想要一個故事片段優秀，可以試著創造10個不同場景，並思考推演角色的反應與行為，再將最優秀的拿出來，並在這個場景下再創造 10 個不同的反應、行為、互動，選出最喜歡的一個，基本上故事就會優良許多。
                     </p>
@@ -351,7 +485,8 @@
                     </p>
                 </div>
 
-                <div class="content-item">
+                <div id="theme-expression" class="content-item" data-category="creative-process">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">主題表達的藝術</h3>
                     <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
                         作者在寫故事時其實就是表達自己的價值觀與想法。但往往以說教的方式出現來灌輸想法，這種方式並不能讓讀者信服，而是會讓讀者感覺厭煩。
                     </p>
@@ -363,7 +498,8 @@
                     </p>
                 </div>
 
-                <div class="content-item">
+                <div id="love-your-creation" class="content-item" data-category="creative-process">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">創作的本質動力</h3>
                     <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
                         <strong class="text-soft-accent-primary">創作的本質是你必須熱愛你所創作的。</strong>
                     </p>
@@ -375,7 +511,8 @@
                     </p>
                 </div>
 
-                <div class="content-item">
+                <div id="classical-design" class="content-item" data-category="story-structure">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">經典設計的人性基礎</h3>
                     <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
                         觀眾數量縮減的理由，在於大多數人相信以下幾種想法：人生帶給他們的是封閉式的經驗，而這些經驗來自於絕對且無法逆轉的改變；他們最大的衝突來源是自己與外在的衝突；他們是自身經驗單一的主動主角；他們的存在，在連續的時間、因果互相連結的連貫真實中運轉，而在這個真實裡，事件因為可解釋、有意義的理由而發生。
                     </p>
@@ -387,7 +524,8 @@
                     </p>
                 </div>
 
-                <div class="content-item">
+                <div id="genre-mastery" class="content-item" data-category="genre-understanding">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">類型精通的重要性</h3>
                     <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
                         儘管學者對於定義與系統爭辯不休，讀者早已是類型專家。觀眾進入每部小說時，都配備了一套複雜的心理預期，這是他們從一生的閱讀經驗學到的。
                     </p>
@@ -399,7 +537,8 @@
                     </p>
                 </div>
 
-                <div class="content-item">
+                <div id="reader-positioning" class="content-item" data-category="genre-understanding">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">讀者定位的策略</h3>
                     <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
                         如果小說有適當的宣傳、名字與簡介，讀者再閱讀時是充滿預期的。以專業行銷人員的術語來說，小說已經被「定位」了。
                     </p>
@@ -408,7 +547,8 @@
                     </p>
                 </div>
 
-                <div class="content-item">
+                <div id="genre-choice-passion" class="content-item" data-category="creative-process">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">類型選擇與創作熱情</h3>
                     <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
                         你是否像海明威或狄更斯，直接從人生經驗中取材？或像莫里哀一樣書寫自己對社會與人性的想法？無論靈感來源為何，請留意：早在小說完成之前，你的自戀就會銷聲匿跡，對故事點子的熱愛也會委靡。
                     </p>
@@ -421,8 +561,90 @@
                     <p class="text-lg leading-relaxed text-soft-text-secondary">
                         不要求只因知識分子朋友認為某個題材具社會重要性而寫；不要只因預想某個題材會在《小說比賽》受到讚賞而寫。誠實面對你對類型的選擇，因為在所有賦予寫作動力的理由當中，唯一能長時間提供我們養分的就是作品本身。
                     </p>
+                    </div>
                 </div>
+                
+                <!-- Sidebar -->
+                <div class="w-full lg:w-80 shrink-0">
+                    <div class="sidebar-container sticky top-24">
+                        
+                        <!-- Table of Contents -->
+                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg mb-6">
+                            <h3 class="text-xl font-bold text-gradient mb-4 flex items-center">
+                                <i class="fas fa-list mr-3"></i>目錄導航
+                            </h3>
+                            <nav class="space-y-2" id="toc-nav">
+                                <a href="#writing-focus" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="writing-techniques">
+                                    <i class="fas fa-crosshairs mr-3 text-soft-accent-primary"></i>
+                                    <span class="text-sm">寫作焦點的掌握</span>
+                                </a>
+                                <a href="#originality-credibility" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creative-process">
+                                    <i class="fas fa-lightbulb mr-3 text-soft-accent-primary"></i>
+                                    <span class="text-sm">原創性與可信度</span>
+                                </a>
+                                <a href="#story-opening" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="story-structure">
+                                    <i class="fas fa-play mr-3 text-soft-accent-primary"></i>
+                                    <span class="text-sm">故事開場的陷阱</span>
+                                </a>
+                                <a href="#character-vs-characterization" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="character-development">
+                                    <i class="fas fa-user mr-3 text-soft-accent-primary"></i>
+                                    <span class="text-sm">角色與角色塑造</span>
+                                </a>
+                                <a href="#scene-creation-method" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="writing-techniques">
+                                    <i class="fas fa-film mr-3 text-soft-accent-primary"></i>
+                                    <span class="text-sm">場景創作十倍法則</span>
+                                </a>
+                                <a href="#theme-expression" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creative-process">
+                                    <i class="fas fa-palette mr-3 text-soft-accent-primary"></i>
+                                    <span class="text-sm">主題表達的藝術</span>
+                                </a>
+                                <a href="#love-your-creation" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creative-process">
+                                    <i class="fas fa-heart mr-3 text-soft-accent-primary"></i>
+                                    <span class="text-sm">創作的本質動力</span>
+                                </a>
+                                <a href="#classical-design" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="story-structure">
+                                    <i class="fas fa-columns mr-3 text-soft-accent-primary"></i>
+                                    <span class="text-sm">經典設計的人性基礎</span>
+                                </a>
+                                <a href="#genre-mastery" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="genre-understanding">
+                                    <i class="fas fa-graduation-cap mr-3 text-soft-accent-primary"></i>
+                                    <span class="text-sm">類型精通的重要性</span>
+                                </a>
+                                <a href="#reader-positioning" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="genre-understanding">
+                                    <i class="fas fa-bullseye mr-3 text-soft-accent-primary"></i>
+                                    <span class="text-sm">讀者定位的策略</span>
+                                </a>
+                                <a href="#genre-choice-passion" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creative-process">
+                                    <i class="fas fa-fire mr-3 text-soft-accent-primary"></i>
+                                    <span class="text-sm">類型選擇與創作熱情</span>
+                                </a>
+                            </nav>
+                        </div>
 
+                        <!-- Quick Stats -->
+                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg">
+                            <h3 class="text-lg font-bold text-gradient mb-4 flex items-center">
+                                <i class="fas fa-chart-bar mr-3"></i>統計資訊
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">總內容數</span>
+                                    <span class="text-soft-accent-primary font-bold" id="total-sections">11</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">分類數</span>
+                                    <span class="text-soft-accent-secondary font-bold">5</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">顯示中</span>
+                                    <span class="text-soft-accent-tertiary font-bold" id="visible-sections">11</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
             </div>
         </div>
     </section>
@@ -473,12 +695,148 @@
 
         window.addEventListener('scroll', toggleBackToTopButton);
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            toggleBackToTopButton();
+        // Search and filter functionality
+        const searchInput = document.getElementById('search-input');
+        const filterTags = document.querySelectorAll('.filter-tag');
+        const contentItems = document.querySelectorAll('.content-item');
+        const tocLinks = document.querySelectorAll('.toc-link');
+        let currentFilter = 'all';
+
+        // Search functionality
+        function performSearch(searchTerm) {
+            const normalizedSearchTerm = searchTerm.toLowerCase().trim();
+            let visibleCount = 0;
+
+            contentItems.forEach(item => {
+                const category = item.getAttribute('data-category');
+                const text = item.textContent.toLowerCase();
+                const hasMatch = normalizedSearchTerm === '' || text.includes(normalizedSearchTerm);
+                
+                if (hasMatch && (currentFilter === 'all' || currentFilter === category)) {
+                    item.style.display = '';
+                    item.classList.remove('content-hidden');
+                    item.classList.add('content-show');
+                    visibleCount++;
+                    
+                    // Highlight search term
+                    if (normalizedSearchTerm !== '') {
+                        highlightText(item, normalizedSearchTerm);
+                    } else {
+                        removeHighlight(item);
+                    }
+                } else {
+                    item.style.display = 'none';
+                    item.classList.add('content-hidden');
+                    item.classList.remove('content-show');
+                    removeHighlight(item);
+                }
+            });
+
+            // Update visible count
+            document.getElementById('visible-sections').textContent = visibleCount;
+        }
+
+        // Highlight search terms
+        function highlightText(element, searchTerm) {
+            const textElements = element.querySelectorAll('p, h3');
+            
+            textElements.forEach(textEl => {
+                const originalText = textEl.getAttribute('data-original') || textEl.innerHTML;
+                if (!textEl.getAttribute('data-original')) {
+                    textEl.setAttribute('data-original', originalText);
+                }
+                
+                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                const highlightedText = originalText.replace(regex, '<span class="search-highlight">$1</span>');
+                textEl.innerHTML = highlightedText;
+            });
+        }
+
+        // Remove highlight
+        function removeHighlight(element) {
+            const textElements = element.querySelectorAll('p, h3');
+            
+            textElements.forEach(textEl => {
+                const originalText = textEl.getAttribute('data-original');
+                if (originalText) {
+                    textEl.innerHTML = originalText;
+                }
+            });
+        }
+
+        // Filter functionality
+        function applyFilter(filter) {
+            currentFilter = filter;
+            
+            // Update filter tags
+            filterTags.forEach(tag => {
+                if (tag.getAttribute('data-filter') === filter) {
+                    tag.classList.add('active');
+                } else {
+                    tag.classList.remove('active');
+                }
+            });
+
+            // Reapply search with new filter
+            performSearch(searchInput.value);
+        }
+
+        // Smooth scroll to section
+        function scrollToSection(targetId) {
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Update active TOC link based on scroll position
+        function updateActiveTocLink() {
+            let currentSection = '';
+            
+            contentItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top <= 150 && rect.bottom >= 150) {
+                    currentSection = item.id;
+                }
+            });
+
+            tocLinks.forEach(link => {
+                const targetId = link.getAttribute('href').substring(1);
+                if (targetId === currentSection) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        // Event listeners
+        searchInput?.addEventListener('input', (e) => {
+            performSearch(e.target.value);
         });
 
-        // Add smooth scrolling animation for sections
+        filterTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const filter = tag.getAttribute('data-filter');
+                applyFilter(filter);
+            });
+        });
+
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+
+        // Scroll spy for TOC
+        window.addEventListener('scroll', updateActiveTocLink);
+
+        // Add smooth scrolling animation for content items
         const observeElements = () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -494,9 +852,12 @@
             });
         };
 
-        // Initialize animations
+        // Initialize
         document.addEventListener('DOMContentLoaded', () => {
+            toggleBackToTopButton();
             observeElements();
+            performSearch(''); // Initialize search
+            updateActiveTocLink();
         });
     </script>
 </body>
