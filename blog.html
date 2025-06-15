@@ -248,6 +248,110 @@
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 15px 35px rgba(200, 168, 233, 0.4), 0 5px 15px rgba(248, 180, 217, 0.3);
         }
+
+        /* Search and Filter Styles */
+        .search-container {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .search-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(200, 168, 233, 0.2);
+        }
+
+        .filter-tag {
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            background: rgba(26, 30, 46, 0.6);
+            border: 1px solid rgba(200, 168, 233, 0.3);
+            color: #e0ddd8;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .filter-tag:hover {
+            background: rgba(200, 168, 233, 0.2);
+            border-color: rgba(200, 168, 233, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .filter-tag.active {
+            background: linear-gradient(135deg, #c8a8e9, #f8b4d9);
+            color: #0a0e1a;
+            border-color: #c8a8e9;
+            font-weight: 600;
+        }
+
+        /* Sidebar Styles */
+        .sidebar-container {
+            max-height: calc(100vh - 6rem);
+            overflow-y: auto;
+        }
+
+        .toc-link {
+            color: #e0ddd8;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: rgba(200, 168, 233, 0.1);
+            border-color: rgba(200, 168, 233, 0.3);
+            color: #c8a8e9;
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            background: rgba(200, 168, 233, 0.2);
+            border-color: rgba(200, 168, 233, 0.4);
+            color: #c8a8e9;
+            font-weight: 600;
+        }
+
+        /* Hide/Show Animation */
+        .article-hidden {
+            display: none !important;
+        }
+
+        .article-show {
+            animation: slide-up 0.6s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1023px) {
+            .sidebar-container {
+                position: static !important;
+                max-height: none;
+            }
+        }
+
+        /* Custom scrollbar for sidebar */
+        .sidebar-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-track {
+            background: rgba(26, 30, 46, 0.3);
+            border-radius: 10px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-thumb {
+            background: rgba(200, 168, 233, 0.5);
+            border-radius: 10px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(200, 168, 233, 0.7);
+        }
+
+        /* Search highlight effect */
+        .search-highlight {
+            background-color: rgba(200, 168, 233, 0.3);
+            border-radius: 4px;
+            padding: 0 2px;
+        }
     </style>
 </head>
 
@@ -320,13 +424,39 @@
         </div>
     </section>
 
+    <!-- Search Section -->
+    <section class="py-8 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-2xl mx-auto">
+                <div class="search-container glass-effect rounded-extra-soft p-6 shadow-lg">
+                    <div class="relative">
+                        <input type="text" id="search-input" placeholder="搜尋文章內容..." 
+                               class="w-full px-6 py-4 pl-14 bg-transparent border border-soft-accent-primary border-opacity-30 rounded-soft text-soft-text-primary placeholder-soft-text-secondary focus:outline-none focus:border-soft-accent-primary focus:border-opacity-60 transition-all duration-300">
+                        <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-soft-accent-primary text-lg"></i>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <button class="filter-tag active" data-filter="all">全部</button>
+                        <button class="filter-tag" data-filter="story">創作</button>
+                        <button class="filter-tag" data-filter="quotes">名句</button>
+                        <button class="filter-tag" data-filter="politics">政治</button>
+                        <button class="filter-tag" data-filter="finance">金融</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Content Section -->
     <section class="py-12 relative">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                
+                <!-- Main Content -->
+                <div class="flex-1" id="main-content">
             
             <!-- Story Anatomy Card -->
             <div class="max-w-4xl mx-auto">
-                <article class="story-card rounded-extra-soft overflow-hidden shadow-2xl">
+                <article id="story-anatomy" class="story-card rounded-extra-soft overflow-hidden shadow-2xl" data-category="story" data-keywords="故事 解剖 創作 寫作 小說">
                     <div class="p-10 md:p-12">
                         <div class="text-center mb-8">
                             <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-6">
@@ -358,6 +488,136 @@
                 </article>
             </div>
 
+            <!-- Additional Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16 max-w-7xl mx-auto">
+                
+                <!-- 名句紀錄 Card -->
+                <article id="quotes" class="story-card rounded-extra-soft overflow-hidden shadow-2xl" data-category="quotes" data-keywords="名句 紀錄 人生 養分 智慧">
+                    <div class="p-8">
+                        <div class="text-center mb-6">
+                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-4">
+                                <i class="fas fa-quote-right text-xl text-soft-primary"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 text-gradient">名句紀錄</h3>
+                        </div>
+                        <p class="text-soft-text-secondary mb-6 leading-relaxed text-center">
+                            人生中看到值得紀錄的內容，我會將其紀錄起來，成為我人生觀中的養分。
+                        </p>
+                        <div class="text-center">
+                            <a href="quotes.html" 
+                               class="story-button px-6 py-3 rounded-soft inline-flex items-center justify-center group transform hover:scale-105 transition-all duration-300">
+                                <i class="fas fa-bookmark mr-3 group-hover:scale-110 transition-transform"></i>
+                                <span class="font-bold">查看收錄</span>
+                                <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 政治與思想 Card -->
+                <article id="politics" class="story-card rounded-extra-soft overflow-hidden shadow-2xl" data-category="politics" data-keywords="政治 思想 中庸 允執厥中 學習">
+                    <div class="p-8">
+                        <div class="text-center mb-6">
+                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-4">
+                                <i class="fas fa-balance-scale text-xl text-soft-primary"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 text-gradient">政治與思想</h3>
+                        </div>
+                        <p class="text-soft-text-secondary mb-6 leading-relaxed text-center">
+                            學的越多、理解的越多、看的越多，想法就會改變，對的、錯的將會越來越模糊，追求中庸之道、允執厥中。
+                        </p>
+                        <div class="text-center">
+                            <a href="politics.html" 
+                               class="story-button px-6 py-3 rounded-soft inline-flex items-center justify-center group transform hover:scale-105 transition-all duration-300">
+                                <i class="fas fa-brain mr-3 group-hover:scale-110 transition-transform"></i>
+                                <span class="font-bold">深入思考</span>
+                                <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 宏觀之金融、經濟、投資與思想 Card -->
+                <article id="finance" class="story-card rounded-extra-soft overflow-hidden shadow-2xl" data-category="finance" data-keywords="金融 經濟 投資 宏觀 反直覺">
+                    <div class="p-8">
+                        <div class="text-center mb-6">
+                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-4">
+                                <i class="fas fa-chart-line text-xl text-soft-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gradient">宏觀之金融經濟投資</h3>
+                        </div>
+                        <p class="text-soft-text-secondary mb-6 leading-relaxed text-center">
+                            經濟的底層原理、金融的詭異之處、投資的想法，從宏觀角度來看世界會不一樣，很多事情是『反直覺』的。
+                        </p>
+                        <div class="text-center">
+                            <a href="finance.html" 
+                               class="story-button px-6 py-3 rounded-soft inline-flex items-center justify-center group transform hover:scale-105 transition-all duration-300">
+                                <i class="fas fa-globe mr-3 group-hover:scale-110 transition-transform"></i>
+                                <span class="font-bold">宏觀視野</span>
+                                <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+            
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="w-full lg:w-80 shrink-0">
+                    <div class="sidebar-container sticky top-24">
+                        
+                        <!-- Table of Contents -->
+                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg mb-6">
+                            <h3 class="text-xl font-bold text-gradient mb-4 flex items-center">
+                                <i class="fas fa-list mr-3"></i>文章目錄
+                            </h3>
+                            <nav class="space-y-2" id="toc-nav">
+                                <a href="#story-anatomy" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="story">
+                                    <i class="fas fa-microscope mr-3 text-soft-accent-primary"></i>
+                                    <span>故事的解剖</span>
+                                </a>
+                                <a href="#quotes" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="quotes">
+                                    <i class="fas fa-quote-right mr-3 text-soft-accent-primary"></i>
+                                    <span>名句紀錄</span>
+                                </a>
+                                <a href="#politics" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="politics">
+                                    <i class="fas fa-balance-scale mr-3 text-soft-accent-primary"></i>
+                                    <span>政治與思想</span>
+                                </a>
+                                <a href="#finance" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="finance">
+                                    <i class="fas fa-chart-line mr-3 text-soft-accent-primary"></i>
+                                    <span>宏觀金融經濟</span>
+                                </a>
+                            </nav>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg">
+                            <h3 class="text-lg font-bold text-gradient mb-4 flex items-center">
+                                <i class="fas fa-chart-bar mr-3"></i>快速統計
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">文章總數</span>
+                                    <span class="text-soft-accent-primary font-bold" id="total-articles">4</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">創作類</span>
+                                    <span class="text-soft-accent-secondary font-bold">1</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">思想類</span>
+                                    <span class="text-soft-accent-tertiary font-bold">3</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
         </div>
     </section>
 
@@ -458,6 +718,191 @@
 
         // Create sparkles periodically
         setInterval(createSparkle, 3000);
+
+        // Search and Filter Functionality
+        const searchInput = document.getElementById('search-input');
+        const filterTags = document.querySelectorAll('.filter-tag');
+        const articles = document.querySelectorAll('article[data-category]');
+        const tocLinks = document.querySelectorAll('.toc-link');
+        let currentFilter = 'all';
+
+        // Search function
+        function searchArticles() {
+            const searchTerm = searchInput.value.toLowerCase();
+            let visibleCount = 0;
+
+            articles.forEach(article => {
+                const title = article.querySelector('h2, h3')?.textContent.toLowerCase() || '';
+                const content = article.textContent.toLowerCase();
+                const keywords = article.dataset.keywords?.toLowerCase() || '';
+                const category = article.dataset.category;
+
+                const matchesSearch = !searchTerm || 
+                    title.includes(searchTerm) || 
+                    content.includes(searchTerm) || 
+                    keywords.includes(searchTerm);
+                
+                const matchesFilter = currentFilter === 'all' || category === currentFilter;
+
+                if (matchesSearch && matchesFilter) {
+                    article.parentElement.classList.remove('article-hidden');
+                    article.parentElement.classList.add('article-show');
+                    visibleCount++;
+
+                    // Highlight search terms
+                    if (searchTerm) {
+                        highlightSearchTerm(article, searchTerm);
+                    } else {
+                        removeHighlights(article);
+                    }
+                } else {
+                    article.parentElement.classList.add('article-hidden');
+                    article.parentElement.classList.remove('article-show');
+                }
+            });
+
+            // Update article count
+            const totalArticlesElement = document.getElementById('total-articles');
+            if (totalArticlesElement) {
+                totalArticlesElement.textContent = visibleCount;
+            }
+
+            // Update TOC links visibility
+            updateTOCVisibility();
+        }
+
+        // Highlight search terms
+        function highlightSearchTerm(article, term) {
+            removeHighlights(article);
+            const textNodes = getTextNodes(article);
+            
+            textNodes.forEach(node => {
+                if (node.textContent.toLowerCase().includes(term)) {
+                    const parent = node.parentNode;
+                    const content = node.textContent;
+                    const regex = new RegExp(`(${term})`, 'gi');
+                    const highlightedContent = content.replace(regex, '<span class="search-highlight">$1</span>');
+                    
+                    if (highlightedContent !== content) {
+                        const wrapper = document.createElement('span');
+                        wrapper.innerHTML = highlightedContent;
+                        parent.replaceChild(wrapper, node);
+                    }
+                }
+            });
+        }
+
+        // Remove search highlights
+        function removeHighlights(article) {
+            const highlights = article.querySelectorAll('.search-highlight');
+            highlights.forEach(highlight => {
+                const parent = highlight.parentNode;
+                parent.replaceChild(document.createTextNode(highlight.textContent), highlight);
+                parent.normalize();
+            });
+        }
+
+        // Get all text nodes
+        function getTextNodes(element) {
+            const textNodes = [];
+            const walker = document.createTreeWalker(
+                element,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            
+            let node;
+            while (node = walker.nextNode()) {
+                if (node.textContent.trim()) {
+                    textNodes.push(node);
+                }
+            }
+            return textNodes;
+        }
+
+        // Update TOC visibility
+        function updateTOCVisibility() {
+            tocLinks.forEach(link => {
+                const targetId = link.getAttribute('href').substring(1);
+                const targetArticle = document.getElementById(targetId);
+                
+                if (targetArticle && !targetArticle.parentElement.classList.contains('article-hidden')) {
+                    link.style.display = 'flex';
+                } else {
+                    link.style.display = 'none';
+                }
+            });
+        }
+
+        // Filter functionality
+        filterTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                // Update active filter
+                filterTags.forEach(t => t.classList.remove('active'));
+                tag.classList.add('active');
+                currentFilter = tag.dataset.filter;
+
+                // Apply filters
+                searchArticles();
+            });
+        });
+
+        // Search input listener
+        searchInput.addEventListener('input', searchArticles);
+
+        // TOC navigation
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    // Update active TOC link
+                    tocLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Smooth scroll to target
+                    targetElement.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                }
+            });
+        });
+
+        // Scroll spy for TOC
+        function updateActiveTOCLink() {
+            let currentActive = '';
+            
+            articles.forEach(article => {
+                if (!article.parentElement.classList.contains('article-hidden')) {
+                    const rect = article.getBoundingClientRect();
+                    if (rect.top <= 200) {
+                        currentActive = article.id;
+                    }
+                }
+            });
+
+            tocLinks.forEach(link => {
+                const targetId = link.getAttribute('href').substring(1);
+                if (targetId === currentActive) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        // Add scroll spy
+        window.addEventListener('scroll', updateActiveTOCLink);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            searchArticles();
+            updateActiveTOCLink();
+        });
     </script>
 </body>
 
