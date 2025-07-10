@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>夢鈴幻想 | 健康與醫學紀錄</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'soft-primary': '#0a0e1a',
+                        'soft-secondary': '#1a1e2e',  
+                        'soft-tertiary': '#2a2e3e',
+                        'soft-accent-primary': '#c8a8e9',
+                        'soft-accent-secondary': '#f8b4d9',
+                        'soft-accent-tertiary': '#a8e6cf',
+                        'soft-text-primary': '#f5f3f0',
+                        'soft-text-secondary': '#e0ddd8'
+                    },
+                    borderRadius: {
+                        'soft': '12px',
+                        'extra-soft': '20px',
+                    },
+                    animation: {
+                        'float-gentle': 'float-gentle 6s ease-in-out infinite',
+                        'glow-soft': 'glow-soft 2s ease-in-out infinite alternate',
+                        'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                    },
+                    keyframes: {
+                        'float-gentle': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '33%': { transform: 'translateY(-10px) rotate(1deg)' },
+                            '66%': { transform: 'translateY(-5px) rotate(-1deg)' },
+                        },
+                        'glow-soft': {
+                            '0%': { 
+                                boxShadow: '0 0 5px rgba(200, 168, 233, 0.3), 0 0 10px rgba(200, 168, 233, 0.2)',
+                                opacity: '0.7'
+                            },
+                            '100%': { 
+                                boxShadow: '0 0 10px rgba(200, 168, 233, 0.4), 0 0 20px rgba(200, 168, 233, 0.3)',
+                                opacity: '1'
+                            }
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                            '50%': { opacity: '0.7', transform: 'scale(1.05)' },
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    },
+                    fontFamily: {
+                        'cute': ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1e2e 50%, #2a2e3e 100%);
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 60%, rgba(168, 230, 207, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .glass-effect {
+            background: rgba(26, 30, 46, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+            color: #e0ddd8;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover {
+            color: #c8a8e9;
+            background: rgba(200, 168, 233, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-link.active {
+            color: #c8a8e9;
+            background: rgba(200, 168, 233, 0.15);
+            font-weight: 600;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .mobile-menu {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+
+        .mobile-menu.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, rgba(200, 168, 233, 0.2), rgba(248, 180, 217, 0.2));
+            border: 1px solid rgba(200, 168, 233, 0.3);
+            color: #c8a8e9;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, rgba(200, 168, 233, 0.3), rgba(248, 180, 217, 0.3));
+            border-color: rgba(200, 168, 233, 0.5);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(200, 168, 233, 0.3);
+            color: #f5f3f0;
+        }
+
+        .floating-decoration {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 168, 233, 0.15) 0%, transparent 70%);
+            animation: float-gentle 8s ease-in-out infinite;
+        }
+
+        .hero-pattern {
+            background-image: radial-gradient(circle at 20% 50%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
+                             radial-gradient(circle at 80% 20%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
+                             radial-gradient(circle at 40% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%);
+        }
+
+        .content-card {
+            background: rgba(26, 30, 46, 0.9);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #c8a8e9, #f8b4d9, #a8e6cf);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(200, 168, 233, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
+        }
+    </style>
+</head>
+
+<body class="gradient-bg text-soft-text-primary min-h-screen font-cute">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-effect">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="index.html" class="flex items-center group">
+                            <img src="images/avatar.png" alt="Dream Bell" 
+                                 class="h-10 w-10 rounded-full mr-3 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
+                            <span class="text-gradient text-xl font-bold">夢鈴幻想</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link">首頁</a>
+                    <a href="novels.html" class="nav-link">奇幻小說</a>
+                    <a href="tools.html" class="nav-link">魔法工具</a>
+                    <a href="ai.html" class="nav-link">AI魔導</a>
+                    <a href="blog.html" class="nav-link active">心境筆記</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button class="mobile-menu-button text-soft-text-primary hover:text-soft-accent-primary transition-colors" 
+                            aria-label="開啟選單">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden md:hidden">
+            <div class="px-4 pt-2 pb-3 space-y-1 glass-effect">
+                <a href="index.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">首頁</a>
+                <a href="novels.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">奇幻小說</a>
+                <a href="tools.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">魔法工具</a>
+                <a href="ai.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">AI魔導</a>
+                <a href="blog.html" class="block px-3 py-2 rounded-soft text-soft-accent-primary font-medium">心境筆記</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Back Button -->
+    <div class="fixed top-20 left-4 z-40">
+        <a href="blog.html" class="back-button px-4 py-2 rounded-soft inline-flex items-center group">
+            <i class="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i>
+            <span class="text-sm font-medium">返回筆記</span>
+        </a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-12 relative hero-pattern">
+        <div class="floating-decoration w-32 h-32 top-20 left-10 opacity-30" style="animation-delay: 0s;"></div>
+        <div class="floating-decoration w-20 h-20 top-32 right-20 opacity-40" style="animation-delay: 2s;"></div>
+        <div class="floating-decoration w-16 h-16 bottom-20 left-1/3 opacity-35" style="animation-delay: 4s;"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8">
+                    <i class="fas fa-heartbeat text-3xl text-soft-primary animate-pulse-soft"></i>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gradient">健康與醫學紀錄</h1>
+                <div class="w-32 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-8"></div>
+                <p class="text-xl md:text-2xl text-soft-text-secondary max-w-4xl mx-auto leading-relaxed">
+                    醫學知識與健康資訊的收集整理，守護健康的智慧
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="py-16 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- 新世代癌症抽血指標 -->
+            <div class="content-card rounded-extra-soft p-8 shadow-2xl mb-12">
+                <div class="prose prose-lg max-w-none">
+                    <h2 class="text-2xl font-bold text-soft-accent-primary mb-6 flex items-center">
+                        <i class="fas fa-dna mr-3"></i>新世代癌症抽血指標
+                    </h2>
+                    
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        新世代癌症抽血指標應該要測定<strong class="text-soft-accent-primary">『腫瘤細胞DNA』</strong>才對
+                    </p>
+                    
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        因為身體如果有腫瘤細胞，每天腫瘤也會新陳代謝
+                    </p>
+                    
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        腫瘤細胞死亡後會釋放DNA到血液中<br>
+                        即為<strong class="text-soft-accent-primary">循環腫瘤DNA (ctDNA)</strong>
+                    </p>
+                    
+                    <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-4 mb-4">
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-2">
+                            <strong class="text-soft-accent-primary">現在抽血運用NGS次世代定序技術</strong>
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-2">
+                            就能一次檢測多種癌症
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary">
+                            大大提升檢查的準確度
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 胰臟癌5大症狀 -->
+            <div class="content-card rounded-extra-soft p-8 shadow-2xl">
+                <div class="prose prose-lg max-w-none">
+                    <h2 class="text-2xl font-bold text-soft-accent-primary mb-6 flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-3"></i>胰臟癌5大症狀
+                    </h2>
+                    
+                    <!-- 腹痛 -->
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-soft-accent-secondary mb-3 flex items-center">
+                            <i class="fas fa-circle text-sm mr-2"></i>腹痛
+                        </h3>
+                        <div class="ml-6 space-y-2">
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                大部分都在肚臍以上胃的附近
+                            </p>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                不是那種非常疼痛的感覺，就是一陣一陣悶悶的不舒服
+                            </p>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                吃了胃藥也不會完全改善
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 背痛 -->
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-soft-accent-secondary mb-3 flex items-center">
+                            <i class="fas fa-circle text-sm mr-2"></i>背痛
+                        </h3>
+                        <div class="ml-6 space-y-2">
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                因為胰臟靠近我們的脊椎背後的地方
+                            </p>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                所以當有腫瘤壓迫到附近的器官或是神經時，就會連帶有背痛的感覺
+                            </p>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                常常病患會先跑去看復健科、骨科或是泌尿科<br>
+                                而忽略了胰臟的問題
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 噁心想吐 -->
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-soft-accent-secondary mb-3 flex items-center">
+                            <i class="fas fa-circle text-sm mr-2"></i>噁心想吐
+                        </h3>
+                        <div class="ml-6 space-y-2">
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                胰臟與消化有關，所以症狀一般飯後會更加嚴重
+                            </p>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                會覺得很容易飽吃不下
+                            </p>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                最終會造成無法解釋的體重下降
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 糖尿病 -->
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-soft-accent-secondary mb-3 flex items-center">
+                            <i class="fas fa-circle text-sm mr-2"></i>糖尿病
+                        </h3>
+                        <div class="ml-6 space-y-2">
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                胰臟分泌胰島素調控血糖
+                            </p>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                突發的糖尿病，尤其50歲以上族群<br>
+                                <strong class="text-soft-accent-primary">千千萬萬要小心胰臟問題</strong>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 黃疸皮膚癢 -->
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-soft-accent-secondary mb-3 flex items-center">
+                            <i class="fas fa-circle text-sm mr-2"></i>黃疸皮膚癢
+                        </h3>
+                        <div class="ml-6 space-y-2">
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                膽囊胰臟本一體
+                            </p>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                當胰臟有腫瘤時會阻塞膽汁<br>
+                                造成黃疸皮膚癢
+                            </p>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                但是特點是可能黃疸嚴重但是疼痛不明顯
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" 
+            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
+            aria-label="回到頂部">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton?.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            setTimeout(() => {
+                mobileMenu.classList.toggle('show');
+            }, 10);
+        });
+
+        // Back to top functionality
+        const backToTopButton = document.getElementById('back-to-top');
+
+        const toggleBackToTopButton = () => {
+            if (window.scrollY > 300) {
+                backToTopButton.style.opacity = '1';
+                backToTopButton.style.transform = 'scale(1)';
+            } else {
+                backToTopButton.style.opacity = '0';
+                backToTopButton.style.transform = 'scale(0.95)';
+            }
+        };
+
+        backToTopButton?.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        window.addEventListener('scroll', toggleBackToTopButton);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            toggleBackToTopButton();
+        });
+    </script>
+</body>
+
+</html>
