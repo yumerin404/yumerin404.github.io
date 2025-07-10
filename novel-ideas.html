@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>夢鈴幻想 | 名句紀錄</title>
+    <title>夢鈴幻想 | 小說想法</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script>
@@ -129,7 +129,7 @@
             opacity: 1;
         }
 
-        .quote-card {
+        .idea-card {
             background: rgba(26, 30, 46, 0.9);
             border: 1px solid rgba(200, 168, 233, 0.2);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -137,7 +137,7 @@
             overflow: hidden;
         }
 
-        .quote-card::before {
+        .idea-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -149,11 +149,11 @@
             transition: transform 0.3s ease;
         }
 
-        .quote-card:hover::before {
+        .idea-card:hover::before {
             transform: scaleX(1);
         }
 
-        .quote-card:hover {
+        .idea-card:hover {
             transform: translateY(-5px);
             border-color: rgba(200, 168, 233, 0.4);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
@@ -170,23 +170,6 @@
             padding: 1rem 2rem;
             margin-bottom: 2rem;
             text-align: center;
-        }
-
-        .quote-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .quote-text::before {
-            content: '"';
-            position: absolute;
-            left: 0;
-            top: -0.2rem;
-            font-size: 3rem;
-            color: #c8a8e9;
-            font-family: serif;
         }
 
         .back-button {
@@ -332,6 +315,34 @@
             border-radius: 4px;
             padding: 0 2px;
         }
+
+        .idea-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-draft {
+            background: rgba(248, 180, 217, 0.2);
+            color: #f8b4d9;
+            border: 1px solid rgba(248, 180, 217, 0.3);
+        }
+
+        .status-developing {
+            background: rgba(168, 230, 207, 0.2);
+            color: #a8e6cf;
+            border: 1px solid rgba(168, 230, 207, 0.3);
+        }
+
+        .status-concept {
+            background: rgba(200, 168, 233, 0.2);
+            color: #c8a8e9;
+            border: 1px solid rgba(200, 168, 233, 0.3);
+        }
     </style>
 </head>
 
@@ -399,12 +410,12 @@
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8">
-                    <i class="fas fa-quote-right text-3xl text-soft-primary animate-pulse-soft"></i>
+                    <i class="fas fa-lightbulb text-3xl text-soft-primary animate-pulse-soft"></i>
                 </div>
-                <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gradient">名句紀錄</h1>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gradient">小說想法</h1>
                 <div class="w-32 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-8"></div>
                 <p class="text-xl md:text-2xl text-soft-text-secondary max-w-4xl mx-auto leading-relaxed">
-                    人生中看到值得紀錄的內容，我會將其紀錄起來，成為我人生觀中的養分
+                    腦海中閃現的創作靈感與故事構思，每一個想法都可能成為下一個作品
                 </p>
             </div>
         </div>
@@ -415,16 +426,16 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="search-container glass-effect rounded-extra-soft p-6 shadow-lg">
                 <div class="relative">
-                    <input type="text" id="search-input" placeholder="搜尋名句內容..." 
+                    <input type="text" id="search-input" placeholder="搜尋創意想法..." 
                            class="w-full px-6 py-4 pl-14 bg-transparent border border-soft-accent-primary border-opacity-30 rounded-soft text-soft-text-primary placeholder-soft-text-secondary focus:outline-none focus:border-soft-accent-primary focus:border-opacity-60 transition-all duration-300">
                     <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-soft-accent-primary text-lg"></i>
                 </div>
                 <div class="flex flex-wrap gap-2 mt-4">
                     <button class="filter-tag active" data-filter="all">全部</button>
-                    <button class="filter-tag" data-filter="creation">創作故事</button>
-                    <button class="filter-tag" data-filter="philosophy">人生哲理</button>
-                    <button class="filter-tag" data-filter="history">歷史社會</button>
-                    <button class="filter-tag" data-filter="communication">溝通智慧</button>
+                    <button class="filter-tag" data-filter="fantasy">奇幻設定</button>
+                    <button class="filter-tag" data-filter="characters">角色概念</button>
+                    <button class="filter-tag" data-filter="plots">劇情構想</button>
+                    <button class="filter-tag" data-filter="worldbuilding">世界觀</button>
                 </div>
             </div>
         </div>
@@ -438,104 +449,125 @@
                 <!-- Main Content -->
                 <div class="flex-1" id="main-content">
             
-            <!-- 創作與故事 -->
-            <div id="creation" class="category-section" data-category="creation">
+            <!-- 奇幻設定 -->
+            <div id="fantasy" class="category-section" data-category="fantasy">
                 <div class="category-title">
                     <h2 class="text-2xl font-bold text-gradient">
-                        <i class="fas fa-pen-fancy mr-3"></i>創作與故事
+                        <i class="fas fa-magic mr-3"></i>奇幻設定
                     </h2>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            劇情應該由慢，利用讀者們越來越對劇情熟悉，慢慢加快整個故事劇情的節奏。
+                    <div class="idea-card rounded-extra-soft p-6 relative">
+                        <div class="idea-status status-concept">概念</div>
+                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">時間迴圈的魔法學院</h3>
+                        <p class="text-soft-text-secondary mb-4">
+                            一座困在時間迴圈中的魔法學院，每當學生畢業時，時間就會重置到開學日。主角必須找出迴圈的原因並打破它。
                         </p>
-                    </div>
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            故事中表達愛的終極方式，是死亡，但現實千萬不要將這樣的觀念帶入。
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 人生哲理 -->
-            <div id="philosophy" class="category-section" data-category="philosophy">
-                <div class="category-title">
-                    <h2 class="text-2xl font-bold text-gradient">
-                        <i class="fas fa-lightbulb mr-3"></i>人生哲理
-                    </h2>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            凡殺不死我的、必使我更強大。
-                        </p>
-                    </div>
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            每一次再見，可能真的是最後一次再見了。
-                        </p>
-                    </div>
-                    <div class="quote-card rounded-extra-soft p-6 lg:col-span-2">
-                        <p class="quote-text text-soft-text-secondary">
-                            認真的人可能下場都不是太好，但他們留下的東西將會永遠流傳。
-                        </p>
-                    </div>
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            XX 擊穿了時間，功力是深厚的，打穿了幾千多年的時間。
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 歷史與社會 -->
-            <div id="history" class="category-section" data-category="history">
-                <div class="category-title">
-                    <h2 class="text-2xl font-bold text-gradient">
-                        <i class="fas fa-scroll mr-3"></i>歷史與社會
-                    </h2>
-                </div>
-                <div class="grid grid-cols-1 gap-6">
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            時來天地皆同力，運去英雄不自由。
-                        </p>
-                    </div>
-                    <div class="quote-card rounded-extra-soft p-8">
-                        <div class="quote-text text-soft-text-secondary space-y-4">
-                            <p>誰生誰死，我們決定不了，到底有一天誰講我們的故事，我們也決定不了。</p>
-                            <p>但歷史最後會給我們一個定位，歷史的眼睛將會看著你。對與錯都是任人憑說，你也不知道到底是誰最後來講你的故事。</p>
-                            <p>或者你的故事根本不值得一提，但歷史的眼睛將會盯著你。</p>
-                            <p>自己能力不強被騙了，就被騙了。還是要說，自己相信的事情。而不是像他們那個樣子。</p>
+                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
+                            <span><i class="fas fa-clock mr-1"></i>2024年3月</span>
+                            <span><i class="fas fa-tag mr-1"></i>時間魔法</span>
                         </div>
                     </div>
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            為天地立心，為生民立命，為往聖繼絕學，為萬世開太平。
+                    <div class="idea-card rounded-extra-soft p-6 relative">
+                        <div class="idea-status status-draft">構思中</div>
+                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">反重力都市</h3>
+                        <p class="text-soft-text-secondary mb-4">
+                            在一個重力被魔法扭曲的世界中，城市建築向上無限延伸。不同高度的區域有著不同的社會階層和重力強度。
                         </p>
-                    </div>
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            爾曹身與名俱滅，不廢江河萬古流。
-                        </p>
+                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
+                            <span><i class="fas fa-clock mr-1"></i>2024年4月</span>
+                            <span><i class="fas fa-tag mr-1"></i>重力魔法</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 溝通與智慧 -->
-            <div id="communication" class="category-section" data-category="communication">
+            <!-- 角色概念 -->
+            <div id="characters" class="category-section" data-category="characters">
                 <div class="category-title">
                     <h2 class="text-2xl font-bold text-gradient">
-                        <i class="fas fa-comments mr-3"></i>溝通與智慧
+                        <i class="fas fa-users mr-3"></i>角色概念
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="idea-card rounded-extra-soft p-6 relative">
+                        <div class="idea-status status-developing">發展中</div>
+                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">記憶編織師</h3>
+                        <p class="text-soft-text-secondary mb-4">
+                            擁有編織和修改他人記憶能力的神秘職業。主角是一名年輕的記憶編織師，必須在倫理與力量之間找到平衡。
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
+                            <span><i class="fas fa-clock mr-1"></i>2024年5月</span>
+                            <span><i class="fas fa-tag mr-1"></i>心靈魔法</span>
+                        </div>
+                    </div>
+                    <div class="idea-card rounded-extra-soft p-6 relative">
+                        <div class="idea-status status-concept">概念</div>
+                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">時間觀察者</h3>
+                        <p class="text-soft-text-secondary mb-4">
+                            能夠看到物品和人物過去歷史片段的角色。每次使用能力都會縮短自己的壽命，必須謹慎選擇何時使用。
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
+                            <span><i class="fas fa-clock mr-1"></i>2024年6月</span>
+                            <span><i class="fas fa-tag mr-1"></i>預知能力</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 劇情構想 -->
+            <div id="plots" class="category-section" data-category="plots">
+                <div class="category-title">
+                    <h2 class="text-2xl font-bold text-gradient">
+                        <i class="fas fa-scroll mr-3"></i>劇情構想
                     </h2>
                 </div>
                 <div class="grid grid-cols-1 gap-6">
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            談判時要說服的不是對面的人，而是對面那個人背後的所有人。
+                    <div class="idea-card rounded-extra-soft p-6 relative">
+                        <div class="idea-status status-draft">構思中</div>
+                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">消失的神明之謎</h3>
+                        <p class="text-soft-text-secondary mb-4">
+                            在一個多神世界中，神明們開始一個接一個地消失。主角作為最後一位神官，必須調查真相並阻止世界走向毀滅。
+                            隨著調查的深入，發現神明的消失並非意外，而是有人在系統性地「收集」神力。
                         </p>
+                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
+                            <span><i class="fas fa-clock mr-1"></i>2024年7月</span>
+                            <span><i class="fas fa-tag mr-1"></i>神話奇幻</span>
+                        </div>
+                    </div>
+                    <div class="idea-card rounded-extra-soft p-6 relative">
+                        <div class="idea-status status-concept">概念</div>
+                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">平行世界的自己</h3>
+                        <p class="text-soft-text-secondary mb-4">
+                            主角意外獲得與平行世界中另一個自己交換身體的能力。兩個世界有著微妙的差異，而主角必須同時在兩個世界中生活並解決問題。
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
+                            <span><i class="fas fa-clock mr-1"></i>2024年8月</span>
+                            <span><i class="fas fa-tag mr-1"></i>平行世界</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 世界觀 -->
+            <div id="worldbuilding" class="category-section" data-category="worldbuilding">
+                <div class="category-title">
+                    <h2 class="text-2xl font-bold text-gradient">
+                        <i class="fas fa-globe mr-3"></i>世界觀
+                    </h2>
+                </div>
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="idea-card rounded-extra-soft p-6 relative">
+                        <div class="idea-status status-developing">發展中</div>
+                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">情感驅動的魔法系統</h3>
+                        <p class="text-soft-text-secondary mb-4">
+                            在這個世界中，魔法的力量來源於使用者的情感強度。不同的情感對應不同類型的魔法：憤怒產生火焰，悲傷控制水流，喜悅操縱光明。
+                            但過度使用某種情感魔法會導致情感失衡，甚至永久失去感受該情感的能力。
+                        </p>
+                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
+                            <span><i class="fas fa-clock mr-1"></i>2024年9月</span>
+                            <span><i class="fas fa-tag mr-1"></i>情感魔法</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -549,28 +581,28 @@
                         <!-- Table of Contents -->
                         <div class="glass-effect rounded-extra-soft p-6 shadow-lg mb-6">
                             <h3 class="text-xl font-bold text-gradient mb-4 flex items-center">
-                                <i class="fas fa-list mr-3"></i>目錄導航
+                                <i class="fas fa-list mr-3"></i>分類導航
                             </h3>
                             <nav class="space-y-2" id="toc-nav">
-                                <a href="#creation" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creation">
-                                    <i class="fas fa-pen-fancy mr-3 text-soft-accent-primary"></i>
-                                    <span>創作與故事</span>
-                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-creation">2</span>
+                                <a href="#fantasy" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="fantasy">
+                                    <i class="fas fa-magic mr-3 text-soft-accent-primary"></i>
+                                    <span>奇幻設定</span>
+                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-fantasy">2</span>
                                 </a>
-                                <a href="#philosophy" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="philosophy">
-                                    <i class="fas fa-lightbulb mr-3 text-soft-accent-primary"></i>
-                                    <span>人生哲理</span>
-                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-philosophy">4</span>
+                                <a href="#characters" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="characters">
+                                    <i class="fas fa-users mr-3 text-soft-accent-primary"></i>
+                                    <span>角色概念</span>
+                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-characters">2</span>
                                 </a>
-                                <a href="#history" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="history">
+                                <a href="#plots" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="plots">
                                     <i class="fas fa-scroll mr-3 text-soft-accent-primary"></i>
-                                    <span>歷史與社會</span>
-                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-history">4</span>
+                                    <span>劇情構想</span>
+                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-plots">2</span>
                                 </a>
-                                <a href="#communication" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="communication">
-                                    <i class="fas fa-comments mr-3 text-soft-accent-primary"></i>
-                                    <span>溝通與智慧</span>
-                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-communication">1</span>
+                                <a href="#worldbuilding" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="worldbuilding">
+                                    <i class="fas fa-globe mr-3 text-soft-accent-primary"></i>
+                                    <span>世界觀</span>
+                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-worldbuilding">1</span>
                                 </a>
                             </nav>
                         </div>
@@ -578,20 +610,24 @@
                         <!-- Quick Stats -->
                         <div class="glass-effect rounded-extra-soft p-6 shadow-lg">
                             <h3 class="text-lg font-bold text-gradient mb-4 flex items-center">
-                                <i class="fas fa-chart-bar mr-3"></i>統計資訊
+                                <i class="fas fa-chart-bar mr-3"></i>創意統計
                             </h3>
                             <div class="space-y-3">
                                 <div class="flex justify-between items-center">
-                                    <span class="text-soft-text-secondary">總名句數</span>
-                                    <span class="text-soft-accent-primary font-bold" id="total-quotes">11</span>
+                                    <span class="text-soft-text-secondary">總想法數</span>
+                                    <span class="text-soft-accent-primary font-bold" id="total-ideas">7</span>
                                 </div>
                                 <div class="flex justify-between items-center">
                                     <span class="text-soft-text-secondary">分類數</span>
                                     <span class="text-soft-accent-secondary font-bold">4</span>
                                 </div>
                                 <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">發展中</span>
+                                    <span class="text-soft-accent-tertiary font-bold">2</span>
+                                </div>
+                                <div class="flex justify-between items-center">
                                     <span class="text-soft-text-secondary">顯示中</span>
-                                    <span class="text-soft-accent-tertiary font-bold" id="visible-quotes">11</span>
+                                    <span class="text-soft-accent-tertiary font-bold" id="visible-ideas">7</span>
                                 </div>
                             </div>
                         </div>
@@ -649,7 +685,7 @@
 
         window.addEventListener('scroll', toggleBackToTopButton);
 
-        // Add smooth scrolling animation for quote cards
+        // Add smooth scrolling animation for idea cards
         const observeElements = () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -660,7 +696,7 @@
                 });
             }, { threshold: 0.1 });
 
-            document.querySelectorAll('.quote-card').forEach(card => {
+            document.querySelectorAll('.idea-card').forEach(card => {
                 observer.observe(card);
             });
         };
@@ -679,10 +715,10 @@
 
             categoryElements.forEach(category => {
                 const categoryName = category.getAttribute('data-category');
-                const quoteCards = category.querySelectorAll('.quote-card');
+                const ideaCards = category.querySelectorAll('.idea-card');
                 let categoryHasMatch = false;
 
-                quoteCards.forEach(card => {
+                ideaCards.forEach(card => {
                     const text = card.textContent.toLowerCase();
                     const hasMatch = normalizedSearchTerm === '' || text.includes(normalizedSearchTerm);
                     
@@ -714,33 +750,33 @@
             });
 
             // Update visible count
-            document.getElementById('visible-quotes').textContent = visibleCount;
+            document.getElementById('visible-ideas').textContent = visibleCount;
         }
 
         // Highlight search terms
         function highlightText(element, searchTerm) {
-            const quoteText = element.querySelector('.quote-text');
-            if (!quoteText) return;
-            
-            const originalText = quoteText.getAttribute('data-original') || quoteText.innerHTML;
-            if (!quoteText.getAttribute('data-original')) {
-                quoteText.setAttribute('data-original', originalText);
-            }
-            
-            const regex = new RegExp(`(${searchTerm})`, 'gi');
-            const highlightedText = originalText.replace(regex, '<span class="search-highlight">$1</span>');
-            quoteText.innerHTML = highlightedText;
+            const textElements = element.querySelectorAll('h3, p');
+            textElements.forEach(textEl => {
+                const originalText = textEl.getAttribute('data-original') || textEl.innerHTML;
+                if (!textEl.getAttribute('data-original')) {
+                    textEl.setAttribute('data-original', originalText);
+                }
+                
+                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                const highlightedText = originalText.replace(regex, '<span class="search-highlight">$1</span>');
+                textEl.innerHTML = highlightedText;
+            });
         }
 
         // Remove highlight
         function removeHighlight(element) {
-            const quoteText = element.querySelector('.quote-text');
-            if (!quoteText) return;
-            
-            const originalText = quoteText.getAttribute('data-original');
-            if (originalText) {
-                quoteText.innerHTML = originalText;
-            }
+            const textElements = element.querySelectorAll('h3, p');
+            textElements.forEach(textEl => {
+                const originalText = textEl.getAttribute('data-original');
+                if (originalText) {
+                    textEl.innerHTML = originalText;
+                }
+            });
         }
 
         // Filter functionality
