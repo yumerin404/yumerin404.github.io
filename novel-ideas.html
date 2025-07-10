@@ -129,49 +129,6 @@
             opacity: 1;
         }
 
-        .idea-card {
-            background: rgba(26, 30, 46, 0.9);
-            border: 1px solid rgba(200, 168, 233, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .idea-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #c8a8e9, #f8b4d9, #a8e6cf);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .idea-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .idea-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(200, 168, 233, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
-        }
-
-        .category-section {
-            margin-bottom: 3rem;
-        }
-
-        .category-title {
-            background: linear-gradient(135deg, rgba(200, 168, 233, 0.2), rgba(248, 180, 217, 0.2));
-            border: 1px solid rgba(200, 168, 233, 0.3);
-            border-radius: 20px;
-            padding: 1rem 2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
         .back-button {
             background: linear-gradient(135deg, rgba(200, 168, 233, 0.2), rgba(248, 180, 217, 0.2));
             border: 1px solid rgba(200, 168, 233, 0.3);
@@ -201,155 +158,39 @@
                              radial-gradient(circle at 40% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%);
         }
 
-        .scroll-progress {
-            position: fixed;
+        .content-card {
+            background: rgba(26, 30, 46, 0.9);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
-            width: 0%;
+            right: 0;
             height: 3px;
             background: linear-gradient(90deg, #c8a8e9, #f8b4d9, #a8e6cf);
-            z-index: 1000;
-            transition: width 0.3s ease;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
-        /* Search and Filter Styles */
-        .search-container {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .content-card:hover::before {
+            transform: scaleX(1);
         }
 
-        .search-container:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(200, 168, 233, 0.2);
-        }
-
-        .filter-tag {
-            padding: 0.5rem 1rem;
-            border-radius: 12px;
-            background: rgba(26, 30, 46, 0.6);
-            border: 1px solid rgba(200, 168, 233, 0.3);
-            color: #e0ddd8;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .filter-tag:hover {
-            background: rgba(200, 168, 233, 0.2);
-            border-color: rgba(200, 168, 233, 0.5);
-            transform: translateY(-1px);
-        }
-
-        .filter-tag.active {
-            background: linear-gradient(135deg, #c8a8e9, #f8b4d9);
-            color: #0a0e1a;
-            border-color: #c8a8e9;
-            font-weight: 600;
-        }
-
-        /* Sidebar Styles */
-        .sidebar-container {
-            max-height: calc(100vh - 6rem);
-            overflow-y: auto;
-        }
-
-        .toc-link {
-            color: #e0ddd8;
-            text-decoration: none;
-            border: 1px solid transparent;
-        }
-
-        .toc-link:hover {
-            background: rgba(200, 168, 233, 0.1);
-            border-color: rgba(200, 168, 233, 0.3);
-            color: #c8a8e9;
-            transform: translateX(4px);
-        }
-
-        .toc-link.active {
-            background: rgba(200, 168, 233, 0.2);
+        .content-card:hover {
+            transform: translateY(-5px);
             border-color: rgba(200, 168, 233, 0.4);
-            color: #c8a8e9;
-            font-weight: 600;
-        }
-
-        /* Hide/Show Animation */
-        .category-hidden {
-            display: none !important;
-        }
-
-        .category-show {
-            animation: slide-up 0.6s ease-out;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1023px) {
-            .sidebar-container {
-                position: static !important;
-                max-height: none;
-            }
-        }
-
-        /* Custom scrollbar for sidebar */
-        .sidebar-container::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .sidebar-container::-webkit-scrollbar-track {
-            background: rgba(26, 30, 46, 0.3);
-            border-radius: 10px;
-        }
-
-        .sidebar-container::-webkit-scrollbar-thumb {
-            background: rgba(200, 168, 233, 0.5);
-            border-radius: 10px;
-        }
-
-        .sidebar-container::-webkit-scrollbar-thumb:hover {
-            background: rgba(200, 168, 233, 0.7);
-        }
-
-        /* Search highlight effect */
-        .search-highlight {
-            background-color: rgba(200, 168, 233, 0.3);
-            border-radius: 4px;
-            padding: 0 2px;
-        }
-
-        .idea-status {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .status-draft {
-            background: rgba(248, 180, 217, 0.2);
-            color: #f8b4d9;
-            border: 1px solid rgba(248, 180, 217, 0.3);
-        }
-
-        .status-developing {
-            background: rgba(168, 230, 207, 0.2);
-            color: #a8e6cf;
-            border: 1px solid rgba(168, 230, 207, 0.3);
-        }
-
-        .status-concept {
-            background: rgba(200, 168, 233, 0.2);
-            color: #c8a8e9;
-            border: 1px solid rgba(200, 168, 233, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
         }
     </style>
 </head>
 
 <body class="gradient-bg text-soft-text-primary min-h-screen font-cute">
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scroll-progress"></div>
-
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 glass-effect">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -421,220 +262,43 @@
         </div>
     </section>
 
-    <!-- Search Section -->
-    <section class="py-8 relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="search-container glass-effect rounded-extra-soft p-6 shadow-lg">
-                <div class="relative">
-                    <input type="text" id="search-input" placeholder="搜尋創意想法..." 
-                           class="w-full px-6 py-4 pl-14 bg-transparent border border-soft-accent-primary border-opacity-30 rounded-soft text-soft-text-primary placeholder-soft-text-secondary focus:outline-none focus:border-soft-accent-primary focus:border-opacity-60 transition-all duration-300">
-                    <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-soft-accent-primary text-lg"></i>
-                </div>
-                <div class="flex flex-wrap gap-2 mt-4">
-                    <button class="filter-tag active" data-filter="all">全部</button>
-                    <button class="filter-tag" data-filter="fantasy">奇幻設定</button>
-                    <button class="filter-tag" data-filter="characters">角色概念</button>
-                    <button class="filter-tag" data-filter="plots">劇情構想</button>
-                    <button class="filter-tag" data-filter="worldbuilding">世界觀</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Content Section -->
     <section class="py-16 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row gap-8">
-                
-                <!-- Main Content -->
-                <div class="flex-1" id="main-content">
-            
-            <!-- 奇幻設定 -->
-            <div id="fantasy" class="category-section" data-category="fantasy">
-                <div class="category-title">
-                    <h2 class="text-2xl font-bold text-gradient">
-                        <i class="fas fa-magic mr-3"></i>奇幻設定
-                    </h2>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="content-card rounded-extra-soft p-8 shadow-2xl">
+                <div class="prose prose-lg max-w-none">
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                        要寫蘿莉，就不能只寫蘿莉。
+                    </p>
+                    
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                        要寫風掠過她雙馬尾時，髮梢輕掃過米白色校服領口的溫柔。
+                    </p>
+                    
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                        寫她笑起來時眼尾彎成月牙，嗓音像浸了蜜的風鈴，脆生生喊「看鏡頭呀」。
+                    </p>
+                    
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                        寫她舉著兩隻小手比耶，指節還帶著孩童的圓潤，在光線下泛著軟乎乎的白。
+                    </p>
+                    
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                        寫她蹦跳時藍格裙角揚起，把春末夏初的鮮活都揉進每一步雀躍裡。
+                    </p>
+                    
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                        寫她眼裡盛著未經雕琢的澄澈，把路邊野花視作寶藏，將水窪倒影當成魔法鏡。
+                    </p>
+                    
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                        寫她攥著你衣角分享「今天螞蟻搬了三粒米」時，掌心傳來的溫熱與依賴。
+                    </p>
+                    
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        而你在她毫無保留的雀躍裡忽然懂得——<strong class="text-soft-accent-primary">喜歡是被這份未染塵埃的天真輕輕撞了滿懷，是看她用稚嫩熱忱丈量世界時，自己也跟著心跳輕了半拍，甘願做她奇思妙想旁的守護者，陪她把尋常巷弄走成童話裡的冒險途。</strong>
+                    </p>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="idea-card rounded-extra-soft p-6 relative">
-                        <div class="idea-status status-concept">概念</div>
-                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">時間迴圈的魔法學院</h3>
-                        <p class="text-soft-text-secondary mb-4">
-                            一座困在時間迴圈中的魔法學院，每當學生畢業時，時間就會重置到開學日。主角必須找出迴圈的原因並打破它。
-                        </p>
-                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
-                            <span><i class="fas fa-clock mr-1"></i>2024年3月</span>
-                            <span><i class="fas fa-tag mr-1"></i>時間魔法</span>
-                        </div>
-                    </div>
-                    <div class="idea-card rounded-extra-soft p-6 relative">
-                        <div class="idea-status status-draft">構思中</div>
-                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">反重力都市</h3>
-                        <p class="text-soft-text-secondary mb-4">
-                            在一個重力被魔法扭曲的世界中，城市建築向上無限延伸。不同高度的區域有著不同的社會階層和重力強度。
-                        </p>
-                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
-                            <span><i class="fas fa-clock mr-1"></i>2024年4月</span>
-                            <span><i class="fas fa-tag mr-1"></i>重力魔法</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 角色概念 -->
-            <div id="characters" class="category-section" data-category="characters">
-                <div class="category-title">
-                    <h2 class="text-2xl font-bold text-gradient">
-                        <i class="fas fa-users mr-3"></i>角色概念
-                    </h2>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="idea-card rounded-extra-soft p-6 relative">
-                        <div class="idea-status status-developing">發展中</div>
-                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">記憶編織師</h3>
-                        <p class="text-soft-text-secondary mb-4">
-                            擁有編織和修改他人記憶能力的神秘職業。主角是一名年輕的記憶編織師，必須在倫理與力量之間找到平衡。
-                        </p>
-                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
-                            <span><i class="fas fa-clock mr-1"></i>2024年5月</span>
-                            <span><i class="fas fa-tag mr-1"></i>心靈魔法</span>
-                        </div>
-                    </div>
-                    <div class="idea-card rounded-extra-soft p-6 relative">
-                        <div class="idea-status status-concept">概念</div>
-                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">時間觀察者</h3>
-                        <p class="text-soft-text-secondary mb-4">
-                            能夠看到物品和人物過去歷史片段的角色。每次使用能力都會縮短自己的壽命，必須謹慎選擇何時使用。
-                        </p>
-                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
-                            <span><i class="fas fa-clock mr-1"></i>2024年6月</span>
-                            <span><i class="fas fa-tag mr-1"></i>預知能力</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 劇情構想 -->
-            <div id="plots" class="category-section" data-category="plots">
-                <div class="category-title">
-                    <h2 class="text-2xl font-bold text-gradient">
-                        <i class="fas fa-scroll mr-3"></i>劇情構想
-                    </h2>
-                </div>
-                <div class="grid grid-cols-1 gap-6">
-                    <div class="idea-card rounded-extra-soft p-6 relative">
-                        <div class="idea-status status-draft">構思中</div>
-                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">消失的神明之謎</h3>
-                        <p class="text-soft-text-secondary mb-4">
-                            在一個多神世界中，神明們開始一個接一個地消失。主角作為最後一位神官，必須調查真相並阻止世界走向毀滅。
-                            隨著調查的深入，發現神明的消失並非意外，而是有人在系統性地「收集」神力。
-                        </p>
-                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
-                            <span><i class="fas fa-clock mr-1"></i>2024年7月</span>
-                            <span><i class="fas fa-tag mr-1"></i>神話奇幻</span>
-                        </div>
-                    </div>
-                    <div class="idea-card rounded-extra-soft p-6 relative">
-                        <div class="idea-status status-concept">概念</div>
-                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">平行世界的自己</h3>
-                        <p class="text-soft-text-secondary mb-4">
-                            主角意外獲得與平行世界中另一個自己交換身體的能力。兩個世界有著微妙的差異，而主角必須同時在兩個世界中生活並解決問題。
-                        </p>
-                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
-                            <span><i class="fas fa-clock mr-1"></i>2024年8月</span>
-                            <span><i class="fas fa-tag mr-1"></i>平行世界</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 世界觀 -->
-            <div id="worldbuilding" class="category-section" data-category="worldbuilding">
-                <div class="category-title">
-                    <h2 class="text-2xl font-bold text-gradient">
-                        <i class="fas fa-globe mr-3"></i>世界觀
-                    </h2>
-                </div>
-                <div class="grid grid-cols-1 gap-6">
-                    <div class="idea-card rounded-extra-soft p-6 relative">
-                        <div class="idea-status status-developing">發展中</div>
-                        <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">情感驅動的魔法系統</h3>
-                        <p class="text-soft-text-secondary mb-4">
-                            在這個世界中，魔法的力量來源於使用者的情感強度。不同的情感對應不同類型的魔法：憤怒產生火焰，悲傷控制水流，喜悅操縱光明。
-                            但過度使用某種情感魔法會導致情感失衡，甚至永久失去感受該情感的能力。
-                        </p>
-                        <div class="flex items-center justify-between text-sm text-soft-text-secondary">
-                            <span><i class="fas fa-clock mr-1"></i>2024年9月</span>
-                            <span><i class="fas fa-tag mr-1"></i>情感魔法</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-                </div>
-                
-                <!-- Sidebar -->
-                <div class="w-full lg:w-80 shrink-0">
-                    <div class="sidebar-container sticky top-24">
-                        
-                        <!-- Table of Contents -->
-                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg mb-6">
-                            <h3 class="text-xl font-bold text-gradient mb-4 flex items-center">
-                                <i class="fas fa-list mr-3"></i>分類導航
-                            </h3>
-                            <nav class="space-y-2" id="toc-nav">
-                                <a href="#fantasy" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="fantasy">
-                                    <i class="fas fa-magic mr-3 text-soft-accent-primary"></i>
-                                    <span>奇幻設定</span>
-                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-fantasy">2</span>
-                                </a>
-                                <a href="#characters" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="characters">
-                                    <i class="fas fa-users mr-3 text-soft-accent-primary"></i>
-                                    <span>角色概念</span>
-                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-characters">2</span>
-                                </a>
-                                <a href="#plots" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="plots">
-                                    <i class="fas fa-scroll mr-3 text-soft-accent-primary"></i>
-                                    <span>劇情構想</span>
-                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-plots">2</span>
-                                </a>
-                                <a href="#worldbuilding" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="worldbuilding">
-                                    <i class="fas fa-globe mr-3 text-soft-accent-primary"></i>
-                                    <span>世界觀</span>
-                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-worldbuilding">1</span>
-                                </a>
-                            </nav>
-                        </div>
-
-                        <!-- Quick Stats -->
-                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg">
-                            <h3 class="text-lg font-bold text-gradient mb-4 flex items-center">
-                                <i class="fas fa-chart-bar mr-3"></i>創意統計
-                            </h3>
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-soft-text-secondary">總想法數</span>
-                                    <span class="text-soft-accent-primary font-bold" id="total-ideas">7</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-soft-text-secondary">分類數</span>
-                                    <span class="text-soft-accent-secondary font-bold">4</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-soft-text-secondary">發展中</span>
-                                    <span class="text-soft-accent-tertiary font-bold">2</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-soft-text-secondary">顯示中</span>
-                                    <span class="text-soft-accent-tertiary font-bold" id="visible-ideas">7</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                
             </div>
         </div>
     </section>
@@ -660,7 +324,6 @@
 
         // Back to top functionality
         const backToTopButton = document.getElementById('back-to-top');
-        const scrollProgress = document.getElementById('scroll-progress');
 
         const toggleBackToTopButton = () => {
             if (window.scrollY > 300) {
@@ -670,10 +333,6 @@
                 backToTopButton.style.opacity = '0';
                 backToTopButton.style.transform = 'scale(0.95)';
             }
-
-            // Update scroll progress
-            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
         };
 
         backToTopButton?.addEventListener('click', () => {
@@ -685,178 +344,9 @@
 
         window.addEventListener('scroll', toggleBackToTopButton);
 
-        // Add smooth scrolling animation for idea cards
-        const observeElements = () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'slide-up 0.6s ease-out';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.idea-card').forEach(card => {
-                observer.observe(card);
-            });
-        };
-
-        // Search and filter functionality
-        const searchInput = document.getElementById('search-input');
-        const filterTags = document.querySelectorAll('.filter-tag');
-        const categoryElements = document.querySelectorAll('.category-section');
-        const tocLinks = document.querySelectorAll('.toc-link');
-        let currentFilter = 'all';
-
-        // Search functionality
-        function performSearch(searchTerm) {
-            const normalizedSearchTerm = searchTerm.toLowerCase().trim();
-            let visibleCount = 0;
-
-            categoryElements.forEach(category => {
-                const categoryName = category.getAttribute('data-category');
-                const ideaCards = category.querySelectorAll('.idea-card');
-                let categoryHasMatch = false;
-
-                ideaCards.forEach(card => {
-                    const text = card.textContent.toLowerCase();
-                    const hasMatch = normalizedSearchTerm === '' || text.includes(normalizedSearchTerm);
-                    
-                    if (hasMatch && (currentFilter === 'all' || currentFilter === categoryName)) {
-                        card.style.display = '';
-                        categoryHasMatch = true;
-                        visibleCount++;
-                        
-                        // Highlight search term
-                        if (normalizedSearchTerm !== '') {
-                            highlightText(card, normalizedSearchTerm);
-                        } else {
-                            removeHighlight(card);
-                        }
-                    } else {
-                        card.style.display = 'none';
-                        removeHighlight(card);
-                    }
-                });
-
-                // Show/hide category based on matches
-                if (categoryHasMatch && (currentFilter === 'all' || currentFilter === categoryName)) {
-                    category.classList.remove('category-hidden');
-                    category.classList.add('category-show');
-                } else {
-                    category.classList.add('category-hidden');
-                    category.classList.remove('category-show');
-                }
-            });
-
-            // Update visible count
-            document.getElementById('visible-ideas').textContent = visibleCount;
-        }
-
-        // Highlight search terms
-        function highlightText(element, searchTerm) {
-            const textElements = element.querySelectorAll('h3, p');
-            textElements.forEach(textEl => {
-                const originalText = textEl.getAttribute('data-original') || textEl.innerHTML;
-                if (!textEl.getAttribute('data-original')) {
-                    textEl.setAttribute('data-original', originalText);
-                }
-                
-                const regex = new RegExp(`(${searchTerm})`, 'gi');
-                const highlightedText = originalText.replace(regex, '<span class="search-highlight">$1</span>');
-                textEl.innerHTML = highlightedText;
-            });
-        }
-
-        // Remove highlight
-        function removeHighlight(element) {
-            const textElements = element.querySelectorAll('h3, p');
-            textElements.forEach(textEl => {
-                const originalText = textEl.getAttribute('data-original');
-                if (originalText) {
-                    textEl.innerHTML = originalText;
-                }
-            });
-        }
-
-        // Filter functionality
-        function applyFilter(filter) {
-            currentFilter = filter;
-            
-            // Update filter tags
-            filterTags.forEach(tag => {
-                if (tag.getAttribute('data-filter') === filter) {
-                    tag.classList.add('active');
-                } else {
-                    tag.classList.remove('active');
-                }
-            });
-
-            // Reapply search with new filter
-            performSearch(searchInput.value);
-        }
-
-        // Smooth scroll to section
-        function scrollToSection(targetId) {
-            const target = document.getElementById(targetId);
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        }
-
-        // Update active TOC link based on scroll position
-        function updateActiveTocLink() {
-            let currentSection = '';
-            
-            categoryElements.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                if (rect.top <= 150 && rect.bottom >= 150) {
-                    currentSection = section.id;
-                }
-            });
-
-            tocLinks.forEach(link => {
-                const targetId = link.getAttribute('href').substring(1);
-                if (targetId === currentSection) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        }
-
-        // Event listeners
-        searchInput.addEventListener('input', (e) => {
-            performSearch(e.target.value);
-        });
-
-        filterTags.forEach(tag => {
-            tag.addEventListener('click', () => {
-                const filter = tag.getAttribute('data-filter');
-                applyFilter(filter);
-            });
-        });
-
-        tocLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                scrollToSection(targetId);
-            });
-        });
-
-        // Scroll spy for TOC
-        window.addEventListener('scroll', updateActiveTocLink);
-
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             toggleBackToTopButton();
-            observeElements();
-            performSearch(''); // Initialize search
-            updateActiveTocLink();
         });
     </script>
 </body>
