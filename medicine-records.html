@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>藥物紀錄 - 夢鈴幻想</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --soft-primary: #0a0e1a;
+            --soft-secondary: #1a1e2e;
+            --soft-tertiary: #2a2e3e;
+            --soft-accent-primary: #c8a8e9;
+            --soft-accent-secondary: #f8b4d9;
+            --soft-accent-tertiary: #a8e6cf;
+            --soft-text-primary: #e8e6f3;
+            --soft-text-secondary: #b8b6c3;
+            --soft-text-muted: #888693;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--soft-primary) 0%, var(--soft-secondary) 100%);
+            color: var(--soft-text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .glass-effect {
+            background: rgba(42, 46, 62, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(200, 168, 233, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .rounded-extra-soft {
+            border-radius: 24px;
+        }
+
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 12px 24px;
+            color: var(--soft-text-secondary);
+            text-decoration: none;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--soft-accent-primary);
+            background: rgba(200, 168, 233, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: var(--soft-accent-primary);
+            background: rgba(200, 168, 233, 0.2);
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-menu {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.4);
+        }
+
+        .medicine-nav {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .medicine-nav::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .medicine-nav::-webkit-scrollbar-track {
+            background: rgba(42, 46, 62, 0.3);
+            border-radius: 10px;
+        }
+
+        .medicine-nav::-webkit-scrollbar-thumb {
+            background: rgba(200, 168, 233, 0.5);
+            border-radius: 10px;
+        }
+
+        .medicine-card {
+            background: rgba(42, 46, 62, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(200, 168, 233, 0.1);
+            border-radius: 24px;
+            margin-bottom: 32px;
+            overflow: hidden;
+        }
+
+        .medicine-header {
+            background: linear-gradient(135deg, rgba(200, 168, 233, 0.1), rgba(248, 180, 217, 0.1));
+            padding: 24px;
+            border-bottom: 1px solid rgba(200, 168, 233, 0.1);
+        }
+
+        .medicine-content {
+            padding: 24px;
+        }
+
+        .medicine-section {
+            margin-bottom: 24px;
+        }
+
+        .medicine-section h3 {
+            color: var(--soft-accent-primary);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(200, 168, 233, 0.2);
+        }
+
+        .medicine-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        .medicine-table th,
+        .medicine-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(200, 168, 233, 0.1);
+        }
+
+        .medicine-table th {
+            background: rgba(200, 168, 233, 0.1);
+            color: var(--soft-accent-primary);
+            font-weight: 600;
+        }
+
+        .medicine-table tr:hover {
+            background: rgba(200, 168, 233, 0.05);
+        }
+
+        .dosage-highlight {
+            background: rgba(168, 230, 207, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--soft-accent-tertiary);
+        }
+
+        .warning-box {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .warning-box h4 {
+            color: #ff6b6b;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .info-box {
+            background: rgba(116, 185, 255, 0.1);
+            border: 1px solid rgba(116, 185, 255, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .info-box h4 {
+            color: #74b9ff;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .chemical-formula {
+            font-family: 'Courier New', monospace;
+            background: rgba(42, 46, 62, 0.8);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(200, 168, 233, 0.2);
+            display: inline-block;
+            margin: 8px 0;
+        }
+
+        .nav-item {
+            padding: 8px 16px;
+            margin: 4px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--soft-text-secondary);
+        }
+
+        .nav-item:hover {
+            background: rgba(200, 168, 233, 0.1);
+            color: var(--soft-accent-primary);
+        }
+
+        .nav-item.active {
+            background: rgba(200, 168, 233, 0.2);
+            color: var(--soft-accent-primary);
+        }
+
+        .search-box {
+            position: sticky;
+            top: 0;
+            background: rgba(42, 46, 62, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(200, 168, 233, 0.1);
+        }
+
+        .search-input {
+            width: 100%;
+            background: rgba(26, 30, 46, 0.8);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: var(--soft-text-primary);
+            font-size: 14px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--soft-accent-primary);
+            box-shadow: 0 0 0 2px rgba(200, 168, 233, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: var(--soft-text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .medicine-nav {
+                position: static;
+                max-height: none;
+                margin-bottom: 24px;
+            }
+            
+            .medicine-table {
+                font-size: 14px;
+            }
+            
+            .medicine-table th,
+            .medicine-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="glass-effect fixed top-0 left-0 right-0 z-50 py-4">
+        <div class="container">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary flex items-center justify-center">
+                        <i class="fas fa-star text-white text-lg"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-gradient">夢鈴幻想</h1>
+                </div>
+                
+                <div class="desktop-menu flex items-center space-x-2">
+                    <a href="index.html" class="nav-link">首頁</a>
+                    <a href="novels.html" class="nav-link">奇幻小說</a>
+                    <a href="tools.html" class="nav-link">魔法工具</a>
+                    <a href="ai.html" class="nav-link">AI魔導</a>
+                    <a href="blog.html" class="nav-link active">心境筆記</a>
+                </div>
+                
+                <button class="mobile-menu text-soft-text-primary text-2xl" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div id="mobile-menu-items" class="mobile-menu hidden mt-4 pt-4 border-t border-soft-accent-primary border-opacity-20">
+                <a href="index.html" class="block nav-link mb-2">首頁</a>
+                <a href="novels.html" class="block nav-link mb-2">奇幻小說</a>
+                <a href="tools.html" class="block nav-link mb-2">魔法工具</a>
+                <a href="ai.html" class="block nav-link mb-2">AI魔導</a>
+                <a href="blog.html" class="block nav-link mb-2 active">心境筆記</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="pt-32 pb-16 text-center">
+        <div class="container">
+            <div class="floating-animation">
+                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8">
+                    <i class="fas fa-pills text-4xl text-white"></i>
+                </div>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gradient">藥物紀錄</h1>
+            <p class="text-xl text-soft-text-secondary max-w-2xl mx-auto">
+                詳細記錄各種藥物的成分、用途、劑量及注意事項
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pb-20">
+        <div class="container">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Sidebar Navigation -->
+                <div class="lg:w-1/4">
+                    <div class="medicine-nav glass-effect rounded-extra-soft p-6">
+                        <div class="search-box">
+                            <input type="text" class="search-input" placeholder="搜尋藥物..." id="searchInput">
+                        </div>
+                        <h3 class="text-lg font-semibold mb-4 text-gradient">藥物分類</h3>
+                        <div class="space-y-2">
+                            <div class="nav-item active" onclick="showCategory('all')">
+                                <i class="fas fa-list mr-2"></i>全部藥物
+                            </div>
+                            <div class="nav-item" onclick="showCategory('gastrointestinal')">
+                                <i class="fas fa-stomach mr-2"></i>腸胃道用藥
+                            </div>
+                            <div class="nav-item" onclick="showCategory('neurological')">
+                                <i class="fas fa-brain mr-2"></i>神經系統用藥
+                            </div>
+                            <div class="nav-item" onclick="showCategory('cardiovascular')">
+                                <i class="fas fa-heart mr-2"></i>心血管用藥
+                            </div>
+                            <div class="nav-item" onclick="showCategory('respiratory')">
+                                <i class="fas fa-lungs mr-2"></i>呼吸系統用藥
+                            </div>
+                            <div class="nav-item" onclick="showCategory('endocrine')">
+                                <i class="fas fa-dna mr-2"></i>內分泌用藥
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medicine Content -->
+                <div class="lg:w-3/4">
+                    <div id="medicine-content">
+                        <!-- Domperidone -->
+                        <div class="medicine-card" data-category="gastrointestinal" data-name="domperidone">
+                            <div class="medicine-header">
+                                <h2 class="text-2xl font-bold text-gradient mb-2">Domperidone (多潘立酮)</h2>
+                                <p class="text-soft-text-secondary">腸胃道促進劑，用於治療噁心、嘔吐及胃腸道功能障礙</p>
+                            </div>
+                            <div class="medicine-content">
+                                <div class="medicine-section">
+                                    <h3>藥物識別</h3>
+                                    <table class="medicine-table">
+                                        <tr>
+                                            <th>項目</th>
+                                            <th>資訊</th>
+                                        </tr>
+                                        <tr>
+                                            <td>商品名</td>
+                                            <td>Motilium®, Domperidone</td>
+                                        </tr>
+                                        <tr>
+                                            <td>學名</td>
+                                            <td>Domperidone</td>
+                                        </tr>
+                                        <tr>
+                                            <td>化學式</td>
+                                            <td><span class="chemical-formula">C₂₂H₂₄ClN₅O₂</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>分子量</td>
+                                            <td>425.91 g/mol</td>
+                                        </tr>
+                                        <tr>
+                                            <td>藥物分類</td>
+                                            <td>多巴胺受體拮抗劑</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="medicine-section">
+                                    <h3>藥理作用</h3>
+                                    <p class="text-soft-text-secondary mb-4">
+                                        Domperidone 是一種選擇性外周多巴胺 D2 受體拮抗劑，主要作用機制包括：
+                                    </p>
+                                    <ul class="text-soft-text-secondary space-y-2 ml-6">
+                                        <li>• 阻斷化學感受器觸發區的多巴胺受體，產生止吐效果</li>
+                                        <li>• 增加下食道括約肌張力，改善胃食道逆流</li>
+                                        <li>• 促進胃腸道蠕動，加速胃排空</li>
+                                        <li>• 不易通過血腦屏障，較少引起中樞神經系統副作用</li>
+                                    </ul>
+                                </div>
+
+                                <div class="medicine-section">
+                                    <h3>臨床應用</h3>
+                                    <div class="info-box">
+                                        <h4>適應症</h4>
+                                        <ul class="text-soft-text-secondary space-y-1">
+                                            <li>• 功能性消化不良</li>
+                                            <li>• 噁心、嘔吐症狀</li>
+                                            <li>• 胃食道逆流症</li>
+                                            <li>• 胃輕癱</li>
+                                            <li>• 化療引起的噁心嘔吐</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="medicine-section">
+                                    <h3>劑量與給藥</h3>
+                                    <table class="medicine-table">
+                                        <tr>
+                                            <th>適應症</th>
+                                            <th>成人劑量</th>
+                                            <th>兒童劑量</th>
+                                        </tr>
+                                        <tr>
+                                            <td>功能性消化不良</td>
+                                            <td><span class="dosage-highlight">10mg，一日三次，飯前30分鐘</span></td>
+                                            <td>0.25-0.5 mg/kg，一日三次</td>
+                                        </tr>
+                                        <tr>
+                                            <td>噁心嘔吐</td>
+                                            <td><span class="dosage-highlight">10-20mg，一日三至四次</span></td>
+                                            <td>0.25-0.5 mg/kg，一日三次</td>
+                                        </tr>
+                                        <tr>
+                                            <td>胃輕癱</td>
+                                            <td><span class="dosage-highlight">10-20mg，一日四次</span></td>
+                                            <td>視需要調整</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="medicine-section">
+                                    <h3>安全性資訊</h3>
+                                    <div class="warning-box">
+                                        <h4>重要警告</h4>
+                                        <ul class="text-soft-text-secondary space-y-1">
+                                            <li>• 可能增加心律不整風險，特別是QT間期延長</li>
+                                            <li>• 心血管疾病患者需謹慎使用</li>
+                                            <li>• 避免與CYP3A4抑制劑併用</li>
+                                            <li>• 肝功能不全患者需減量</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <h4 class="text-soft-accent-primary font-semibold mt-6 mb-3">常見副作用</h4>
+                                    <ul class="text-soft-text-secondary space-y-1 ml-6">
+                                        <li>• 頭痛、頭暈</li>
+                                        <li>• 腹瀉、腹痛</li>
+                                        <li>• 皮疹、搔癢</li>
+                                        <li>• 月經不規則（女性）</li>
+                                        <li>• 泌乳激素上升</li>
+                                    </ul>
+                                </div>
+
+                                <div class="medicine-section">
+                                    <h3>藥物交互作用</h3>
+                                    <table class="medicine-table">
+                                        <tr>
+                                            <th>藥物</th>
+                                            <th>交互作用</th>
+                                            <th>注意事項</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Ketoconazole</td>
+                                            <td>血中濃度增加</td>
+                                            <td>避免併用</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Erythromycin</td>
+                                            <td>QT延長風險</td>
+                                            <td>謹慎併用</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Anticholinergics</td>
+                                            <td>效果相互抵消</td>
+                                            <td>避免併用</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="medicine-section">
+                                    <h3>儲存與處理</h3>
+                                    <div class="info-box">
+                                        <h4>儲存條件</h4>
+                                        <ul class="text-soft-text-secondary space-y-1">
+                                            <li>• 室溫保存（15-30°C）</li>
+                                            <li>• 避免陽光直射</li>
+                                            <li>• 保持乾燥</li>
+                                            <li>• 兒童無法取得之處</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Placeholder for more medicines -->
+                        <div class="medicine-card" data-category="all">
+                            <div class="medicine-header">
+                                <h2 class="text-2xl font-bold text-gradient mb-2">更多藥物資訊</h2>
+                                <p class="text-soft-text-secondary">持續更新中...</p>
+                            </div>
+                            <div class="medicine-content">
+                                <p class="text-soft-text-secondary text-center py-12">
+                                    更多藥物資訊將陸續添加至此頁面
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-effect py-8 mt-16">
+        <div class="container text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://www.threads.net/@yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors">
+                    <i class="fab fa-threads text-2xl"></i>
+                </a>
+                <a href="https://www.pixiv.net/users/96890924" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors">
+                    <i class="fab fa-pixiv text-2xl"></i>
+                </a>
+                <a href="https://github.com/yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-soft-text-muted">&copy; 2024 夢鈴幻想. 所有權利保留.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu-items');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Back to top functionality
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Category filter functionality
+        function showCategory(category) {
+            // Update navigation active state
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Filter medicine cards
+            const medicineCards = document.querySelectorAll('.medicine-card');
+            medicineCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const medicineCards = document.querySelectorAll('.medicine-card');
+            
+            medicineCards.forEach(card => {
+                const medicineName = card.dataset.name || '';
+                const medicineText = card.textContent.toLowerCase();
+                
+                if (medicineName.includes(searchTerm) || medicineText.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
