@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>夢鈴幻想 | 心境筆記</title>
+    <title>醫學、藥物、保健品 - 夢鈴幻想</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script>
@@ -234,48 +233,6 @@
         .topic-card:hover .topic-icon {
             transform: scale(1.1) rotate(5deg);
         }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(26, 30, 46, 0.6);
-            border: 1px solid rgba(200, 168, 233, 0.2);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .stat-item:hover {
-            background: rgba(26, 30, 46, 0.8);
-            border-color: rgba(200, 168, 233, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #c8a8e9;
-        }
-
-        .social-button {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(200, 168, 233, 0.3);
-            background: rgba(26, 30, 46, 0.8);
-            color: #c8a8e9;
-        }
-
-        .social-button:hover {
-            background: rgba(200, 168, 233, 0.2);
-            border-color: rgba(200, 168, 233, 0.6);
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(200, 168, 233, 0.3);
-            color: #f5f3f0;
-        }
     </style>
 </head>
 
@@ -294,15 +251,15 @@
                     </div>
                 </div>
 
-                <div class="hidden md:flex items-center space-x-8">
+                <div class="hidden md:flex items-center space-x-4">
                     <a href="index.html" class="nav-link">首頁</a>
                     <a href="novels.html" class="nav-link">輕小說</a>
                     <a href="tools.html" class="nav-link">程式與工具</a>
                     <a href="ai.html" class="nav-link">AI 心得</a>
-                    <a href="health-medical.html" class="nav-link">醫學、藥物、保健品</a>
+                    <a href="medical-category.html" class="nav-link active">醫學、藥物、保健品</a>
                     <a href="finance.html" class="nav-link">經濟與投資</a>
                     <a href="politics.html" class="nav-link">政治與思想</a>
-                    <a href="blog.html" class="nav-link active">心境筆記</a>
+                    <a href="blog.html" class="nav-link">心境筆記</a>
                 </div>
 
                 <div class="md:hidden flex items-center">
@@ -321,10 +278,10 @@
                 <a href="novels.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">輕小說</a>
                 <a href="tools.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">程式與工具</a>
                 <a href="ai.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">AI 心得</a>
-                <a href="health-medical.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">醫學、藥物、保健品</a>
+                <a href="medical-category.html" class="block px-3 py-2 rounded-soft text-soft-accent-primary font-medium">醫學、藥物、保健品</a>
                 <a href="finance.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">經濟與投資</a>
                 <a href="politics.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">政治與思想</a>
-                <a href="blog.html" class="block px-3 py-2 rounded-soft text-soft-accent-primary font-medium">心境筆記</a>
+                <a href="blog.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">心境筆記</a>
             </div>
         </div>
     </nav>
@@ -344,10 +301,10 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h1 class="text-5xl md:text-6xl font-bold mb-6">
-                    <span class="text-gradient">心境</span> & <span class="text-gradient">筆記</span>
+                    <span class="text-gradient">醫學、藥物、保健品</span>
                 </h1>
                 <p class="text-xl md:text-2xl text-soft-text-secondary max-w-3xl mx-auto leading-relaxed">
-                    在這裡記錄創作路上的點點滴滴，紀錄著自己的軌跡
+                    健康知識的收藏庫，從基礎醫學到專業藥學，從營養保健到疾病預防
                 </p>
             </div>
         </div>
@@ -357,106 +314,76 @@
     <section class="py-16 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- 故事的解剖 -->
+                <!-- 健康與醫學紀錄 -->
                 <div class="topic-card rounded-extra-soft p-8 shadow-2xl">
                     <div class="text-center mb-6">
                         <div class="topic-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-6">
-                            <i class="fas fa-microscope text-3xl text-soft-primary"></i>
+                            <i class="fas fa-heartbeat text-3xl text-soft-primary"></i>
                         </div>
-                        <h2 class="text-3xl font-bold mb-4 text-gradient">故事的解剖</h2>
-                        <div class="w-16 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-6"></div>
-                    </div>
-                    <div class="space-y-4 text-soft-text-secondary mb-8">
-                        <p class="text-center italic">放諸四海永恆皆準的<strong class="text-soft-accent-primary">形式</strong>，而非公式</p>
-                        <p class="text-center italic"><strong class="text-soft-accent-primary">原型</strong>而非老套陳腔</p>
-                        <p class="text-center italic"><strong class="text-soft-accent-primary">原創</strong>而非複製</p>
-                        <p class="text-center italic">精通「<strong class="text-soft-accent-primary">說故事</strong>」這門技藝</p>
-                    </div>
-                    <div class="text-center">
-                        <a href="story-anatomy.html" class="topic-button px-8 py-4 rounded-extra-soft inline-flex items-center justify-center group">
-                            <i class="fas fa-book-open mr-3 group-hover:scale-110 transition-transform"></i>
-                            <span class="font-bold">深入探索</span>
-                            <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 名句紀錄 -->
-                <div class="topic-card rounded-extra-soft p-8 shadow-2xl">
-                    <div class="text-center mb-6">
-                        <div class="topic-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-6">
-                            <i class="fas fa-quote-right text-3xl text-soft-primary"></i>
-                        </div>
-                        <h2 class="text-3xl font-bold mb-4 text-gradient">名句紀錄</h2>
+                        <h2 class="text-3xl font-bold mb-4 text-gradient">健康與醫學紀錄</h2>
                         <div class="w-16 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-6"></div>
                     </div>
                     <div class="space-y-3 text-soft-text-secondary mb-8">
-                        <p class="text-center">人生中看到值得紀錄的內容，成為人生觀中的養分</p>
-                        <div class="grid grid-cols-2 gap-2 text-center text-sm">
-                            <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-2">創作與故事</div>
-                            <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-2">人生哲理</div>
-                            <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-2">歷史與社會</div>
-                            <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-2">溝通與智慧</div>
-                        </div>
+                        <p class="text-center">醫學知識與健康資訊的收集整理</p>
+                        <p class="text-center italic">新世代醫療技術與疾病預防</p>
+                        <p class="text-center font-semibold text-soft-accent-primary">守護健康的智慧</p>
                     </div>
                     <div class="text-center">
-                        <a href="quotes.html" class="topic-button px-8 py-4 rounded-extra-soft inline-flex items-center justify-center group">
-                            <i class="fas fa-bookmark mr-3 group-hover:scale-110 transition-transform"></i>
-                            <span class="font-bold">瀏覽收錄</span>
+                        <a href="health-medical.html" class="topic-button px-8 py-4 rounded-extra-soft inline-flex items-center justify-center group">
+                            <i class="fas fa-stethoscope mr-3 group-hover:scale-110 transition-transform"></i>
+                            <span class="font-bold">醫學筆記</span>
                             <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
                         </a>
                     </div>
                 </div>
 
-
-                <!-- 小說想法 -->
+                <!-- 藥物紀錄 -->
                 <div class="topic-card rounded-extra-soft p-8 shadow-2xl">
                     <div class="text-center mb-6">
                         <div class="topic-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-6">
-                            <i class="fas fa-lightbulb text-3xl text-soft-primary"></i>
+                            <i class="fas fa-pills text-3xl text-soft-primary"></i>
                         </div>
-                        <h2 class="text-3xl font-bold mb-4 text-gradient">小說想法</h2>
+                        <h2 class="text-3xl font-bold mb-4 text-gradient">藥物紀錄</h2>
                         <div class="w-16 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-6"></div>
                     </div>
                     <div class="space-y-3 text-soft-text-secondary mb-8">
-                        <p class="text-center">腦海中閃現的創作靈感與故事構思</p>
-                        <p class="text-center italic">每一個想法都可能成為下一個作品</p>
-                        <p class="text-center font-semibold text-soft-accent-primary">記錄創意的瞬間</p>
+                        <p class="text-center">詳細的藥物資訊與使用說明</p>
+                        <p class="text-center italic">藥理學機轉與臨床應用分析</p>
+                        <p class="text-center font-semibold text-soft-accent-primary">專業藥學知識庫</p>
                     </div>
                     <div class="text-center">
-                        <a href="novel-ideas.html" class="topic-button px-8 py-4 rounded-extra-soft inline-flex items-center justify-center group">
-                            <i class="fas fa-pen-fancy mr-3 group-hover:scale-110 transition-transform"></i>
-                            <span class="font-bold">創意靈感</span>
+                        <a href="medicine-records.html" class="topic-button px-8 py-4 rounded-extra-soft inline-flex items-center justify-center group">
+                            <i class="fas fa-prescription-bottle-alt mr-3 group-hover:scale-110 transition-transform"></i>
+                            <span class="font-bold">藥學資料</span>
                             <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- 發文紀錄 -->
+                <!-- 保健食品 -->
                 <div class="topic-card rounded-extra-soft p-8 shadow-2xl">
                     <div class="text-center mb-6">
                         <div class="topic-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-6">
-                            <i class="fas fa-pen-alt text-3xl text-soft-primary"></i>
+                            <i class="fas fa-leaf text-3xl text-soft-primary"></i>
                         </div>
-                        <h2 class="text-3xl font-bold mb-4 text-gradient">發文紀錄</h2>
+                        <h2 class="text-3xl font-bold mb-4 text-gradient">保健食品</h2>
                         <div class="w-16 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-6"></div>
                     </div>
                     <div class="space-y-3 text-soft-text-secondary mb-8">
-                        <p class="text-center">隨時隨地的想法記錄與心得分享</p>
-                        <p class="text-center italic">思維的軌跡與成長的足跡</p>
-                        <p class="text-center font-semibold text-soft-accent-primary">記錄思考的瞬間</p>
+                        <p class="text-center">營養補充品的科學分析與使用指南</p>
+                        <p class="text-center italic">天然健康保健的專業資訊</p>
+                        <p class="text-center font-semibold text-soft-accent-primary">優化健康的智慧選擇</p>
                     </div>
                     <div class="text-center">
-                        <a href="post-records.html" class="topic-button px-8 py-4 rounded-extra-soft inline-flex items-center justify-center group">
-                            <i class="fas fa-clock mr-3 group-hover:scale-110 transition-transform"></i>
-                            <span class="font-bold">時光記錄</span>
+                        <a href="supplements.html" class="topic-button px-8 py-4 rounded-extra-soft inline-flex items-center justify-center group">
+                            <i class="fas fa-seedling mr-3 group-hover:scale-110 transition-transform"></i>
+                            <span class="font-bold">保健指南</span>
                             <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
                         </a>
                     </div>
                 </div>
-
 
             </div>
         </div>
@@ -466,20 +393,15 @@
     <section class="py-16">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="glass-effect rounded-extra-soft p-12 text-center">
-                <h2 class="text-3xl font-bold mb-6 text-gradient">保持連結</h2>
+                <h2 class="text-3xl font-bold mb-6 text-gradient">保持健康連結</h2>
                 <p class="text-xl text-soft-text-secondary mb-8">
-                    跟隨我的創作旅程，第一時間獲取新文章、故事和創作項目的最新動態
+                    關注健康知識的最新動態，一起守護身心健康
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
                     <a href="https://www.threads.com/@yumerin.main.i" target="_blank" 
-                       class="social-button px-8 py-4 rounded-extra-soft font-medium inline-flex items-center justify-center">
+                       class="social-button px-8 py-4 rounded-extra-soft font-medium inline-flex items-center justify-center bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary text-soft-primary hover:scale-105 transition-transform">
                         <i class="fab fa-threads mr-3"></i>
                         <span>在 Threads 上追蹤</span>
-                    </a>
-                    <a href="https://www.pixiv.net/users/108590809/novels" target="_blank" 
-                       class="social-button px-8 py-4 rounded-extra-soft font-medium inline-flex items-center justify-center">
-                        <i class="fas fa-paint-brush mr-3"></i>
-                        <span>在 Pixiv 上追蹤</span>
                     </a>
                 </div>
             </div>
