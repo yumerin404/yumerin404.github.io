@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保健食品 - 夢鈴幻想</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --soft-primary: #0a0e1a;
+            --soft-secondary: #1a1e2e;
+            --soft-tertiary: #2a2e3e;
+            --soft-accent-primary: #c8a8e9;
+            --soft-accent-secondary: #f8b4d9;
+            --soft-accent-tertiary: #a8e6cf;
+            --soft-text-primary: #e8e6f3;
+            --soft-text-secondary: #b8b6c3;
+            --soft-text-muted: #888693;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--soft-primary) 0%, var(--soft-secondary) 100%);
+            color: var(--soft-text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .glass-effect {
+            background: rgba(42, 46, 62, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(200, 168, 233, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .rounded-extra-soft {
+            border-radius: 24px;
+        }
+
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 12px 24px;
+            color: var(--soft-text-secondary);
+            text-decoration: none;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--soft-accent-primary);
+            background: rgba(200, 168, 233, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: var(--soft-accent-primary);
+            background: rgba(200, 168, 233, 0.2);
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-menu {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.4);
+        }
+
+        .category-card {
+            background: rgba(42, 46, 62, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(200, 168, 233, 0.1);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--soft-accent-primary), var(--soft-accent-secondary), var(--soft-accent-tertiary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(200, 168, 233, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .category-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .category-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .category-description {
+            color: var(--soft-text-secondary);
+            text-align: center;
+            margin-bottom: 24px;
+            font-size: 1.125rem;
+            line-height: 1.7;
+        }
+
+        .category-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .feature-item {
+            background: rgba(26, 30, 46, 0.5);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(200, 168, 233, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(26, 30, 46, 0.8);
+            border-color: rgba(200, 168, 233, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            color: var(--soft-accent-primary);
+            margin-right: 12px;
+            font-size: 1.25rem;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: var(--soft-accent-primary);
+            margin-bottom: 8px;
+        }
+
+        .feature-text {
+            color: var(--soft-text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .category-button {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
+            color: var(--soft-primary);
+            padding: 16px 32px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .category-button:hover::before {
+            left: 100%;
+        }
+
+        .category-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(200, 168, 233, 0.4);
+        }
+
+        .info-section {
+            background: rgba(42, 46, 62, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(200, 168, 233, 0.1);
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .info-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .info-section p {
+            color: var(--soft-text-secondary);
+            font-size: 1.125rem;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .warning-note {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .warning-note h3 {
+            color: #ff6b6b;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .warning-note p {
+            color: var(--soft-text-secondary);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .category-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-title {
+                font-size: 1.75rem;
+            }
+            
+            .info-section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="glass-effect fixed top-0 left-0 right-0 z-50 py-4">
+        <div class="container">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary flex items-center justify-center">
+                        <i class="fas fa-star text-white text-lg"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-gradient">夢鈴幻想</h1>
+                </div>
+                
+                <div class="desktop-menu flex items-center space-x-2">
+                    <a href="index.html" class="nav-link">首頁</a>
+                    <a href="novels.html" class="nav-link">奇幻小說</a>
+                    <a href="tools.html" class="nav-link">魔法工具</a>
+                    <a href="ai.html" class="nav-link">AI魔導</a>
+                    <a href="blog.html" class="nav-link active">心境筆記</a>
+                </div>
+                
+                <button class="mobile-menu text-soft-text-primary text-2xl" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div id="mobile-menu-items" class="mobile-menu hidden mt-4 pt-4 border-t border-soft-accent-primary border-opacity-20">
+                <a href="index.html" class="block nav-link mb-2">首頁</a>
+                <a href="novels.html" class="block nav-link mb-2">奇幻小說</a>
+                <a href="tools.html" class="block nav-link mb-2">魔法工具</a>
+                <a href="ai.html" class="block nav-link mb-2">AI魔導</a>
+                <a href="blog.html" class="block nav-link mb-2 active">心境筆記</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="pt-32 pb-16 text-center">
+        <div class="container">
+            <div class="floating-animation">
+                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8">
+                    <i class="fas fa-leaf text-4xl text-white"></i>
+                </div>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gradient">保健食品</h1>
+            <p class="text-xl text-soft-text-secondary max-w-2xl mx-auto">
+                營養補充品的科學分析與使用指南，天然健康保健的專業資訊
+            </p>
+        </div>
+    </header>
+
+    <!-- Introduction Section -->
+    <section class="pb-16">
+        <div class="container">
+            <div class="info-section">
+                <h2>營養補充，智慧選擇</h2>
+                <p>
+                    保健食品是現代人維持健康的重要補充，但選擇適合的產品需要科學依據。
+                    每個人的身體狀況、生活習慣、飲食結構都不同，因此需要個別化的營養補充策略。
+                    在這裡，我們將深入探討各類保健食品的科學原理、適用人群、使用方法以及注意事項。
+                </p>
+                <div class="warning-note">
+                    <h3><i class="fas fa-exclamation-triangle mr-2"></i>重要提醒</h3>
+                    <p>本站資訊僅供參考，不構成醫療建議。使用任何保健食品前，請諮詢專業醫護人員。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="pb-20">
+        <div class="container">
+            <!-- 益生菌 -->
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-seedling text-4xl text-white"></i>
+                </div>
+                <h2 class="category-title">益生菌</h2>
+                <p class="category-description">
+                    腸道健康的守護者，調節消化系統平衡，增強免疫力。
+                    選擇適合的益生菌株，維持腸道微生態的穩定與健康。
+                </p>
+                <div class="category-features">
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-shield-alt feature-icon"></i>
+                            增強免疫力
+                        </div>
+                        <p class="feature-text">調節腸道免疫系統，提高身體抵抗力，預防感染性疾病。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-balance-scale feature-icon"></i>
+                            改善消化
+                        </div>
+                        <p class="feature-text">促進腸道蠕動，改善便秘問題，維持消化系統健康。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-brain feature-icon"></i>
+                            腸腦連結
+                        </div>
+                        <p class="feature-text">影響情緒和認知功能，改善焦慮和憂鬱症狀。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-heartbeat feature-icon"></i>
+                            心血管健康
+                        </div>
+                        <p class="feature-text">降低膽固醇，調節血壓，促進心血管系統健康。</p>
+                    </div>
+                </div>
+                <a href="probiotics.html" class="category-button">
+                    <i class="fas fa-microscope mr-3"></i>
+                    深入了解益生菌
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+
+            <!-- 眼睛保健 -->
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-eye text-4xl text-white"></i>
+                </div>
+                <h2 class="category-title">眼睛保健</h2>
+                <p class="category-description">
+                    數位時代的視力保護，抗藍光、抗氧化、預防眼部疾病。
+                    從葉黃素到花青素，科學護眼，維持清晰視力。
+                </p>
+                <div class="category-features">
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-sun feature-icon"></i>
+                            抗藍光傷害
+                        </div>
+                        <p class="feature-text">保護視網膜免受藍光傷害，預防黃斑部病變。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-droplet feature-icon"></i>
+                            改善乾眼症
+                        </div>
+                        <p class="feature-text">增加淚液分泌，改善眼部乾澀不適症狀。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-clock feature-icon"></i>
+                            延緩老化
+                        </div>
+                        <p class="feature-text">抗氧化作用，延緩眼部老化，保持視力清晰。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-moon feature-icon"></i>
+                            夜間視力
+                        </div>
+                        <p class="feature-text">改善夜間視力，增強暗適應能力。</p>
+                    </div>
+                </div>
+                <a href="eye-care.html" class="category-button">
+                    <i class="fas fa-low-vision mr-3"></i>
+                    探索護眼秘方
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+
+            <!-- 胃部保健 -->
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-stomach text-4xl text-white"></i>
+                </div>
+                <h2 class="category-title">胃部保健</h2>
+                <p class="category-description">
+                    現代人的胃部健康挑戰，從胃食道逆流到胃潰瘍。
+                    天然保健成分，溫和調理，重建胃部健康防線。
+                </p>
+                <div class="category-features">
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-shield feature-icon"></i>
+                            胃黏膜保護
+                        </div>
+                        <p class="feature-text">修復胃黏膜，增強胃部防護能力，預防潰瘍形成。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-fire feature-icon"></i>
+                            抗發炎作用
+                        </div>
+                        <p class="feature-text">減少胃部發炎反應，緩解胃痛和不適症狀。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-arrows-spin feature-icon"></i>
+                            調節胃酸
+                        </div>
+                        <p class="feature-text">平衡胃酸分泌，改善胃食道逆流症狀。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-leaf feature-icon"></i>
+                            天然修復
+                        </div>
+                        <p class="feature-text">促進胃部組織修復，恢復正常消化功能。</p>
+                    </div>
+                </div>
+                <a href="stomach-care.html" class="category-button">
+                    <i class="fas fa-heartbeat mr-3"></i>
+                    胃部健康指南
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+
+            <!-- 胺基酸 -->
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-dna text-4xl text-white"></i>
+                </div>
+                <h2 class="category-title">胺基酸</h2>
+                <p class="category-description">
+                    生命的基石，蛋白質的構成要素。從肌肉合成到神經傳導，
+                    胺基酸在人體中扮演著不可或缺的角色。
+                </p>
+                <div class="category-features">
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-dumbbell feature-icon"></i>
+                            肌肉合成
+                        </div>
+                        <p class="feature-text">促進肌肉蛋白質合成，增強肌力，加速運動後恢復。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-bolt feature-icon"></i>
+                            能量代謝
+                        </div>
+                        <p class="feature-text">參與能量代謝過程，提高運動表現和耐力。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-brain feature-icon"></i>
+                            神經功能
+                        </div>
+                        <p class="feature-text">支持神經傳導，改善認知功能和情緒調節。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-title">
+                            <i class="fas fa-heart feature-icon"></i>
+                            免疫支持
+                        </div>
+                        <p class="feature-text">增強免疫系統功能，提高身體抵抗力。</p>
+                    </div>
+                </div>
+                <a href="amino-acids.html" class="category-button">
+                    <i class="fas fa-atom mr-3"></i>
+                    胺基酸科學
+                    <i class="fas fa-arrow-right ml-3"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass-effect py-8 mt-16">
+        <div class="container text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="https://www.threads.net/@yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors">
+                    <i class="fab fa-threads text-2xl"></i>
+                </a>
+                <a href="https://www.pixiv.net/users/96890924" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors">
+                    <i class="fab fa-pixiv text-2xl"></i>
+                </a>
+                <a href="https://github.com/yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-soft-text-muted">&copy; 2024 夢鈴幻想. 所有權利保留.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu-items');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Back to top functionality
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observeElements = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease-out';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.category-card').forEach(card => {
+                observer.observe(card);
+            });
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            observeElements();
+        });
+    </script>
+</body>
+</html>
