@@ -364,10 +364,12 @@
                     <a href="blog.html" class="nav-link active">心境筆記</a>
                 </div>
 
+                <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button class="mobile-menu-button text-soft-text-primary hover:text-soft-accent-primary transition-colors" 
-                            aria-label="開啟選單">
-                        <i class="fas fa-bars text-xl"></i>
+                    <button type="button" id="mobile-menu-button"
+                        class="inline-flex items-center justify-center p-2 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-all duration-300 border border-soft-accent-primary/20 hover:border-soft-accent-primary/40">
+                        <span class="sr-only">開啟選單</span>
+                        <i class="fas fa-bars text-lg"></i>
                     </button>
                 </div>
             </div>
@@ -375,15 +377,15 @@
 
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="mobile-menu hidden md:hidden">
-            <div class="px-4 pt-2 pb-3 space-y-1 glass-effect">
-                <a href="index.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">首頁</a>
-                <a href="novels.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">輕小說</a>
-                <a href="tools.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">程式與工具</a>
-                <a href="ai.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">AI 心得</a>
-                <a href="medical-category.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">醫學、藥物、保健品</a>
-                <a href="finance.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">經濟與投資</a>
-                <a href="politics.html" class="block px-3 py-2 rounded-soft text-soft-text-secondary hover:text-soft-text-primary transition-colors">政治與思想</a>
-                <a href="blog.html" class="block px-3 py-2 rounded-soft text-soft-accent-primary font-medium">心境筆記</a>
+            <div class="px-4 pt-2 pb-3 space-y-1 bg-gradient-to-r from-soft-dark-primary/95 via-soft-dark-secondary/95 to-soft-dark-tertiary/95 backdrop-blur-md border-t border-soft-accent-primary/20">
+                <a href="index.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">首頁</a>
+                <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">輕小說</a>
+                <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">程式與工具</a>
+                <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI 心得</a>
+                <a href="medical-category.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">醫學、藥物、保健品</a>
+                <a href="finance.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">經濟與投資</a>
+                <a href="politics.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">政治與思想</a>
+                <a href="blog.html" class="block px-4 py-3 rounded-lg text-soft-accent-primary font-medium bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 border border-soft-accent-primary/30">心境筆記</a>
             </div>
         </div>
     </nav>
@@ -618,14 +620,16 @@
 
     <script>
         // Mobile menu toggle
-        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
-        mobileMenuButton?.addEventListener('click', () => {
+        menuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-            setTimeout(() => {
-                mobileMenu.classList.toggle('show');
-            }, 10);
+            if (!mobileMenu.classList.contains('hidden')) {
+                setTimeout(() => mobileMenu.classList.add('show'), 10);
+            } else {
+                mobileMenu.classList.remove('show');
+            }
         });
 
         // Back to top functionality
