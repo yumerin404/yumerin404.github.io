@@ -426,7 +426,7 @@
                         <span class="relative z-10">經濟與投資</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
-                    <a href="politics.html" class="nav-link group relative active">
+                    <a href="politics.html" class="nav-link active group relative">
                         <span class="relative z-10">政治與思想</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
@@ -718,14 +718,16 @@
 
     <script>
         // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const menuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
-        mobileMenuButton?.addEventListener('click', () => {
+        menuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-            setTimeout(() => {
-                mobileMenu.classList.toggle('show');
-            }, 10);
+            if (!mobileMenu.classList.contains('hidden')) {
+                setTimeout(() => mobileMenu.classList.add('show'), 10);
+            } else {
+                mobileMenu.classList.remove('show');
+            }
         });
 
         // Back to top functionality
