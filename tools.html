@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>夢鈴幻想 | 程式與工具</title>
+    
+    <!-- 統一樣式系統 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script>
@@ -13,29 +15,86 @@
             theme: {
                 extend: {
                     colors: {
-                        'pro-dark-primary': '#0d1117',
-                        'pro-dark-secondary': '#161b22',
-                        'pro-dark-tertiary': '#21262d',
-                        'pro-accent-blue': '#58a6ff',
-                        'pro-accent-purple': '#a5a5ff',
-                        'pro-accent-green': '#7ce38a',
-                        'pro-accent-orange': '#ffa657',
-                        'pro-text-primary': '#f0f6fc',
-                        'pro-text-secondary': '#8b949e',
-                        'pro-text-muted': '#6e7681',
-                        'pro-border': '#30363d',
-                        'pro-border-muted': '#21262d',
+                        // 主要軟色調
+                        'soft-dark-primary': '#0a0e1a',
+                        'soft-dark-secondary': '#1a1e2e',
+                        'soft-dark-tertiary': '#2a2e3e',
+                        'soft-accent-primary': '#c8a8e9',
+                        'soft-accent-secondary': '#f8b4d9',
+                        'soft-accent-tertiary': '#a8e6cf',
+                        'soft-text-primary': '#f5f3f0',
+                        'soft-text-secondary': '#b8b5b0',
+                        'soft-text-muted': '#8a8680',
+                        // 技術主題色調
+                        'tech-dark-primary': '#0d1117',
+                        'tech-dark-secondary': '#161b22',
+                        'tech-dark-tertiary': '#21262d',
+                        'tech-accent-blue': '#58a6ff',
+                        'tech-accent-purple': '#a5a5ff',
+                        'tech-accent-green': '#7ce38a',
+                        'tech-accent-orange': '#ffa657',
+                        'tech-text-primary': '#f0f6fc',
+                        'tech-text-secondary': '#8b949e',
+                        'tech-text-muted': '#6e7681',
+                        'tech-border': '#30363d',
                     },
                     animation: {
-                        'matrix-rain': 'matrix-rain 20s linear infinite',
-                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                        'float-gentle': 'float-gentle 6s ease-in-out infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'glow-soft': 'glow-soft 2s ease-in-out infinite alternate',
+                        'bounce-soft': 'bounce-soft 1s ease-in-out',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'scale-bounce': 'scale-bounce 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                        'fade-in': 'fade-in 0.8s ease-out',
                         'slide-in-left': 'slide-in-left 0.6s ease-out',
                         'slide-in-right': 'slide-in-right 0.6s ease-out',
-                        'fade-in-up': 'fade-in-up 0.8s ease-out',
-                        'hover-lift': 'hover-lift 0.3s ease-out',
+                        'matrix-rain': 'matrix-rain 20s linear infinite',
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
                         'tech-scan': 'tech-scan 3s ease-in-out infinite',
                     },
                     keyframes: {
+                        'float-gentle': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-8px) rotate(1deg)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: '0.6' },
+                            '50%': { opacity: '0.9' },
+                        },
+                        'glow-soft': {
+                            '0%': {
+                                'box-shadow': '0 0 5px rgba(200, 168, 233, 0.4), 0 0 10px rgba(200, 168, 233, 0.2)',
+                            },
+                            '100%': {
+                                'box-shadow': '0 0 10px rgba(200, 168, 233, 0.6), 0 0 20px rgba(200, 168, 233, 0.3), 0 0 30px rgba(200, 168, 233, 0.1)',
+                            }
+                        },
+                        'bounce-soft': {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.05)' },
+                            '100%': { transform: 'scale(1)' },
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        'scale-bounce': {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                            '100%': { transform: 'scale(1)' },
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        'slide-in-left': {
+                            '0%': { transform: 'translateX(-30px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        'slide-in-right': {
+                            '0%': { transform: 'translateX(30px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
                         'matrix-rain': {
                             '0%': { transform: 'translateY(-100%)' },
                             '100%': { transform: 'translateY(100vh)' },
@@ -48,349 +107,285 @@
                                 'box-shadow': '0 0 10px rgba(88, 166, 255, 0.6), 0 0 20px rgba(88, 166, 255, 0.4), 0 0 30px rgba(88, 166, 255, 0.3)',
                             }
                         },
-                        'slide-in-left': {
-                            '0%': { transform: 'translateX(-50px)', opacity: '0' },
-                            '100%': { transform: 'translateX(0)', opacity: '1' },
-                        },
-                        'slide-in-right': {
-                            '0%': { transform: 'translateX(50px)', opacity: '0' },
-                            '100%': { transform: 'translateX(0)', opacity: '1' },
-                        },
-                        'fade-in-up': {
-                            '0%': { transform: 'translateY(30px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                        'hover-lift': {
-                            '0%': { transform: 'translateY(0)' },
-                            '100%': { transform: 'translateY(-5px)' },
-                        },
                         'tech-scan': {
-                            '0%, 100%': { transform: 'translateX(-100%)' },
-                            '50%': { transform: 'translateX(100%)' },
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' },
                         }
                     },
                     fontFamily: {
-                        'mono': ['JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'monospace'],
-                        'tech': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        'cute': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
                     },
-                    fontSize: {
-                        'code': '0.9rem',
-                    },
+                    borderRadius: {
+                        'soft': '12px',
+                        'extra-soft': '20px',
+                    }
                 }
             }
         }
     </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         * {
             font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
         }
 
-        .tech-bg {
+        .gradient-bg {
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1e2e 50%, #2a2e3e 100%);
+        }
+
+        .tech-gradient-bg {
             background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #21262d 100%);
-            position: relative;
         }
 
-        .tech-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(88, 166, 255, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(165, 165, 255, 0.05) 0%, transparent 50%);
-            pointer-events: none;
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(26, 30, 46, 0.7);
+            border: 1px solid rgba(200, 168, 233, 0.2);
         }
 
-        .glass-pro {
-            backdrop-filter: blur(16px);
+        .tech-glass-effect {
+            backdrop-filter: blur(20px);
             background: rgba(22, 27, 34, 0.8);
-            border: 1px solid rgba(48, 54, 61, 0.8);
+            border: 1px solid rgba(88, 166, 255, 0.2);
         }
 
-        .nav-link-pro {
-            position: relative;
-            transition: all 0.3s ease;
-            color: #8b949e;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-        }
-
-        .nav-link-pro::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(88, 166, 255, 0.1), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            border-radius: 6px;
-        }
-
-        .nav-link-pro:hover {
-            color: #f0f6fc;
-        }
-
-        .nav-link-pro:hover::before {
-            opacity: 1;
-        }
-
-        .nav-link-pro.active {
-            color: #58a6ff;
-            background: rgba(88, 166, 255, 0.1);
-        }
-
-        .tech-gradient {
-            background: linear-gradient(135deg, #58a6ff 0%, #a5a5ff 50%, #7ce38a 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .tool-card-pro {
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: 1px solid #30363d;
-            background: linear-gradient(145deg, rgba(22, 27, 34, 0.9), rgba(33, 38, 45, 0.9));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tool-card-pro::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #58a6ff, #a5a5ff, #7ce38a);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .tool-card-pro:hover::before {
-            transform: scaleX(1);
-        }
-
-        .tool-card-pro:hover {
-            transform: translateY(-8px);
-            border-color: rgba(88, 166, 255, 0.5);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.3),
-                0 0 20px rgba(88, 166, 255, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .tech-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tech-icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: tech-scan 3s ease-in-out infinite;
-        }
-
-        .icon-threads { background: linear-gradient(135deg, #000, #333); }
-        .icon-exhentai { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-        .icon-dlsite { background: linear-gradient(135deg, #3498db, #2980b9); }
-        .icon-chatgpt { background: linear-gradient(135deg, #10a37f, #0d8b6b); }
-
-        .btn-primary-pro {
-            background: linear-gradient(135deg, #58a6ff, #a5a5ff);
-            color: #0d1117;
-            border: none;
+        .button-primary {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 100%);
+            color: #0a0e1a;
             font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
 
-        .btn-primary-pro::before {
+        .button-primary::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
         }
 
-        .btn-primary-pro:hover::before {
+        .button-primary:hover::before {
             left: 100%;
         }
 
-        .btn-primary-pro:hover {
+        .button-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(88, 166, 255, 0.4);
+            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.4);
         }
 
-        .btn-secondary-pro {
-            border: 2px solid #58a6ff;
-            color: #58a6ff;
-            background: transparent;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        .button-tech {
+            background: linear-gradient(135deg, #58a6ff 0%, #a5a5ff 100%);
+            color: #0d1117;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
 
-        .btn-secondary-pro::before {
+        .button-tech::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .button-tech:hover::before {
+            left: 100%;
+        }
+
+        .button-tech:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(88, 166, 255, 0.4);
+        }
+
+        .button-secondary {
+            border: 2px solid #c8a8e9;
+            color: #c8a8e9;
+            background: transparent;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-secondary::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 0;
             height: 100%;
-            background: linear-gradient(135deg, #58a6ff, #a5a5ff);
-            transition: width 0.4s ease;
+            background: linear-gradient(135deg, #c8a8e9, #f8b4d9);
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 0;
         }
 
-        .btn-secondary-pro:hover::before {
+        .button-secondary:hover::before {
             width: 100%;
         }
 
-        .btn-secondary-pro:hover {
-            color: #0d1117;
+        .button-secondary:hover {
+            color: #0a0e1a;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(88, 166, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.3);
         }
 
-        .btn-secondary-pro span {
+        .button-secondary span {
             position: relative;
             z-index: 1;
         }
 
-        .code-block {
-            background: #0d1117;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            font-family: 'JetBrains Mono', monospace;
+        .nav-link {
             position: relative;
-        }
-
-        .code-header {
-            background: #161b22;
-            border-bottom: 1px solid #30363d;
-            padding: 0.75rem 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: between;
-        }
-
-        .copy-btn {
-            background: #21262d;
-            border: 1px solid #30363d;
-            color: #8b949e;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            transition: all 0.2s ease;
-        }
-
-        .copy-btn:hover {
-            background: #30363d;
-            color: #f0f6fc;
-        }
-
-        .feature-badge {
-            background: linear-gradient(135deg, rgba(88, 166, 255, 0.1), rgba(165, 165, 255, 0.1));
-            border: 1px solid rgba(88, 166, 255, 0.3);
-            color: #58a6ff;
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
+            transition: all 0.3s ease;
+            color: #b8b5b0;
             font-weight: 500;
-            display: inline-block;
-            margin: 0.25rem 0.25rem 0.25rem 0;
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #c8a8e9, #f8b4d9);
+            transition: width 0.3s ease;
+            border-radius: 1px;
         }
 
-        .stat-item {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(22, 27, 34, 0.5);
-            border: 1px solid #30363d;
-            border-radius: 8px;
+        .nav-link:hover {
+            color: #f5f3f0;
         }
 
-        .stat-value {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #58a6ff;
+        .nav-link:hover::after {
+            width: 100%;
         }
 
-        .stat-label {
-            font-size: 0.875rem;
-            color: #8b949e;
-            margin-top: 0.25rem;
+        .nav-link.active {
+            color: #c8a8e9;
         }
 
-        .mobile-menu-pro {
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transform: translateY(-10px);
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(200, 168, 233, 0.1);
+            background: rgba(26, 30, 46, 0.8);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(200, 168, 233, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
+        }
+
+        .tool-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(88, 166, 255, 0.1);
+            background: rgba(22, 27, 34, 0.8);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(88, 166, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(88, 166, 255, 0.2);
+        }
+
+        .mobile-menu {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-20px);
             opacity: 0;
         }
 
-        .mobile-menu-pro.show {
+        .mobile-menu.show {
             transform: translateY(0);
             opacity: 1;
         }
 
-        .matrix-rain {
-            position: fixed;
-            top: 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            color: rgba(88, 166, 255, 0.3);
+        .tech-tag {
+            background: rgba(88, 166, 255, 0.1);
+            color: #58a6ff;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(88, 166, 255, 0.2);
+            border-color: rgba(88, 166, 255, 0.4);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tech-text-gradient {
+            background: linear-gradient(135deg, #58a6ff 0%, #a5a5ff 50%, #7ce38a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-decoration {
+            position: absolute;
             pointer-events: none;
-            z-index: 1;
+        }
+
+        .matrix-char {
+            position: absolute;
+            color: #58a6ff;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            opacity: 0.3;
             animation: matrix-rain 20s linear infinite;
         }
 
-        .tech-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #58a6ff, transparent);
-            margin: 3rem 0;
+        .code-block {
+            background: rgba(13, 17, 23, 0.9);
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            font-family: 'Courier New', monospace;
+        }
+
+        .feature-list {
+            background: rgba(22, 27, 34, 0.6);
+            border-left: 3px solid #58a6ff;
         }
     </style>
 </head>
 
-<body class="tech-bg text-pro-text-primary min-h-screen font-tech">
+<body class="gradient-bg text-soft-text-primary min-h-screen font-cute">
     <!-- Matrix Rain Effect -->
-    <div class="matrix-rain" style="left: 10%; animation-delay: 0s;">01010110</div>
-    <div class="matrix-rain" style="left: 30%; animation-delay: 2s;">11001010</div>
-    <div class="matrix-rain" style="left: 50%; animation-delay: 4s;">10101101</div>
-    <div class="matrix-rain" style="left: 70%; animation-delay: 6s;">01110101</div>
-    <div class="matrix-rain" style="left: 90%; animation-delay: 8s;">11010011</div>
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="matrix-char" style="left: 5%; animation-delay: 0s;">0</div>
+        <div class="matrix-char" style="left: 15%; animation-delay: 2s;">1</div>
+        <div class="matrix-char" style="left: 25%; animation-delay: 4s;">{</div>
+        <div class="matrix-char" style="left: 35%; animation-delay: 6s;">}</div>
+        <div class="matrix-char" style="left: 45%; animation-delay: 8s;">;</div>
+        <div class="matrix-char" style="left: 55%; animation-delay: 10s;">function</div>
+        <div class="matrix-char" style="left: 65%; animation-delay: 12s;">var</div>
+        <div class="matrix-char" style="left: 75%; animation-delay: 14s;">const</div>
+        <div class="matrix-char" style="left: 85%; animation-delay: 16s;">let</div>
+        <div class="matrix-char" style="left: 95%; animation-delay: 18s;">return</div>
+    </div>
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
@@ -427,15 +422,15 @@
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="medical-category.html" class="nav-link group relative">
-                        <span class="relative z-10">醫學、藥物、保健品</span>
+                        <span class="relative z-10">醫學資源</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="finance.html" class="nav-link group relative">
-                        <span class="relative z-10">經濟與投資</span>
+                        <span class="relative z-10">經濟投資</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="politics.html" class="nav-link group relative">
-                        <span class="relative z-10">政治與思想</span>
+                        <span class="relative z-10">政治思想</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="blog.html" class="nav-link group relative">
@@ -462,287 +457,354 @@
                 <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">輕小說</a>
                 <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-accent-primary font-medium bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 border border-soft-accent-primary/30">程式與工具</a>
                 <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI 心得</a>
-                <a href="medical-category.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">醫學、藥物、保健品</a>
-                <a href="finance.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">經濟與投資</a>
-                <a href="politics.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">政治與思想</a>
+                <a href="medical-category.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">醫學資源</a>
+                <a href="finance.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">經濟投資</a>
+                <a href="politics.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">政治思想</a>
                 <a href="blog.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">心境筆記</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-24 pb-12 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h1 class="text-5xl md:text-6xl font-bold mb-6 animate-fade-in-up">
-                    <span class="tech-gradient">魔法</span><br>
-                    <span class="text-pro-text-primary">工具集</span>
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+        <div class="relative z-10 text-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="animate-slide-up">
+                <div class="flex justify-center mb-8">
+                    <div class="tech-glass-effect rounded-full p-6 animate-pulse-glow">
+                        <i class="fas fa-code text-6xl tech-text-gradient"></i>
+                    </div>
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
+                    <span class="tech-text-gradient">程式與工具</span>
                 </h1>
-                <p class="text-xl md:text-2xl text-pro-text-secondary max-w-4xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.2s;">
-                    精心打造的程式工具與實用軟體，旨在提升你的數位體驗，優化工作流程，解決現實世界的各種挑戰
+                
+                <p class="text-xl md:text-2xl text-soft-text-secondary mb-8 max-w-4xl mx-auto leading-relaxed">
+                    精心打造的實用工具集，為開發者和用戶帶來更高效的數位體驗
                 </p>
-            </div>
 
+                <div class="flex flex-wrap justify-center gap-3 mb-12">
+                    <span class="tech-tag px-4 py-2 rounded-full text-sm font-medium">JavaScript</span>
+                    <span class="tech-tag px-4 py-2 rounded-full text-sm font-medium">Userscript</span>
+                    <span class="tech-tag px-4 py-2 rounded-full text-sm font-medium">瀏覽器擴展</span>
+                    <span class="tech-tag px-4 py-2 rounded-full text-sm font-medium">自動化</span>
+                    <span class="tech-tag px-4 py-2 rounded-full text-sm font-medium">效率工具</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Tools Section -->
-    <section class="py-12 relative">
+    <section class="py-20 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 tech-text-gradient">工具集合</h2>
+                <p class="text-xl text-soft-text-secondary max-w-3xl mx-auto">
+                    每個工具都經過精心設計，旨在解決實際問題並提升使用體驗
+                </p>
+            </div>
+
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                
-                <!-- Tool 1: Threads Follower Manager -->
-                <div class="tool-card-pro rounded-xl p-8 animate-slide-in-left">
-                    <div class="flex items-start mb-6">
-                        <div class="tech-icon icon-threads mr-4">
-                            <i class="fab fa-threads"></i>
+                <!-- Threads Follower Manager -->
+                <div class="tool-card rounded-extra-soft overflow-hidden">
+                    <div class="p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-tech-accent-blue to-tech-accent-purple rounded-full flex items-center justify-center mr-4">
+                                <i class="fab fa-threads text-2xl text-tech-dark-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-tech-text-primary">Threads 追蹤者管理器</h3>
+                                <p class="text-tech-accent-blue font-medium">Social Media Automation</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-pro-text-primary mb-2">Threads 追蹤者管理器</h3>
-                            <p class="text-pro-text-secondary">為 Meta Threads 設計的高級追蹤者管理與清理工具</p>
+                        
+                        <p class="text-tech-text-secondary mb-6 leading-relaxed">
+                            智能社交媒體管理工具，提供自動化追蹤管理、批量操作和帳戶清理功能，
+                            讓您的社交媒體維護變得更加高效。
+                        </p>
+
+                        <div class="feature-list rounded-soft p-4 mb-6">
+                            <h4 class="text-tech-text-primary font-semibold mb-3">核心功能</h4>
+                            <ul class="space-y-2 text-sm text-tech-text-secondary">
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>自動追蹤/取消追蹤管理</li>
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>批量帳戶操作</li>
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>智能清理工具</li>
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>統計資料追蹤</li>
+                            </ul>
                         </div>
-                    </div>
 
-                    <div class="mb-6">
-                        <div class="feature-badge">社交媒體</div>
-                        <div class="feature-badge">自動化</div>
-                        <div class="feature-badge">清理工具</div>
-                    </div>
-
-                    <p class="text-pro-text-secondary mb-6 leading-relaxed">
-                        高效管理你的 Threads 追蹤者，支持批量操作、智能篩選和自動清理。
-                        移除非活躍追蹤者，管理互追比例，維護健康的追蹤者生態系統。
-                    </p>
-
-                    <div class="code-block mb-6">
-                        <div class="code-header">
-                            <span class="text-pro-text-secondary text-sm">安裝方式</span>
-                            <button class="copy-btn ml-auto" onclick="copyToClipboard('https://gist.github.com/yumerin404/2efad1c668a60b3dc4ab834a00d41435')">
-                                <i class="fas fa-copy mr-1"></i>Copy URL
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="https://gist.github.com/yumerin404/2efad1c668a60b3dc4ab834a00d41435" 
+                               target="_blank" 
+                               class="button-tech px-6 py-3 rounded-soft inline-flex items-center justify-center flex-1">
+                                <i class="fab fa-github mr-2"></i>
+                                查看代碼
+                            </a>
+                            <button class="button-secondary px-6 py-3 rounded-soft inline-flex items-center justify-center">
+                                <span>
+                                    <i class="fas fa-download mr-2"></i>
+                                    安裝指南
+                                </span>
                             </button>
                         </div>
-                        <div class="p-4">
-                            <code class="text-code text-pro-accent-green">
-                                // 透過 Tampermonkey/Greasemonkey 安裝<br>
-                                // GitHub Gist 鏈接可供複製
-                            </code>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-4">
-                        <a href="https://gist.github.com/yumerin404/2efad1c668a60b3dc4ab834a00d41435" target="_blank"
-                           class="btn-primary-pro px-6 py-3 rounded-lg inline-flex items-center">
-                            <i class="fab fa-github mr-2"></i>
-                            <span>查看原始碼</span>
-                        </a>
                     </div>
                 </div>
 
-                <!-- Tool 2: Enhanced ExHentai Script -->
-                <div class="tool-card-pro rounded-xl p-8 animate-slide-in-right">
-                    <div class="flex items-start mb-6">
-                        <div class="tech-icon icon-exhentai mr-4">
-                            <i class="fas fa-book-open"></i>
+                <!-- Enhanced ExHentai Script -->
+                <div class="tool-card rounded-extra-soft overflow-hidden">
+                    <div class="p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-tech-accent-purple to-tech-accent-green rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-book-reader text-2xl text-tech-dark-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-tech-text-primary">強化 ExHentai 腳本</h3>
+                                <p class="text-tech-accent-purple font-medium">Reading Enhancement</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-pro-text-primary mb-2">強化 ExHentai 腳本</h3>
-                            <p class="text-pro-text-secondary">提供優化加載和進度追蹤的高級閱讀體驗</p>
+                        
+                        <p class="text-tech-text-secondary mb-6 leading-relaxed">
+                            專為閱讀體驗設計的增強腳本，提供性能優化、界面改進和便利功能，
+                            讓您的閱讀過程更加流暢舒適。
+                        </p>
+
+                        <div class="feature-list rounded-soft p-4 mb-6">
+                            <h4 class="text-tech-text-primary font-semibold mb-3">特色功能</h4>
+                            <ul class="space-y-2 text-sm text-tech-text-secondary">
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>界面性能優化</li>
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>閱讀體驗提升</li>
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>快捷鍵支援</li>
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>自定義設置</li>
+                            </ul>
                         </div>
-                    </div>
 
-                    <div class="mb-6">
-                        <div class="feature-badge">閱讀工具</div>
-                        <div class="feature-badge">性能優化</div>
-                        <div class="feature-badge">體驗提升</div>
-                    </div>
-
-                    <p class="text-pro-text-secondary mb-6 leading-relaxed">
-                        大幅改善 ExHentai 的閱讀體驗，具備背景預加載、進度保存、
-                        強化導航控制和優化圖像加載等功能，為你帶來更流暢的瀏覽體驗。
-                    </p>
-
-                    <div class="code-block mb-6">
-                        <div class="code-header">
-                            <span class="text-pro-text-secondary text-sm">功能特色</span>
-                            <button class="copy-btn ml-auto" onclick="copyToClipboard('https://gist.github.com/yumerin404/bc23649a1423e835ecb1474f3b35664f')">
-                                <i class="fas fa-copy mr-1"></i>Copy URL
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="https://gist.github.com/yumerin404/bc23649a1423e835ecb1474f3b35664f" 
+                               target="_blank" 
+                               class="button-tech px-6 py-3 rounded-soft inline-flex items-center justify-center flex-1">
+                                <i class="fab fa-github mr-2"></i>
+                                查看代碼
+                            </a>
+                            <button class="button-secondary px-6 py-3 rounded-soft inline-flex items-center justify-center">
+                                <span>
+                                    <i class="fas fa-download mr-2"></i>
+                                    安裝指南
+                                </span>
                             </button>
                         </div>
-                        <div class="p-4">
-                            <code class="text-code text-pro-accent-blue">
-                                ✓ 背景預加載<br>
-                                ✓ 進度追蹤<br>
-                                ✓ 強化導航<br>
-                                ✓ 性能優化
-                            </code>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-4">
-                        <a href="https://gist.github.com/yumerin404/bc23649a1423e835ecb1474f3b35664f" target="_blank"
-                           class="btn-primary-pro px-6 py-3 rounded-lg inline-flex items-center">
-                            <i class="fab fa-github mr-2"></i>
-                            <span>查看原始碼</span>
-                        </a>
                     </div>
                 </div>
 
-                <!-- Tool 3: DLsite Records Manager -->
-                <div class="tool-card-pro rounded-xl p-8 animate-slide-in-left" style="animation-delay: 0.3s;">
-                    <div class="flex items-start mb-6">
-                        <div class="tech-icon icon-dlsite mr-4">
-                            <i class="fas fa-database"></i>
+                <!-- DLsite Record Manager -->
+                <div class="tool-card rounded-extra-soft overflow-hidden">
+                    <div class="p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-tech-accent-green to-tech-accent-orange rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-database text-2xl text-tech-dark-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-tech-text-primary">DLsite 記錄管理器</h3>
+                                <p class="text-tech-accent-green font-medium">Data Management</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-pro-text-primary mb-2">DLsite 記錄管理器</h3>
-                            <p class="text-pro-text-secondary">具備標籤和導出功能的全面圖書館管理工具</p>
+                        
+                        <p class="text-tech-text-secondary mb-6 leading-relaxed">
+                            全功能數據記錄管理工具，支援資料導出導入、視覺化統計和自定義主題，
+                            讓您的數據管理更加便捷直觀。
+                        </p>
+
+                        <div class="feature-list rounded-soft p-4 mb-6">
+                            <h4 class="text-tech-text-primary font-semibold mb-3">管理功能</h4>
+                            <ul class="space-y-2 text-sm text-tech-text-secondary">
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>數據導出/導入</li>
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>統計圖表顯示</li>
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>亮色主題支援</li>
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>批量資料處理</li>
+                            </ul>
                         </div>
-                    </div>
 
-                    <div class="mb-6">
-                        <div class="feature-badge">数據管理</div>
-                        <div class="feature-badge">導出/導入</div>
-                        <div class="feature-badge">亮色主題</div>
-                    </div>
-
-                    <p class="text-pro-text-secondary mb-6 leading-relaxed">
-                        一個精密的 DLsite 圖書館管理工具，具備時間記錄、高級標籤系統、
-                        数據導出/導入功能，以及簡潔的亮色主題界面，為你提供更好的使用體驗。
-                    </p>
-
-                    <div class="code-block mb-6">
-                        <div class="code-header">
-                            <span class="text-pro-text-secondary text-sm">功能能力</span>
-                            <button class="copy-btn ml-auto" onclick="copyToClipboard('https://gist.github.com/yumerin404/ed1426a90ef70e7f925afde8654f97ca')">
-                                <i class="fas fa-copy mr-1"></i>Copy URL
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="https://gist.github.com/yumerin404/ed1426a90ef70e7f925afde8654f97ca" 
+                               target="_blank" 
+                               class="button-tech px-6 py-3 rounded-soft inline-flex items-center justify-center flex-1">
+                                <i class="fab fa-github mr-2"></i>
+                                查看代碼
+                            </a>
+                            <button class="button-secondary px-6 py-3 rounded-soft inline-flex items-center justify-center">
+                                <span>
+                                    <i class="fas fa-download mr-2"></i>
+                                    安裝指南
+                                </span>
                             </button>
                         </div>
-                        <div class="p-4">
-                            <code class="text-code text-pro-accent-orange">
-                                ✓ 時間記錄功能<br>
-                                ✓ 高級標籤系統<br>
-                                ✓ 数據導出/導入<br>
-                                ✓ 亮色主題界面
-                            </code>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-4">
-                        <a href="https://gist.github.com/yumerin404/ed1426a90ef70e7f925afde8654f97ca" target="_blank"
-                           class="btn-primary-pro px-6 py-3 rounded-lg inline-flex items-center">
-                            <i class="fab fa-github mr-2"></i>
-                            <span>查看原始碼</span>
-                        </a>
                     </div>
                 </div>
 
-                <!-- Tool 4: ChatGPT Risk Monitor -->
-                <div class="tool-card-pro rounded-xl p-8 animate-slide-in-right" style="animation-delay: 0.3s;">
-                    <div class="flex items-start mb-6">
-                        <div class="tech-icon icon-chatgpt mr-4">
-                            <i class="fas fa-shield-alt"></i>
+                <!-- ChatGPT Risk Monitor -->
+                <div class="tool-card rounded-extra-soft overflow-hidden">
+                    <div class="p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-tech-accent-orange to-tech-accent-blue rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-shield-alt text-2xl text-tech-dark-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-tech-text-primary">ChatGPT 風險監控器</h3>
+                                <p class="text-tech-accent-orange font-medium">Security Tool</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-pro-text-primary mb-2">ChatGPT 風險監控器</h3>
-                            <p class="text-pro-text-secondary">實時風險等級監控和安全意識提升工具</p>
+                        
+                        <p class="text-tech-text-secondary mb-6 leading-relaxed">
+                            AI 對話安全監控工具，提供實時風險評估、內容篩選和安全預警功能，
+                            確保您的 AI 互動過程安全可靠。
+                        </p>
+
+                        <div class="feature-list rounded-soft p-4 mb-6">
+                            <h4 class="text-tech-text-primary font-semibold mb-3">安全功能</h4>
+                            <ul class="space-y-2 text-sm text-tech-text-secondary">
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>實時風險監控</li>
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>內容安全篩選</li>
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>自動警報系統</li>
+                                <li><i class="fas fa-check text-tech-accent-green mr-2"></i>風險評估報告</li>
+                            </ul>
                         </div>
-                    </div>
 
-                    <div class="mb-6">
-                        <div class="feature-badge">安全工具</div>
-                        <div class="feature-badge">實時監控</div>
-                        <div class="feature-badge">風險評估</div>
-                    </div>
-
-                    <p class="text-pro-text-secondary mb-6 leading-relaxed">
-                        為 ChatGPT 用戶特別設計的高級安全監控工具，提供實時風險等級評估、
-                        連接監控和強化安全意識，為 AI 互動提供更安全的保障。
-                    </p>
-
-                    <div class="code-block mb-6">
-                        <div class="code-header">
-                            <span class="text-pro-text-secondary text-sm">安全特色</span>
-                            <button class="copy-btn ml-auto" onclick="copyToClipboard('https://gist.github.com/yumerin404/23897d7fea9f6d061593b88ded5e1171')">
-                                <i class="fas fa-copy mr-1"></i>Copy URL
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="https://gist.github.com/yumerin404/23897d7fea9f6d061593b88ded5e1171" 
+                               target="_blank" 
+                               class="button-tech px-6 py-3 rounded-soft inline-flex items-center justify-center flex-1">
+                                <i class="fab fa-github mr-2"></i>
+                                查看代碼
+                            </a>
+                            <button class="button-secondary px-6 py-3 rounded-soft inline-flex items-center justify-center">
+                                <span>
+                                    <i class="fas fa-download mr-2"></i>
+                                    安裝指南
+                                </span>
                             </button>
                         </div>
-                        <div class="p-4">
-                            <code class="text-code text-pro-accent-green">
-                                ✓ 實時風險監控<br>
-                                ✓ 連接狀態顯示<br>
-                                ✓ 安全意識提醒<br>
-                                ✓ 強化用戶體驗
-                            </code>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-4">
-                        <a href="https://gist.github.com/yumerin404/23897d7fea9f6d061593b88ded5e1171" target="_blank"
-                           class="btn-primary-pro px-6 py-3 rounded-lg inline-flex items-center">
-                            <i class="fab fa-github mr-2"></i>
-                            <span>查看原始碼</span>
-                        </a>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Technical Divider -->
-    <div class="tech-divider"></div>
-
     <!-- Support Section -->
-    <section class="py-16 glass-pro">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold mb-6 tech-gradient">魔法支援</h2>
-            <p class="text-xl text-pro-text-secondary mb-8 max-w-3xl mx-auto">
-                需要安裝協助、客製化設定或有功能需求？我在這裡提供專業的程式工具支援。
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="https://github.com/yumerin404" target="_blank"
-                   class="btn-primary-pro px-8 py-4 rounded-lg inline-flex items-center justify-center">
-                    <i class="fab fa-github mr-3"></i>
-                    <span>GitHub 檔案</span>
-                </a>
-                <a href="https://www.threads.com/@yumerin.main.i" target="_blank"
-                   class="btn-secondary-pro px-8 py-4 rounded-lg inline-flex items-center justify-center">
-                    <span><i class="fab fa-threads mr-3"></i>聯繫支援</span>
-                </a>
+    <section class="py-16 relative z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="tech-glass-effect rounded-extra-soft p-12 text-center">
+                <div class="mb-8">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-tech-accent-blue to-tech-accent-purple rounded-full mb-6">
+                        <i class="fas fa-heart text-3xl text-tech-dark-primary"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-4 tech-text-gradient">支持與反饋</h2>
+                    <p class="text-xl text-tech-text-secondary mb-8">
+                        您的支持是我持續開發優質工具的動力
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="tech-glass-effect rounded-soft p-6">
+                        <h3 class="text-lg font-semibold text-tech-text-primary mb-3">
+                            <i class="fab fa-github mr-2 text-tech-accent-blue"></i>
+                            GitHub
+                        </h3>
+                        <p class="text-sm text-tech-text-secondary mb-4">
+                            在 GitHub 上查看源碼、提出問題或建議改進
+                        </p>
+                        <a href="https://github.com/yumerin404" 
+                           target="_blank" 
+                           class="button-tech px-4 py-2 rounded-soft text-sm inline-flex items-center">
+                            <i class="fab fa-github mr-2"></i>
+                            訪問 GitHub
+                        </a>
+                    </div>
+
+                    <div class="tech-glass-effect rounded-soft p-6">
+                        <h3 class="text-lg font-semibold text-tech-text-primary mb-3">
+                            <i class="fab fa-threads mr-2 text-tech-accent-purple"></i>
+                            Threads
+                        </h3>
+                        <p class="text-sm text-tech-text-secondary mb-4">
+                            在 Threads 上關注最新開發動態和工具更新
+                        </p>
+                        <a href="https://www.threads.com/@yumerin.main.i" 
+                           target="_blank" 
+                           class="button-secondary px-4 py-2 rounded-soft text-sm inline-flex items-center">
+                            <span>
+                                <i class="fab fa-threads mr-2"></i>
+                                追蹤更新
+                            </span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="glass-pro text-pro-text-secondary py-8 mt-12">
+    <footer class="glass-effect text-soft-text-secondary py-12 mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="border-t border-pro-border pt-8 text-center">
-                <p>&copy; 2025 夢鈴幻想. 精心打造的程式工具.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- 品牌資訊 -->
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <img src="images/avatar.png" alt="Dream Bell" class="h-8 w-8 rounded-full mr-3 border border-soft-accent-primary/30">
+                        <span class="text-gradient text-lg font-bold">夢鈴幻想</span>
+                    </div>
+                    <p class="text-sm leading-relaxed">
+                        一個充滿魔法的幻想國度，在這裡故事甦醒，工具賦予靈感，思緒綻放成絢爛篇章。
+                    </p>
+                </div>
+
+                <!-- 快速連結 -->
+                <div class="space-y-4">
+                    <h4 class="text-soft-text-primary font-semibold">快速導航</h4>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        <a href="novels.html" class="hover:text-soft-accent-primary transition-colors">輕小說</a>
+                        <a href="tools.html" class="hover:text-soft-accent-primary transition-colors">程式工具</a>
+                        <a href="ai.html" class="hover:text-soft-accent-primary transition-colors">AI 心得</a>
+                        <a href="medical-category.html" class="hover:text-soft-accent-primary transition-colors">醫學資源</a>
+                        <a href="finance.html" class="hover:text-soft-accent-primary transition-colors">經濟投資</a>
+                        <a href="politics.html" class="hover:text-soft-accent-primary transition-colors">政治思想</a>
+                        <a href="blog.html" class="hover:text-soft-accent-primary transition-colors">心境筆記</a>
+                        <a href="quotes.html" class="hover:text-soft-accent-primary transition-colors">名句收錄</a>
+                    </div>
+                </div>
+
+                <!-- 社交連結 -->
+                <div class="space-y-4">
+                    <h4 class="text-soft-text-primary font-semibold">連結方式</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://www.threads.com/@yumerin.main.i" target="_blank" 
+                           class="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-dark-primary hover:scale-110 transition-transform">
+                            <i class="fab fa-threads"></i>
+                        </a>
+                        <a href="https://www.pixiv.net/users/93925190" target="_blank" 
+                           class="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-soft-accent-secondary to-soft-accent-tertiary text-soft-dark-primary hover:scale-110 transition-transform">
+                            <i class="fas fa-palette"></i>
+                        </a>
+                        <a href="https://github.com/yumerin404" target="_blank" 
+                           class="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-soft-accent-tertiary to-soft-accent-primary text-soft-dark-primary hover:scale-110 transition-transform">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                    <p class="text-xs">
+                        在 Threads 追蹤最新創作動態
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-t border-soft-accent-primary/20 pt-6 text-center">
+                <p class="text-sm">&copy; 2025 夢鈴幻想. 所有權利保留，以愛創作.</p>
             </div>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
     <button id="back-to-top"
-        class="fixed bottom-8 right-8 p-4 rounded-lg bg-gradient-to-br from-pro-accent-blue to-pro-accent-purple text-pro-dark-primary shadow-lg opacity-0 invisible transition-all duration-300 hover:scale-110 hover:shadow-xl animate-pulse-glow">
+        class="fixed bottom-8 right-8 p-4 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-dark-primary shadow-lg opacity-0 invisible transition-all duration-300 hover:scale-110 hover:shadow-xl z-40">
         <i class="fas fa-arrow-up text-lg"></i>
     </button>
-
-    <!-- Install Guide Modal -->
-    <div id="install-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-        <div class="glass-pro rounded-xl max-w-2xl w-full mx-4 p-8">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold tech-gradient">Installation Guide</h3>
-                <button onclick="closeInstallGuide()" class="text-pro-text-secondary hover:text-pro-text-primary">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div id="install-content" class="space-y-4">
-                <!-- Content will be populated by JavaScript -->
-            </div>
-        </div>
-    </div>
 
     <script>
         // Mobile menu toggle
@@ -776,179 +838,60 @@
                 top: 0,
                 behavior: 'smooth'
             });
+            backToTopButton.style.animation = 'scale-bounce 0.3s ease';
+            setTimeout(() => backToTopButton.style.animation = '', 300);
         });
 
         window.addEventListener('scroll', toggleBackToTopButton);
 
-        // Copy to clipboard function
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                // Show feedback
-                const event = new CustomEvent('copied');
-                document.dispatchEvent(event);
-            });
-        }
-
-        // Install guide function
-        function showInstallGuide(tool) {
-            const modal = document.getElementById('install-modal');
-            const content = document.getElementById('install-content');
-            
-            const guides = {
-                threads: {
-                    title: 'Threads Follower Manager',
-                    steps: [
-                        'Install Tampermonkey or Greasemonkey browser extension',
-                        'Click "View Source" to open the GitHub Gist',
-                        'Click "Raw" button on the gist page',
-                        'Tampermonkey will automatically detect and prompt for installation',
-                        'Click "Install" to add the script to your browser'
-                    ]
-                },
-                exhentai: {
-                    title: 'Enhanced ExHentai Script',
-                    steps: [
-                        'Ensure you have userscript manager installed',
-                        'Visit the GitHub Gist link',
-                        'Copy the raw script content',
-                        'Create new script in your userscript manager',
-                        'Paste the code and save'
-                    ]
-                },
-                dlsite: {
-                    title: 'DLsite Records Manager',
-                    steps: [
-                        'Install browser userscript extension',
-                        'Navigate to the GitHub Gist',
-                        'Install script via "Raw" button',
-                        'Visit DLsite to see the enhanced interface',
-                        'Use the new features for library management'
-                    ]
-                },
-                chatgpt: {
-                    title: 'ChatGPT Risk Monitor',
-                    steps: [
-                        'Install Tampermonkey or similar extension',
-                        'Access the GitHub Gist for the script',
-                        'Install via the userscript manager',
-                        'Visit ChatGPT website',
-                        'Observe the new risk monitoring interface'
-                    ]
-                }
-            };
-
-            const guide = guides[tool];
-            content.innerHTML = `
-                <div class="mb-4">
-                    <h4 class="text-lg font-semibold text-pro-text-primary">${guide.title}</h4>
-                    <p class="text-pro-text-secondary">Follow these steps to install the userscript:</p>
-                </div>
-                <ol class="space-y-3">
-                    ${guide.steps.map((step, index) => `
-                        <li class="flex items-start">
-                            <span class="bg-pro-accent-blue text-pro-dark-primary rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 mt-0.5">${index + 1}</span>
-                            <span class="text-pro-text-secondary">${step}</span>
-                        </li>
-                    `).join('')}
-                </ol>
-                <div class="mt-6 p-4 bg-pro-dark-tertiary rounded-lg">
-                    <p class="text-sm text-pro-text-secondary">
-                        <i class="fas fa-info-circle text-pro-accent-blue mr-2"></i>
-                        Need help? Contact me via Threads or GitHub for technical support.
-                    </p>
-                </div>
-            `;
-            
-            modal.classList.remove('hidden');
-        }
-
-        function closeInstallGuide() {
-            document.getElementById('install-modal').classList.add('hidden');
-        }
-
-        // Enhanced animations
+        // Intersection Observer for animations
         const observeElements = () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.style.animation = entry.target.style.animation || 'fade-in-up 0.8s ease-out';
+                        entry.target.style.animation = 'slide-up 0.6s ease-out';
                         observer.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.1 });
 
-            document.querySelectorAll('.tool-card-pro').forEach(card => {
+            document.querySelectorAll('.tool-card, .feature-card').forEach(card => {
                 observer.observe(card);
             });
         };
 
-        // Button animations
-        document.querySelectorAll('.btn-primary-pro, .btn-secondary-pro').forEach(button => {
+        // Button feedback animations
+        document.querySelectorAll('.button-primary, .button-secondary, .button-tech').forEach(button => {
             button.addEventListener('click', function(e) {
-                // Create ripple effect
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    border-radius: 50%;
-                    background: rgba(255, 255, 255, 0.6);
-                    transform: scale(0);
-                    animation: ripple 0.6s linear;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                `;
-                
-                this.appendChild(ripple);
-                setTimeout(() => ripple.remove(), 600);
+                this.style.animation = 'bounce-soft 0.3s ease';
+                setTimeout(() => this.style.animation = '', 300);
             });
         });
 
-        // Add CSS for ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
-                to { transform: scale(4); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
+        // Create dynamic matrix characters
+        function createMatrixChar() {
+            const chars = ['0', '1', 'function', 'var', 'const', 'let', 'return', '{', '}', ';', '(', ')', '[', ']'];
+            const char = document.createElement('div');
+            char.className = 'matrix-char';
+            char.textContent = chars[Math.floor(Math.random() * chars.length)];
+            char.style.left = Math.random() * 100 + '%';
+            char.style.animationDelay = Math.random() * 20 + 's';
+            document.querySelector('.fixed.inset-0').appendChild(char);
 
-        // Initialize
+            setTimeout(() => {
+                if (char.parentNode) {
+                    char.remove();
+                }
+            }, 20000);
+        }
+
+        // Add matrix characters periodically
+        setInterval(createMatrixChar, 3000);
+
+        // Initialize animations on page load
         document.addEventListener('DOMContentLoaded', () => {
             observeElements();
             toggleBackToTopButton();
-        });
-
-        // Copy feedback
-        document.addEventListener('copied', () => {
-            const feedback = document.createElement('div');
-            feedback.className = 'fixed top-20 right-8 bg-pro-accent-green text-pro-dark-primary px-4 py-2 rounded-lg shadow-lg z-50';
-            feedback.textContent = 'URL copied to clipboard!';
-            document.body.appendChild(feedback);
-            
-            setTimeout(() => {
-                feedback.style.animation = 'fade-in-up 0.3s ease-out reverse';
-                setTimeout(() => feedback.remove(), 300);
-            }, 2000);
-        });
-
-        // Close modal on escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeInstallGuide();
-            }
-        });
-
-        // Close modal on backdrop click
-        document.getElementById('install-modal').addEventListener('click', (e) => {
-            if (e.target.id === 'install-modal') {
-                closeInstallGuide();
-            }
         });
     </script>
 </body>

@@ -1,3 +1,6 @@
+<!-- 統一導航系統 -->
+<!-- 使用時需要替換 {{ACTIVE_PAGE}} 為當前頁面名稱 -->
+
 <!-- Navigation -->
 <nav class="fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -16,35 +19,35 @@
 
             <!-- Desktop Navigation -->
             <div class="hidden md:flex items-center space-x-6">
-                <a href="index.html" class="nav-link group relative">
+                <a href="index.html" class="nav-link {{ACTIVE_INDEX}} group relative">
                     <span class="relative z-10">首頁</span>
                     <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
-                <a href="novels.html" class="nav-link group relative">
+                <a href="novels.html" class="nav-link {{ACTIVE_NOVELS}} group relative">
                     <span class="relative z-10">輕小說</span>
                     <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
-                <a href="tools.html" class="nav-link group relative">
+                <a href="tools.html" class="nav-link {{ACTIVE_TOOLS}} group relative">
                     <span class="relative z-10">程式與工具</span>
                     <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
-                <a href="ai.html" class="nav-link group relative">
+                <a href="ai.html" class="nav-link {{ACTIVE_AI}} group relative">
                     <span class="relative z-10">AI 心得</span>
                     <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
-                <a href="medical-category.html" class="nav-link group relative">
-                    <span class="relative z-10">醫學、藥物、保健品</span>
+                <a href="medical-category.html" class="nav-link {{ACTIVE_MEDICAL}} group relative">
+                    <span class="relative z-10">醫學資源</span>
                     <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
-                <a href="finance.html" class="nav-link group relative">
-                    <span class="relative z-10">經濟與投資</span>
+                <a href="finance.html" class="nav-link {{ACTIVE_FINANCE}} group relative">
+                    <span class="relative z-10">經濟投資</span>
                     <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
-                <a href="politics.html" class="nav-link group relative">
-                    <span class="relative z-10">政治與思想</span>
+                <a href="politics.html" class="nav-link {{ACTIVE_POLITICS}} group relative">
+                    <span class="relative z-10">政治思想</span>
                     <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
-                <a href="blog.html" class="nav-link group relative">
+                <a href="blog.html" class="nav-link {{ACTIVE_BLOG}} group relative">
                     <span class="relative z-10">心境筆記</span>
                     <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
@@ -64,29 +67,14 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="mobile-menu hidden md:hidden">
         <div class="px-4 pt-2 pb-3 space-y-1 bg-gradient-to-r from-soft-dark-primary/95 via-soft-dark-secondary/95 to-soft-dark-tertiary/95 backdrop-blur-md border-t border-soft-accent-primary/20">
-            <a href="index.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">首頁</a>
-            <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">輕小說</a>
-            <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">程式與工具</a>
-            <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI 心得</a>
-            <a href="medical-category.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">醫學、藥物、保健品</a>
-            <a href="finance.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">經濟與投資</a>
-            <a href="politics.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">政治與思想</a>
-            <a href="blog.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">心境筆記</a>
+            <a href="index.html" class="block px-4 py-3 rounded-lg {{MOBILE_ACTIVE_INDEX}} transition-colors border border-transparent hover:border-soft-accent-primary/20">首頁</a>
+            <a href="novels.html" class="block px-4 py-3 rounded-lg {{MOBILE_ACTIVE_NOVELS}} transition-colors border border-transparent hover:border-soft-accent-primary/20">輕小說</a>
+            <a href="tools.html" class="block px-4 py-3 rounded-lg {{MOBILE_ACTIVE_TOOLS}} transition-colors border border-transparent hover:border-soft-accent-primary/20">程式與工具</a>
+            <a href="ai.html" class="block px-4 py-3 rounded-lg {{MOBILE_ACTIVE_AI}} transition-colors border border-transparent hover:border-soft-accent-primary/20">AI 心得</a>
+            <a href="medical-category.html" class="block px-4 py-3 rounded-lg {{MOBILE_ACTIVE_MEDICAL}} transition-colors border border-transparent hover:border-soft-accent-primary/20">醫學資源</a>
+            <a href="finance.html" class="block px-4 py-3 rounded-lg {{MOBILE_ACTIVE_FINANCE}} transition-colors border border-transparent hover:border-soft-accent-primary/20">經濟投資</a>
+            <a href="politics.html" class="block px-4 py-3 rounded-lg {{MOBILE_ACTIVE_POLITICS}} transition-colors border border-transparent hover:border-soft-accent-primary/20">政治思想</a>
+            <a href="blog.html" class="block px-4 py-3 rounded-lg {{MOBILE_ACTIVE_BLOG}} transition-colors border border-transparent hover:border-soft-accent-primary/20">心境筆記</a>
         </div>
     </div>
 </nav>
-
-<script>
-// Mobile menu toggle
-const menuButton = document.getElementById('mobile-menu-button');
-const mobileMenu = document.getElementById('mobile-menu');
-
-menuButton.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-    if (!mobileMenu.classList.contains('hidden')) {
-        setTimeout(() => mobileMenu.classList.add('show'), 10);
-    } else {
-        mobileMenu.classList.remove('show');
-    }
-});
-</script>

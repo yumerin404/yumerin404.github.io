@@ -94,6 +94,19 @@ The site features multiple coordinated design themes:
 - Social media: Threads (main social), GitHub (development)
 - No analytics or tracking implemented
 
+## Development Workflow
+
+### Local Development
+- No build process required - open HTML files directly in browser for testing
+- Use browser developer tools for debugging CSS/JavaScript
+- Test responsive design across different viewport sizes
+- Verify Traditional Chinese character rendering
+
+### File Serving
+- For local development with external resources, serve files via simple HTTP server:
+  - `python -m http.server 8000` or `python3 -m http.server 8000`
+  - Navigate to `http://localhost:8000`
+
 ## Deployment
 
 This is a GitHub Pages site deployed from the main branch. All changes pushed to main are automatically deployed.

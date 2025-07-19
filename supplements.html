@@ -4,34 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>保健食品 - 夢鈴幻想</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Load Shared Styles -->
+    <script>
+        fetch('shared-styles.html')
+            .then(response => response.text())
+            .then(data => {
+                document.head.insertAdjacentHTML('beforeend', data);
+            });
+    </script>
+    
     <style>
-        :root {
-            --soft-primary: #0a0e1a;
-            --soft-secondary: #1a1e2e;
-            --soft-tertiary: #2a2e3e;
-            --soft-accent-primary: #c8a8e9;
-            --soft-accent-secondary: #f8b4d9;
-            --soft-accent-tertiary: #a8e6cf;
-            --soft-text-primary: #e8e6f3;
-            --soft-text-secondary: #b8b6c3;
-            --soft-text-muted: #888693;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Supplements specific styles */
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--soft-primary) 0%, var(--soft-secondary) 100%);
-            color: var(--soft-text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
+            /* Inherited from shared styles */
         }
 
         .container {
@@ -342,7 +331,9 @@
         }
     </style>
 </head>
-<body>
+<body class="gradient-bg text-soft-text-primary min-h-screen font-cute" style="padding-top: 4rem;">
+    <!-- Navigation -->
+    <div id="navigation-container"></div>
     <!-- Navigation -->
     <nav class="fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1007,6 +998,33 @@
         document.addEventListener('DOMContentLoaded', () => {
             observeElements();
         });
+    </script>
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Load Scripts -->
+    <script>
+        // Load navigation
+        fetch('shared-nav.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navigation-container').innerHTML = data
+                    .replace(/{{ACTIVE_PAGE}}/g, 'medical-category');
+            });
+        
+        // Load footer
+        fetch('shared-footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+
+        // Load shared scripts
+        fetch('shared-scripts.html')
+            .then(response => response.text())
+            .then(data => {
+                document.head.insertAdjacentHTML('beforeend', data);
+            });
     </script>
 </body>
 </html>

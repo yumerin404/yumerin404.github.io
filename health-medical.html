@@ -5,130 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>夢鈴幻想 | 健康與醫學紀錄</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'soft-primary': '#0a0e1a',
-                        'soft-secondary': '#1a1e2e',  
-                        'soft-tertiary': '#2a2e3e',
-                        'soft-accent-primary': '#c8a8e9',
-                        'soft-accent-secondary': '#f8b4d9',
-                        'soft-accent-tertiary': '#a8e6cf',
-                        'soft-text-primary': '#f5f3f0',
-                        'soft-text-secondary': '#e0ddd8'
-                    },
-                    borderRadius: {
-                        'soft': '12px',
-                        'extra-soft': '20px',
-                    },
-                    animation: {
-                        'float-gentle': 'float-gentle 6s ease-in-out infinite',
-                        'glow-soft': 'glow-soft 2s ease-in-out infinite alternate',
-                        'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
-                        'slide-up': 'slide-up 0.6s ease-out',
-                    },
-                    keyframes: {
-                        'float-gentle': {
-                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-                            '33%': { transform: 'translateY(-10px) rotate(1deg)' },
-                            '66%': { transform: 'translateY(-5px) rotate(-1deg)' },
-                        },
-                        'glow-soft': {
-                            '0%': { 
-                                boxShadow: '0 0 5px rgba(200, 168, 233, 0.3), 0 0 10px rgba(200, 168, 233, 0.2)',
-                                opacity: '0.7'
-                            },
-                            '100%': { 
-                                boxShadow: '0 0 10px rgba(200, 168, 233, 0.4), 0 0 20px rgba(200, 168, 233, 0.3)',
-                                opacity: '1'
-                            }
-                        },
-                        'pulse-soft': {
-                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
-                            '50%': { opacity: '0.7', transform: 'scale(1.05)' },
-                        },
-                        'slide-up': {
-                            '0%': { transform: 'translateY(30px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        }
-                    },
-                    fontFamily: {
-                        'cute': ['Inter', 'system-ui', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Load Shared Styles -->
+    <script>
+        fetch('shared-styles.html')
+            .then(response => response.text())
+            .then(data => {
+                document.head.insertAdjacentHTML('beforeend', data);
+            });
+    </script>
+
     <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #0a0e1a 0%, #1a1e2e 50%, #2a2e3e 100%);
-            position: relative;
-            min-height: 100vh;
-        }
-
-        .gradient-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 20%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 60%, rgba(168, 230, 207, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .glass-effect {
-            background: rgba(26, 30, 46, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(200, 168, 233, 0.2);
-        }
-
-        .nav-link {
-            position: relative;
-            color: #e0ddd8;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-        }
-
-        .nav-link:hover {
-            color: #c8a8e9;
-            background: rgba(200, 168, 233, 0.1);
-            transform: translateY(-1px);
-        }
-
-        .nav-link.active {
-            color: #c8a8e9;
-            background: rgba(200, 168, 233, 0.15);
-            font-weight: 600;
-        }
-
-        .text-gradient {
-            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .mobile-menu {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(-20px);
-            opacity: 0;
-        }
-
-        .mobile-menu.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
+        /* Health/Medical specific styles */
         .back-button {
             background: linear-gradient(135deg, rgba(200, 168, 233, 0.2), rgba(248, 180, 217, 0.2));
             border: 1px solid rgba(200, 168, 233, 0.3);
@@ -143,131 +34,12 @@
             box-shadow: 0 8px 20px rgba(200, 168, 233, 0.3);
             color: #f5f3f0;
         }
-
-        .floating-decoration {
-            position: absolute;
-            pointer-events: none;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(200, 168, 233, 0.15) 0%, transparent 70%);
-            animation: float-gentle 8s ease-in-out infinite;
-        }
-
-        .hero-pattern {
-            background-image: radial-gradient(circle at 20% 50%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
-                             radial-gradient(circle at 80% 20%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
-                             radial-gradient(circle at 40% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%);
-        }
-
-        .content-card {
-            background: rgba(26, 30, 46, 0.9);
-            border: 1px solid rgba(200, 168, 233, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .content-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #c8a8e9, #f8b4d9, #a8e6cf);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .content-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .content-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(200, 168, 233, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
-        }
     </style>
 </head>
 
-<body class="gradient-bg text-soft-text-primary min-h-screen font-cute">
+<body class="gradient-bg text-soft-text-primary min-h-screen font-cute" style="padding-top: 4rem;">
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo Section -->
-                <div class="flex items-center">
-                    <a href="index.html" class="flex items-center group">
-                        <div class="relative">
-                            <div class="absolute inset-0 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
-                            <img src="images/avatar.png" alt="Dream Bell" 
-                                 class="relative h-10 w-10 rounded-full mr-3 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 border-2 border-soft-accent-primary/30">
-                        </div>
-                        <div class="text-gradient text-xl font-bold tracking-wide">夢鈴幻想</div>
-                    </a>
-                </div>
-
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="index.html" class="nav-link group relative">
-                        <span class="relative z-10">首頁</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </a>
-                    <a href="novels.html" class="nav-link group relative">
-                        <span class="relative z-10">輕小說</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </a>
-                    <a href="tools.html" class="nav-link group relative">
-                        <span class="relative z-10">程式與工具</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </a>
-                    <a href="ai.html" class="nav-link group relative">
-                        <span class="relative z-10">AI 心得</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </a>
-                    <a href="medical-category.html" class="nav-link active group relative">
-                        <span class="relative z-10">醫學、藥物、保健品</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </a>
-                    <a href="finance.html" class="nav-link group relative">
-                        <span class="relative z-10">經濟與投資</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </a>
-                    <a href="politics.html" class="nav-link group relative">
-                        <span class="relative z-10">政治與思想</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </a>
-                    <a href="blog.html" class="nav-link group relative">
-                        <span class="relative z-10">心境筆記</span>
-                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button type="button" id="mobile-menu-button"
-                        class="inline-flex items-center justify-center p-2 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-all duration-300 border border-soft-accent-primary/20 hover:border-soft-accent-primary/40">
-                        <span class="sr-only">開啟選單</span>
-                        <i class="fas fa-bars text-lg"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu hidden md:hidden">
-            <div class="px-4 pt-2 pb-3 space-y-1 bg-gradient-to-r from-soft-dark-primary/95 via-soft-dark-secondary/95 to-soft-dark-tertiary/95 backdrop-blur-md border-t border-soft-accent-primary/20">
-                <a href="index.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">首頁</a>
-                <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">輕小說</a>
-                <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">程式與工具</a>
-                <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI 心得</a>
-                <a href="medical-category.html" class="block px-4 py-3 rounded-lg text-soft-accent-primary font-medium bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 border border-soft-accent-primary/30">醫學、藥物、保健品</a>
-                <a href="finance.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">經濟與投資</a>
-                <a href="politics.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">政治與思想</a>
-                <a href="blog.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">心境筆記</a>
-            </div>
-        </div>
-    </nav>
+    <div id="navigation-container"></div>
 
     <!-- Back Button -->
     <div class="fixed top-20 left-4 z-40">
@@ -437,6 +209,9 @@
         </div>
     </section>
 
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
     <!-- Back to Top Button -->
     <button id="back-to-top" 
             class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
@@ -444,46 +219,29 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- Load Scripts -->
     <script>
-        // Mobile menu toggle
-        const menuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        menuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            if (!mobileMenu.classList.contains('hidden')) {
-                setTimeout(() => mobileMenu.classList.add('show'), 10);
-            } else {
-                mobileMenu.classList.remove('show');
-            }
-        });
-
-        // Back to top functionality
-        const backToTopButton = document.getElementById('back-to-top');
-
-        const toggleBackToTopButton = () => {
-            if (window.scrollY > 300) {
-                backToTopButton.style.opacity = '1';
-                backToTopButton.style.transform = 'scale(1)';
-            } else {
-                backToTopButton.style.opacity = '0';
-                backToTopButton.style.transform = 'scale(0.95)';
-            }
-        };
-
-        backToTopButton?.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        // Load navigation
+        fetch('shared-nav.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navigation-container').innerHTML = data
+                    .replace(/{{ACTIVE_PAGE}}/g, 'medical-category');
             });
-        });
+        
+        // Load footer
+        fetch('shared-footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
 
-        window.addEventListener('scroll', toggleBackToTopButton);
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            toggleBackToTopButton();
-        });
+        // Load shared scripts
+        fetch('shared-scripts.html')
+            .then(response => response.text())
+            .then(data => {
+                document.head.insertAdjacentHTML('beforeend', data);
+            });
     </script>
 </body>
 
