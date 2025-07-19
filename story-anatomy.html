@@ -5,19 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>夢鈴幻想 | 故事的解剖</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Load Shared Styles -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'soft-primary': '#0a0e1a',
-                        'soft-secondary': '#1a1e2e',  
-                        'soft-tertiary': '#2a2e3e',
-                        'soft-accent-primary': '#c8a8e9',
-                        'soft-accent-secondary': '#f8b4d9',
-                        'soft-accent-tertiary': '#a8e6cf',
+        fetch('shared-styles.html')
+            .then(response => response.text())
+            .then(data => {
+                document.head.insertAdjacentHTML('beforeend', data);
+            });
+    </script>
                         'soft-text-primary': '#f5f3f0',
                         'soft-text-secondary': '#e0ddd8'
                     },
@@ -321,12 +320,15 @@
     </style>
 </head>
 
-<body class="gradient-bg text-soft-text-primary min-h-screen font-cute">
+<body class="gradient-bg text-soft-text-primary min-h-screen font-cute" style="padding-top: 4rem;">
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scroll-progress"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
+    <div id="navigation-container"></div>
+    
+    <!-- Original Navigation -->
+    <nav class="hidden fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo Section -->
@@ -1282,6 +1284,33 @@
             performSearch(''); // Initialize search
             updateActiveTocLink();
         });
+    </script>
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Load Scripts -->
+    <script>
+        // Load navigation
+        fetch('shared-nav.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navigation-container').innerHTML = data
+                    .replace(/{{ACTIVE_PAGE}}/g, 'blog');
+            });
+        
+        // Load footer
+        fetch('shared-footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+
+        // Load shared scripts
+        fetch('shared-scripts.html')
+            .then(response => response.text())
+            .then(data => {
+                document.head.insertAdjacentHTML('beforeend', data);
+            });
     </script>
 </body>
 
