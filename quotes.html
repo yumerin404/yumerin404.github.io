@@ -4,64 +4,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>夢鈴幻想 | 名句紀錄</title>
-    
+    <title>夢鈴幻想 | 名言佳句</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Load Shared Styles -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script>
-        fetch('shared-styles.html')
-            .then(response => response.text())
-            .then(data => {
-                document.head.insertAdjacentHTML('beforeend', data);
-            });
-    </script>
-                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
-                            '50%': { opacity: '0.7', transform: 'scale(1.05)' },
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'soft-dark-primary': '#0a0e1a',
+                        'soft-dark-secondary': '#1a1e2e',
+                        'soft-dark-tertiary': '#2a2e3e',
+                        'soft-accent-primary': '#c8a8e9',
+                        'soft-accent-secondary': '#f8b4d9',
+                        'soft-accent-tertiary': '#a8e6cf',
+                        'soft-text-primary': '#f5f3f0',
+                        'soft-text-secondary': '#b8b5b0',
+                        'soft-text-muted': '#8a8680',
+                    },
+                    animation: {
+                        'float-gentle': 'float-gentle 6s ease-in-out infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'glow-soft': 'glow-soft 2s ease-in-out infinite alternate',
+                        'bounce-soft': 'bounce-soft 1s ease-in-out',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'scale-bounce': 'scale-bounce 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                    },
+                    keyframes: {
+                        'float-gentle': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-8px) rotate(1deg)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: '0.6' },
+                            '50%': { opacity: '0.9' },
+                        },
+                        'glow-soft': {
+                            '0%': {
+                                'box-shadow': '0 0 5px rgba(200, 168, 233, 0.4), 0 0 10px rgba(200, 168, 233, 0.2)',
+                            },
+                            '100%': {
+                                'box-shadow': '0 0 10px rgba(200, 168, 233, 0.6), 0 0 20px rgba(200, 168, 233, 0.3), 0 0 30px rgba(200, 168, 233, 0.1)',
+                            }
+                        },
+                        'bounce-soft': {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.05)' },
+                            '100%': { transform: 'scale(1)' },
                         },
                         'slide-up': {
                             '0%': { transform: 'translateY(30px)', opacity: '0' },
                             '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        'scale-bounce': {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                            '100%': { transform: 'scale(1)' },
                         }
                     },
                     fontFamily: {
-                        'cute': ['Inter', 'system-ui', 'sans-serif']
+                        'cute': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'soft': '12px',
+                        'extra-soft': '20px',
                     }
                 }
             }
         }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #0a0e1a 0%, #1a1e2e 50%, #2a2e3e 100%);
-            position: relative;
-            min-height: 100vh;
+        * {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
         }
 
-        .gradient-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 20%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 60%, rgba(168, 230, 207, 0.05) 0%, transparent 50%);
-            pointer-events: none;
+        .gradient-bg {
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1e2e 50%, #2a2e3e 100%);
         }
 
         .glass-effect {
-            background: rgba(26, 30, 46, 0.8);
             backdrop-filter: blur(20px);
+            background: rgba(26, 30, 46, 0.7);
             border: 1px solid rgba(200, 168, 233, 0.2);
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 100%);
+            color: #0a0e1a;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.4);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-link {
             position: relative;
-            color: #e0ddd8;
+            color: #b8b5b0;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-weight: 500;
             padding: 0.5rem 1rem;
@@ -80,13 +133,6 @@
             font-weight: 600;
         }
 
-        .text-gradient {
-            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
         .mobile-menu {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             transform: translateY(-20px);
@@ -98,7 +144,21 @@
             opacity: 1;
         }
 
-        .quote-card {
+        .floating-decoration {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 168, 233, 0.15) 0%, transparent 70%);
+            animation: float-gentle 8s ease-in-out infinite;
+        }
+
+        .hero-pattern {
+            background-image: radial-gradient(circle at 20% 50%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
+                             radial-gradient(circle at 80% 20%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
+                             radial-gradient(circle at 40% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%);
+        }
+
+        .content-card {
             background: rgba(26, 30, 46, 0.9);
             border: 1px solid rgba(200, 168, 233, 0.2);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -106,7 +166,7 @@
             overflow: hidden;
         }
 
-        .quote-card::before {
+        .content-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -118,27 +178,59 @@
             transition: transform 0.3s ease;
         }
 
-        .quote-card:hover::before {
+        .content-card:hover::before {
             transform: scaleX(1);
         }
 
-        .quote-card:hover {
+        .content-card:hover {
             transform: translateY(-5px);
             border-color: rgba(200, 168, 233, 0.4);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
         }
 
-        .category-section {
-            margin-bottom: 3rem;
-        }
-
-        .category-title {
+        .back-button {
             background: linear-gradient(135deg, rgba(200, 168, 233, 0.2), rgba(248, 180, 217, 0.2));
             border: 1px solid rgba(200, 168, 233, 0.3);
-            border-radius: 20px;
-            padding: 1rem 2rem;
-            margin-bottom: 2rem;
-            text-align: center;
+            color: #c8a8e9;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, rgba(200, 168, 233, 0.3), rgba(248, 180, 217, 0.3));
+            border-color: rgba(200, 168, 233, 0.5);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(200, 168, 233, 0.3);
+            color: #f5f3f0;
+        }
+
+        .quote-card {
+            background: rgba(26, 30, 46, 0.6);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #c8a8e9, #f8b4d9);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .quote-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .quote-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(200, 168, 233, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 0 15px rgba(200, 168, 233, 0.1);
         }
 
         .quote-text {
@@ -158,161 +250,20 @@
             font-family: serif;
         }
 
-        .back-button {
+        .category-header {
             background: linear-gradient(135deg, rgba(200, 168, 233, 0.2), rgba(248, 180, 217, 0.2));
             border: 1px solid rgba(200, 168, 233, 0.3);
-            color: #c8a8e9;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .back-button:hover {
-            background: linear-gradient(135deg, rgba(200, 168, 233, 0.3), rgba(248, 180, 217, 0.3));
-            border-color: rgba(200, 168, 233, 0.5);
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(200, 168, 233, 0.3);
-            color: #f5f3f0;
-        }
-
-        .floating-decoration {
-            position: absolute;
-            pointer-events: none;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(200, 168, 233, 0.15) 0%, transparent 70%);
-            animation: float-gentle 8s ease-in-out infinite;
-        }
-
-        .hero-pattern {
-            background-image: radial-gradient(circle at 20% 50%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
-                             radial-gradient(circle at 80% 20%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
-                             radial-gradient(circle at 40% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%);
-        }
-
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, #c8a8e9, #f8b4d9, #a8e6cf);
-            z-index: 1000;
-            transition: width 0.3s ease;
-        }
-
-        /* Search and Filter Styles */
-        .search-container {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .search-container:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(200, 168, 233, 0.2);
-        }
-
-        .filter-tag {
-            padding: 0.5rem 1rem;
-            border-radius: 12px;
-            background: rgba(26, 30, 46, 0.6);
-            border: 1px solid rgba(200, 168, 233, 0.3);
-            color: #e0ddd8;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        .filter-tag:hover {
-            background: rgba(200, 168, 233, 0.2);
-            border-color: rgba(200, 168, 233, 0.5);
-            transform: translateY(-1px);
-        }
-
-        .filter-tag.active {
-            background: linear-gradient(135deg, #c8a8e9, #f8b4d9);
-            color: #0a0e1a;
-            border-color: #c8a8e9;
-            font-weight: 600;
-        }
-
-        /* Sidebar Styles */
-        .sidebar-container {
-            max-height: calc(100vh - 6rem);
-            overflow-y: auto;
-        }
-
-        .toc-link {
-            color: #e0ddd8;
-            text-decoration: none;
-            border: 1px solid transparent;
-        }
-
-        .toc-link:hover {
-            background: rgba(200, 168, 233, 0.1);
-            border-color: rgba(200, 168, 233, 0.3);
-            color: #c8a8e9;
-            transform: translateX(4px);
-        }
-
-        .toc-link.active {
-            background: rgba(200, 168, 233, 0.2);
-            border-color: rgba(200, 168, 233, 0.4);
-            color: #c8a8e9;
-            font-weight: 600;
-        }
-
-        /* Hide/Show Animation */
-        .category-hidden {
-            display: none !important;
-        }
-
-        .category-show {
-            animation: slide-up 0.6s ease-out;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1023px) {
-            .sidebar-container {
-                position: static !important;
-                max-height: none;
-            }
-        }
-
-        /* Custom scrollbar for sidebar */
-        .sidebar-container::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .sidebar-container::-webkit-scrollbar-track {
-            background: rgba(26, 30, 46, 0.3);
-            border-radius: 10px;
-        }
-
-        .sidebar-container::-webkit-scrollbar-thumb {
-            background: rgba(200, 168, 233, 0.5);
-            border-radius: 10px;
-        }
-
-        .sidebar-container::-webkit-scrollbar-thumb:hover {
-            background: rgba(200, 168, 233, 0.7);
-        }
-
-        /* Search highlight effect */
-        .search-highlight {
-            background-color: rgba(200, 168, 233, 0.3);
-            border-radius: 4px;
-            padding: 0 2px;
+            border-radius: 20px;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
         }
     </style>
 </head>
 
-<body class="gradient-bg text-soft-text-primary min-h-screen font-cute" style="padding-top: 4rem;">
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scroll-progress"></div>
-
+<body class="gradient-bg text-soft-text-primary min-h-screen font-cute">
     <!-- Navigation -->
-    <div id="navigation-container"></div>
-    
-    <!-- Original Navigation -->
-    <nav class="hidden fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
+    <nav class="fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo Section -->
@@ -334,15 +285,15 @@
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="novels.html" class="nav-link group relative">
-                        <span class="relative z-10">輕小說</span>
+                        <span class="relative z-10">奇幻小說</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="tools.html" class="nav-link group relative">
-                        <span class="relative z-10">程式與工具</span>
+                        <span class="relative z-10">魔法工具</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="ai.html" class="nav-link group relative">
-                        <span class="relative z-10">AI 心得</span>
+                        <span class="relative z-10">AI魔導</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="medical-category.html" class="nav-link group relative">
@@ -378,9 +329,9 @@
         <div id="mobile-menu" class="mobile-menu hidden md:hidden">
             <div class="px-4 pt-2 pb-3 space-y-1 bg-gradient-to-r from-soft-dark-primary/95 via-soft-dark-secondary/95 to-soft-dark-tertiary/95 backdrop-blur-md border-t border-soft-accent-primary/20">
                 <a href="index.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">首頁</a>
-                <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">輕小說</a>
-                <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">程式與工具</a>
-                <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI 心得</a>
+                <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">奇幻小說</a>
+                <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">魔法工具</a>
+                <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI魔導</a>
                 <a href="medical-category.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">醫學、藥物、保健品</a>
                 <a href="finance.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">經濟與投資</a>
                 <a href="politics.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">政治與思想</a>
@@ -405,214 +356,154 @@
 
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8">
-                    <i class="fas fa-quote-right text-3xl text-soft-primary animate-pulse-soft"></i>
+                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8 animate-float-gentle">
+                    <i class="fas fa-quote-left text-3xl text-soft-dark-primary"></i>
                 </div>
-                <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gradient">名句紀錄</h1>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-gradient leading-tight">名言佳句</h1>
                 <div class="w-32 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-8"></div>
                 <p class="text-xl md:text-2xl text-soft-text-secondary max-w-4xl mx-auto leading-relaxed">
-                    人生中看到值得紀錄的內容，我會將其紀錄起來，成為我人生觀中的養分
+                    收集與分享觸動人心的名言佳句，以及個人的思考與感悟
                 </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Search Section -->
-    <section class="py-8 relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="search-container glass-effect rounded-extra-soft p-6 shadow-lg">
-                <div class="relative">
-                    <input type="text" id="search-input" placeholder="搜尋名句內容..." 
-                           class="w-full px-6 py-4 pl-14 bg-transparent border border-soft-accent-primary border-opacity-30 rounded-soft text-soft-text-primary placeholder-soft-text-secondary focus:outline-none focus:border-soft-accent-primary focus:border-opacity-60 transition-all duration-300">
-                    <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-soft-accent-primary text-lg"></i>
-                </div>
-                <div class="flex flex-wrap gap-2 mt-4">
-                    <button class="filter-tag active" data-filter="all">全部</button>
-                    <button class="filter-tag" data-filter="creation">創作故事</button>
-                    <button class="filter-tag" data-filter="philosophy">人生哲理</button>
-                    <button class="filter-tag" data-filter="history">歷史社會</button>
-                    <button class="filter-tag" data-filter="communication">溝通智慧</button>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- Content Section -->
     <section class="py-16 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row gap-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="space-y-12">
                 
-                <!-- Main Content -->
-                <div class="flex-1" id="main-content">
-            
-            <!-- 創作與故事 -->
-            <div id="creation" class="category-section" data-category="creation">
-                <div class="category-title">
-                    <h2 class="text-2xl font-bold text-gradient">
-                        <i class="fas fa-pen-fancy mr-3"></i>創作與故事
-                    </h2>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            劇情應該由慢，利用讀者們越來越對劇情熟悉，慢慢加快整個故事劇情的節奏。
-                        </p>
+                <!-- 創作與故事 -->
+                <div class="space-y-8">
+                    <div class="category-header">
+                        <h2 class="text-2xl font-bold text-gradient">
+                            <i class="fas fa-pen-fancy mr-3"></i>創作與故事
+                        </h2>
                     </div>
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            故事中表達愛的終極方式，是死亡，但現實千萬不要將這樣的觀念帶入。
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 人生哲理 -->
-            <div id="philosophy" class="category-section" data-category="philosophy">
-                <div class="category-title">
-                    <h2 class="text-2xl font-bold text-gradient">
-                        <i class="fas fa-lightbulb mr-3"></i>人生哲理
-                    </h2>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            凡殺不死我的、必使我更強大。
-                        </p>
-                    </div>
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            每一次再見，可能真的是最後一次再見了。
-                        </p>
-                    </div>
-                    <div class="quote-card rounded-extra-soft p-6 lg:col-span-2">
-                        <p class="quote-text text-soft-text-secondary">
-                            認真的人可能下場都不是太好，但他們留下的東西將會永遠流傳。
-                        </p>
-                    </div>
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            XX 擊穿了時間，功力是深厚的，打穿了幾千多年的時間。
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 歷史與社會 -->
-            <div id="history" class="category-section" data-category="history">
-                <div class="category-title">
-                    <h2 class="text-2xl font-bold text-gradient">
-                        <i class="fas fa-scroll mr-3"></i>歷史與社會
-                    </h2>
-                </div>
-                <div class="grid grid-cols-1 gap-6">
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            時來天地皆同力，運去英雄不自由。
-                        </p>
-                    </div>
-                    <div class="quote-card rounded-extra-soft p-8">
-                        <div class="quote-text text-soft-text-secondary space-y-4">
-                            <p>誰生誰死，我們決定不了，到底有一天誰講我們的故事，我們也決定不了。</p>
-                            <p>但歷史最後會給我們一個定位，歷史的眼睛將會看著你。對與錯都是任人憑說，你也不知道到底是誰最後來講你的故事。</p>
-                            <p>或者你的故事根本不值得一提，但歷史的眼睛將會盯著你。</p>
-                            <p>自己能力不強被騙了，就被騙了。還是要說，自己相信的事情。而不是像他們那個樣子。</p>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="quote-card rounded-extra-soft p-6 shadow-xl">
+                            <p class="quote-text text-soft-text-secondary">
+                                劇情應該由慢，利用讀者們越來越對劇情熟悉，慢慢加快整個故事劇情的節奏。
+                            </p>
+                        </div>
+                        <div class="quote-card rounded-extra-soft p-6 shadow-xl">
+                            <p class="quote-text text-soft-text-secondary">
+                                故事中表達愛的終極方式，是死亡，但現實千萬不要將這樣的觀念帶入。
+                            </p>
                         </div>
                     </div>
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            為天地立心，為生民立命，為往聖繼絕學，為萬世開太平。
-                        </p>
-                    </div>
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            爾曹身與名俱滅，不廢江河萬古流。
-                        </p>
-                    </div>
                 </div>
-            </div>
 
-            <!-- 溝通與智慧 -->
-            <div id="communication" class="category-section" data-category="communication">
-                <div class="category-title">
-                    <h2 class="text-2xl font-bold text-gradient">
-                        <i class="fas fa-comments mr-3"></i>溝通與智慧
-                    </h2>
-                </div>
-                <div class="grid grid-cols-1 gap-6">
-                    <div class="quote-card rounded-extra-soft p-6">
-                        <p class="quote-text text-soft-text-secondary">
-                            談判時要說服的不是對面的人，而是對面那個人背後的所有人。
-                        </p>
+                <!-- 人生哲理 -->
+                <div class="space-y-8">
+                    <div class="category-header">
+                        <h2 class="text-2xl font-bold text-gradient">
+                            <i class="fas fa-lightbulb mr-3"></i>人生哲理
+                        </h2>
                     </div>
-                </div>
-            </div>
-
-                </div>
-                
-                <!-- Sidebar -->
-                <div class="w-full lg:w-80 shrink-0">
-                    <div class="sidebar-container sticky top-24">
-                        
-                        <!-- Table of Contents -->
-                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg mb-6">
-                            <h3 class="text-xl font-bold text-gradient mb-4 flex items-center">
-                                <i class="fas fa-list mr-3"></i>目錄導航
-                            </h3>
-                            <nav class="space-y-2" id="toc-nav">
-                                <a href="#creation" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creation">
-                                    <i class="fas fa-pen-fancy mr-3 text-soft-accent-primary"></i>
-                                    <span>創作與故事</span>
-                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-creation">2</span>
-                                </a>
-                                <a href="#philosophy" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="philosophy">
-                                    <i class="fas fa-lightbulb mr-3 text-soft-accent-primary"></i>
-                                    <span>人生哲理</span>
-                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-philosophy">4</span>
-                                </a>
-                                <a href="#history" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="history">
-                                    <i class="fas fa-scroll mr-3 text-soft-accent-primary"></i>
-                                    <span>歷史與社會</span>
-                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-history">4</span>
-                                </a>
-                                <a href="#communication" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="communication">
-                                    <i class="fas fa-comments mr-3 text-soft-accent-primary"></i>
-                                    <span>溝通與智慧</span>
-                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-communication">1</span>
-                                </a>
-                            </nav>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="quote-card rounded-extra-soft p-6 shadow-xl">
+                            <p class="quote-text text-soft-text-secondary">
+                                凡殺不死我的、必使我更強大。
+                            </p>
                         </div>
+                        <div class="quote-card rounded-extra-soft p-6 shadow-xl">
+                            <p class="quote-text text-soft-text-secondary">
+                                每一次再見，可能真的是最後一次再見了。
+                            </p>
+                        </div>
+                        <div class="quote-card rounded-extra-soft p-6 shadow-xl lg:col-span-2">
+                            <p class="quote-text text-soft-text-secondary">
+                                認真的人可能下場都不是太好，但他們留下的東西將會永遠流傳。
+                            </p>
+                        </div>
+                        <div class="quote-card rounded-extra-soft p-6 shadow-xl">
+                            <p class="quote-text text-soft-text-secondary">
+                                XX 擊穿了時間，功力是深厚的，打穿了幾千多年的時間。
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-                        <!-- Quick Stats -->
-                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg">
-                            <h3 class="text-lg font-bold text-gradient mb-4 flex items-center">
-                                <i class="fas fa-chart-bar mr-3"></i>統計資訊
-                            </h3>
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-soft-text-secondary">總名句數</span>
-                                    <span class="text-soft-accent-primary font-bold" id="total-quotes">11</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-soft-text-secondary">分類數</span>
-                                    <span class="text-soft-accent-secondary font-bold">4</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-soft-text-secondary">顯示中</span>
-                                    <span class="text-soft-accent-tertiary font-bold" id="visible-quotes">11</span>
-                                </div>
+                <!-- 歷史與社會 -->
+                <div class="space-y-8">
+                    <div class="category-header">
+                        <h2 class="text-2xl font-bold text-gradient">
+                            <i class="fas fa-scroll mr-3"></i>歷史與社會
+                        </h2>
+                    </div>
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="quote-card rounded-extra-soft p-6 shadow-xl">
+                            <p class="quote-text text-soft-text-secondary">
+                                時來天地皆同力，運去英雄不自由。
+                            </p>
+                        </div>
+                        <div class="quote-card rounded-extra-soft p-8 shadow-xl">
+                            <div class="quote-text text-soft-text-secondary space-y-4">
+                                <p>誰生誰死，我們決定不了，到底有一天誰講我們的故事，我們也決定不了。</p>
+                                <p>但歷史最後會給我們一個定位，歷史的眼睛將會看著你。對與錯都是任人憑說，你也不知道到底是誰最後來講你的故事。</p>
+                                <p>或者你的故事根本不值得一提，但歷史的眼睛將會盯著你。</p>
+                                <p>自己能力不強被騙了，就被騙了。還是要說，自己相信的事情。而不是像他們那個樣子。</p>
                             </div>
                         </div>
-
+                        <div class="quote-card rounded-extra-soft p-6 shadow-xl">
+                            <p class="quote-text text-soft-text-secondary">
+                                為天地立心，為生民立命，為往聖繼絕學，為萬世開太平。
+                            </p>
+                        </div>
+                        <div class="quote-card rounded-extra-soft p-6 shadow-xl">
+                            <p class="quote-text text-soft-text-secondary">
+                                爾曹身與名俱滅，不廢江河萬古流。
+                            </p>
+                        </div>
                     </div>
                 </div>
-                
+
+                <!-- 溝通與智慧 -->
+                <div class="space-y-8">
+                    <div class="category-header">
+                        <h2 class="text-2xl font-bold text-gradient">
+                            <i class="fas fa-comments mr-3"></i>溝通與智慧
+                        </h2>
+                    </div>
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="quote-card rounded-extra-soft p-6 shadow-xl">
+                            <p class="quote-text text-soft-text-secondary">
+                                談判時要說服的不是對面的人，而是對面那個人背後的所有人。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer class="glass-effect py-12 mt-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="https://www.threads.net/@yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-threads text-2xl"></i>
+                    </a>
+                    <a href="https://www.pixiv.net/users/96890924" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-pixiv text-2xl"></i>
+                    </a>
+                    <a href="https://github.com/yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                </div>
+                <div class="border-t border-soft-accent-primary/20 pt-8">
+                    <p class="text-soft-text-muted">&copy; 2024 夢鈴幻想. 在夢境與現實的交界處編織故事.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <!-- Back to Top Button -->
     <button id="back-to-top" 
-            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
+            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-dark-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
             aria-label="回到頂部">
         <i class="fas fa-arrow-up"></i>
     </button>
@@ -633,7 +524,6 @@
 
         // Back to top functionality
         const backToTopButton = document.getElementById('back-to-top');
-        const scrollProgress = document.getElementById('scroll-progress');
 
         const toggleBackToTopButton = () => {
             if (window.scrollY > 300) {
@@ -643,10 +533,6 @@
                 backToTopButton.style.opacity = '0';
                 backToTopButton.style.transform = 'scale(0.95)';
             }
-
-            // Update scroll progress
-            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
         };
 
         backToTopButton?.addEventListener('click', () => {
@@ -658,206 +544,10 @@
 
         window.addEventListener('scroll', toggleBackToTopButton);
 
-        // Add smooth scrolling animation for quote cards
-        const observeElements = () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'slide-up 0.6s ease-out';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.quote-card').forEach(card => {
-                observer.observe(card);
-            });
-        };
-
-        // Search and filter functionality
-        const searchInput = document.getElementById('search-input');
-        const filterTags = document.querySelectorAll('.filter-tag');
-        const categoryElements = document.querySelectorAll('.category-section');
-        const tocLinks = document.querySelectorAll('.toc-link');
-        let currentFilter = 'all';
-
-        // Search functionality
-        function performSearch(searchTerm) {
-            const normalizedSearchTerm = searchTerm.toLowerCase().trim();
-            let visibleCount = 0;
-
-            categoryElements.forEach(category => {
-                const categoryName = category.getAttribute('data-category');
-                const quoteCards = category.querySelectorAll('.quote-card');
-                let categoryHasMatch = false;
-
-                quoteCards.forEach(card => {
-                    const text = card.textContent.toLowerCase();
-                    const hasMatch = normalizedSearchTerm === '' || text.includes(normalizedSearchTerm);
-                    
-                    if (hasMatch && (currentFilter === 'all' || currentFilter === categoryName)) {
-                        card.style.display = '';
-                        categoryHasMatch = true;
-                        visibleCount++;
-                        
-                        // Highlight search term
-                        if (normalizedSearchTerm !== '') {
-                            highlightText(card, normalizedSearchTerm);
-                        } else {
-                            removeHighlight(card);
-                        }
-                    } else {
-                        card.style.display = 'none';
-                        removeHighlight(card);
-                    }
-                });
-
-                // Show/hide category based on matches
-                if (categoryHasMatch && (currentFilter === 'all' || currentFilter === categoryName)) {
-                    category.classList.remove('category-hidden');
-                    category.classList.add('category-show');
-                } else {
-                    category.classList.add('category-hidden');
-                    category.classList.remove('category-show');
-                }
-            });
-
-            // Update visible count
-            document.getElementById('visible-quotes').textContent = visibleCount;
-        }
-
-        // Highlight search terms
-        function highlightText(element, searchTerm) {
-            const quoteText = element.querySelector('.quote-text');
-            if (!quoteText) return;
-            
-            const originalText = quoteText.getAttribute('data-original') || quoteText.innerHTML;
-            if (!quoteText.getAttribute('data-original')) {
-                quoteText.setAttribute('data-original', originalText);
-            }
-            
-            const regex = new RegExp(`(${searchTerm})`, 'gi');
-            const highlightedText = originalText.replace(regex, '<span class="search-highlight">$1</span>');
-            quoteText.innerHTML = highlightedText;
-        }
-
-        // Remove highlight
-        function removeHighlight(element) {
-            const quoteText = element.querySelector('.quote-text');
-            if (!quoteText) return;
-            
-            const originalText = quoteText.getAttribute('data-original');
-            if (originalText) {
-                quoteText.innerHTML = originalText;
-            }
-        }
-
-        // Filter functionality
-        function applyFilter(filter) {
-            currentFilter = filter;
-            
-            // Update filter tags
-            filterTags.forEach(tag => {
-                if (tag.getAttribute('data-filter') === filter) {
-                    tag.classList.add('active');
-                } else {
-                    tag.classList.remove('active');
-                }
-            });
-
-            // Reapply search with new filter
-            performSearch(searchInput.value);
-        }
-
-        // Smooth scroll to section
-        function scrollToSection(targetId) {
-            const target = document.getElementById(targetId);
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        }
-
-        // Update active TOC link based on scroll position
-        function updateActiveTocLink() {
-            let currentSection = '';
-            
-            categoryElements.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                if (rect.top <= 150 && rect.bottom >= 150) {
-                    currentSection = section.id;
-                }
-            });
-
-            tocLinks.forEach(link => {
-                const targetId = link.getAttribute('href').substring(1);
-                if (targetId === currentSection) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        }
-
-        // Event listeners
-        searchInput.addEventListener('input', (e) => {
-            performSearch(e.target.value);
-        });
-
-        filterTags.forEach(tag => {
-            tag.addEventListener('click', () => {
-                const filter = tag.getAttribute('data-filter');
-                applyFilter(filter);
-            });
-        });
-
-        tocLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
-                scrollToSection(targetId);
-            });
-        });
-
-        // Scroll spy for TOC
-        window.addEventListener('scroll', updateActiveTocLink);
-
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             toggleBackToTopButton();
-            observeElements();
-            performSearch(''); // Initialize search
-            updateActiveTocLink();
         });
-    </script>
-    <!-- Footer -->
-    <div id="footer-container"></div>
-
-    <!-- Load Scripts -->
-    <script>
-        // Load navigation
-        fetch('shared-nav.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navigation-container').innerHTML = data
-                    .replace(/{{ACTIVE_PAGE}}/g, 'blog');
-            });
-        
-        // Load footer
-        fetch('shared-footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            });
-
-        // Load shared scripts
-        fetch('shared-scripts.html')
-            .then(response => response.text())
-            .then(data => {
-                document.head.insertAdjacentHTML('beforeend', data);
-            });
     </script>
 </body>
 

@@ -6,45 +6,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>夢鈴幻想 | 小說想法</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Load Shared Styles -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script>
-        fetch('shared-styles.html')
-            .then(response => response.text())
-            .then(data => {
-                document.head.insertAdjacentHTML('beforeend', data);
-            });
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'soft-dark-primary': '#0a0e1a',
+                        'soft-dark-secondary': '#1a1e2e',
+                        'soft-dark-tertiary': '#2a2e3e',
+                        'soft-accent-primary': '#c8a8e9',
+                        'soft-accent-secondary': '#f8b4d9',
+                        'soft-accent-tertiary': '#a8e6cf',
+                        'soft-text-primary': '#f5f3f0',
+                        'soft-text-secondary': '#b8b5b0',
+                        'soft-text-muted': '#8a8680',
+                    },
+                    animation: {
+                        'float-gentle': 'float-gentle 6s ease-in-out infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'glow-soft': 'glow-soft 2s ease-in-out infinite alternate',
+                        'bounce-soft': 'bounce-soft 1s ease-in-out',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'scale-bounce': 'scale-bounce 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                    },
+                    keyframes: {
+                        'float-gentle': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-8px) rotate(1deg)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: '0.6' },
+                            '50%': { opacity: '0.9' },
+                        },
+                        'glow-soft': {
+                            '0%': {
+                                'box-shadow': '0 0 5px rgba(200, 168, 233, 0.4), 0 0 10px rgba(200, 168, 233, 0.2)',
+                            },
+                            '100%': {
+                                'box-shadow': '0 0 10px rgba(200, 168, 233, 0.6), 0 0 20px rgba(200, 168, 233, 0.3), 0 0 30px rgba(200, 168, 233, 0.1)',
+                            }
+                        },
+                        'bounce-soft': {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.05)' },
+                            '100%': { transform: 'scale(1)' },
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        'scale-bounce': {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                            '100%': { transform: 'scale(1)' },
+                        }
+                    },
+                    fontFamily: {
+                        'cute': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'soft': '12px',
+                        'extra-soft': '20px',
+                    }
+                }
+            }
+        }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .gradient-bg {
-            background: linear-gradient(135deg, #0a0e1a 0%, #1a1e2e 50%, #2a2e3e 100%);
-            position: relative;
-            min-height: 100vh;
+        * {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
         }
 
-        .gradient-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 20% 20%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 60%, rgba(168, 230, 207, 0.05) 0%, transparent 50%);
-            pointer-events: none;
+        .gradient-bg {
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1e2e 50%, #2a2e3e 100%);
         }
 
         .glass-effect {
-            background: rgba(26, 30, 46, 0.8);
             backdrop-filter: blur(20px);
+            background: rgba(26, 30, 46, 0.7);
             border: 1px solid rgba(200, 168, 233, 0.2);
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 100%);
+            color: #0a0e1a;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.4);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .nav-link {
             position: relative;
-            color: #e0ddd8;
+            color: #b8b5b0;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-weight: 500;
             padding: 0.5rem 1rem;
@@ -63,13 +133,6 @@
             font-weight: 600;
         }
 
-        .text-gradient {
-            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
         .mobile-menu {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             transform: translateY(-20px);
@@ -79,21 +142,6 @@
         .mobile-menu.show {
             transform: translateY(0);
             opacity: 1;
-        }
-
-        .back-button {
-            background: linear-gradient(135deg, rgba(200, 168, 233, 0.2), rgba(248, 180, 217, 0.2));
-            border: 1px solid rgba(200, 168, 233, 0.3);
-            color: #c8a8e9;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .back-button:hover {
-            background: linear-gradient(135deg, rgba(200, 168, 233, 0.3), rgba(248, 180, 217, 0.3));
-            border-color: rgba(200, 168, 233, 0.5);
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(200, 168, 233, 0.3);
-            color: #f5f3f0;
         }
 
         .floating-decoration {
@@ -139,12 +187,123 @@
             border-color: rgba(200, 168, 233, 0.4);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
         }
+
+        .back-button {
+            background: linear-gradient(135deg, rgba(200, 168, 233, 0.2), rgba(248, 180, 217, 0.2));
+            border: 1px solid rgba(200, 168, 233, 0.3);
+            color: #c8a8e9;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, rgba(200, 168, 233, 0.3), rgba(248, 180, 217, 0.3));
+            border-color: rgba(200, 168, 233, 0.5);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(200, 168, 233, 0.3);
+            color: #f5f3f0;
+        }
+
+        .prose-paragraph {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #b8b5b0;
+            transition: all 0.3s ease;
+        }
+
+        .prose-paragraph:hover {
+            color: #f5f3f0;
+            transform: translateX(4px);
+        }
+
+        .prose-emphasis {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
     </style>
 </head>
 
 <body class="gradient-bg text-soft-text-primary min-h-screen font-cute">
     <!-- Navigation -->
-    <div id="navigation-container"></div>
+    <nav class="fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center group">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+                            <img src="images/avatar.png" alt="Dream Bell" 
+                                 class="relative h-10 w-10 rounded-full mr-3 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 border-2 border-soft-accent-primary/30">
+                        </div>
+                        <div class="text-gradient text-xl font-bold tracking-wide">夢鈴幻想</div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="nav-link group relative">
+                        <span class="relative z-10">首頁</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="novels.html" class="nav-link group relative">
+                        <span class="relative z-10">奇幻小說</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="tools.html" class="nav-link group relative">
+                        <span class="relative z-10">魔法工具</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="ai.html" class="nav-link group relative">
+                        <span class="relative z-10">AI魔導</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="medical-category.html" class="nav-link group relative">
+                        <span class="relative z-10">醫學、藥物、保健品</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="finance.html" class="nav-link group relative">
+                        <span class="relative z-10">經濟與投資</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="politics.html" class="nav-link group relative">
+                        <span class="relative z-10">政治與思想</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="blog.html" class="nav-link active group relative">
+                        <span class="relative z-10">心境筆記</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button type="button" id="mobile-menu-button"
+                        class="inline-flex items-center justify-center p-2 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-all duration-300 border border-soft-accent-primary/20 hover:border-soft-accent-primary/40">
+                        <span class="sr-only">開啟選單</span>
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden md:hidden">
+            <div class="px-4 pt-2 pb-3 space-y-1 bg-gradient-to-r from-soft-dark-primary/95 via-soft-dark-secondary/95 to-soft-dark-tertiary/95 backdrop-blur-md border-t border-soft-accent-primary/20">
+                <a href="index.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">首頁</a>
+                <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">奇幻小說</a>
+                <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">魔法工具</a>
+                <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI魔導</a>
+                <a href="medical-category.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">醫學、藥物、保健品</a>
+                <a href="finance.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">經濟與投資</a>
+                <a href="politics.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">政治與思想</a>
+                <a href="blog.html" class="block px-4 py-3 rounded-lg text-soft-accent-primary font-medium bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 border border-soft-accent-primary/30">心境筆記</a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Back Button -->
     <div class="fixed top-20 left-4 z-40">
@@ -162,10 +321,10 @@
 
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8">
-                    <i class="fas fa-lightbulb text-3xl text-soft-primary animate-pulse-soft"></i>
+                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8 animate-float-gentle">
+                    <i class="fas fa-lightbulb text-3xl text-soft-dark-primary"></i>
                 </div>
-                <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gradient">小說想法</h1>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-gradient leading-tight">小說想法</h1>
                 <div class="w-32 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-8"></div>
                 <p class="text-xl md:text-2xl text-soft-text-secondary max-w-4xl mx-auto leading-relaxed">
                     腦海中閃現的創作靈感與故事構思，每一個想法都可能成為下一個作品
@@ -179,45 +338,67 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="content-card rounded-extra-soft p-8 shadow-2xl">
                 <div class="prose prose-lg max-w-none">
-                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                    <p class="prose-paragraph">
                         要寫蘿莉，就不能只寫蘿莉。
                     </p>
                     
-                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                    <p class="prose-paragraph">
                         要寫風掠過她雙馬尾時，髮梢輕掃過米白色校服領口的溫柔。
                     </p>
                     
-                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                    <p class="prose-paragraph">
                         寫她笑起來時眼尾彎成月牙，嗓音像浸了蜜的風鈴，脆生生喊「看鏡頭呀」。
                     </p>
                     
-                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                    <p class="prose-paragraph">
                         寫她舉著兩隻小手比耶，指節還帶著孩童的圓潤，在光線下泛著軟乎乎的白。
                     </p>
                     
-                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                    <p class="prose-paragraph">
                         寫她蹦跳時藍格裙角揚起，把春末夏初的鮮活都揉進每一步雀躍裡。
                     </p>
                     
-                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                    <p class="prose-paragraph">
                         寫她眼裡盛著未經雕琢的澄澈，把路邊野花視作寶藏，將水窪倒影當成魔法鏡。
                     </p>
                     
-                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-6">
+                    <p class="prose-paragraph">
                         寫她攥著你衣角分享「今天螞蟻搬了三粒米」時，掌心傳來的溫熱與依賴。
                     </p>
                     
-                    <p class="text-lg leading-relaxed text-soft-text-secondary">
-                        而你在她毫無保留的雀躍裡忽然懂得——<strong class="text-soft-accent-primary">喜歡是被這份未染塵埃的天真輕輕撞了滿懷，是看她用稚嫩熱忱丈量世界時，自己也跟著心跳輕了半拍，甘願做她奇思妙想旁的守護者，陪她把尋常巷弄走成童話裡的冒險途。</strong>
+                    <p class="prose-paragraph">
+                        而你在她毫無保留的雀躍裡忽然懂得——<span class="prose-emphasis">喜歡是被這份未染塵埃的天真輕輕撞了滿懷，是看她用稚嫩熱忱丈量世界時，自己也跟著心跳輕了半拍，甘願做她奇思妙想旁的守護者，陪她把尋常巷弄走成童話裡的冒險途。</span>
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer class="glass-effect py-12 mt-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="https://www.threads.net/@yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-threads text-2xl"></i>
+                    </a>
+                    <a href="https://www.pixiv.net/users/96890924" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-pixiv text-2xl"></i>
+                    </a>
+                    <a href="https://github.com/yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                </div>
+                <div class="border-t border-soft-accent-primary/20 pt-8">
+                    <p class="text-soft-text-muted">&copy; 2024 夢鈴幻想. 在夢境與現實的交界處編織故事.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <!-- Back to Top Button -->
     <button id="back-to-top" 
-            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
+            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-dark-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
             aria-label="回到頂部">
         <i class="fas fa-arrow-up"></i>
     </button>
@@ -262,34 +443,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             toggleBackToTopButton();
         });
-    </script>
-    
-    <!-- Footer -->
-    <div id="footer-container"></div>
-
-    <!-- Load Scripts -->
-    <script>
-        // Load navigation
-        fetch('shared-nav.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navigation-container').innerHTML = data
-                    .replace(/{{ACTIVE_PAGE}}/g, 'blog');
-            });
-        
-        // Load footer
-        fetch('shared-footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            });
-
-        // Load shared scripts
-        fetch('shared-scripts.html')
-            .then(response => response.text())
-            .then(data => {
-                document.head.insertAdjacentHTML('beforeend', data);
-            });
     </script>
 </body>
 
