@@ -9,10 +9,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
+                        'soft-primary': '#0a0e1a',
+                        'soft-secondary': '#1a1e2e',  
+                        'soft-tertiary': '#2a2e3e',
                         'soft-dark-primary': '#0a0e1a',
                         'soft-dark-secondary': '#1a1e2e',
                         'soft-dark-tertiary': '#2a2e3e',
@@ -20,101 +22,80 @@
                         'soft-accent-secondary': '#f8b4d9',
                         'soft-accent-tertiary': '#a8e6cf',
                         'soft-text-primary': '#f5f3f0',
-                        'soft-text-secondary': '#b8b5b0',
-                        'soft-text-muted': '#8a8680',
-                    },
-                    animation: {
-                        'float-gentle': 'float-gentle 6s ease-in-out infinite',
-                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
-                        'glow-soft': 'glow-soft 2s ease-in-out infinite alternate',
-                        'bounce-soft': 'bounce-soft 1s ease-in-out',
-                        'slide-up': 'slide-up 0.6s ease-out',
-                        'scale-bounce': 'scale-bounce 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-                    },
-                    keyframes: {
-                        'float-gentle': {
-                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-                            '50%': { transform: 'translateY(-8px) rotate(1deg)' },
-                        },
-                        'pulse-soft': {
-                            '0%, 100%': { opacity: '0.6' },
-                            '50%': { opacity: '0.9' },
-                        },
-                        'glow-soft': {
-                            '0%': {
-                                'box-shadow': '0 0 5px rgba(200, 168, 233, 0.4), 0 0 10px rgba(200, 168, 233, 0.2)',
-                            },
-                            '100%': {
-                                'box-shadow': '0 0 10px rgba(200, 168, 233, 0.6), 0 0 20px rgba(200, 168, 233, 0.3), 0 0 30px rgba(200, 168, 233, 0.1)',
-                            }
-                        },
-                        'bounce-soft': {
-                            '0%': { transform: 'scale(1)' },
-                            '50%': { transform: 'scale(1.05)' },
-                            '100%': { transform: 'scale(1)' },
-                        },
-                        'slide-up': {
-                            '0%': { transform: 'translateY(30px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                        'scale-bounce': {
-                            '0%': { transform: 'scale(1)' },
-                            '50%': { transform: 'scale(1.1)' },
-                            '100%': { transform: 'scale(1)' },
-                        }
-                    },
-                    fontFamily: {
-                        'cute': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        'soft-text-secondary': '#e0ddd8'
                     },
                     borderRadius: {
                         'soft': '12px',
                         'extra-soft': '20px',
+                    },
+                    animation: {
+                        'float-gentle': 'float-gentle 6s ease-in-out infinite',
+                        'glow-soft': 'glow-soft 2s ease-in-out infinite alternate',
+                        'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                    },
+                    keyframes: {
+                        'float-gentle': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '33%': { transform: 'translateY(-10px) rotate(1deg)' },
+                            '66%': { transform: 'translateY(-5px) rotate(-1deg)' },
+                        },
+                        'glow-soft': {
+                            '0%': { 
+                                boxShadow: '0 0 5px rgba(200, 168, 233, 0.3), 0 0 10px rgba(200, 168, 233, 0.2)',
+                                opacity: '0.7'
+                            },
+                            '100%': { 
+                                boxShadow: '0 0 10px rgba(200, 168, 233, 0.4), 0 0 20px rgba(200, 168, 233, 0.3)',
+                                opacity: '1'
+                            }
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                            '50%': { opacity: '0.7', transform: 'scale(1.05)' },
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    },
+                    fontFamily: {
+                        'cute': ['Inter', 'system-ui', 'sans-serif']
                     }
                 }
             }
         }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-        }
-
         .gradient-bg {
             background: linear-gradient(135deg, #0a0e1a 0%, #1a1e2e 50%, #2a2e3e 100%);
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 60%, rgba(168, 230, 207, 0.05) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .glass-effect {
+            background: rgba(26, 30, 46, 0.8);
             backdrop-filter: blur(20px);
-            background: rgba(26, 30, 46, 0.7);
             border: 1px solid rgba(200, 168, 233, 0.2);
-        }
-
-        .button-primary {
-            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 100%);
-            color: #0a0e1a;
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .button-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.4);
-        }
-
-        .text-gradient {
-            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .nav-link {
             position: relative;
-            color: #b8b5b0;
+            color: #e0ddd8;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-weight: 500;
             padding: 0.5rem 1rem;
@@ -133,6 +114,13 @@
             font-weight: 600;
         }
 
+        .text-gradient {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .mobile-menu {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             transform: translateY(-20px);
@@ -142,6 +130,118 @@
         .mobile-menu.show {
             transform: translateY(0);
             opacity: 1;
+        }
+
+        .content-section {
+            background: rgba(26, 30, 46, 0.9);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #c8a8e9, #f8b4d9, #a8e6cf);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .content-section:hover::before {
+            opacity: 1;
+        }
+
+        .content-section:hover {
+            transform: translateY(-3px);
+            border-color: rgba(200, 168, 233, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
+        }
+
+        .level-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(200, 168, 233, 0.1);
+        }
+
+        .level-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .level-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, #c8a8e9, #f8b4d9);
+            color: #0a0e1a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .strategy-step {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid rgba(200, 168, 233, 0.1);
+        }
+
+        .strategy-step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .strategy-step::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.8rem;
+            height: 1.8rem;
+            background: linear-gradient(135deg, rgba(200, 168, 233, 0.2), rgba(248, 180, 217, 0.2));
+            border: 1px solid rgba(200, 168, 233, 0.4);
+            color: #c8a8e9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .strategy-container {
+            counter-reset: step-counter;
+        }
+
+        .back-button {
+            background: linear-gradient(135deg, rgba(200, 168, 233, 0.2), rgba(248, 180, 217, 0.2));
+            border: 1px solid rgba(200, 168, 233, 0.3);
+            color: #c8a8e9;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .back-button:hover {
+            background: linear-gradient(135deg, rgba(200, 168, 233, 0.3), rgba(248, 180, 217, 0.3));
+            border-color: rgba(200, 168, 233, 0.5);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(200, 168, 233, 0.3);
+            color: #f5f3f0;
         }
 
         .floating-decoration {
@@ -158,39 +258,132 @@
                              radial-gradient(circle at 40% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%);
         }
 
-        .content-card {
-            background: rgba(26, 30, 46, 0.9);
-            border: 1px solid rgba(200, 168, 233, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .content-card::before {
-            content: '';
-            position: absolute;
+        .scroll-progress {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
+            width: 0%;
             height: 3px;
             background: linear-gradient(90deg, #c8a8e9, #f8b4d9, #a8e6cf);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            z-index: 1000;
+            transition: width 0.3s ease;
         }
 
-        .content-card:hover::before {
-            transform: scaleX(1);
+        /* Search and filter styles */
+        .search-container {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .content-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(200, 168, 233, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
+        .filter-tag {
+            background: rgba(200, 168, 233, 0.1);
+            border: 1px solid rgba(200, 168, 233, 0.3);
+            color: #c8a8e9;
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .filter-tag:hover {
+            background: rgba(200, 168, 233, 0.2);
+            border-color: rgba(200, 168, 233, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .filter-tag.active {
+            background: linear-gradient(135deg, #c8a8e9, #f8b4d9);
+            color: #0a0e1a;
+            border-color: transparent;
+            font-weight: 600;
+        }
+
+        /* Sidebar styles */
+        .sidebar-container {
+            max-height: calc(100vh - 5rem);
+            overflow-y: auto;
+        }
+
+        .toc-link {
+            color: #e0ddd8;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 3px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: rgba(200, 168, 233, 0.1);
+            color: #c8a8e9;
+            border-left-color: rgba(200, 168, 233, 0.5);
+        }
+
+        .toc-link.active {
+            background: rgba(200, 168, 233, 0.15);
+            color: #c8a8e9;
+            border-left-color: #c8a8e9;
+            font-weight: 600;
+        }
+
+        /* Category animation */
+        .category-section {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .category-hidden {
+            opacity: 0;
+            transform: translateY(-20px);
+            max-height: 0;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .category-show {
+            opacity: 1;
+            transform: translateY(0);
+            max-height: none;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar-container {
+                position: relative;
+                top: 0;
+                max-height: none;
+            }
+        }
+
+        /* Custom scrollbar for sidebar */
+        .sidebar-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-track {
+            background: rgba(42, 46, 62, 0.5);
+            border-radius: 10px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-thumb {
+            background: rgba(200, 168, 233, 0.5);
+            border-radius: 10px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(200, 168, 233, 0.7);
+        }
+
+        /* Search highlight effect */
+        .search-highlight {
+            background-color: rgba(200, 168, 233, 0.3);
+            border-radius: 4px;
+            padding: 0 2px;
         }
     </style>
 </head>
 
-<body class="gradient-bg text-soft-text-primary min-h-screen font-cute">
+<body class="gradient-bg text-soft-text-primary min-h-screen font-cute" style="padding-top: 4rem;">
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
     <!-- Navigation -->
     <nav class="fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -214,15 +407,15 @@
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="novels.html" class="nav-link group relative">
-                        <span class="relative z-10">奇幻小說</span>
+                        <span class="relative z-10">輕小說</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="tools.html" class="nav-link group relative">
-                        <span class="relative z-10">魔法工具</span>
+                        <span class="relative z-10">程式與工具</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="ai.html" class="nav-link group relative">
-                        <span class="relative z-10">AI魔導</span>
+                        <span class="relative z-10">AI 心得</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="medical-category.html" class="nav-link group relative">
@@ -233,7 +426,7 @@
                         <span class="relative z-10">經濟與投資</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
-                    <a href="politics.html" class="nav-link active group relative">
+                    <a href="politics.html" class="nav-link group relative active">
                         <span class="relative z-10">政治與思想</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
@@ -258,16 +451,24 @@
         <div id="mobile-menu" class="mobile-menu hidden md:hidden">
             <div class="px-4 pt-2 pb-3 space-y-1 bg-gradient-to-r from-soft-dark-primary/95 via-soft-dark-secondary/95 to-soft-dark-tertiary/95 backdrop-blur-md border-t border-soft-accent-primary/20">
                 <a href="index.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">首頁</a>
-                <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">奇幻小說</a>
-                <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">魔法工具</a>
-                <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI魔導</a>
+                <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">輕小說</a>
+                <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">程式與工具</a>
+                <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI 心得</a>
                 <a href="medical-category.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">醫學、藥物、保健品</a>
                 <a href="finance.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">經濟與投資</a>
-                <a href="politics.html" class="block px-4 py-3 rounded-lg text-soft-accent-primary font-medium bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 border border-soft-accent-primary/30">政治與思想</a>
+                <a href="politics.html" class="block px-4 py-3 rounded-lg text-soft-text-primary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-soft-accent-primary/20 font-semibold">政治與思想</a>
                 <a href="blog.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">心境筆記</a>
             </div>
         </div>
     </nav>
+
+    <!-- Back Button -->
+    <div class="fixed top-20 left-4 z-40">
+        <a href="blog.html" class="back-button px-4 py-2 rounded-soft inline-flex items-center group">
+            <i class="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i>
+            <span class="text-sm font-medium">返回筆記</span>
+        </a>
+    </div>
 
     <!-- Hero Section -->
     <section class="pt-24 pb-12 relative hero-pattern">
@@ -277,86 +478,259 @@
 
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8 animate-float-gentle">
-                    <i class="fas fa-balance-scale text-3xl text-soft-dark-primary"></i>
+                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8">
+                    <i class="fas fa-balance-scale text-3xl text-soft-primary animate-pulse-soft"></i>
                 </div>
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-gradient leading-tight">政治與思想</h1>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gradient">政治與思想</h1>
                 <div class="w-32 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-8"></div>
                 <p class="text-xl md:text-2xl text-soft-text-secondary max-w-4xl mx-auto leading-relaxed">
-                    政治理論、社會思想與公共議題的思辨筆記
+                    學的越多、理解的越多、看的越多，想法就會改變<br>
+                    對的、錯的將會越來越模糊，追求中庸之道、允執厥中
                 </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="py-8 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="search-container glass-effect rounded-extra-soft p-6 shadow-lg">
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="搜尋政治思想內容..." 
+                           class="w-full px-6 py-4 pl-14 bg-transparent border border-soft-accent-primary border-opacity-30 rounded-soft text-soft-text-primary placeholder-soft-text-secondary focus:outline-none focus:border-soft-accent-primary focus:border-opacity-60 transition-all duration-300">
+                    <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-soft-accent-primary text-lg"></i>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <button class="filter-tag active" data-filter="all">全部</button>
+                    <button class="filter-tag" data-filter="crisis-management">危機處理</button>
+                    <button class="filter-tag" data-filter="political-strategy">政治鬥爭</button>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Content Section -->
     <section class="py-16 relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="content-card rounded-extra-soft p-8 shadow-2xl">
-                <div class="text-center py-16">
-                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-soft-accent-secondary to-soft-accent-primary mb-8">
-                        <i class="fas fa-university text-2xl text-soft-dark-primary"></i>
-                    </div>
-                    <h2 class="text-3xl font-bold text-gradient mb-6">內容建構中</h2>
-                    <p class="text-lg text-soft-text-secondary max-w-2xl mx-auto leading-relaxed">
-                        政治與思想相關內容正在整理與撰寫中，將提供深度的政治理論分析和社會議題思辨。
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
+                
+                <!-- Main Content -->
+                <div class="flex-1" id="main-content">
+            
+            <!-- 政治人物危機處理能力分類 -->
+            <div id="crisis-management" class="category-section content-section rounded-extra-soft p-8 md:p-12 shadow-2xl mb-12" data-category="crisis-management">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-4 text-gradient">
+                        <i class="fas fa-crown mr-3"></i>政治人物危機處理能力分類
+                    </h2>
+                    <p class="text-lg text-soft-text-secondary">
+                        若以對重大危機的處理能力為標誌，這個地球上的政治人物可分為四等
                     </p>
-                    <div class="mt-8">
-                        <div class="inline-flex items-center text-soft-accent-primary">
-                            <i class="fas fa-clock mr-2"></i>
-                            <span class="text-sm">預計上線時間：近期</span>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="level-item">
+                        <div class="level-number">1</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-soft-accent-primary mb-3">歷史的創造者</h3>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                最偉大、最有手腕的政治人物，往往是通過<strong class="text-soft-accent-primary">製造危機</strong>，
+                                <strong class="text-soft-accent-primary">掌控危機</strong>，然後<strong class="text-soft-accent-primary">利用危機</strong>，
+                                成就個人夢想與歷史霸業，他們是歷史的創造者。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="level-item">
+                        <div class="level-number">2</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-soft-accent-primary mb-3">歷史的推進者</h3>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                偉大而有手腕的政治人物，往往是<strong class="text-soft-accent-primary">順勢而為</strong>，
+                                通過掌控和利用危機，達成個人夢想與歷史定位，他們是歷史的推進者。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="level-item">
+                        <div class="level-number">3</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-soft-accent-primary mb-3">危機的俘虜</h3>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                一些相對無能的政治人物，他們不願也掀不起什麼歷史波瀾，但是危機卻找上門來，
+                                他們在危機面前<strong class="text-soft-accent-primary">驚慌失措</strong>，被危機裹挾，
+                                成為危機的俘虜，失去對時局的把控能力，最終被歷史淹沒。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="level-item">
+                        <div class="level-number">4</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-soft-accent-primary mb-3">歷史的罪人</h3>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                最無能、最愚蠢的一類，就是對自己<strong class="text-soft-accent-primary">超級自信</strong>，
+                                自以為找到了某條絕對正確的可以拯救國家和人民的道路，他們掀起歷史狂浪，製造危機，
+                                不惜以國家和民族利益為代價試圖成就夢想霸業，但實際上卻<strong class="text-soft-accent-primary">德不配位、志大才疏、眼高手低</strong>，
+                                根本不具備掌握時局與危機的能力，結果被自己掀起的危機吞沒，成為國家和歷史的罪人，人們的恥笑對象。
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- 政治鬥爭策略 -->
+            <div id="political-strategy" class="category-section content-section rounded-extra-soft p-8 md:p-12 shadow-2xl" data-category="political-strategy">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold mb-4 text-gradient">
+                        <i class="fas fa-chess mr-3"></i>政治鬥爭的七步策略
+                    </h2>
+                    <p class="text-lg text-soft-text-secondary">
+                        古典政治鬥爭中的系統性操作手法
+                    </p>
+                </div>
+
+                <div class="strategy-container space-y-6">
+                    <div class="strategy-step">
+                        <div>
+                            <h3 class="text-lg font-bold text-soft-accent-primary mb-2">預備造勢</h3>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                向具發言權的人暗示你們已經準備好選邊站。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="strategy-step">
+                        <div>
+                            <h3 class="text-lg font-bold text-soft-accent-primary mb-2">公開批評</h3>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                開始造勢，公開批評那位有問題的人，促使周圍的人也跟進表態，進而開始收集對方的罪證。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="strategy-step">
+                        <div>
+                            <h3 class="text-lg font-bold text-soft-accent-primary mb-2">施壓倒戈</h3>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                以對方承認錯誤為契機，進一步施壓整個派系，讓他們不得不面對事實，實現成功倒戈。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="strategy-step">
+                        <div>
+                            <h3 class="text-lg font-bold text-soft-accent-primary mb-2">緩兵之計</h3>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                不應一開始就針對核心人物，要表現出沒有趕盡殺絕的意圖，這是一種緩兵之計。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="strategy-step">
+                        <div>
+                            <h3 class="text-lg font-bold text-soft-accent-primary mb-2">調動職務</h3>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                當派系成員都反叛後，突然調動核心人物的職務。由於其無力反抗，讓大家看到其失勢，徹底削弱其影響力和根基。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="strategy-step">
+                        <div>
+                            <h3 class="text-lg font-bold text-soft-accent-primary mb-2">全面彈劾</h3>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                隨後，各部會與地方官員開始對核心人物進行彈劾，指控其「罪大惡極，必須受到懲罰」。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="strategy-step">
+                        <div>
+                            <h3 class="text-lg font-bold text-soft-accent-primary mb-2">仁厚收場</h3>
+                            <p class="text-lg leading-relaxed text-soft-text-secondary">
+                                最後，核心人物的官位和職權逐步被剝奪，最終被下放，但表面上要顯示出「仁厚」，避免過於激烈。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="w-full lg:w-80 shrink-0">
+                    <div class="sidebar-container sticky top-24">
+                        
+                        <!-- Table of Contents -->
+                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg mb-6">
+                            <h3 class="text-xl font-bold text-gradient mb-4 flex items-center">
+                                <i class="fas fa-list mr-3"></i>目錄導航
+                            </h3>
+                            <nav class="space-y-2" id="toc-nav">
+                                <a href="#crisis-management" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="crisis-management">
+                                    <i class="fas fa-crown mr-3 text-soft-accent-primary"></i>
+                                    <span>危機處理分類</span>
+                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-crisis-management">4</span>
+                                </a>
+                                <a href="#political-strategy" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="political-strategy">
+                                    <i class="fas fa-chess mr-3 text-soft-accent-primary"></i>
+                                    <span>政治鬥爭策略</span>
+                                    <span class="ml-auto text-xs bg-soft-accent-primary bg-opacity-20 px-2 py-1 rounded" id="count-political-strategy">7</span>
+                                </a>
+                            </nav>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg">
+                            <h3 class="text-lg font-bold text-gradient mb-4 flex items-center">
+                                <i class="fas fa-chart-bar mr-3"></i>統計資訊
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">總內容數</span>
+                                    <span class="text-soft-accent-primary font-bold" id="total-items">11</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">分類數</span>
+                                    <span class="text-soft-accent-secondary font-bold">2</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">顯示中</span>
+                                    <span class="text-soft-accent-tertiary font-bold" id="visible-items">11</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="glass-effect py-12 mt-16">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <div class="flex justify-center space-x-6 mb-8">
-                    <a href="https://www.threads.net/@yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
-                        <i class="fab fa-threads text-2xl"></i>
-                    </a>
-                    <a href="https://www.pixiv.net/users/96890924" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
-                        <i class="fab fa-pixiv text-2xl"></i>
-                    </a>
-                    <a href="https://github.com/yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
-                        <i class="fab fa-github text-2xl"></i>
-                    </a>
-                </div>
-                <div class="border-t border-soft-accent-primary/20 pt-8">
-                    <p class="text-soft-text-muted">&copy; 2024 夢鈴幻想. 在夢境與現實的交界處編織故事.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <!-- Back to Top Button -->
     <button id="back-to-top" 
-            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-dark-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
+            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
             aria-label="回到頂部">
         <i class="fas fa-arrow-up"></i>
     </button>
 
     <script>
         // Mobile menu toggle
-        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
-        menuButton.addEventListener('click', () => {
+        mobileMenuButton?.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-            if (!mobileMenu.classList.contains('hidden')) {
-                setTimeout(() => mobileMenu.classList.add('show'), 10);
-            } else {
-                mobileMenu.classList.remove('show');
-            }
+            setTimeout(() => {
+                mobileMenu.classList.toggle('show');
+            }, 10);
         });
 
         // Back to top functionality
         const backToTopButton = document.getElementById('back-to-top');
+        const scrollProgress = document.getElementById('scroll-progress');
 
         const toggleBackToTopButton = () => {
             if (window.scrollY > 300) {
@@ -366,6 +740,10 @@
                 backToTopButton.style.opacity = '0';
                 backToTopButton.style.transform = 'scale(0.95)';
             }
+
+            // Update scroll progress
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
         };
 
         backToTopButton?.addEventListener('click', () => {
@@ -380,6 +758,207 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             toggleBackToTopButton();
+        });
+
+        // Add smooth scrolling animation for sections
+        const observeElements = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'slide-up 0.6s ease-out';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.content-section').forEach(section => {
+                observer.observe(section);
+            });
+        };
+
+        // Search and filter functionality
+        const searchInput = document.getElementById('search-input');
+        const filterTags = document.querySelectorAll('.filter-tag');
+        const categoryElements = document.querySelectorAll('.category-section');
+        const tocLinks = document.querySelectorAll('.toc-link');
+        let currentFilter = 'all';
+
+        // Search functionality
+        function performSearch(searchTerm) {
+            const normalizedSearchTerm = searchTerm.toLowerCase().trim();
+            let visibleCount = 0;
+
+            categoryElements.forEach(category => {
+                const categoryName = category.getAttribute('data-category');
+                const content = category.textContent.toLowerCase();
+                const hasMatch = normalizedSearchTerm === '' || content.includes(normalizedSearchTerm);
+                
+                if (hasMatch && (currentFilter === 'all' || currentFilter === categoryName)) {
+                    category.classList.remove('category-hidden');
+                    category.classList.add('category-show');
+                    visibleCount++;
+                    
+                    // Highlight search term
+                    if (normalizedSearchTerm !== '') {
+                        highlightText(category, normalizedSearchTerm);
+                    } else {
+                        removeHighlight(category);
+                    }
+                } else {
+                    category.classList.add('category-hidden');
+                    category.classList.remove('category-show');
+                    removeHighlight(category);
+                }
+            });
+
+            // Update visible count
+            updateVisibleCount(visibleCount);
+            updateTocCounts();
+        }
+
+        // Filter functionality
+        function applyFilter(filter) {
+            currentFilter = filter;
+            performSearch(searchInput.value);
+            
+            // Update active filter tag
+            filterTags.forEach(tag => {
+                if (tag.getAttribute('data-filter') === filter) {
+                    tag.classList.add('active');
+                } else {
+                    tag.classList.remove('active');
+                }
+            });
+        }
+
+        // Highlight text function
+        function highlightText(element, searchTerm) {
+            // First remove existing highlights
+            removeHighlight(element);
+            
+            // Get all text nodes
+            const walker = document.createTreeWalker(
+                element,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            
+            const textNodes = [];
+            let node;
+            while (node = walker.nextNode()) {
+                textNodes.push(node);
+            }
+            
+            // Highlight matching text
+            textNodes.forEach(textNode => {
+                const text = textNode.textContent;
+                const lowerText = text.toLowerCase();
+                const searchIndex = lowerText.indexOf(searchTerm);
+                
+                if (searchIndex !== -1) {
+                    const beforeText = text.substring(0, searchIndex);
+                    const matchText = text.substring(searchIndex, searchIndex + searchTerm.length);
+                    const afterText = text.substring(searchIndex + searchTerm.length);
+                    
+                    const highlightSpan = document.createElement('span');
+                    highlightSpan.className = 'search-highlight';
+                    highlightSpan.textContent = matchText;
+                    
+                    const fragment = document.createDocumentFragment();
+                    if (beforeText) fragment.appendChild(document.createTextNode(beforeText));
+                    fragment.appendChild(highlightSpan);
+                    if (afterText) fragment.appendChild(document.createTextNode(afterText));
+                    
+                    textNode.parentNode.replaceChild(fragment, textNode);
+                }
+            });
+        }
+
+        // Remove highlight function
+        function removeHighlight(element) {
+            const highlights = element.querySelectorAll('.search-highlight');
+            highlights.forEach(highlight => {
+                const parent = highlight.parentNode;
+                parent.replaceChild(document.createTextNode(highlight.textContent), highlight);
+                parent.normalize();
+            });
+        }
+
+        // Update visible count
+        function updateVisibleCount(count) {
+            const visibleItemsElement = document.getElementById('visible-items');
+            if (visibleItemsElement) {
+                visibleItemsElement.textContent = count;
+            }
+        }
+
+        // Update TOC counts
+        function updateTocCounts() {
+            const crisisCount = document.querySelector('#crisis-management').classList.contains('category-hidden') ? 0 : 4;
+            const strategyCount = document.querySelector('#political-strategy').classList.contains('category-hidden') ? 0 : 7;
+            
+            document.getElementById('count-crisis-management').textContent = crisisCount;
+            document.getElementById('count-political-strategy').textContent = strategyCount;
+        }
+
+        // Scroll spy functionality
+        function updateActiveSection() {
+            const sections = document.querySelectorAll('.category-section');
+            const scrollPosition = window.scrollY + 200;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                const tocLink = document.querySelector(`a[href="#${sectionId}"]`);
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    tocLinks.forEach(link => link.classList.remove('active'));
+                    if (tocLink) tocLink.classList.add('active');
+                }
+            });
+        }
+
+        // Event listeners
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                performSearch(e.target.value);
+            });
+        }
+
+        filterTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const filter = tag.getAttribute('data-filter');
+                applyFilter(filter);
+            });
+        });
+
+        // TOC smooth scrolling
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Scroll spy
+        window.addEventListener('scroll', updateActiveSection);
+
+        // Initialize animations and functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            observeElements();
+            updateActiveSection();
+            updateTocCounts();
+        });
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            updateActiveSection();
         });
     </script>
 </body>
