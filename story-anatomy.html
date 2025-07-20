@@ -4,29 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>夢鈴幻想 | 故事解析</title>
+    <title>夢鈴幻想 | 故事的解剖</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        'soft-dark-primary': '#0a0e1a',
-                        'soft-dark-secondary': '#1a1e2e',
-                        'soft-dark-tertiary': '#2a2e3e',
+                        'soft-primary': '#0a0e1a',
+                        'soft-secondary': '#1a1e2e',  
+                        'soft-tertiary': '#2a2e3e',
                         'soft-accent-primary': '#c8a8e9',
                         'soft-accent-secondary': '#f8b4d9',
                         'soft-accent-tertiary': '#a8e6cf',
                         'soft-text-primary': '#f5f3f0',
-                        'soft-text-secondary': '#b8b5b0',
-                        'soft-text-muted': '#8a8680',
+                        'soft-text-secondary': '#e0ddd8'
+                    },
+                    borderRadius: {
+                        'soft': '12px',
+                        'extra-soft': '20px',
                     },
                     animation: {
                         'float-gentle': 'float-gentle 6s ease-in-out infinite',
-                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
                         'glow-soft': 'glow-soft 2s ease-in-out infinite alternate',
+                        'pulse-soft': 'pulse-soft 2s ease-in-out infinite',
                         'bounce-soft': 'bounce-soft 1s ease-in-out',
                         'slide-up': 'slide-up 0.6s ease-out',
                         'scale-bounce': 'scale-bounce 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
@@ -34,24 +36,26 @@
                     keyframes: {
                         'float-gentle': {
                             '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-                            '50%': { transform: 'translateY(-8px) rotate(1deg)' },
-                        },
-                        'pulse-soft': {
-                            '0%, 100%': { opacity: '0.6' },
-                            '50%': { opacity: '0.9' },
+                            '33%': { transform: 'translateY(-10px) rotate(1deg)' },
+                            '66%': { transform: 'translateY(-5px) rotate(-1deg)' },
                         },
                         'glow-soft': {
-                            '0%': {
-                                'box-shadow': '0 0 5px rgba(200, 168, 233, 0.4), 0 0 10px rgba(200, 168, 233, 0.2)',
+                            '0%': { 
+                                boxShadow: '0 0 5px rgba(200, 168, 233, 0.3), 0 0 10px rgba(200, 168, 233, 0.2), 0 0 15px rgba(200, 168, 233, 0.1)',
+                                opacity: '0.7'
                             },
-                            '100%': {
-                                'box-shadow': '0 0 10px rgba(200, 168, 233, 0.6), 0 0 20px rgba(200, 168, 233, 0.3), 0 0 30px rgba(200, 168, 233, 0.1)',
+                            '100%': { 
+                                boxShadow: '0 0 10px rgba(200, 168, 233, 0.4), 0 0 20px rgba(200, 168, 233, 0.3), 0 0 30px rgba(200, 168, 233, 0.2)',
+                                opacity: '1'
                             }
                         },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                            '50%': { opacity: '0.7', transform: 'scale(1.05)' },
+                        },
                         'bounce-soft': {
-                            '0%': { transform: 'scale(1)' },
-                            '50%': { transform: 'scale(1.05)' },
-                            '100%': { transform: 'scale(1)' },
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
                         },
                         'slide-up': {
                             '0%': { transform: 'translateY(30px)', opacity: '0' },
@@ -64,57 +68,42 @@
                         }
                     },
                     fontFamily: {
-                        'cute': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-                    },
-                    borderRadius: {
-                        'soft': '12px',
-                        'extra-soft': '20px',
+                        'cute': ['Inter', 'system-ui', 'sans-serif']
                     }
                 }
             }
         }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-        }
-
         .gradient-bg {
             background: linear-gradient(135deg, #0a0e1a 0%, #1a1e2e 50%, #2a2e3e 100%);
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 60%, rgba(168, 230, 207, 0.05) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .glass-effect {
+            background: rgba(26, 30, 46, 0.8);
             backdrop-filter: blur(20px);
-            background: rgba(26, 30, 46, 0.7);
             border: 1px solid rgba(200, 168, 233, 0.2);
-        }
-
-        .button-primary {
-            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 100%);
-            color: #0a0e1a;
-            font-weight: 600;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .button-primary:hover {
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.4);
-        }
-
-        .text-gradient {
-            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .nav-link {
             position: relative;
-            color: #b8b5b0;
+            color: #e0ddd8;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-weight: 500;
             padding: 0.5rem 1rem;
@@ -131,6 +120,13 @@
             color: #c8a8e9;
             background: rgba(200, 168, 233, 0.15);
             font-weight: 600;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .mobile-menu {
@@ -158,34 +154,39 @@
                              radial-gradient(circle at 40% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%);
         }
 
-        .content-card {
+        .content-section {
             background: rgba(26, 30, 46, 0.9);
             border: 1px solid rgba(200, 168, 233, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .content-section h2 {
+            color: #c8a8e9;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(200, 168, 233, 0.3);
+        }
+
+        .content-item {
             position: relative;
-            overflow: hidden;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(200, 168, 233, 0.1);
         }
 
-        .content-card::before {
-            content: '';
+        .content-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .content-item::before {
+            content: '✦';
             position: absolute;
-            top: 0;
             left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #c8a8e9, #f8b4d9, #a8e6cf);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .content-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .content-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(200, 168, 233, 0.4);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
+            top: 0;
+            color: #c8a8e9;
+            font-size: 1.2rem;
         }
 
         .back-button {
@@ -203,39 +204,127 @@
             color: #f5f3f0;
         }
 
-        .story-item {
-            background: rgba(26, 30, 46, 0.6);
-            border: 1px solid rgba(200, 168, 233, 0.2);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .story-item::before {
-            content: '';
-            position: absolute;
+        .scroll-progress {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #c8a8e9, #f8b4d9);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #c8a8e9, #f8b4d9, #a8e6cf);
+            z-index: 1000;
+            transition: width 0.3s ease;
         }
 
-        .story-item:hover::before {
-            transform: scaleX(1);
+        /* Search and Filter Styles */
+        .search-container {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .story-item:hover {
-            transform: translateY(-3px);
+        .search-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(200, 168, 233, 0.2);
+        }
+
+        .filter-tag {
+            padding: 0.5rem 1rem;
+            border-radius: 12px;
+            background: rgba(26, 30, 46, 0.6);
+            border: 1px solid rgba(200, 168, 233, 0.3);
+            color: #e0ddd8;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .filter-tag:hover {
+            background: rgba(200, 168, 233, 0.2);
+            border-color: rgba(200, 168, 233, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .filter-tag.active {
+            background: linear-gradient(135deg, #c8a8e9, #f8b4d9);
+            color: #0a0e1a;
+            border-color: #c8a8e9;
+            font-weight: 600;
+        }
+
+        /* Sidebar Styles */
+        .sidebar-container {
+            max-height: calc(100vh - 6rem);
+            overflow-y: auto;
+        }
+
+        .toc-link {
+            color: #e0ddd8;
+            text-decoration: none;
+            border: 1px solid transparent;
+        }
+
+        .toc-link:hover {
+            background: rgba(200, 168, 233, 0.1);
+            border-color: rgba(200, 168, 233, 0.3);
+            color: #c8a8e9;
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            background: rgba(200, 168, 233, 0.2);
             border-color: rgba(200, 168, 233, 0.4);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 0 15px rgba(200, 168, 233, 0.1);
+            color: #c8a8e9;
+            font-weight: 600;
+        }
+
+        /* Hide/Show Animation */
+        .content-hidden {
+            display: none !important;
+        }
+
+        .content-show {
+            animation: slide-up 0.6s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1023px) {
+            .sidebar-container {
+                position: static !important;
+                max-height: none;
+            }
+        }
+
+        /* Custom scrollbar for sidebar */
+        .sidebar-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-track {
+            background: rgba(26, 30, 46, 0.3);
+            border-radius: 10px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-thumb {
+            background: rgba(200, 168, 233, 0.5);
+            border-radius: 10px;
+        }
+
+        .sidebar-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(200, 168, 233, 0.7);
+        }
+
+        /* Search highlight effect */
+        .search-highlight {
+            background-color: rgba(200, 168, 233, 0.3);
+            border-radius: 4px;
+            padding: 0 2px;
         }
     </style>
 </head>
 
 <body class="gradient-bg text-soft-text-primary min-h-screen font-cute">
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
     <!-- Navigation -->
     <nav class="fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -259,15 +348,15 @@
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="novels.html" class="nav-link group relative">
-                        <span class="relative z-10">奇幻小說</span>
+                        <span class="relative z-10">輕小說</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="tools.html" class="nav-link group relative">
-                        <span class="relative z-10">魔法工具</span>
+                        <span class="relative z-10">程式與工具</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="ai.html" class="nav-link group relative">
-                        <span class="relative z-10">AI魔導</span>
+                        <span class="relative z-10">AI 心得</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="medical-category.html" class="nav-link group relative">
@@ -303,9 +392,9 @@
         <div id="mobile-menu" class="mobile-menu hidden md:hidden">
             <div class="px-4 pt-2 pb-3 space-y-1 bg-gradient-to-r from-soft-dark-primary/95 via-soft-dark-secondary/95 to-soft-dark-tertiary/95 backdrop-blur-md border-t border-soft-accent-primary/20">
                 <a href="index.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">首頁</a>
-                <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">奇幻小說</a>
-                <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">魔法工具</a>
-                <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI魔導</a>
+                <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">輕小說</a>
+                <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">程式與工具</a>
+                <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI 心得</a>
                 <a href="medical-category.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">醫學、藥物、保健品</a>
                 <a href="finance.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">經濟與投資</a>
                 <a href="politics.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">政治與思想</a>
@@ -330,180 +419,660 @@
 
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8 animate-float-gentle">
-                    <i class="fas fa-microscope text-3xl text-soft-dark-primary"></i>
+                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8">
+                    <i class="fas fa-microscope text-3xl text-soft-primary animate-pulse-soft"></i>
                 </div>
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-gradient leading-tight">故事解析</h1>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gradient">故事的解剖</h1>
                 <div class="w-32 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-8"></div>
                 <p class="text-xl md:text-2xl text-soft-text-secondary max-w-4xl mx-auto leading-relaxed">
-                    深入探討小說創作的技巧與心得，從角色塑造到情節安排的寫作思考
+                    深入探索說故事的藝術，從技法到心法，從形式到本質
                 </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="py-8 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="search-container glass-effect rounded-extra-soft p-6 shadow-lg">
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="搜尋故事解剖內容..." 
+                           class="w-full px-6 py-4 pl-14 bg-transparent border border-soft-accent-primary border-opacity-30 rounded-soft text-soft-text-primary placeholder-soft-text-secondary focus:outline-none focus:border-soft-accent-primary focus:border-opacity-60 transition-all duration-300">
+                    <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-soft-accent-primary text-lg"></i>
+                </div>
+                <div class="flex flex-wrap gap-2 mt-4">
+                    <button class="filter-tag active" data-filter="all">全部</button>
+                    <button class="filter-tag" data-filter="writing-techniques">寫作技法</button>
+                    <button class="filter-tag" data-filter="character-development">角色塑造</button>
+                    <button class="filter-tag" data-filter="story-structure">故事結構</button>
+                    <button class="filter-tag" data-filter="creative-process">創作心法</button>
+                    <button class="filter-tag" data-filter="genre-understanding">類型理解</button>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Content Section -->
     <section class="py-16 relative">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="space-y-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-8">
                 
-                <!-- 寫作焦點的掌握 -->
-                <div class="story-item rounded-extra-soft p-8 shadow-2xl">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary flex items-center justify-center mr-4">
-                            <i class="fas fa-crosshairs text-soft-dark-primary text-lg"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gradient">寫作焦點的掌握</h2>
-                    </div>
+                <!-- Main Content -->
+                <div class="flex-1" id="main-content">
+                
+                <div id="writing-focus" class="content-item" data-category="writing-techniques">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">寫作焦點的掌握</h3>
                     <p class="text-lg leading-relaxed text-soft-text-secondary">
                         在故事中，那些應該強調與深入的描寫，那些應該一筆帶過，要是能掌握好，能從千篇一律的故事中脫穎而出。
                     </p>
                 </div>
 
-                <!-- 原創性與可信度 -->
-                <div class="story-item rounded-extra-soft p-8 shadow-2xl">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-secondary to-soft-accent-tertiary flex items-center justify-center mr-4">
-                            <i class="fas fa-lightbulb text-soft-dark-primary text-lg"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gradient">原創性與可信度</h2>
+                <div id="originality-credibility" class="content-item" data-category="creative-process">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">原創性與可信度</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        原創創意的出現，有賴於致力追求可信度而非追求特立獨行。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        具個人特色的風格不可能是在高度自覺下完成的。身為作者的你，如果對角色和故事設定的認知掌握符合自己的個性，你所作的選擇，以及你從大量素材中創造出來的種種巧妙安排，就會成為專屬於你的獨特作品。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        你的作品反映出你這個人，它是具原創創意的作品。
+                    </p>
+                </div>
+
+                <div id="story-opening" class="content-item" data-category="story-structure">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">故事開場的陷阱</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        身為作者的我們，在設計和安排觸發事件時如果有所謂的通病，那就是我們經常會延遲中心劇情出現的時機，在開場的場景段落塞進太多背景說明。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        我們老是低估觀眾的認知和生活經驗，用冗長無趣的細節來呈現角色和角色的世界，偏偏這些細節對觀眾來說早已是常識的一部分。
+                    </p>
+                </div>
+
+                <div id="character-vs-characterization" class="content-item" data-category="character-development">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">角色與角色塑造的區別</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        <strong class="text-soft-accent-primary">角色跟角色塑造是兩個不同的概念。</strong>
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        角色塑造指的是角色是甚麼人？職業、外在、風格、特質。如同一個醫生，有錢、有能力、聰明、富有愛心。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        而角色指的是角色的本質，而角色的本質必須要在壓力下才能顯現，如果選擇可有可無，那麼角色的選擇絲毫沒有意義。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        例如：醫生選擇捐錢給兒童還是大學學生，對這個角色來說並不能表現出本質。但如果是：這筆錢是自己知道自己剩下不到一個月壽命，並且無妻子小孩與家人，那麼這筆錢的捐給學生還是孩子就反映出的角色本質。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        角色跟角色塑造要是一致，那麼故事會很無聊，讀者們看過太多的故事，對於陳腔濫調早就毫無耐心。
+                    </p>
+                </div>
+
+                <div id="scene-creation-method" class="content-item" data-category="writing-techniques">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">場景創作的十倍法則</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        想要一個故事片段優秀，可以試著創造10個不同場景，並思考推演角色的反應與行為，再將最優秀的拿出來，並在這個場景下再創造 10 個不同的反應、行為、互動，選出最喜歡的一個，基本上故事就會優良許多。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        在創作的時候，人往往根據經驗創作，而經驗很大一部分來自於看過、閱讀過的故事，通常這種模板化到創作令人感到無趣，因此必須要跳脫這種直覺與經驗思維。
+                    </p>
+                </div>
+
+                <div id="theme-expression" class="content-item" data-category="creative-process">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">主題表達的藝術</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        作者在寫故事時其實就是表達自己的價值觀與想法。但往往以說教的方式出現來灌輸想法，這種方式並不能讓讀者信服，而是會讓讀者感覺厭煩。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        同時，如果塞入過多想法，故事最終將會碎片化，讀完後看起來就是：甚麼也沒講。而某個想法上很優秀的靠著故事與人物傳達出來，讀者們自己就會產生作者預期之外的體會。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        小說創作是門文化、藝術、哲學與娛樂的綜合體。
+                    </p>
+                </div>
+
+                <div id="love-your-creation" class="content-item" data-category="creative-process">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">創作的本質動力</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        <strong class="text-soft-accent-primary">創作的本質是你必須熱愛你所創作的。</strong>
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        你會為了這樣的故事掏錢。並且反覆看自己的創作都會感到開心。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        這是你寫的故事你想要看到的故事。
+                    </p>
+                </div>
+
+                <div id="classical-design" class="content-item" data-category="story-structure">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">經典設計的人性基礎</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        觀眾數量縮減的理由，在於大多數人相信以下幾種想法：
+                    </p>
+                    <ul class="text-lg leading-relaxed text-soft-text-secondary mb-4 ml-6 space-y-2">
+                        <li>• 人生帶給他們的是<strong class="text-soft-accent-primary">封閉式的經驗</strong>，而這些經驗來自於絕對且無法逆轉的改變</li>
+                        <li>• 他們最大的衝突來源是<strong class="text-soft-accent-primary">自己與外在的衝突</strong></li>
+                        <li>• 他們是自身經驗<strong class="text-soft-accent-primary">單一的主動主角</strong></li>
+                        <li>• 他們的存在，在連續的時間、因果互相連結的連貫真實中運轉，而在這個真實裡，事件因為<strong class="text-soft-accent-primary">可解釋、有意義的理由</strong>而發生</li>
+                    </ul>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        自從我們的老祖宗凝視自己生起的火，思索「我存在」這個想法後，人類就如此看待世界，以及存在於世界當中的自身。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        <strong class="text-soft-accent-primary">經典設計是人類心智的鏡子。</strong>
+                    </p>
+                </div>
+
+                <div id="genre-mastery" class="content-item" data-category="genre-understanding">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">類型精通的重要性</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        儘管學者對於定義與系統爭辯不休，<strong class="text-soft-accent-primary">讀者早已是類型專家</strong>。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        觀眾進入每部小說時，都配備了一套複雜的心理預期，這是他們從一生的閱讀經驗學到的。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        讀者對於類型的熟悉，讓作者必須面對這個重大挑戰：
+                    </p>
+                    <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-4 mb-4">
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-2">
+                            • <strong class="text-soft-accent-primary">既要滿足讀者預期</strong>，不讓讀者困惑與失望
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary">
+                            • <strong class="text-soft-accent-primary">同時還必須超越他們的期待</strong>，呈現新鮮、意想不到的片段，以免讓讀者覺得無聊
+                        </p>
                     </div>
-                    <div class="space-y-4 text-lg leading-relaxed text-soft-text-secondary">
-                        <p>原創創意的出現，有賴於致力追求可信度而非追求特立獨行。</p>
-                        <p>具個人特色的風格不可能是在高度自覺下完成的。身為作者的你，如果對角色和故事設定的認知掌握符合自己的個性，你所作的選擇，以及你從大量素材中創造出來的種種巧妙安排，就會成為專屬於你的獨特作品。</p>
-                        <p><strong class="text-soft-accent-primary">你的作品反映出你這個人，它是具原創創意的作品。</strong></p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        如果對類型的理解不如讀者，不可能同時達到這兩個目標。
+                    </p>
+                </div>
+
+                <div id="reader-positioning" class="content-item" data-category="genre-understanding">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">讀者定位的策略</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        如果小說有適當的宣傳、名字與簡介，讀者再閱讀時是充滿預期的。<br>
+                        以專業行銷人員的術語來說，小說已經被<strong class="text-soft-accent-primary">「定位」</strong>了。
+                    </p>
+                    <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-4">
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-3">
+                            <strong class="text-soft-accent-primary">「定位讀者」的意思是：</strong>
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-3">
+                            我們不希望讀者來看小說時沒有心理準備或毫無預期，讓我們不得不耗費大量章節或說明，來提示他們該採用什麼態度來觀看這個故事。
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary">
+                            我們希望讀者在翻開故事時，已經作好準備，全神貫注於我們即將提供滿足的一切。
+                        </p>
                     </div>
                 </div>
 
-                <!-- 角色與角色塑造的區別 -->
-                <div class="story-item rounded-extra-soft p-8 shadow-2xl">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-tertiary to-soft-accent-primary flex items-center justify-center mr-4">
-                            <i class="fas fa-user text-soft-dark-primary text-lg"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gradient">角色與角色塑造的區別</h2>
+                <div id="genre-choice-passion" class="content-item" data-category="creative-process">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">類型選擇與創作熱情</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        你是否像海明威或狄更斯，直接從人生經驗中取材？或像莫里哀一樣書寫自己對社會與人性的想法？無論靈感來源為何，請留意：早在小說完成之前，你的自戀就會銷聲匿跡，對故事點子的熱愛也會委靡。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        若對自己或自己的點子感覺厭倦無聊，可能就無法跑完這場比賽。最後再問自己一個問題：<strong class="text-soft-accent-primary">我最喜歡的類型是什麼？然後寫寫你喜愛的類型。</strong>
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        你對點子或個人經驗的熱情或許會降低，但對小說的愛是永恆的。類型應是不斷反覆為你提供靈感的來源。每回重讀自己的劇本都應該感覺興奮，因為這是你想寫的故事類型，是你會願意在網站花錢觀看的類型。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        不要求只因知識分子朋友認為某個題材具社會重要性而寫；不要只因預想某個題材會在《小說比賽》受到讚賞而寫。誠實面對你對類型的選擇，因為在所有賦予寫作動力的理由當中，唯一能長時間提供我們養分的就是作品本身。
+                    </p>
                     </div>
-                    <div class="space-y-4 text-lg leading-relaxed text-soft-text-secondary">
-                        <p><strong class="text-soft-accent-primary">角色跟角色塑造是兩個不同的概念。</strong></p>
-                        <p>角色塑造指的是角色是甚麼人？職業、外在、風格、特質。如同一個醫生，有錢、有能力、聰明、富有愛心。</p>
-                        <p>而角色指的是角色的本質，而角色的本質必須要在壓力下才能顯現，如果選擇可有可無，那麼角色的選擇絲毫沒有意義。</p>
-                        <p>例如：醫生選擇捐錢給兒童還是大學學生，對這個角色來說並不能表現出本質。但如果是：這筆錢是自己知道自己剩下不到一個月壽命，並且無妻子小孩與家人，那麼這筆錢的捐給學生還是孩子就反映出的角色本質。</p>
-                        <p>角色跟角色塑造要是一致，那麼故事會很無聊，讀者們看過太多的故事，對於陳腔濫調早就毫無耐心。</p>
+                    
+                <div id="conflict-types" class="content-item" data-category="story-structure">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">衝突的兩種類型</h3>
+                    <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-4 mb-4">
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-3">
+                            <strong class="text-soft-accent-primary">第一種</strong>就像以極速特效呈現的練習作品。<br>
+                            作者照著教科書依樣畫葫蘆創造出衝突，但由於對人生真正的掙扎毫無興趣或感覺，因此只能替刻意而為的亂象幻想出虛偽做作的理由。
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary">
+                            <strong class="text-soft-accent-primary">第二種</strong>則是為回應衝突而寫的沉悶描繪。<br>
+                            這些作者過於天真，認為生活的確美好......只要沒有衝突。<br>
+                            因此，他們的作品以低調描述的方式來迴避衝突，希望我們能了解，只要我們試著加強溝通，多一點善意，對環境更尊重，人類就能重返樂園。
+                        </p>
+                    </div>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        不過，如果我們確實從歷史學到了什麼樣的智慧，那想必就是：<br>
+                        <strong class="text-soft-accent-primary">即使最後恐怖的夢魔不再，無家可歸的人都找到遮風蔽雨之處，全世界都採用太陽能，我們每一個人依然要面對無數的煩惱。</strong>
+                    </p>
+                </div>
+
+                <div id="story-progression" class="content-item" data-category="story-structure">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">故事的進展法則</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        <strong class="text-soft-accent-primary">觸發事件</strong>引領主角啟程追尋自覺或不自覺渴望的事物，以重新打造生活的平衡。<br>
+                        他開始追尋欲望時會採取<strong class="text-soft-accent-primary">規模最小的保守行動</strong>，希望引發來自現實環境的正面回應。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        不過，他的行動結果卻喚起了內在、個人或社會與環境等衝突層面的對立力量，阻礙了他的欲望，在期望與結果之間製造了<strong class="text-soft-accent-primary">落差</strong>。<br>
+                        當落差產生，讀者心裡明白，眼前面對的是一個<strong class="text-soft-accent-primary">無法回頭、只能繼續前進的臨界點</strong>。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        微不足道的付出無法發揮作用。角色不可能只採取一點點行動就想回復生活的平衡。接下來,所有類似角色第一次付諸實行的行動、所有質量輕微的行動，都不會在故事裡再度出現了。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        主角體認到自己面對的風險，展現更多意志力和能力,想盡辦法克服這個落差，採取第二個難度更高的行動。儘管如此，結果卻再次激發對立的力量，在期望和結果之間形成第二個落差。這時觀眾感覺得到，這又是個無法回頭的臨界點，像第二個行動這樣的中等影響也不會成功。於是所有質量相當的行動也不會在故事裡再出現。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        角色面對更大的風險，勢必要針對周遭環境的改變來重新調整自己，並且採取更需意志力與個人能力的行動，期待或至少希望能從他置身的世界得到回應，而且是得到有所助益或自己能夠掌控的回應。然而,更強而有力的對立力量回應了他的第三個行動,更巨大的落差也隨之出現。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        藉由發掘角色一次比一次更強大的能力，誘發他們一次比一次更堅韌的意志力，讓他們陷身一次比一次更高的風險，越過一個又一個依行動質量程度不同而設定的無法回頭的臨界點，作者讓故事不斷往前進展。故事不但不該退回質量變弱的行動，反而應循序漸進朝著最後的行動前進，而在觀眾心中，這個行動必須是沒有其他行動可以替代的。
+                    </p>
+                </div>
+
+                <div id="triggering-events" class="content-item" data-category="writing-techniques">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">觸發事件的設計</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        最後一幕的高潮無疑是創作場景時難度最高的。它是故事敘述過程的靈魂，如果失敗，整個故事也跟著失敗。不過，寫作難度第二高的場景就是中心劇情的觸發事件，這個場景的改寫次數也是所有場景中最多的。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        因此，以下提出的一些問題，對於發想觸發事件應該有所幫助：
+                    </p>
+                    <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-4 mb-4">
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-2">
+                            <strong class="text-soft-accent-primary">我的主角可能遇到的最糟的事是什麼?</strong>
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                            如何才能讓它最後轉化為主角遇到的最好的事?
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-2">
+                            <strong class="text-soft-accent-primary">我的主角可能遇到的最好的事是什麼?</strong>
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary">
+                            如何才能讓它最後轉化為主角遇到的最糟的事?
+                        </p>
                     </div>
                 </div>
 
-                <!-- 場景創作的十倍法則 -->
-                <div class="story-item rounded-extra-soft p-8 shadow-2xl">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-tertiary flex items-center justify-center mr-4">
-                            <i class="fas fa-film text-soft-dark-primary text-lg"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gradient">場景創作的十倍法則</h2>
+                <div id="inner-transformation" class="content-item" data-category="creative-process">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">內心轉變與預示</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        故事中內心的轉變不是透過大聲嚷嚷就能完成的。自白式的對白不具說服力。它必須通過某個終極事件的考驗，必須通過備感壓力的角色的選擇與行動的考驗，也就是必要場景(危機)和最後一幕的高潮的考驗。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        長年的閱讀經驗讓觀眾不自覺產生了預期心理，他們期待觸發事件激發的對立力量，會將人類經驗逼至極限，除非主角以某種方式在這些對立力量最強大時正面迎擊，故事的敘述不會輕易結束。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        將故事的觸發事件和故事的危機場景加以連結，這就是一種<strong class="text-soft-accent-primary">預示</strong>。也就是藉由較早發生的事件的安排，為後來的事件預作準備。事實上，不管是類型、場景設定、角色、氛圍，你作的每一個選擇都會成為預示。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        透過每一句對白或每一個行動的描述，你讓觀眾產生預期，期待某種特定的可能性，因此事件出現時，就能以某種方式滿足你所創造的期待。不過，預示的首要組成元素，是藉由觸發事件來讓觀眾對必要場景(危機)預先有所想像。
+                    </p>
+                </div>
+
+                <div id="life-ultimate-questions" class="content-item" data-category="creative-process">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">生命的終極問題</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        生命和以下這些終極問題有關：
+                    </p>
+                    <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-4 mb-4">
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-2">
+                            <strong class="text-soft-accent-primary">如何找到愛與自我價值?</strong>
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-2">
+                            <strong class="text-soft-accent-primary">如何為混沌的內心帶來平靜?</strong>
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary">
+                            <strong class="text-soft-accent-primary">周遭處處可見的難以撼動的社會不公，以及光陰一去不復返等。</strong>
+                        </p>
                     </div>
-                    <div class="space-y-4 text-lg leading-relaxed text-soft-text-secondary">
-                        <p>想要一個故事片段優秀，可以試著創造10個不同場景，並思考推演角色的反應與行為，再將最優秀的拿出來，並在這個場景下再創造 10 個不同的反應、行為、互動，選出最喜歡的一個，基本上故事就會優良許多。</p>
-                        <p>在創作的時候，人往往根據經驗創作，而經驗很大一部分來自於看過、閱讀過的故事，通常這種模板化到創作令人感到無趣，因此必須要跳脫這種直覺與經驗思維。</p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        <strong class="text-soft-accent-primary">生命就是衝突。</strong>
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        <strong class="text-soft-accent-primary">衝突是生命的本質。</strong>
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        作者必須決定在何時何地妥善安排這樣的掙扎。
+                    </p>
+                </div>
+
+                <div id="simple-complex-design" class="content-item" data-category="story-structure">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">相對簡單卻複雜難解的故事設計</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        設計相對簡單卻複雜難解的故事。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        相對簡單並不是指過分簡化，而是依循以下原則，但依然能將故事說得精采、轉折高明:
+                    </p>
+                    <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-4 mb-4">
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                            <strong class="text-soft-accent-primary">不要讓角色和拍攝地點倍增。</strong>
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary">
+                            與其在時間、空間和人之間來回奔忙，不如自我克制，把力氣用來發想具說服力的人物與世界，將心思專注於創造豐富且複雜難解的故事。
+                        </p>
                     </div>
                 </div>
 
-                <!-- 創作的本質動力 -->
-                <div class="story-item rounded-extra-soft p-8 shadow-2xl">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-secondary to-soft-accent-primary flex items-center justify-center mr-4">
-                            <i class="fas fa-heart text-soft-dark-primary text-lg"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gradient">創作的本質動力</h2>
-                    </div>
-                    <div class="space-y-4 text-lg leading-relaxed text-soft-text-secondary">
-                        <p><strong class="text-soft-accent-primary">創作的本質是你必須熱愛你所創作的。</strong></p>
-                        <p>你會為了這樣的故事掏錢。並且反覆看自己的創作都會感到開心。</p>
-                        <p>這是你寫的故事你想要看到的故事。</p>
+                <div id="emotion-creation" class="content-item" data-category="writing-techniques">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">觸動觀眾情緒的技法</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        觸動觀眾情緒的方式，不是讓角色眼中淚光閃閃，不是演員以華麗對白吟誦喜悅，不是對情欲擁抱的描寫，也不是訴諸憤怒的音樂，而是精準描繪足以引發情緒的必要經驗，從而帶領觀眾徹底體會那樣的經驗。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        <strong class="text-soft-accent-primary">轉捩點不僅傳達體悟，也能創造情緒動態。</strong>
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        想理解如何創造觀眾的情緒體驗，首先必須了解，世上只有兩種基本情緒模式——快樂和痛苦。
+                    </p>
+                </div>
+
+                <div id="emotion-dynamics" class="content-item" data-category="writing-techniques">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">情緒的動態性質</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        一旦狀況穩定，<strong class="text-soft-accent-primary">原有的情緒很快消失無蹤</strong>。
+                    </p>
+                    <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-4">
+                        <p class="text-lg leading-relaxed text-soft-text-secondary text-center">
+                            <strong class="text-soft-accent-primary text-xl">情緒是一種活躍但相對短暫的體驗，<br>它猛然發展極致，又很快燃燒殆盡。</strong>
+                        </p>
                     </div>
                 </div>
 
-                <!-- 類型精通的重要性 -->
-                <div class="story-item rounded-extra-soft p-8 shadow-2xl">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-tertiary to-soft-accent-secondary flex items-center justify-center mr-4">
-                            <i class="fas fa-graduation-cap text-soft-dark-primary text-lg"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gradient">類型精通的重要性</h2>
-                    </div>
-                    <div class="space-y-4 text-lg leading-relaxed text-soft-text-secondary">
-                        <p>儘管學者對於定義與系統爭辯不休，<strong class="text-soft-accent-primary">讀者早已是類型專家</strong>。</p>
-                        <p>觀眾進入每部小說時，都配備了一套複雜的心理預期，這是他們從一生的閱讀經驗學到的。</p>
-                        <p>讀者對於類型的熟悉，讓作者必須面對這個重大挑戰：</p>
-                        <div class="bg-soft-dark-secondary/50 rounded-soft p-6 border border-soft-accent-primary/20">
-                            <p class="mb-3">• <strong class="text-soft-accent-primary">既要滿足讀者預期</strong>，不讓讀者困惑與失望</p>
-                            <p>• <strong class="text-soft-accent-primary">同時還必須超越他們的期待</strong>，呈現新鮮、意想不到的片段，以免讓讀者覺得無聊</p>
-                        </div>
-                        <p>如果對類型的理解不如讀者，不可能同時達到這兩個目標。</p>
-                    </div>
-                </div>
-
-                <!-- 故事的進展法則 -->
-                <div class="story-item rounded-extra-soft p-8 shadow-2xl">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary flex items-center justify-center mr-4">
-                            <i class="fas fa-arrow-up text-soft-dark-primary text-lg"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gradient">故事的進展法則</h2>
-                    </div>
-                    <div class="space-y-4 text-lg leading-relaxed text-soft-text-secondary">
-                        <p><strong class="text-soft-accent-primary">觸發事件</strong>引領主角啟程追尋自覺或不自覺渴望的事物，以重新打造生活的平衡。他開始追尋欲望時會採取<strong class="text-soft-accent-primary">規模最小的保守行動</strong>，希望引發來自現實環境的正面回應。</p>
-                        <p>不過，他的行動結果卻喚起了內在、個人或社會與環境等衝突層面的對立力量，阻礙了他的欲望，在期望與結果之間製造了<strong class="text-soft-accent-primary">落差</strong>。當落差產生，讀者心裡明白，眼前面對的是一個<strong class="text-soft-accent-primary">無法回頭、只能繼續前進的臨界點</strong>。</p>
-                        <p>藉由發掘角色一次比一次更強大的能力，誘發他們一次比一次更堅韌的意志力，讓他們陷身一次比一次更高的風險，越過一個又一個依行動質量程度不同而設定的無法回頭的臨界點，作者讓故事不斷往前進展。</p>
+                <div id="diminishing-returns" class="content-item" data-category="story-structure">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">報酬遞減法則</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        故事必須創造出這種在正負面情緒之間的動態變化，以符合報酬遞減法則。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        <strong class="text-soft-accent-primary">報酬遞減法則的意思是：我們對某事的體驗愈多，它的影響也會愈小。</strong>
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        換句話說，連續重複的情緒體驗，其效果不會相對增加。這個法則在生活或故事當中都適用。
+                    </p>
+                    <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-4 mb-4">
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                            我們第一次體驗某種情緒或感覺時，受到的影響很大。如果想立刻重複這樣的體驗，它帶來的影響就會減半甚或不到一半。如果我們接著嘗試第三次，它的影響力不僅不會像原來那麼強，甚至會帶來反效果。
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                            想像一下，如果一個故事接連出現三個悲劇場景，效果會如何？
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-2">
+                            <strong class="text-soft-accent-primary">在第一個場景，我們會流淚。</strong>
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-2">
+                            <strong class="text-soft-accent-primary">第二個場景，我們會吸鼻子。</strong>
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary">
+                            <strong class="text-soft-accent-primary">第三個場景，我們會笑……而且是大笑。</strong>
+                        </p>
                     </div>
                 </div>
 
-                <!-- 情緒的動態性質 -->
-                <div class="story-item rounded-extra-soft p-8 shadow-2xl">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-secondary to-soft-accent-tertiary flex items-center justify-center mr-4">
-                            <i class="fas fa-wave-square text-soft-dark-primary text-lg"></i>
-                        </div>
-                        <h2 class="text-2xl font-bold text-gradient">情緒的動態性質</h2>
+                <div id="emotion-vs-feeling" class="content-item" data-category="creative-process">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">情緒與感覺的區別</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        情緒和感覺是不一樣的，不過這兩個概念經常混為一談。
+                    </p>
+                    <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-4 mb-4">
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                            <strong class="text-soft-accent-primary">情緒</strong>是一種短暫的體驗，很快發展到極致，又很快燃燒殆盡。
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary">
+                            <strong class="text-soft-accent-primary">感覺</strong>卻是一種長期瀰漫的感受經歷，為我們生命中的每一天，每一個月或每一年增添色彩。
+                        </p>
                     </div>
-                    <div class="space-y-4 text-lg leading-relaxed text-soft-text-secondary">
-                        <p>一旦狀況穩定，<strong class="text-soft-accent-primary">原有的情緒很快消失無蹤</strong>。</p>
-                        <div class="bg-soft-dark-secondary/50 rounded-soft p-6 border border-soft-accent-primary/20 text-center">
-                            <p class="text-xl font-semibold text-soft-accent-primary">
-                                情緒是一種活躍但相對短暫的體驗，<br>它猛然發展極致，又很快燃燒殆盡。
-                            </p>
-                        </div>
-                        <p>觸動觀眾情緒的方式，不是讓角色眼中淚光閃閃，不是演員以華麗對白吟誦喜悅，而是精準描繪足以引發情緒的必要經驗，從而帶領觀眾徹底體會那樣的經驗。</p>
-                    </div>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        的確，具體的感覺往往對人格形成有所影響。
+                    </p>
                 </div>
 
+                <div id="moral-complexity" class="content-item" data-category="creative-process">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">善惡選擇的複雜性</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        人類只根據自己相信或認可的善惡是非來採取行動，如果我們對人類天性沒有這樣的了解，那麼我們可說什麼都不了解。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        <strong class="text-soft-accent-primary">以戲劇性而論，善與惡、是與非的選擇實在過於簡單且微不足道。</strong>
+                    </p>
+                </div>
+
+                <div id="storyteller-role" class="content-item" data-category="creative-process">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">說故事人的深層探索</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        說故事的人會引領我們跨越每個層面的現有樣貌，並且不是偶一為之，而是直達故事終點為止。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        說故事的人賦予我們生活拒絕提供的樂趣，那樣的樂趣，來自於坐在黑暗的故事儀式中，穿過生活的表層，觸及深藏於言行舉止之下的真情實感。
+                    </p>
+                </div>
+
+                <div id="desire-opposition" class="content-item" data-category="story-structure">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">場景中的欲望與對立力量</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        深入觀察這個角色或力量的文本和潛文本，並問自己：<strong class="text-soft-accent-primary">他(它)想要的是什麼？</strong>欲望永遠是關鍵，因此，仔細描述這個欲望的目的。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        接著綜觀整個場景，問自己：<strong class="text-soft-accent-primary">阻擋這個欲望的對立力量是什麼？</strong>同樣的，這些力量可能來自某個層面，或由不同層面組合而成。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        確認對立力量的來源後，問自己：<strong class="text-soft-accent-primary">這些對立力量想要的是什麼？</strong>這同樣也能以其目的來描述：「為了不那麼做......」或是「為了用這個取代.......」。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary">
+                        場景若寫得好，將雙方的欲望目的加以比較就會發現，它們是正面對立的衝突，而不是間接相關的。
+                    </p>
+                </div>
+
+                <div id="beat-analysis" class="content-item" data-category="writing-techniques">
+                    <h3 class="text-xl font-semibold text-soft-accent-primary mb-3">節拍分析方法</h3>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        節拍是主角行動/反應之間的行為更替。從兩個不同層面來仔細觀察第一個行動：從外在看起來，角色似乎準備要做什麼，更重要的是，看出他掩藏於表相之下的意圖。
+                    </p>
+                    <p class="text-lg leading-relaxed text-soft-text-secondary mb-4">
+                        用進行式來描述這個潛文本的行動，如「正在哀求」。試著找出能描述動作又能點出角色感情的描述方式。
+                    </p>
+                    <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-4">
+                        <p class="text-lg leading-relaxed text-soft-text-secondary mb-2">
+                            例如，當我們說<strong class="text-soft-accent-primary">「正在懇求」</strong>，就傳達出角色的行動拘謹有節，
+                        </p>
+                        <p class="text-lg leading-relaxed text-soft-text-secondary">
+                            至於<strong class="text-soft-accent-primary">「正在她腳下」</strong>則傳達孤注一擲的屈從。
+                        </p>
+                    </div>
+                </div>
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="w-full lg:w-80 shrink-0">
+                    <div class="sidebar-container sticky top-24">
+                        
+                        <!-- Table of Contents -->
+                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg mb-6">
+                            <h3 class="text-xl font-bold text-gradient mb-4 flex items-center">
+                                <i class="fas fa-list mr-3"></i>目錄導航
+                            </h3>
+                            <nav class="space-y-2" id="toc-nav">
+                                <a href="#writing-focus" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="writing-techniques">
+                                    <i class="fas fa-crosshairs mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">寫作焦點的掌握</span>
+                                    </div>
+                                </a>
+                                <a href="#originality-credibility" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creative-process">
+                                    <i class="fas fa-lightbulb mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">原創性與可信度</span>
+                                    </div>
+                                </a>
+                                <a href="#story-opening" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="story-structure">
+                                    <i class="fas fa-play mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">故事開場的陷阱</span>
+                                    </div>
+                                </a>
+                                <a href="#character-vs-characterization" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="character-development">
+                                    <i class="fas fa-user mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">角色與角色塑造</span>
+                                    </div>
+                                </a>
+                                <a href="#scene-creation-method" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="writing-techniques">
+                                    <i class="fas fa-film mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">場景創作十倍法則</span>
+                                    </div>
+                                </a>
+                                <a href="#theme-expression" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creative-process">
+                                    <i class="fas fa-palette mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">主題表達的藝術</span>
+                                    </div>
+                                </a>
+                                <a href="#love-your-creation" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creative-process">
+                                    <i class="fas fa-heart mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">創作的本質動力</span>
+                                    </div>
+                                </a>
+                                <a href="#classical-design" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="story-structure">
+                                    <i class="fas fa-columns mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">經典設計的人性基礎</span>
+                                    </div>
+                                </a>
+                                <a href="#genre-mastery" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="genre-understanding">
+                                    <i class="fas fa-graduation-cap mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">類型精通的重要性</span>
+                                    </div>
+                                </a>
+                                <a href="#reader-positioning" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="genre-understanding">
+                                    <i class="fas fa-bullseye mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">讀者定位的策略</span>
+                                    </div>
+                                </a>
+                                <a href="#genre-choice-passion" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creative-process">
+                                    <i class="fas fa-fire mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">類型選擇與創作熱情</span>
+                                    </div>
+                                </a>
+                                <a href="#conflict-types" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="story-structure">
+                                    <i class="fas fa-exclamation-triangle mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">衝突的兩種類型</span>
+                                    </div>
+                                </a>
+                                <a href="#story-progression" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="story-structure">
+                                    <i class="fas fa-arrow-up mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">故事的進展法則</span>
+                                    </div>
+                                </a>
+                                <a href="#triggering-events" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="writing-techniques">
+                                    <i class="fas fa-bolt mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">觸發事件的設計</span>
+                                    </div>
+                                </a>
+                                <a href="#inner-transformation" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creative-process">
+                                    <i class="fas fa-seedling mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">內心轉變與預示</span>
+                                    </div>
+                                </a>
+                                <a href="#life-ultimate-questions" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creative-process">
+                                    <i class="fas fa-question-circle mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">生命的終極問題</span>
+                                    </div>
+                                </a>
+                                <a href="#simple-complex-design" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="story-structure">
+                                    <i class="fas fa-puzzle-piece mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">相對簡單的複雜設計</span>
+                                    </div>
+                                </a>
+                                <a href="#emotion-creation" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="writing-techniques">
+                                    <i class="fas fa-theater-masks mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">觸動觀眾情緒的技法</span>
+                                    </div>
+                                </a>
+                                <a href="#emotion-dynamics" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="writing-techniques">
+                                    <i class="fas fa-wave-square mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">情緒的動態性質</span>
+                                    </div>
+                                </a>
+                                <a href="#diminishing-returns" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="story-structure">
+                                    <i class="fas fa-chart-line-down mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">報酬遞減法則</span>
+                                    </div>
+                                </a>
+                                <a href="#emotion-vs-feeling" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creative-process">
+                                    <i class="fas fa-balance-scale mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">情緒與感覺的區別</span>
+                                    </div>
+                                </a>
+                                <a href="#moral-complexity" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creative-process">
+                                    <i class="fas fa-yin-yang mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">善惡選擇的複雜性</span>
+                                    </div>
+                                </a>
+                                <a href="#storyteller-role" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="creative-process">
+                                    <i class="fas fa-eye mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">說故事人的深層探索</span>
+                                    </div>
+                                </a>
+                                <a href="#desire-opposition" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="story-structure">
+                                    <i class="fas fa-fist-raised mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">場景中的欲望與對立力量</span>
+                                    </div>
+                                </a>
+                                <a href="#beat-analysis" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="writing-techniques">
+                                    <i class="fas fa-drum mr-3 text-soft-accent-primary"></i>
+                                    <div class="flex-1 min-w-0">
+                                        <span class="text-sm block truncate">節拍分析方法</span>
+                                    </div>
+                                </a>
+                            </nav>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg">
+                            <h3 class="text-lg font-bold text-gradient mb-4 flex items-center">
+                                <i class="fas fa-chart-bar mr-3"></i>統計資訊
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">總內容數</span>
+                                    <span class="text-soft-accent-primary font-bold" id="total-sections">25</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">分類數</span>
+                                    <span class="text-soft-accent-secondary font-bold">5</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-soft-text-secondary">顯示中</span>
+                                    <span class="text-soft-accent-tertiary font-bold" id="visible-sections">25</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="glass-effect py-12 mt-16">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <div class="flex justify-center space-x-6 mb-8">
-                    <a href="https://www.threads.net/@yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
-                        <i class="fab fa-threads text-2xl"></i>
-                    </a>
-                    <a href="https://www.pixiv.net/users/96890924" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
-                        <i class="fab fa-pixiv text-2xl"></i>
-                    </a>
-                    <a href="https://github.com/yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
-                        <i class="fab fa-github text-2xl"></i>
-                    </a>
-                </div>
-                <div class="border-t border-soft-accent-primary/20 pt-8">
-                    <p class="text-soft-text-muted">&copy; 2024 夢鈴幻想. 在夢境與現實的交界處編織故事.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <!-- Back to Top Button -->
     <button id="back-to-top" 
-            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-dark-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
+            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
             aria-label="回到頂部">
         <i class="fas fa-arrow-up"></i>
     </button>
@@ -524,6 +1093,7 @@
 
         // Back to top functionality
         const backToTopButton = document.getElementById('back-to-top');
+        const scrollProgress = document.getElementById('scroll-progress');
 
         const toggleBackToTopButton = () => {
             if (window.scrollY > 300) {
@@ -533,6 +1103,10 @@
                 backToTopButton.style.opacity = '0';
                 backToTopButton.style.transform = 'scale(0.95)';
             }
+
+            // Update scroll progress
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
         };
 
         backToTopButton?.addEventListener('click', () => {
@@ -544,9 +1118,169 @@
 
         window.addEventListener('scroll', toggleBackToTopButton);
 
+        // Search and filter functionality
+        const searchInput = document.getElementById('search-input');
+        const filterTags = document.querySelectorAll('.filter-tag');
+        const contentItems = document.querySelectorAll('.content-item');
+        const tocLinks = document.querySelectorAll('.toc-link');
+        let currentFilter = 'all';
+
+        // Search functionality
+        function performSearch(searchTerm) {
+            const normalizedSearchTerm = searchTerm.toLowerCase().trim();
+            let visibleCount = 0;
+
+            contentItems.forEach(item => {
+                const category = item.getAttribute('data-category');
+                const text = item.textContent.toLowerCase();
+                const hasMatch = normalizedSearchTerm === '' || text.includes(normalizedSearchTerm);
+                
+                if (hasMatch && (currentFilter === 'all' || currentFilter === category)) {
+                    item.style.display = '';
+                    item.classList.remove('content-hidden');
+                    item.classList.add('content-show');
+                    visibleCount++;
+                    
+                    // Highlight search term
+                    if (normalizedSearchTerm !== '') {
+                        highlightText(item, normalizedSearchTerm);
+                    } else {
+                        removeHighlight(item);
+                    }
+                } else {
+                    item.style.display = 'none';
+                    item.classList.add('content-hidden');
+                    item.classList.remove('content-show');
+                    removeHighlight(item);
+                }
+            });
+
+            // Update visible count
+            document.getElementById('visible-sections').textContent = visibleCount;
+        }
+
+        // Highlight search terms
+        function highlightText(element, searchTerm) {
+            const textElements = element.querySelectorAll('p, h3');
+            
+            textElements.forEach(textEl => {
+                const originalText = textEl.getAttribute('data-original') || textEl.innerHTML;
+                if (!textEl.getAttribute('data-original')) {
+                    textEl.setAttribute('data-original', originalText);
+                }
+                
+                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                const highlightedText = originalText.replace(regex, '<span class="search-highlight">$1</span>');
+                textEl.innerHTML = highlightedText;
+            });
+        }
+
+        // Remove highlight
+        function removeHighlight(element) {
+            const textElements = element.querySelectorAll('p, h3');
+            
+            textElements.forEach(textEl => {
+                const originalText = textEl.getAttribute('data-original');
+                if (originalText) {
+                    textEl.innerHTML = originalText;
+                }
+            });
+        }
+
+        // Filter functionality
+        function applyFilter(filter) {
+            currentFilter = filter;
+            
+            // Update filter tags
+            filterTags.forEach(tag => {
+                if (tag.getAttribute('data-filter') === filter) {
+                    tag.classList.add('active');
+                } else {
+                    tag.classList.remove('active');
+                }
+            });
+
+            // Reapply search with new filter
+            performSearch(searchInput.value);
+        }
+
+        // Smooth scroll to section
+        function scrollToSection(targetId) {
+            const target = document.getElementById(targetId);
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Update active TOC link based on scroll position
+        function updateActiveTocLink() {
+            let currentSection = '';
+            
+            contentItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top <= 150 && rect.bottom >= 150) {
+                    currentSection = item.id;
+                }
+            });
+
+            tocLinks.forEach(link => {
+                const targetId = link.getAttribute('href').substring(1);
+                if (targetId === currentSection) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        // Event listeners
+        searchInput?.addEventListener('input', (e) => {
+            performSearch(e.target.value);
+        });
+
+        filterTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const filter = tag.getAttribute('data-filter');
+                applyFilter(filter);
+            });
+        });
+
+        tocLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+
+        // Scroll spy for TOC
+        window.addEventListener('scroll', updateActiveTocLink);
+
+        // Add smooth scrolling animation for content items
+        const observeElements = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'slide-up 0.6s ease-out';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.content-item').forEach(item => {
+                observer.observe(item);
+            });
+        };
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             toggleBackToTopButton();
+            observeElements();
+            performSearch(''); // Initialize search
+            updateActiveTocLink();
         });
     </script>
 </body>
