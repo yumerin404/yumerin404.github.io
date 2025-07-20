@@ -4,493 +4,383 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>經濟與投資 - 夢鈴幻想</title>
-    
+    <title>夢鈴幻想 | 經濟與投資</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Load Shared Styles -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script>
-        fetch('shared-styles.html')
-            .then(response => response.text())
-            .then(data => {
-                document.head.insertAdjacentHTML('beforeend', data);
-            });
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'soft-dark-primary': '#0a0e1a',
+                        'soft-dark-secondary': '#1a1e2e',
+                        'soft-dark-tertiary': '#2a2e3e',
+                        'soft-accent-primary': '#c8a8e9',
+                        'soft-accent-secondary': '#f8b4d9',
+                        'soft-accent-tertiary': '#a8e6cf',
+                        'soft-text-primary': '#f5f3f0',
+                        'soft-text-secondary': '#b8b5b0',
+                        'soft-text-muted': '#8a8680',
+                    },
+                    animation: {
+                        'float-gentle': 'float-gentle 6s ease-in-out infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'glow-soft': 'glow-soft 2s ease-in-out infinite alternate',
+                        'bounce-soft': 'bounce-soft 1s ease-in-out',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'scale-bounce': 'scale-bounce 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                    },
+                    keyframes: {
+                        'float-gentle': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-8px) rotate(1deg)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: '0.6' },
+                            '50%': { opacity: '0.9' },
+                        },
+                        'glow-soft': {
+                            '0%': {
+                                'box-shadow': '0 0 5px rgba(200, 168, 233, 0.4), 0 0 10px rgba(200, 168, 233, 0.2)',
+                            },
+                            '100%': {
+                                'box-shadow': '0 0 10px rgba(200, 168, 233, 0.6), 0 0 20px rgba(200, 168, 233, 0.3), 0 0 30px rgba(200, 168, 233, 0.1)',
+                            }
+                        },
+                        'bounce-soft': {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.05)' },
+                            '100%': { transform: 'scale(1)' },
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        'scale-bounce': {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                            '100%': { transform: 'scale(1)' },
+                        }
+                    },
+                    fontFamily: {
+                        'cute': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'soft': '12px',
+                        'extra-soft': '20px',
+                    }
+                }
+            }
+        }
     </script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Financial specific styles */
-        .financial-insight {
-            background: linear-gradient(135deg, rgba(200, 168, 233, 0.1), rgba(248, 180, 217, 0.1));
-            border-left: 4px solid #c8a8e9;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            border-radius: 0 12px 12px 0;
+        * {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
         }
 
-        .economic-principle {
-            background: rgba(42, 46, 62, 0.8);
-            border: 1px solid rgba(168, 230, 207, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem 0;
+        .gradient-bg {
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1e2e 50%, #2a2e3e 100%);
         }
 
-        .investment-strategy {
-            background: rgba(248, 180, 217, 0.1);
-            border: 1px solid rgba(248, 180, 217, 0.3);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem 0;
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(26, 30, 46, 0.7);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 100%);
+            color: #0a0e1a;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.4);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            position: relative;
+            color: #b8b5b0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover {
+            color: #c8a8e9;
+            background: rgba(200, 168, 233, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-link.active {
+            color: #c8a8e9;
+            background: rgba(200, 168, 233, 0.15);
+            font-weight: 600;
+        }
+
+        .mobile-menu {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+
+        .mobile-menu.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .floating-decoration {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 168, 233, 0.15) 0%, transparent 70%);
+            animation: float-gentle 8s ease-in-out infinite;
+        }
+
+        .hero-pattern {
+            background-image: radial-gradient(circle at 20% 50%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
+                             radial-gradient(circle at 80% 20%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
+                             radial-gradient(circle at 40% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%);
+        }
+
+        .content-card {
+            background: rgba(26, 30, 46, 0.9);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #c8a8e9, #f8b4d9, #a8e6cf);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(200, 168, 233, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
         }
     </style>
 </head>
 
-<body class="gradient-bg text-soft-text-primary min-h-screen font-cute" style="padding-top: 4rem;">
+<body class="gradient-bg text-soft-text-primary min-h-screen font-cute">
     <!-- Navigation -->
-    <div id="navigation-container"></div>
-
-    <!-- Hero Section -->
-    <section class="relative py-20 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-soft-primary via-soft-secondary to-soft-tertiary"></div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="glass-effect rounded-extra-soft p-12 shadow-2xl">
-                <div class="mb-8">
-                    <i class="fas fa-chart-line text-6xl text-soft-accent-primary mb-6 animate-bounce"></i>
+    <nav class="fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center group">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+                            <img src="images/avatar.png" alt="Dream Bell" 
+                                 class="relative h-10 w-10 rounded-full mr-3 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 border-2 border-soft-accent-primary/30">
+                        </div>
+                        <div class="text-gradient text-xl font-bold tracking-wide">夢鈴幻想</div>
+                    </a>
                 </div>
-                <h1 class="text-4xl md:text-6xl font-bold mb-6 text-gradient">
-                    宏觀之金融經濟投資
-                </h1>
-                <p class="text-xl md:text-2xl text-soft-text-secondary mb-8 max-w-3xl mx-auto leading-relaxed">
-                    探索金融市場的本質，理解經濟運行的規律，掌握投資的智慧與策略
-                </p>
-                <div class="flex flex-wrap justify-center gap-4 text-soft-text-secondary">
-                    <div class="flex items-center">
-                        <i class="fas fa-coins mr-2 text-soft-accent-primary"></i>
-                        <span>經濟理論</span>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-chart-area mr-2 text-soft-accent-secondary"></i>
-                        <span>市場分析</span>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-briefcase mr-2 text-soft-accent-tertiary"></i>
-                        <span>投資策略</span>
-                    </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="nav-link group relative">
+                        <span class="relative z-10">首頁</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="novels.html" class="nav-link group relative">
+                        <span class="relative z-10">奇幻小說</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="tools.html" class="nav-link group relative">
+                        <span class="relative z-10">魔法工具</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="ai.html" class="nav-link group relative">
+                        <span class="relative z-10">AI魔導</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="medical-category.html" class="nav-link group relative">
+                        <span class="relative z-10">醫學、藥物、保健品</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="finance.html" class="nav-link active group relative">
+                        <span class="relative z-10">經濟與投資</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="politics.html" class="nav-link group relative">
+                        <span class="relative z-10">政治與思想</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="blog.html" class="nav-link group relative">
+                        <span class="relative z-10">心境筆記</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button type="button" id="mobile-menu-button"
+                        class="inline-flex items-center justify-center p-2 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-all duration-300 border border-soft-accent-primary/20 hover:border-soft-accent-primary/40">
+                        <span class="sr-only">開啟選單</span>
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Search Section -->
-    <section class="py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="search-section rounded-extra-soft p-6 shadow-lg">
-                <div class="mb-6">
-                    <div class="relative">
-                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-soft-accent-primary"></i>
-                        <input type="text" id="search-input" class="search-input" placeholder="搜尋金融經濟內容...">
-                    </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden md:hidden">
+            <div class="px-4 pt-2 pb-3 space-y-1 bg-gradient-to-r from-soft-dark-primary/95 via-soft-dark-secondary/95 to-soft-dark-tertiary/95 backdrop-blur-md border-t border-soft-accent-primary/20">
+                <a href="index.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">首頁</a>
+                <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">奇幻小說</a>
+                <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">魔法工具</a>
+                <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI魔導</a>
+                <a href="medical-category.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">醫學、藥物、保健品</a>
+                <a href="finance.html" class="block px-4 py-3 rounded-lg text-soft-accent-primary font-medium bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 border border-soft-accent-primary/30">經濟與投資</a>
+                <a href="politics.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">政治與思想</a>
+                <a href="blog.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">心境筆記</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-12 relative hero-pattern">
+        <div class="floating-decoration w-32 h-32 top-20 left-10 opacity-30" style="animation-delay: 0s;"></div>
+        <div class="floating-decoration w-20 h-20 top-32 right-20 opacity-40" style="animation-delay: 2s;"></div>
+        <div class="floating-decoration w-16 h-16 bottom-20 left-1/3 opacity-35" style="animation-delay: 4s;"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8 animate-float-gentle">
+                    <i class="fas fa-chart-line text-3xl text-soft-dark-primary"></i>
                 </div>
-                <div class="flex flex-wrap gap-2">
-                    <button class="filter-tag active" data-filter="all">
-                        <i class="fas fa-globe mr-2"></i>全部
-                    </button>
-                    <button class="filter-tag" data-filter="economic-theory">
-                        <i class="fas fa-book mr-2"></i>經濟理論
-                    </button>
-                    <button class="filter-tag" data-filter="market-analysis">
-                        <i class="fas fa-chart-line mr-2"></i>市場分析
-                    </button>
-                    <button class="filter-tag" data-filter="investment-strategy">
-                        <i class="fas fa-briefcase mr-2"></i>投資策略
-                    </button>
-                    <button class="filter-tag" data-filter="financial-news">
-                        <i class="fas fa-newspaper mr-2"></i>金融資訊
-                    </button>
-                </div>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-gradient leading-tight">經濟與投資</h1>
+                <div class="w-32 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-8"></div>
+                <p class="text-xl md:text-2xl text-soft-text-secondary max-w-4xl mx-auto leading-relaxed">
+                    財經知識、投資策略與市場分析的學習筆記
+                </p>
             </div>
         </div>
     </section>
 
     <!-- Content Section -->
     <section class="py-16 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row gap-8">
-                
-                <!-- Main Content -->
-                <div class="flex-1" id="main-content">
-
-                    <!-- 經濟理論 -->
-                    <div id="economic-theory" class="category-section" data-category="economic-theory">
-                        <div class="category-title">
-                            <h2 class="text-3xl font-bold text-gradient">
-                                <i class="fas fa-book mr-3"></i>經濟理論基礎
-                            </h2>
-                            <p class="text-lg text-soft-text-secondary mt-2">
-                                深入理解經濟學的核心概念與原理
-                            </p>
-                        </div>
-
-                        <div id="marx-capital" class="content-item rounded-extra-soft p-8 md:p-12" data-category="economic-theory">
-                            <h3 class="text-2xl font-bold text-soft-accent-primary mb-4">
-                                <i class="fas fa-coins mr-3"></i>馬克思《資本論》中的利潤驅動
-                            </h3>
-                            <div class="financial-insight">
-                                <p class="text-lg text-soft-text-secondary mb-4 leading-relaxed">
-                                    馬克思在《資本論》中引用了鄧寧的著名論述，深刻揭示了資本逐利的本性：
-                                </p>
-                            </div>
-                            
-                            <div class="space-y-6">
-                                <div class="economic-principle">
-                                    <div class="flex items-center mb-3">
-                                        <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-primary font-bold text-lg mr-4">10%</span>
-                                        <h4 class="text-xl font-semibold text-soft-accent-primary">合理利潤階段</h4>
-                                    </div>
-                                    <p class="text-soft-text-secondary leading-relaxed">
-                                        有10%的利潤，它就保證到處被使用；
-                                    </p>
-                                </div>
-
-                                <div class="economic-principle">
-                                    <div class="flex items-center mb-3">
-                                        <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-secondary to-soft-accent-tertiary text-soft-primary font-bold text-lg mr-4">20%</span>
-                                        <h4 class="text-xl font-semibold text-soft-accent-secondary">活躍投機階段</h4>
-                                    </div>
-                                    <p class="text-soft-text-secondary leading-relaxed">
-                                        有20%的利潤，它就活躍起來；
-                                    </p>
-                                </div>
-
-                                <div class="economic-principle">
-                                    <div class="flex items-center mb-3">
-                                        <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-tertiary to-soft-accent-primary text-soft-primary font-bold text-lg mr-4">50%</span>
-                                        <h4 class="text-xl font-semibold text-soft-accent-tertiary">冒險進取階段</h4>
-                                    </div>
-                                    <p class="text-soft-text-secondary leading-relaxed">
-                                        有50%的利潤，它就鋌而走險；
-                                    </p>
-                                </div>
-
-                                <div class="economic-principle">
-                                    <div class="flex items-center mb-3">
-                                        <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-orange-500 text-white font-bold text-lg mr-4">100%</span>
-                                        <h4 class="text-xl font-semibold text-red-400">踐踏法律階段</h4>
-                                    </div>
-                                    <p class="text-soft-text-secondary leading-relaxed">
-                                        為了100%的利潤，它就敢踐踏一切人間法律；
-                                    </p>
-                                </div>
-
-                                <div class="economic-principle">
-                                    <div class="flex items-center mb-3">
-                                        <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-red-600 to-red-800 text-white font-bold text-lg mr-4">300%</span>
-                                        <h4 class="text-xl font-semibold text-red-500">極端瘋狂階段</h4>
-                                    </div>
-                                    <p class="text-soft-text-secondary leading-relaxed">
-                                        有300%的利潤，它就敢犯任何罪行，甚至冒絞首的危險。
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="financial-insight mt-8">
-                                <div class="flex items-center mb-4">
-                                    <i class="fas fa-quote-left text-2xl text-soft-accent-primary mr-3"></i>
-                                    <h4 class="text-xl font-semibold text-soft-accent-primary">經典引述</h4>
-                                </div>
-                                <p class="text-lg text-soft-text-secondary italic leading-relaxed">
-                                    「馬克思在《資本論》中來自鄧寧的小冊子《交易的工會和罷工》的著名引言」
-                                </p>
-                                <div class="flex items-center justify-center space-x-4 mt-4">
-                                    <div class="flex items-center">
-                                        <i class="fas fa-book mr-2 text-soft-accent-primary"></i>
-                                        <span class="font-semibold">《資本論》</span>
-                                    </div>
-                                    <span>•</span>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-user mr-2 text-soft-accent-primary"></i>
-                                        <span class="font-semibold">卡爾·馬克思</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="content-card rounded-extra-soft p-8 shadow-2xl">
+                <div class="text-center py-16">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-tertiary mb-8">
+                        <i class="fas fa-coins text-2xl text-soft-dark-primary"></i>
                     </div>
-
-                    <!-- 市場分析 -->
-                    <div id="market-analysis" class="category-section" data-category="market-analysis">
-                        <div class="category-title">
-                            <h2 class="text-3xl font-bold text-gradient">
-                                <i class="fas fa-chart-line mr-3"></i>市場分析洞察
-                            </h2>
-                            <p class="text-lg text-soft-text-secondary mt-2">
-                                深度解析市場趨勢與投資機會
-                            </p>
+                    <h2 class="text-3xl font-bold text-gradient mb-6">內容建構中</h2>
+                    <p class="text-lg text-soft-text-secondary max-w-2xl mx-auto leading-relaxed">
+                        經濟與投資相關內容正在整理與撰寫中，將提供實用的財經知識和投資策略分析。
+                    </p>
+                    <div class="mt-8">
+                        <div class="inline-flex items-center text-soft-accent-primary">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span class="text-sm">預計上線時間：近期</span>
                         </div>
-
-                        <div id="market-trends" class="content-item rounded-extra-soft p-8 md:p-12" data-category="market-analysis">
-                            <h3 class="text-2xl font-bold text-soft-accent-primary mb-4">
-                                <i class="fas fa-chart-area mr-3"></i>更多市場洞察
-                            </h3>
-                            <div class="text-center">
-                                <div class="mb-8">
-                                    <i class="fas fa-chart-area text-6xl text-soft-accent-primary mb-6 animate-pulse"></i>
-                                </div>
-                                <p class="text-lg text-soft-text-secondary mb-8 leading-relaxed">
-                                    更多關於金融市場、經濟原理、投資策略的深度思考正在整理中<br>
-                                    從宏觀經濟學到行為金融學，從價值投資到風險管理
-                                </p>
-                                <div class="inline-flex items-center text-soft-accent-primary font-medium">
-                                    <i class="fas fa-coins mr-2 animate-pulse"></i>
-                                    <span>持續觀察市場中...</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 投資策略 -->
-                    <div id="investment-strategy" class="category-section" data-category="investment-strategy">
-                        <div class="category-title">
-                            <h2 class="text-3xl font-bold text-gradient">
-                                <i class="fas fa-briefcase mr-3"></i>投資策略研究
-                            </h2>
-                            <p class="text-lg text-soft-text-secondary mt-2">
-                                實用的投資方法與風險管理
-                            </p>
-                        </div>
-
-                        <div id="value-investing" class="content-item rounded-extra-soft p-8 md:p-12" data-category="investment-strategy">
-                            <h3 class="text-2xl font-bold text-soft-accent-primary mb-4">
-                                <i class="fas fa-gem mr-3"></i>價值投資策略
-                            </h3>
-                            <div class="investment-strategy">
-                                <p class="text-lg text-soft-text-secondary mb-4 leading-relaxed">
-                                    價值投資是一種長期的投資策略，專注於尋找被市場低估的優質企業。
-                                </p>
-                                <div class="inline-flex items-center text-soft-accent-secondary font-medium">
-                                    <i class="fas fa-chart-line mr-2 animate-pulse"></i>
-                                    <span>策略詳解即將發布...</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Sidebar -->
-                <div class="w-full lg:w-80 shrink-0">
-                    <div class="sidebar-container sticky top-20">
-                        
-                        <!-- Table of Contents -->
-                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg mb-6">
-                            <h3 class="text-xl font-bold text-gradient mb-4 flex items-center">
-                                <i class="fas fa-list mr-3"></i>目錄導航
-                            </h3>
-                            <nav class="space-y-2" id="toc-nav">
-                                <a href="#marx-capital" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="economic-theory">
-                                    <i class="fas fa-coins mr-3 text-soft-accent-primary"></i>
-                                    <div class="flex-1 min-w-0">
-                                        <span class="text-sm block truncate">馬克思資本論洞察</span>
-                                    </div>
-                                </a>
-                                <a href="#market-trends" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="market-analysis">
-                                    <i class="fas fa-chart-area mr-3 text-soft-accent-primary"></i>
-                                    <div class="flex-1 min-w-0">
-                                        <span class="text-sm block truncate">市場趨勢分析</span>
-                                    </div>
-                                </a>
-                                <a href="#value-investing" class="toc-link flex items-center p-3 rounded-soft transition-all duration-300" data-category="investment-strategy">
-                                    <i class="fas fa-gem mr-3 text-soft-accent-primary"></i>
-                                    <div class="flex-1 min-w-0">
-                                        <span class="text-sm block truncate">價值投資策略</span>
-                                    </div>
-                                </a>
-                            </nav>
-                        </div>
-
-                        <!-- Quick Stats -->
-                        <div class="glass-effect rounded-extra-soft p-6 shadow-lg">
-                            <h3 class="text-lg font-bold text-gradient mb-4 flex items-center">
-                                <i class="fas fa-chart-bar mr-3"></i>統計資訊
-                            </h3>
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-soft-text-secondary">總內容數</span>
-                                    <span class="text-soft-accent-primary font-bold" id="total-content">3</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-soft-text-secondary">分類數</span>
-                                    <span class="text-soft-accent-secondary font-bold">3</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-soft-text-secondary">顯示中</span>
-                                    <span class="text-soft-accent-tertiary font-bold" id="visible-content">3</span>
-                                </div>
-                            </div>
-                        </div>
-                        
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <div id="footer-container"></div>
+    <footer class="glass-effect py-12 mt-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="https://www.threads.net/@yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-threads text-2xl"></i>
+                    </a>
+                    <a href="https://www.pixiv.net/users/96890924" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-pixiv text-2xl"></i>
+                    </a>
+                    <a href="https://github.com/yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                </div>
+                <div class="border-t border-soft-accent-primary/20 pt-8">
+                    <p class="text-soft-text-muted">&copy; 2024 夢鈴幻想. 在夢境與現實的交界處編織故事.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Back to Top Button -->
     <button id="back-to-top" 
-            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
+            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-dark-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
             aria-label="回到頂部">
-        <div id="scroll-progress" class="absolute inset-0 rounded-full border-2 border-transparent bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary p-0.5">
-            <div class="w-full h-full rounded-full bg-soft-primary"></div>
-        </div>
-        <i class="fas fa-arrow-up relative z-10"></i>
+        <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Load Scripts -->
     <script>
-        // Load navigation
-        fetch('shared-nav.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navigation-container').innerHTML = data
-                    .replace(/{{ACTIVE_PAGE}}/g, 'finance');
-            });
-        
-        // Load footer
-        fetch('shared-footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            });
+        // Mobile menu toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-        // Page-specific scripts
-        document.addEventListener('DOMContentLoaded', () => {
-            // Search and filter functionality
-            const searchInput = document.getElementById('search-input');
-            const filterTags = document.querySelectorAll('.filter-tag');
-            const categoryElements = document.querySelectorAll('.category-section');
-            const contentItems = document.querySelectorAll('.content-item');
-            const tocLinks = document.querySelectorAll('.toc-link');
-            let currentFilter = 'all';
-
-            // Search functionality
-            function performSearch(searchTerm) {
-                const normalizedSearchTerm = searchTerm.toLowerCase().trim();
-                let visibleCount = 0;
-
-                contentItems.forEach(item => {
-                    const category = item.getAttribute('data-category');
-                    const text = item.textContent.toLowerCase();
-                    const hasMatch = normalizedSearchTerm === '' || text.includes(normalizedSearchTerm);
-                    
-                    if (hasMatch && (currentFilter === 'all' || currentFilter === category)) {
-                        item.style.display = '';
-                        item.parentElement.classList.remove('category-hidden');
-                        item.parentElement.classList.add('category-show');
-                        visibleCount++;
-                        
-                        // Highlight search term
-                        if (normalizedSearchTerm !== '') {
-                            highlightText(item, normalizedSearchTerm);
-                        } else {
-                            removeHighlight(item);
-                        }
-                    } else {
-                        item.style.display = 'none';
-                        removeHighlight(item);
-                    }
-                });
-
-                // Hide categories with no visible items
-                categoryElements.forEach(category => {
-                    const categoryItems = category.querySelectorAll('.content-item');
-                    const hasVisibleItems = Array.from(categoryItems).some(item => item.style.display !== 'none');
-                    
-                    if (!hasVisibleItems) {
-                        category.classList.add('category-hidden');
-                    } else {
-                        category.classList.remove('category-hidden');
-                        category.classList.add('category-show');
-                    }
-                });
-
-                // Update visible count
-                const visibleCountEl = document.getElementById('visible-content');
-                if (visibleCountEl) visibleCountEl.textContent = visibleCount;
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (!mobileMenu.classList.contains('hidden')) {
+                setTimeout(() => mobileMenu.classList.add('show'), 10);
+            } else {
+                mobileMenu.classList.remove('show');
             }
-
-            // Highlight search terms
-            function highlightText(element, searchTerm) {
-                const textElements = element.querySelectorAll('p, h3, h4');
-                
-                textElements.forEach(textEl => {
-                    const originalText = textEl.getAttribute('data-original') || textEl.innerHTML;
-                    if (!textEl.getAttribute('data-original')) {
-                        textEl.setAttribute('data-original', originalText);
-                    }
-                    
-                    const regex = new RegExp(`(${searchTerm})`, 'gi');
-                    const highlightedText = originalText.replace(regex, '<span class="search-highlight">$1</span>');
-                    textEl.innerHTML = highlightedText;
-                });
-            }
-
-            // Remove highlight
-            function removeHighlight(element) {
-                const textElements = element.querySelectorAll('p, h3, h4');
-                
-                textElements.forEach(textEl => {
-                    const originalText = textEl.getAttribute('data-original');
-                    if (originalText) {
-                        textEl.innerHTML = originalText;
-                    }
-                });
-            }
-
-            // Filter functionality
-            function applyFilter(filter) {
-                currentFilter = filter;
-                
-                // Update filter tags
-                filterTags.forEach(tag => {
-                    if (tag.getAttribute('data-filter') === filter) {
-                        tag.classList.add('active');
-                    } else {
-                        tag.classList.remove('active');
-                    }
-                });
-
-                // Reapply search with new filter
-                performSearch(searchInput ? searchInput.value : '');
-            }
-
-            // Initialize functionality
-            if (searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    performSearch(e.target.value);
-                });
-            }
-
-            filterTags.forEach(tag => {
-                tag.addEventListener('click', () => {
-                    const filter = tag.getAttribute('data-filter');
-                    applyFilter(filter);
-                });
-            });
-
-            // Initialize search
-            performSearch('');
         });
 
-        // Load shared scripts
-        fetch('shared-scripts.html')
-            .then(response => response.text())
-            .then(data => {
-                document.head.insertAdjacentHTML('beforeend', data);
+        // Back to top functionality
+        const backToTopButton = document.getElementById('back-to-top');
+
+        const toggleBackToTopButton = () => {
+            if (window.scrollY > 300) {
+                backToTopButton.style.opacity = '1';
+                backToTopButton.style.transform = 'scale(1)';
+            } else {
+                backToTopButton.style.opacity = '0';
+                backToTopButton.style.transform = 'scale(0.95)';
+            }
+        };
+
+        backToTopButton?.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
+        });
+
+        window.addEventListener('scroll', toggleBackToTopButton);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            toggleBackToTopButton();
+        });
     </script>
 </body>
 

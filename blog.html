@@ -6,173 +6,388 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>夢鈴幻想 | 心境筆記</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Load Shared Styles -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script>
-        fetch('shared-styles.html')
-            .then(response => response.text())
-            .then(data => {
-                document.head.insertAdjacentHTML('beforeend', data);
-            });
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'soft-dark-primary': '#0a0e1a',
+                        'soft-dark-secondary': '#1a1e2e',
+                        'soft-dark-tertiary': '#2a2e3e',
+                        'soft-accent-primary': '#c8a8e9',
+                        'soft-accent-secondary': '#f8b4d9',
+                        'soft-accent-tertiary': '#a8e6cf',
+                        'soft-text-primary': '#f5f3f0',
+                        'soft-text-secondary': '#b8b5b0',
+                        'soft-text-muted': '#8a8680',
+                    },
+                    animation: {
+                        'float-gentle': 'float-gentle 6s ease-in-out infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'glow-soft': 'glow-soft 2s ease-in-out infinite alternate',
+                        'bounce-soft': 'bounce-soft 1s ease-in-out',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'scale-bounce': 'scale-bounce 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                    },
+                    keyframes: {
+                        'float-gentle': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-8px) rotate(1deg)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: '0.6' },
+                            '50%': { opacity: '0.9' },
+                        },
+                        'glow-soft': {
+                            '0%': {
+                                'box-shadow': '0 0 5px rgba(200, 168, 233, 0.4), 0 0 10px rgba(200, 168, 233, 0.2)',
+                            },
+                            '100%': {
+                                'box-shadow': '0 0 10px rgba(200, 168, 233, 0.6), 0 0 20px rgba(200, 168, 233, 0.3), 0 0 30px rgba(200, 168, 233, 0.1)',
+                            }
+                        },
+                        'bounce-soft': {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.05)' },
+                            '100%': { transform: 'scale(1)' },
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        'scale-bounce': {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                            '100%': { transform: 'scale(1)' },
+                        }
+                    },
+                    fontFamily: {
+                        'cute': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'soft': '12px',
+                        'extra-soft': '20px',
+                    }
+                }
+            }
+        }
     </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1e2e 50%, #2a2e3e 100%);
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(26, 30, 46, 0.7);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 100%);
+            color: #0a0e1a;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.4);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            position: relative;
+            color: #b8b5b0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover {
+            color: #c8a8e9;
+            background: rgba(200, 168, 233, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-link.active {
+            color: #c8a8e9;
+            background: rgba(200, 168, 233, 0.15);
+            font-weight: 600;
+        }
+
+        .mobile-menu {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+
+        .mobile-menu.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .floating-decoration {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 168, 233, 0.15) 0%, transparent 70%);
+            animation: float-gentle 8s ease-in-out infinite;
+        }
+
+        .hero-pattern {
+            background-image: radial-gradient(circle at 20% 50%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
+                             radial-gradient(circle at 80% 20%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
+                             radial-gradient(circle at 40% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%);
+        }
+
+        .content-card {
+            background: rgba(26, 30, 46, 0.9);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #c8a8e9, #f8b4d9, #a8e6cf);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .content-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(200, 168, 233, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
+        }
+
+        .blog-card {
+            background: rgba(26, 30, 46, 0.9);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(200, 168, 233, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
+        }
+    </style>
 </head>
 
-<body class="gradient-bg text-soft-text-primary min-h-screen font-cute" style="padding-top: 4rem;">
+<body class="gradient-bg text-soft-text-primary min-h-screen font-cute">
     <!-- Navigation -->
-    <div id="navigation-container"></div>
+    <nav class="fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center group">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity duration-300"></div>
+                            <img src="images/avatar.png" alt="Dream Bell" 
+                                 class="relative h-10 w-10 rounded-full mr-3 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 border-2 border-soft-accent-primary/30">
+                        </div>
+                        <div class="text-gradient text-xl font-bold tracking-wide">夢鈴幻想</div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="nav-link group relative">
+                        <span class="relative z-10">首頁</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="novels.html" class="nav-link group relative">
+                        <span class="relative z-10">奇幻小說</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="tools.html" class="nav-link group relative">
+                        <span class="relative z-10">魔法工具</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="ai.html" class="nav-link group relative">
+                        <span class="relative z-10">AI魔導</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="medical-category.html" class="nav-link group relative">
+                        <span class="relative z-10">醫學、藥物、保健品</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="finance.html" class="nav-link group relative">
+                        <span class="relative z-10">經濟與投資</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="politics.html" class="nav-link group relative">
+                        <span class="relative z-10">政治與思想</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                    <a href="blog.html" class="nav-link active group relative">
+                        <span class="relative z-10">心境筆記</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button type="button" id="mobile-menu-button"
+                        class="inline-flex items-center justify-center p-2 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-all duration-300 border border-soft-accent-primary/20 hover:border-soft-accent-primary/40">
+                        <span class="sr-only">開啟選單</span>
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu hidden md:hidden">
+            <div class="px-4 pt-2 pb-3 space-y-1 bg-gradient-to-r from-soft-dark-primary/95 via-soft-dark-secondary/95 to-soft-dark-tertiary/95 backdrop-blur-md border-t border-soft-accent-primary/20">
+                <a href="index.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">首頁</a>
+                <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">奇幻小說</a>
+                <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">魔法工具</a>
+                <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI魔導</a>
+                <a href="medical-category.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">醫學、藥物、保健品</a>
+                <a href="finance.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">經濟與投資</a>
+                <a href="politics.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">政治與思想</a>
+                <a href="blog.html" class="block px-4 py-3 rounded-lg text-soft-accent-primary font-medium bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 border border-soft-accent-primary/30">心境筆記</a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="pt-24 pb-16 hero-pattern relative overflow-hidden">
-        <!-- Floating decorations -->
-        <div class="floating-decoration w-32 h-32 top-20 left-20" style="animation-delay: 0s;"></div>
-        <div class="floating-decoration w-24 h-24 top-40 right-32" style="animation-delay: 2s;"></div>
-        <div class="floating-decoration w-40 h-40 bottom-10 left-40" style="animation-delay: 4s;"></div>
-        
-        <!-- Sparkles -->
-        <div class="sparkle top-1/4 left-1/3" style="animation-delay: 0s;"></div>
-        <div class="sparkle top-1/3 right-1/4" style="animation-delay: 1s;"></div>
-        <div class="sparkle bottom-1/3 left-1/4" style="animation-delay: 2s;"></div>
+    <section class="pt-24 pb-12 relative hero-pattern">
+        <div class="floating-decoration w-32 h-32 top-20 left-10 opacity-30" style="animation-delay: 0s;"></div>
+        <div class="floating-decoration w-20 h-20 top-32 right-20 opacity-40" style="animation-delay: 2s;"></div>
+        <div class="floating-decoration w-16 h-16 bottom-20 left-1/3 opacity-35" style="animation-delay: 4s;"></div>
 
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h1 class="text-5xl md:text-6xl font-bold mb-6">
-                    <span class="text-gradient">心境</span> & <span class="text-gradient">筆記</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-soft-text-secondary max-w-3xl mx-auto leading-relaxed">
-                    在這裡記錄創作路上的點點滴滴，紀錄著自己的軌跡
+                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8 animate-float-gentle">
+                    <i class="fas fa-feather-alt text-3xl text-soft-dark-primary"></i>
+                </div>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-gradient leading-tight">心境筆記</h1>
+                <div class="w-32 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-8"></div>
+                <p class="text-xl md:text-2xl text-soft-text-secondary max-w-4xl mx-auto leading-relaxed">
+                    個人思考、生活感悟與創作心得的隨筆記錄
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Topics Section -->
+    <!-- Blog Posts Section -->
     <section class="py-16 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- 故事的解剖 -->
-                <div class="topic-card rounded-extra-soft p-8 shadow-2xl">
-                    <div class="text-center mb-6">
-                        <div class="topic-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-6">
-                            <i class="fas fa-microscope text-3xl text-soft-primary"></i>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Story Anatomy -->
+                <div class="blog-card rounded-extra-soft p-6 shadow-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary flex items-center justify-center mr-4">
+                            <i class="fas fa-microscope text-soft-dark-primary text-lg"></i>
                         </div>
-                        <h2 class="text-3xl font-bold mb-4 text-gradient">故事的解剖</h2>
-                        <div class="w-16 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-6"></div>
-                    </div>
-                    <div class="space-y-4 text-soft-text-secondary mb-8">
-                        <p class="text-center italic">放諸四海永恆皆準的<strong class="text-soft-accent-primary">形式</strong>，而非公式</p>
-                        <p class="text-center italic"><strong class="text-soft-accent-primary">原型</strong>而非老套陳腔</p>
-                        <p class="text-center italic"><strong class="text-soft-accent-primary">原創</strong>而非複製</p>
-                        <p class="text-center italic">精通「<strong class="text-soft-accent-primary">說故事</strong>」這門技藝</p>
-                    </div>
-                    <div class="text-center">
-                        <a href="story-anatomy.html" class="topic-button px-8 py-4 rounded-extra-soft inline-flex items-center justify-center group">
-                            <i class="fas fa-book-open mr-3 group-hover:scale-110 transition-transform"></i>
-                            <span class="font-bold">深入探索</span>
-                            <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 名句紀錄 -->
-                <div class="topic-card rounded-extra-soft p-8 shadow-2xl">
-                    <div class="text-center mb-6">
-                        <div class="topic-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-6">
-                            <i class="fas fa-quote-right text-3xl text-soft-primary"></i>
-                        </div>
-                        <h2 class="text-3xl font-bold mb-4 text-gradient">名句紀錄</h2>
-                        <div class="w-16 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-6"></div>
-                    </div>
-                    <div class="space-y-3 text-soft-text-secondary mb-8">
-                        <p class="text-center">人生中看到值得紀錄的內容，成為人生觀中的養分</p>
-                        <div class="grid grid-cols-2 gap-2 text-center text-sm">
-                            <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-2">創作與故事</div>
-                            <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-2">人生哲理</div>
-                            <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-2">歷史與社會</div>
-                            <div class="bg-soft-secondary bg-opacity-50 rounded-soft p-2">溝通與智慧</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gradient">故事解析</h3>
+                            <p class="text-sm text-soft-text-muted">故事結構與寫作技巧</p>
                         </div>
                     </div>
-                    <div class="text-center">
-                        <a href="quotes.html" class="topic-button px-8 py-4 rounded-extra-soft inline-flex items-center justify-center group">
-                            <i class="fas fa-bookmark mr-3 group-hover:scale-110 transition-transform"></i>
-                            <span class="font-bold">瀏覽收錄</span>
-                            <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-
-                <!-- 小說想法 -->
-                <div class="topic-card rounded-extra-soft p-8 shadow-2xl">
-                    <div class="text-center mb-6">
-                        <div class="topic-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-6">
-                            <i class="fas fa-lightbulb text-3xl text-soft-primary"></i>
-                        </div>
-                        <h2 class="text-3xl font-bold mb-4 text-gradient">小說想法</h2>
-                        <div class="w-16 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-6"></div>
-                    </div>
-                    <div class="space-y-3 text-soft-text-secondary mb-8">
-                        <p class="text-center">腦海中閃現的創作靈感與故事構思</p>
-                        <p class="text-center italic">每一個想法都可能成為下一個作品</p>
-                        <p class="text-center font-semibold text-soft-accent-primary">記錄創意的瞬間</p>
-                    </div>
-                    <div class="text-center">
-                        <a href="novel-ideas.html" class="topic-button px-8 py-4 rounded-extra-soft inline-flex items-center justify-center group">
-                            <i class="fas fa-pen-fancy mr-3 group-hover:scale-110 transition-transform"></i>
-                            <span class="font-bold">創意靈感</span>
-                            <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 發文紀錄 -->
-                <div class="topic-card rounded-extra-soft p-8 shadow-2xl">
-                    <div class="text-center mb-6">
-                        <div class="topic-icon inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-6">
-                            <i class="fas fa-pen-alt text-3xl text-soft-primary"></i>
-                        </div>
-                        <h2 class="text-3xl font-bold mb-4 text-gradient">發文紀錄</h2>
-                        <div class="w-16 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-6"></div>
-                    </div>
-                    <div class="space-y-3 text-soft-text-secondary mb-8">
-                        <p class="text-center">隨時隨地的想法記錄與心得分享</p>
-                        <p class="text-center italic">思維的軌跡與成長的足跡</p>
-                        <p class="text-center font-semibold text-soft-accent-primary">記錄思考的瞬間</p>
-                    </div>
-                    <div class="text-center">
-                        <a href="post-records.html" class="topic-button px-8 py-4 rounded-extra-soft inline-flex items-center justify-center group">
-                            <i class="fas fa-clock mr-3 group-hover:scale-110 transition-transform"></i>
-                            <span class="font-bold">時光記錄</span>
-                            <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="py-16">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="glass-effect rounded-extra-soft p-12 text-center">
-                <h2 class="text-3xl font-bold mb-6 text-gradient">保持連結</h2>
-                <p class="text-xl text-soft-text-secondary mb-8">
-                    跟隨我的創作旅程，第一時間獲取新文章、故事和創作項目的最新動態
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="https://www.threads.com/@yumerin.main.i" target="_blank" 
-                       class="social-button px-8 py-4 rounded-extra-soft font-medium inline-flex items-center justify-center">
-                        <i class="fab fa-threads mr-3"></i>
-                        <span>在 Threads 上追蹤</span>
+                    <p class="text-soft-text-secondary mb-6 leading-relaxed">
+                        深入探討小說創作的技巧與心得，從角色塑造到情節安排的寫作思考。
+                    </p>
+                    <a href="story-anatomy.html" 
+                       class="button-primary px-4 py-2 rounded-soft inline-flex items-center group text-sm">
+                        <span class="mr-2">閱讀更多</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     </a>
-                    <a href="https://www.pixiv.net/users/108590809/novels" target="_blank" 
-                       class="social-button px-8 py-4 rounded-extra-soft font-medium inline-flex items-center justify-center">
-                        <i class="fas fa-paint-brush mr-3"></i>
-                        <span>在 Pixiv 上追蹤</span>
+                </div>
+
+                <!-- Quotes -->
+                <div class="blog-card rounded-extra-soft p-6 shadow-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-secondary to-soft-accent-tertiary flex items-center justify-center mr-4">
+                            <i class="fas fa-quote-left text-soft-dark-primary text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gradient">名言佳句</h3>
+                            <p class="text-sm text-soft-text-muted">智慧語錄與思辨</p>
+                        </div>
+                    </div>
+                    <p class="text-soft-text-secondary mb-6 leading-relaxed">
+                        收集與分享觸動人心的名言佳句，以及個人的思考與感悟。
+                    </p>
+                    <a href="quotes.html" 
+                       class="button-primary px-4 py-2 rounded-soft inline-flex items-center group text-sm">
+                        <span class="mr-2">閱讀更多</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Novel Ideas -->
+                <div class="blog-card rounded-extra-soft p-6 shadow-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-tertiary to-soft-accent-primary flex items-center justify-center mr-4">
+                            <i class="fas fa-lightbulb text-soft-dark-primary text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gradient">小說想法</h3>
+                            <p class="text-sm text-soft-text-muted">創作靈感與構思</p>
+                        </div>
+                    </div>
+                    <p class="text-soft-text-secondary mb-6 leading-relaxed">
+                        腦海中閃現的創作靈感與故事構思，每一個想法都可能成為下一個作品。
+                    </p>
+                    <a href="novel-ideas.html" 
+                       class="button-primary px-4 py-2 rounded-soft inline-flex items-center group text-sm">
+                        <span class="mr-2">閱讀更多</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Post Records -->
+                <div class="blog-card rounded-extra-soft p-6 shadow-2xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-tertiary flex items-center justify-center mr-4">
+                            <i class="fas fa-calendar-alt text-soft-dark-primary text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gradient">發文紀錄</h3>
+                            <p class="text-sm text-soft-text-muted">創作歷程記錄</p>
+                        </div>
+                    </div>
+                    <p class="text-soft-text-secondary mb-6 leading-relaxed">
+                        記錄創作過程中的點點滴滴，分享作品發布的心路歷程。
+                    </p>
+                    <a href="post-records.html" 
+                       class="button-primary px-4 py-2 rounded-soft inline-flex items-center group text-sm">
+                        <span class="mr-2">閱讀更多</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
                     </a>
                 </div>
             </div>
@@ -180,38 +395,74 @@
     </section>
 
     <!-- Footer -->
-    <div id="footer-container"></div>
+    <footer class="glass-effect py-12 mt-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="https://www.threads.net/@yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-threads text-2xl"></i>
+                    </a>
+                    <a href="https://www.pixiv.net/users/96890924" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-pixiv text-2xl"></i>
+                    </a>
+                    <a href="https://github.com/yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                </div>
+                <div class="border-t border-soft-accent-primary/20 pt-8">
+                    <p class="text-soft-text-muted">&copy; 2024 夢鈴幻想. 在夢境與現實的交界處編織故事.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Back to Top Button -->
     <button id="back-to-top" 
-            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
+            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-dark-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
             aria-label="回到頂部">
-        <i class="fas fa-arrow-up text-lg"></i>
+        <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Load Scripts -->
     <script>
-        // Load navigation
-        fetch('shared-nav.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navigation-container').innerHTML = data
-                    .replace(/{{ACTIVE_PAGE}}/g, 'blog');
-            });
-        
-        // Load footer
-        fetch('shared-footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            });
+        // Mobile menu toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-        // Load shared scripts
-        fetch('shared-scripts.html')
-            .then(response => response.text())
-            .then(data => {
-                document.head.insertAdjacentHTML('beforeend', data);
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (!mobileMenu.classList.contains('hidden')) {
+                setTimeout(() => mobileMenu.classList.add('show'), 10);
+            } else {
+                mobileMenu.classList.remove('show');
+            }
+        });
+
+        // Back to top functionality
+        const backToTopButton = document.getElementById('back-to-top');
+
+        const toggleBackToTopButton = () => {
+            if (window.scrollY > 300) {
+                backToTopButton.style.opacity = '1';
+                backToTopButton.style.transform = 'scale(1)';
+            } else {
+                backToTopButton.style.opacity = '0';
+                backToTopButton.style.transform = 'scale(0.95)';
+            }
+        };
+
+        backToTopButton?.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
+        });
+
+        window.addEventListener('scroll', toggleBackToTopButton);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            toggleBackToTopButton();
+        });
     </script>
 </body>
 

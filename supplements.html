@@ -1,339 +1,211 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>保健食品 - 夢鈴幻想</title>
-    
+    <title>夢鈴幻想 | 保健品</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Load Shared Styles -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script>
-        fetch('shared-styles.html')
-            .then(response => response.text())
-            .then(data => {
-                document.head.insertAdjacentHTML('beforeend', data);
-            });
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'soft-dark-primary': '#0a0e1a',
+                        'soft-dark-secondary': '#1a1e2e',
+                        'soft-dark-tertiary': '#2a2e3e',
+                        'soft-accent-primary': '#c8a8e9',
+                        'soft-accent-secondary': '#f8b4d9',
+                        'soft-accent-tertiary': '#a8e6cf',
+                        'soft-text-primary': '#f5f3f0',
+                        'soft-text-secondary': '#b8b5b0',
+                        'soft-text-muted': '#8a8680',
+                    },
+                    animation: {
+                        'float-gentle': 'float-gentle 6s ease-in-out infinite',
+                        'pulse-soft': 'pulse-soft 3s ease-in-out infinite',
+                        'glow-soft': 'glow-soft 2s ease-in-out infinite alternate',
+                        'bounce-soft': 'bounce-soft 1s ease-in-out',
+                        'slide-up': 'slide-up 0.6s ease-out',
+                        'scale-bounce': 'scale-bounce 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                    },
+                    keyframes: {
+                        'float-gentle': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-8px) rotate(1deg)' },
+                        },
+                        'pulse-soft': {
+                            '0%, 100%': { opacity: '0.6' },
+                            '50%': { opacity: '0.9' },
+                        },
+                        'glow-soft': {
+                            '0%': {
+                                'box-shadow': '0 0 5px rgba(200, 168, 233, 0.4), 0 0 10px rgba(200, 168, 233, 0.2)',
+                            },
+                            '100%': {
+                                'box-shadow': '0 0 10px rgba(200, 168, 233, 0.6), 0 0 20px rgba(200, 168, 233, 0.3), 0 0 30px rgba(200, 168, 233, 0.1)',
+                            }
+                        },
+                        'bounce-soft': {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.05)' },
+                            '100%': { transform: 'scale(1)' },
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        'scale-bounce': {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                            '100%': { transform: 'scale(1)' },
+                        }
+                    },
+                    fontFamily: {
+                        'cute': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'soft': '12px',
+                        'extra-soft': '20px',
+                    }
+                }
+            }
+        }
     </script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Supplements specific styles */
-        body {
-            /* Inherited from shared styles */
+        * {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .gradient-bg {
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1e2e 50%, #2a2e3e 100%);
         }
 
         .glass-effect {
-            background: rgba(42, 46, 62, 0.6);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(200, 168, 233, 0.1);
+            background: rgba(26, 30, 46, 0.7);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 100%);
+            color: #0a0e1a;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.4);
         }
 
         .text-gradient {
-            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
+            background: linear-gradient(135deg, #c8a8e9 0%, #f8b4d9 50%, #a8e6cf 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .rounded-extra-soft {
-            border-radius: 24px;
-        }
-
-        .hover-lift {
-            transition: all 0.3s ease;
-        }
-
-        .hover-lift:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .floating-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
         .nav-link {
             position: relative;
-            padding: 12px 24px;
-            color: var(--soft-text-secondary);
-            text-decoration: none;
-            border-radius: 16px;
-            transition: all 0.3s ease;
+            color: #b8b5b0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
         }
 
         .nav-link:hover {
-            color: var(--soft-accent-primary);
+            color: #c8a8e9;
             background: rgba(200, 168, 233, 0.1);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         .nav-link.active {
-            color: var(--soft-accent-primary);
-            background: rgba(200, 168, 233, 0.2);
+            color: #c8a8e9;
+            background: rgba(200, 168, 233, 0.15);
+            font-weight: 600;
         }
 
         .mobile-menu {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .desktop-menu {
-                display: none;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(-20px);
             opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
         }
 
-        .back-to-top.visible {
+        .mobile-menu.show {
+            transform: translateY(0);
             opacity: 1;
-            visibility: visible;
         }
 
-        .back-to-top:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(200, 168, 233, 0.4);
+        .floating-decoration {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 168, 233, 0.15) 0%, transparent 70%);
+            animation: float-gentle 8s ease-in-out infinite;
         }
 
-        .category-card {
-            background: rgba(42, 46, 62, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(200, 168, 233, 0.1);
-            border-radius: 24px;
-            padding: 32px;
-            margin-bottom: 32px;
-            transition: all 0.3s ease;
+        .hero-pattern {
+            background-image: radial-gradient(circle at 20% 50%, rgba(200, 168, 233, 0.1) 0%, transparent 50%),
+                             radial-gradient(circle at 80% 20%, rgba(248, 180, 217, 0.1) 0%, transparent 50%),
+                             radial-gradient(circle at 40% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 50%);
+        }
+
+        .content-card {
+            background: rgba(26, 30, 46, 0.9);
+            border: 1px solid rgba(200, 168, 233, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
 
-        .category-card::before {
+        .content-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--soft-accent-primary), var(--soft-accent-secondary), var(--soft-accent-tertiary));
+            height: 3px;
+            background: linear-gradient(90deg, #c8a8e9, #f8b4d9, #a8e6cf);
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
 
-        .category-card:hover::before {
+        .content-card:hover::before {
             transform: scaleX(1);
         }
 
-        .category-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(200, 168, 233, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        .content-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(200, 168, 233, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(200, 168, 233, 0.2);
         }
 
-        .category-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            transition: all 0.3s ease;
+        .back-button {
+            background: linear-gradient(135deg, rgba(200, 168, 233, 0.2), rgba(248, 180, 217, 0.2));
+            border: 1px solid rgba(200, 168, 233, 0.3);
+            color: #c8a8e9;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .category-card:hover .category-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .category-title {
-            font-size: 2rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .category-description {
-            color: var(--soft-text-secondary);
-            text-align: center;
-            margin-bottom: 24px;
-            font-size: 1.125rem;
-            line-height: 1.7;
-        }
-
-        .category-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .feature-item {
-            background: rgba(26, 30, 46, 0.5);
-            padding: 20px;
-            border-radius: 16px;
-            border: 1px solid rgba(200, 168, 233, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .feature-item:hover {
-            background: rgba(26, 30, 46, 0.8);
-            border-color: rgba(200, 168, 233, 0.3);
-            transform: translateY(-4px);
-        }
-
-        .feature-icon {
-            color: var(--soft-accent-primary);
-            margin-right: 12px;
-            font-size: 1.25rem;
-        }
-
-        .feature-title {
-            font-weight: 600;
-            color: var(--soft-accent-primary);
-            margin-bottom: 8px;
-        }
-
-        .feature-text {
-            color: var(--soft-text-secondary);
-            font-size: 0.95rem;
-        }
-
-        .category-button {
-            display: block;
-            width: 100%;
-            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
-            color: var(--soft-primary);
-            padding: 16px 32px;
-            border-radius: 16px;
-            text-decoration: none;
-            font-weight: 600;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .category-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s;
-        }
-
-        .category-button:hover::before {
-            left: 100%;
-        }
-
-        .category-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(200, 168, 233, 0.4);
-        }
-
-        .info-section {
-            background: rgba(42, 46, 62, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(200, 168, 233, 0.1);
-            border-radius: 24px;
-            padding: 32px;
-            margin-bottom: 32px;
-            text-align: center;
-        }
-
-        .info-section h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, var(--soft-accent-primary), var(--soft-accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .info-section p {
-            color: var(--soft-text-secondary);
-            font-size: 1.125rem;
-            line-height: 1.7;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .warning-note {
-            background: rgba(255, 107, 107, 0.1);
-            border: 1px solid rgba(255, 107, 107, 0.3);
-            border-radius: 16px;
-            padding: 20px;
-            margin-top: 32px;
-            text-align: center;
-        }
-
-        .warning-note h3 {
-            color: #ff6b6b;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .warning-note p {
-            color: var(--soft-text-secondary);
-            font-size: 0.95rem;
-        }
-
-        @media (max-width: 768px) {
-            .category-features {
-                grid-template-columns: 1fr;
-            }
-            
-            .category-title {
-                font-size: 1.75rem;
-            }
-            
-            .info-section h2 {
-                font-size: 2rem;
-            }
+        .back-button:hover {
+            background: linear-gradient(135deg, rgba(200, 168, 233, 0.3), rgba(248, 180, 217, 0.3));
+            border-color: rgba(200, 168, 233, 0.5);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(200, 168, 233, 0.3);
+            color: #f5f3f0;
         }
     </style>
 </head>
-<body class="gradient-bg text-soft-text-primary min-h-screen font-cute" style="padding-top: 4rem;">
-    <!-- Navigation -->
-    <div id="navigation-container"></div>
+
+<body class="gradient-bg text-soft-text-primary min-h-screen font-cute">
     <!-- Navigation -->
     <nav class="fixed w-full z-50 backdrop-blur-md bg-gradient-to-r from-soft-dark-primary/90 via-soft-dark-secondary/90 to-soft-dark-tertiary/90 border-b border-soft-accent-primary/20 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -357,15 +229,15 @@
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="novels.html" class="nav-link group relative">
-                        <span class="relative z-10">輕小說</span>
+                        <span class="relative z-10">奇幻小說</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="tools.html" class="nav-link group relative">
-                        <span class="relative z-10">程式與工具</span>
+                        <span class="relative z-10">魔法工具</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="ai.html" class="nav-link group relative">
-                        <span class="relative z-10">AI 心得</span>
+                        <span class="relative z-10">AI魔導</span>
                         <div class="absolute inset-0 bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </a>
                     <a href="medical-category.html" class="nav-link active group relative">
@@ -401,9 +273,9 @@
         <div id="mobile-menu" class="mobile-menu hidden md:hidden">
             <div class="px-4 pt-2 pb-3 space-y-1 bg-gradient-to-r from-soft-dark-primary/95 via-soft-dark-secondary/95 to-soft-dark-tertiary/95 backdrop-blur-md border-t border-soft-accent-primary/20">
                 <a href="index.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">首頁</a>
-                <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">輕小說</a>
-                <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">程式與工具</a>
-                <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI 心得</a>
+                <a href="novels.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">奇幻小說</a>
+                <a href="tools.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">魔法工具</a>
+                <a href="ai.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">AI魔導</a>
                 <a href="medical-category.html" class="block px-4 py-3 rounded-lg text-soft-accent-primary font-medium bg-gradient-to-r from-soft-accent-primary/20 to-soft-accent-secondary/20 border border-soft-accent-primary/30">醫學、藥物、保健品</a>
                 <a href="finance.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">經濟與投資</a>
                 <a href="politics.html" class="block px-4 py-3 rounded-lg text-soft-text-secondary hover:text-soft-text-primary hover:bg-soft-dark-tertiary/50 transition-colors border border-transparent hover:border-soft-accent-primary/20">政治與思想</a>
@@ -412,619 +284,127 @@
         </div>
     </nav>
 
-    <!-- Header -->
-    <header class="pt-32 pb-16 text-center">
-        <div class="container">
-            <div class="floating-animation">
-                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary mb-8">
-                    <i class="fas fa-leaf text-4xl text-white"></i>
-                </div>
-            </div>
-            <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gradient">保健食品</h1>
-            <p class="text-xl text-soft-text-secondary max-w-2xl mx-auto">
-                營養補充品的科學分析與使用指南，天然健康保健的專業資訊
-            </p>
-        </div>
-    </header>
+    <!-- Back Button -->
+    <div class="fixed top-20 left-4 z-40">
+        <a href="medical-category.html" class="back-button px-4 py-2 rounded-soft inline-flex items-center group">
+            <i class="fas fa-arrow-left mr-2 group-hover:-translate-x-1 transition-transform"></i>
+            <span class="text-sm font-medium">返回醫學分類</span>
+        </a>
+    </div>
 
-    <!-- Introduction Section -->
-    <section class="pb-16">
-        <div class="container">
-            <div class="info-section">
-                <h2>營養補充，智慧選擇</h2>
-                <p>
-                    保健食品是現代人維持健康的重要補充，但選擇適合的產品需要科學依據。
-                    每個人的身體狀況、生活習慣、飲食結構都不同，因此需要個別化的營養補充策略。
-                    在這裡，我們將深入探討各類保健食品的科學原理、適用人群、使用方法以及注意事項。
-                </p>
-                <div class="warning-note">
-                    <h3><i class="fas fa-exclamation-triangle mr-2"></i>重要提醒</h3>
-                    <p>本站資訊僅供參考，不構成醫療建議。使用任何保健食品前，請諮詢專業醫護人員。</p>
+    <!-- Hero Section -->
+    <section class="pt-24 pb-12 relative hero-pattern">
+        <div class="floating-decoration w-32 h-32 top-20 left-10 opacity-30" style="animation-delay: 0s;"></div>
+        <div class="floating-decoration w-20 h-20 top-32 right-20 opacity-40" style="animation-delay: 2s;"></div>
+        <div class="floating-decoration w-16 h-16 bottom-20 left-1/3 opacity-35" style="animation-delay: 4s;"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-soft-accent-primary to-soft-accent-tertiary mb-8 animate-float-gentle">
+                    <i class="fas fa-leaf text-3xl text-soft-dark-primary"></i>
                 </div>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-gradient leading-tight">保健品</h1>
+                <div class="w-32 h-1 bg-gradient-to-r from-soft-accent-primary to-soft-accent-secondary mx-auto rounded-full mb-8"></div>
+                <p class="text-xl md:text-2xl text-soft-text-secondary max-w-4xl mx-auto leading-relaxed">
+                    營養補充品、保健食品的成分分析與使用指南
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Categories Section -->
-    <section class="pb-20">
-        <div class="container">
-            <!-- 益生菌 -->
-            <div class="category-card">
-                <div class="category-icon">
-                    <i class="fas fa-seedling text-4xl text-white"></i>
-                </div>
-                <h2 class="category-title">益生菌</h2>
-                <p class="category-description">
-                    腸道健康的守護者，調節消化系統平衡，增強免疫力。
-                    選擇適合的益生菌株，維持腸道微生態的穩定與健康。
-                </p>
-                <div class="category-features">
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-shield-alt feature-icon"></i>
-                            增強免疫力
+    <!-- Content Section -->
+    <section class="py-16 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="content-card rounded-extra-soft p-8 shadow-2xl">
+                <div class="text-center py-16">
+                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-soft-accent-tertiary to-soft-accent-secondary mb-8">
+                        <i class="fas fa-capsules text-2xl text-soft-dark-primary"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gradient mb-6">內容建構中</h2>
+                    <p class="text-lg text-soft-text-secondary max-w-2xl mx-auto leading-relaxed">
+                        保健品相關內容正在整理與撰寫中，將提供專業的營養補充品成分分析與使用建議。
+                    </p>
+                    <div class="mt-8">
+                        <div class="inline-flex items-center text-soft-accent-primary">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span class="text-sm">預計上線時間：近期</span>
                         </div>
-                        <p class="feature-text">調節腸道免疫系統，提高身體抵抗力，預防感染性疾病。</p>
                     </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-balance-scale feature-icon"></i>
-                            改善消化
-                        </div>
-                        <p class="feature-text">促進腸道蠕動，改善便秘問題，維持消化系統健康。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-brain feature-icon"></i>
-                            腸腦連結
-                        </div>
-                        <p class="feature-text">影響情緒和認知功能，改善焦慮和憂鬱症狀。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-heartbeat feature-icon"></i>
-                            心血管健康
-                        </div>
-                        <p class="feature-text">降低膽固醇，調節血壓，促進心血管系統健康。</p>
-                    </div>
-                </div>
-                <a href="probiotics.html" class="category-button">
-                    <i class="fas fa-microscope mr-3"></i>
-                    深入了解益生菌
-                    <i class="fas fa-arrow-right ml-3"></i>
-                </a>
-            </div>
-
-            <!-- 眼睛保健 -->
-            <div class="category-card">
-                <div class="category-icon">
-                    <i class="fas fa-eye text-4xl text-white"></i>
-                </div>
-                <h2 class="category-title">眼睛保健</h2>
-                <p class="category-description">
-                    數位時代的視力保護，抗藍光、抗氧化、預防眼部疾病。
-                    從葉黃素到花青素，科學護眼，維持清晰視力。
-                </p>
-                <div class="category-features">
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-sun feature-icon"></i>
-                            抗藍光傷害
-                        </div>
-                        <p class="feature-text">保護視網膜免受藍光傷害，預防黃斑部病變。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-droplet feature-icon"></i>
-                            改善乾眼症
-                        </div>
-                        <p class="feature-text">增加淚液分泌，改善眼部乾澀不適症狀。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-clock feature-icon"></i>
-                            延緩老化
-                        </div>
-                        <p class="feature-text">抗氧化作用，延緩眼部老化，保持視力清晰。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-moon feature-icon"></i>
-                            夜間視力
-                        </div>
-                        <p class="feature-text">改善夜間視力，增強暗適應能力。</p>
-                    </div>
-                </div>
-                <a href="eye-care.html" class="category-button">
-                    <i class="fas fa-low-vision mr-3"></i>
-                    探索護眼秘方
-                    <i class="fas fa-arrow-right ml-3"></i>
-                </a>
-            </div>
-
-            <!-- 胃部保健 -->
-            <div class="category-card">
-                <div class="category-icon">
-                    <i class="fas fa-stomach text-4xl text-white"></i>
-                </div>
-                <h2 class="category-title">胃部保健</h2>
-                <p class="category-description">
-                    現代人的胃部健康挑戰，從胃食道逆流到胃潰瘍。
-                    天然保健成分，溫和調理，重建胃部健康防線。
-                </p>
-                <div class="category-features">
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-shield feature-icon"></i>
-                            胃黏膜保護
-                        </div>
-                        <p class="feature-text">修復胃黏膜，增強胃部防護能力，預防潰瘍形成。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-fire feature-icon"></i>
-                            抗發炎作用
-                        </div>
-                        <p class="feature-text">減少胃部發炎反應，緩解胃痛和不適症狀。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-arrows-spin feature-icon"></i>
-                            調節胃酸
-                        </div>
-                        <p class="feature-text">平衡胃酸分泌，改善胃食道逆流症狀。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-leaf feature-icon"></i>
-                            天然修復
-                        </div>
-                        <p class="feature-text">促進胃部組織修復，恢復正常消化功能。</p>
-                    </div>
-                </div>
-                <a href="stomach-care.html" class="category-button">
-                    <i class="fas fa-heartbeat mr-3"></i>
-                    胃部健康指南
-                    <i class="fas fa-arrow-right ml-3"></i>
-                </a>
-            </div>
-
-            <!-- 胺基酸 -->
-            <div class="category-card">
-                <div class="category-icon">
-                    <i class="fas fa-dna text-4xl text-white"></i>
-                </div>
-                <h2 class="category-title">胺基酸</h2>
-                <p class="category-description">
-                    生命的基石，蛋白質的構成要素。從肌肉合成到神經傳導，
-                    胺基酸在人體中扮演著不可或缺的角色。
-                </p>
-                <div class="category-features">
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-dumbbell feature-icon"></i>
-                            肌肉合成
-                        </div>
-                        <p class="feature-text">促進肌肉蛋白質合成，增強肌力，加速運動後恢復。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-bolt feature-icon"></i>
-                            能量代謝
-                        </div>
-                        <p class="feature-text">參與能量代謝過程，提高運動表現和耐力。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-brain feature-icon"></i>
-                            神經功能
-                        </div>
-                        <p class="feature-text">支持神經傳導，改善認知功能和情緒調節。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-heart feature-icon"></i>
-                            免疫支持
-                        </div>
-                        <p class="feature-text">增強免疫系統功能，提高身體抵抗力。</p>
-                    </div>
-                </div>
-                <a href="amino-acids.html" class="category-button">
-                    <i class="fas fa-atom mr-3"></i>
-                    胺基酸科學
-                    <i class="fas fa-arrow-right ml-3"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Detailed Product Information Section -->
-    <section class="pb-20">
-        <div class="container">
-            <!-- 魚油 -->
-            <div class="category-card">
-                <div class="category-icon">
-                    <i class="fas fa-fish text-4xl text-white"></i>
-                </div>
-                <h2 class="category-title">魚油 (Omega-3)</h2>
-                <p class="category-description">
-                    深海魚油富含EPA和DHA，支持心血管健康、大腦功能與抗發炎。
-                    高品質魚油是現代人健康保養的重要選擇。
-                </p>
-                <div class="category-features">
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-heart feature-icon"></i>
-                            心血管保護
-                        </div>
-                        <p class="feature-text">降低三酸甘油酯，維護心臟健康，預防心血管疾病。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-brain feature-icon"></i>
-                            腦部功能
-                        </div>
-                        <p class="feature-text">DHA支持大腦發育，改善記憶力和認知功能。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-fire feature-icon"></i>
-                            抗發炎作用
-                        </div>
-                        <p class="feature-text">EPA具有強效抗發炎特性，減少體內慢性發炎。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-eye feature-icon"></i>
-                            視力保健
-                        </div>
-                        <p class="feature-text">DHA是視網膜重要成分，維護眼部健康。</p>
-                    </div>
-                </div>
-                
-                <!-- 詳細產品資訊 -->
-                <div class="mt-8 space-y-6">
-                    <h3 class="text-xl font-bold text-soft-accent-primary mb-4">推薦產品與劑量</h3>
-                    
-                    <div class="bg-soft-secondary bg-opacity-30 rounded-lg p-6">
-                        <h4 class="text-lg font-semibold text-soft-accent-secondary mb-3">高濃度魚油 (EPA:DHA = 3:2)</h4>
-                        <ul class="space-y-2 text-soft-text-secondary">
-                            <li>• <strong>建議劑量：</strong>每日1-2粒，總EPA+DHA含量1000-2000mg</li>
-                            <li>• <strong>適用對象：</strong>心血管疾病預防、三酸甘油酯偏高者</li>
-                            <li>• <strong>服用時機：</strong>飯後服用，增加吸收率</li>
-                            <li>• <strong>注意事項：</strong>服用抗凝血劑者需醫師監督</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-soft-secondary bg-opacity-30 rounded-lg p-6">
-                        <h4 class="text-lg font-semibold text-soft-accent-secondary mb-3">高DHA魚油 (EPA:DHA = 1:2)</h4>
-                        <ul class="space-y-2 text-soft-text-secondary">
-                            <li>• <strong>建議劑量：</strong>每日1粒，DHA含量500-1000mg</li>
-                            <li>• <strong>適用對象：</strong>孕婦、兒童、學生、年長者</li>
-                            <li>• <strong>特殊功效：</strong>支持大腦發育，改善認知功能</li>
-                            <li>• <strong>品質要求：</strong>選擇分子蒸餾技術去除重金屬</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 維生素 -->
-            <div class="category-card">
-                <div class="category-icon">
-                    <i class="fas fa-pills text-4xl text-white"></i>
-                </div>
-                <h2 class="category-title">維生素</h2>
-                <p class="category-description">
-                    人體必需的微量營養素，參與代謝、免疫、抗氧化等重要生理功能。
-                    現代生活中維生素缺乏問題日益嚴重。
-                </p>
-                <div class="category-features">
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-sun feature-icon"></i>
-                            維生素D3
-                        </div>
-                        <p class="feature-text">骨骼健康、免疫調節、情緒穩定的關鍵營養素。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-bolt feature-icon"></i>
-                            B群維生素
-                        </div>
-                        <p class="feature-text">能量代謝、神經功能、細胞分裂必需營養素。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-shield feature-icon"></i>
-                            維生素C
-                        </div>
-                        <p class="feature-text">強效抗氧化劑，支持免疫系統和膠原蛋白合成。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-heart feature-icon"></i>
-                            維生素E
-                        </div>
-                        <p class="feature-text">細胞膜保護，預防心血管疾病和抗老化。</p>
-                    </div>
-                </div>
-
-                <!-- 詳細產品資訊 -->
-                <div class="mt-8 space-y-6">
-                    <h3 class="text-xl font-bold text-soft-accent-primary mb-4">關鍵維生素補充指南</h3>
-                    
-                    <div class="bg-soft-secondary bg-opacity-30 rounded-lg p-6">
-                        <h4 class="text-lg font-semibold text-soft-accent-secondary mb-3">維生素D3</h4>
-                        <ul class="space-y-2 text-soft-text-secondary">
-                            <li>• <strong>建議劑量：</strong>每日1000-4000 IU (25-100 μg)</li>
-                            <li>• <strong>缺乏症狀：</strong>骨質疏鬆、免疫力低下、憂鬱情緒</li>
-                            <li>• <strong>檢測建議：</strong>血清25(OH)D3應維持在30-50 ng/mL</li>
-                            <li>• <strong>注意事項：</strong>脂溶性維生素，飯後服用增加吸收</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-soft-secondary bg-opacity-30 rounded-lg p-6">
-                        <h4 class="text-lg font-semibold text-soft-accent-secondary mb-3">活性B群複合維生素</h4>
-                        <ul class="space-y-2 text-soft-text-secondary">
-                            <li>• <strong>重要成分：</strong>活性葉酸(5-MTHF)、甲基B12、P5P(B6)</li>
-                            <li>• <strong>建議劑量：</strong>依個人代謝基因型調整</li>
-                            <li>• <strong>適用對象：</strong>高壓工作者、素食者、年長者</li>
-                            <li>• <strong>服用時機：</strong>早餐後，避免晚上服用影響睡眠</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 礦物質 -->
-            <div class="category-card">
-                <div class="category-icon">
-                    <i class="fas fa-gem text-4xl text-white"></i>
-                </div>
-                <h2 class="category-title">礦物質</h2>
-                <p class="category-description">
-                    人體無法自行合成的必需礦物質，參與酵素反應、骨骼形成、
-                    電解質平衡等重要生理功能。
-                </p>
-                <div class="category-features">
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-bone feature-icon"></i>
-                            鈣鎂鋅
-                        </div>
-                        <p class="feature-text">骨骼健康、肌肉收縮、神經傳導的重要礦物質。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-droplet feature-icon"></i>
-                            鐵質
-                        </div>
-                        <p class="feature-text">血紅素組成，預防缺鐵性貧血，提升攜氧能力。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-shield-alt feature-icon"></i>
-                            硒
-                        </div>
-                        <p class="feature-text">強效抗氧化礦物質，支持免疫系統和甲狀腺功能。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-water feature-icon"></i>
-                            電解質
-                        </div>
-                        <p class="feature-text">維持體液平衡，支持細胞正常功能運作。</p>
-                    </div>
-                </div>
-
-                <!-- 詳細產品資訊 -->
-                <div class="mt-8 space-y-6">
-                    <h3 class="text-xl font-bold text-soft-accent-primary mb-4">重要礦物質補充方案</h3>
-                    
-                    <div class="bg-soft-secondary bg-opacity-30 rounded-lg p-6">
-                        <h4 class="text-lg font-semibold text-soft-accent-secondary mb-3">鈣鎂鋅複合礦物質</h4>
-                        <ul class="space-y-2 text-soft-text-secondary">
-                            <li>• <strong>理想比例：</strong>鈣:鎂:鋅 = 2:1:0.1 (如 500mg:250mg:15mg)</li>
-                            <li>• <strong>吸收形式：</strong>檸檬酸鈣、甘胺酸鎂、吡啶甲酸鋅</li>
-                            <li>• <strong>服用時機：</strong>睡前服用，有助放鬆和睡眠</li>
-                            <li>• <strong>注意事項：</strong>避免與纖維、咖啡因同時服用</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-soft-secondary bg-opacity-30 rounded-lg p-6">
-                        <h4 class="text-lg font-semibold text-soft-accent-secondary mb-3">螯合鐵 (女性專用)</h4>
-                        <ul class="space-y-2 text-soft-text-secondary">
-                            <li>• <strong>建議劑量：</strong>每日18-27mg (懷孕期間)</li>
-                            <li>• <strong>最佳形式：</strong>甘胺酸亞鐵，腸胃刺激性低</li>
-                            <li>• <strong>促進吸收：</strong>搭配維生素C，避免與鈣質同服</li>
-                            <li>• <strong>檢測指標：</strong>血清鐵蛋白、血色素濃度</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 專業補充品 -->
-            <div class="category-card">
-                <div class="category-icon">
-                    <i class="fas fa-flask text-4xl text-white"></i>
-                </div>
-                <h2 class="category-title">專業營養補充品</h2>
-                <p class="category-description">
-                    針對特定健康需求設計的進階營養補充品，
-                    基於最新科學研究，提供精準營養支持。
-                </p>
-                <div class="category-features">
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-dna feature-icon"></i>
-                            輔酶Q10
-                        </div>
-                        <p class="feature-text">細胞能量工廠輔酶，心臟健康和抗老化關鍵。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-leaf feature-icon"></i>
-                            薑黃素
-                        </div>
-                        <p class="feature-text">天然抗發炎化合物，保護關節和認知功能。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-seedling feature-icon"></i>
-                            白藜蘆醇
-                        </div>
-                        <p class="feature-text">抗氧化多酚，心血管保護和長壽基因活化。</p>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-title">
-                            <i class="fas fa-mountain feature-icon"></i>
-                            紅景天
-                        </div>
-                        <p class="feature-text">適應原草本，抗壓力和提升身體適應能力。</p>
-                    </div>
-                </div>
-
-                <!-- 詳細產品資訊 -->
-                <div class="mt-8 space-y-6">
-                    <h3 class="text-xl font-bold text-soft-accent-primary mb-4">進階營養補充方案</h3>
-                    
-                    <div class="bg-soft-secondary bg-opacity-30 rounded-lg p-6">
-                        <h4 class="text-lg font-semibold text-soft-accent-secondary mb-3">還原型輔酶Q10 (Ubiquinol)</h4>
-                        <ul class="space-y-2 text-soft-text-secondary">
-                            <li>• <strong>建議劑量：</strong>每日100-200mg</li>
-                            <li>• <strong>適用對象：</strong>40歲以上、心血管疾病、服用史他汀類藥物者</li>
-                            <li>• <strong>生物利用度：</strong>還原型比氧化型CoQ10吸收率高8倍</li>
-                            <li>• <strong>服用時機：</strong>飯後服用，脂溶性成分需要油脂幫助吸收</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-soft-secondary bg-opacity-30 rounded-lg p-6">
-                        <h4 class="text-lg font-semibold text-soft-accent-secondary mb-3">95%薑黃素 + 胡椒鹼</h4>
-                        <ul class="space-y-2 text-soft-text-secondary">
-                            <li>• <strong>建議劑量：</strong>每日500-1000mg薑黃素</li>
-                            <li>• <strong>增效配方：</strong>添加胡椒鹼提升吸收率20倍</li>
-                            <li>• <strong>適用症狀：</strong>關節炎、慢性發炎、消化不良</li>
-                            <li>• <strong>注意事項：</strong>服用抗凝血劑者需醫師評估</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- 安全警示 -->
-                <div class="warning-note">
-                    <h3><i class="fas fa-exclamation-triangle mr-2"></i>重要安全提醒</h3>
-                    <p>所有保健食品僅供保健參考，不能取代均衡飲食與醫療治療。懷孕、哺乳期婦女及慢性疾病患者使用前請諮詢醫療專業人員。如出現不適症狀應立即停用並就醫。</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="glass-effect py-8 mt-16">
-        <div class="container text-center">
-            <div class="flex justify-center space-x-6 mb-6">
-                <a href="https://www.threads.net/@yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors">
-                    <i class="fab fa-threads text-2xl"></i>
-                </a>
-                <a href="https://www.pixiv.net/users/96890924" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors">
-                    <i class="fab fa-pixiv text-2xl"></i>
-                </a>
-                <a href="https://github.com/yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors">
-                    <i class="fab fa-github text-2xl"></i>
-                </a>
+    <footer class="glass-effect py-12 mt-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="https://www.threads.net/@yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-threads text-2xl"></i>
+                    </a>
+                    <a href="https://www.pixiv.net/users/96890924" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-pixiv text-2xl"></i>
+                    </a>
+                    <a href="https://github.com/yumerin404" class="text-soft-text-secondary hover:text-soft-accent-primary transition-colors duration-300">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                </div>
+                <div class="border-t border-soft-accent-primary/20 pt-8">
+                    <p class="text-soft-text-muted">&copy; 2024 夢鈴幻想. 在夢境與現實的交界處編織故事.</p>
+                </div>
             </div>
-            <p class="text-soft-text-muted">&copy; 2024 夢鈴幻想. 所有權利保留.</p>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <button class="back-to-top" onclick="scrollToTop()">
+    <button id="back-to-top" 
+            class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-soft-accent-primary to-soft-accent-secondary text-soft-dark-primary rounded-full shadow-lg opacity-0 transform scale-95 transition-all duration-300 hover:scale-110 hover:shadow-xl z-50"
+            aria-label="回到頂部">
         <i class="fas fa-arrow-up"></i>
     </button>
 
     <script>
         // Mobile menu toggle
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobile-menu-items');
-            mobileMenu.classList.toggle('hidden');
-        }
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-        // Back to top functionality
-        window.addEventListener('scroll', function() {
-            const backToTop = document.querySelector('.back-to-top');
-            if (window.pageYOffset > 300) {
-                backToTop.classList.add('visible');
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (!mobileMenu.classList.contains('hidden')) {
+                setTimeout(() => mobileMenu.classList.add('show'), 10);
             } else {
-                backToTop.classList.remove('visible');
+                mobileMenu.classList.remove('show');
             }
         });
 
-        function scrollToTop() {
+        // Back to top functionality
+        const backToTopButton = document.getElementById('back-to-top');
+
+        const toggleBackToTopButton = () => {
+            if (window.scrollY > 300) {
+                backToTopButton.style.opacity = '1';
+                backToTopButton.style.transform = 'scale(1)';
+            } else {
+                backToTopButton.style.opacity = '0';
+                backToTopButton.style.transform = 'scale(0.95)';
+            }
+        };
+
+        backToTopButton?.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
-        }
-
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
         });
 
-        // Intersection Observer for animations
-        const observeElements = () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fadeInUp 0.6s ease-out';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.category-card').forEach(card => {
-                observer.observe(card);
-            });
-        };
+        window.addEventListener('scroll', toggleBackToTopButton);
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            observeElements();
+            toggleBackToTopButton();
         });
     </script>
-    <!-- Footer -->
-    <div id="footer-container"></div>
-
-    <!-- Load Scripts -->
-    <script>
-        // Load navigation
-        fetch('shared-nav.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navigation-container').innerHTML = data
-                    .replace(/{{ACTIVE_PAGE}}/g, 'medical-category');
-            });
-        
-        // Load footer
-        fetch('shared-footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            });
-
-        // Load shared scripts
-        fetch('shared-scripts.html')
-            .then(response => response.text())
-            .then(data => {
-                document.head.insertAdjacentHTML('beforeend', data);
-            });
-    </script>
 </body>
+
 </html>
