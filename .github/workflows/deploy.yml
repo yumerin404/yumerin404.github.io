@@ -16,13 +16,11 @@ jobs:
           node-version: "20"
       # Pick your own package manager and build script
       - run: yarn install
-        working-directory: ./web
       - run: yarn nuxt build --preset github_pages
-        working-directory: ./web
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./web/.output/public
+          path: ./.output/public
   # Deployment job
   deploy:
     # Add a dependency to the build job
