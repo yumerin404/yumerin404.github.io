@@ -40,7 +40,7 @@ const categories = [
     description: "沉浸於《來自第二次人生～命運交織的重生之旅～》的奇幻世界中，一個充滿愛情、魔法與可愛角色的故事。",
     path: "/novels",
     icon: "heroicons:book-open",
-    image: "/images/novels/novels.jpg"
+    image: "/images/categories/novels.jpg"
   },
   {
     title: "Galgame",

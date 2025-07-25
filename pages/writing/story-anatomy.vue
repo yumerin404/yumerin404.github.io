@@ -1,25 +1,20 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-slate-950 via-amber-950/20 to-slate-900 text-white relative overflow-hidden">
     <!-- 古典書籍背景效果 -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none opacity-10">
-      <!-- 飄浮的古典裝飾 -->
-      <div 
-        v-for="i in 15" 
-        :key="`decoration-${i}`"
-        class="absolute w-4 h-4 text-amber-400/30 animate-float-gentle"
-        :style="getFloatingDecorationStyle(i)"
-      >✦</div>
-      
-      <!-- 紙張紋理效果 -->
-      <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-orange-500/5"></div>
-      <div class="absolute inset-0 bg-gradient-to-tl from-yellow-500/3 via-transparent to-amber-600/3"></div>
-    </div>
+    <WritingGradientBackground 
+      variant="amber"
+      opacity="light"
+      :decoration-count="18"
+      decoration-symbol="✦"
+    />
 
     <!-- 滾動進度條 -->
-    <div 
-      class="fixed top-0 left-0 h-1 bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-400 z-50 transition-all duration-300"
-      :style="{ width: scrollProgress + '%' }"
-    ></div>
+    <WritingProgressBar 
+      :progress="scrollProgress"
+      variant="gradient"
+      :show-glow="true"
+      :animated="true"
+    />
 
     <!-- Header -->
     <Header />
@@ -66,38 +61,23 @@
         </div>
       </section>
 
-      <!-- Search and Filter Section -->
+      <!-- 搜尋和篩選區域 -->
       <section class="py-8 px-4 relative">
-        <div class="container mx-auto max-w-4xl">
-          <div class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl rounded-3xl p-6 border border-amber-500/20 shadow-2xl hover:border-amber-500/40 transition-all duration-500">
-            <!-- 搜尋輸入 -->
-            <div class="relative mb-6">
-              <input 
-                v-model="searchQuery"
-                type="text" 
-                placeholder="搜尋故事解剖內容..." 
-                class="w-full px-6 py-4 pl-14 bg-slate-900/60 border border-amber-500/30 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:border-amber-500/60 focus:ring-2 focus:ring-amber-500/20 transition-all duration-300"
-              />
-              <Icon name="heroicons:magnifying-glass" class="absolute left-5 top-1/2 transform -translate-y-1/2 text-amber-400 text-lg" />
-            </div>
-            
-            <!-- 分類篩選標籤 -->
-            <div class="flex flex-wrap gap-3">
-              <button
-                v-for="filter in filters"
-                :key="filter.key"
-                @click="activeFilter = filter.key"
-                :class="[
-                  'px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300',
-                  activeFilter === filter.key
-                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-slate-900 shadow-lg'
-                    : 'bg-slate-800/60 text-gray-300 hover:bg-amber-500/20 hover:text-amber-300 border border-amber-500/20 hover:border-amber-500/40'
-                ]"
-              >
-                {{ filter.name }}
-              </button>
-            </div>
-          </div>
+        <div class="container mx-auto max-w-5xl">
+          <WritingSearchFilter
+            :search-query="searchQuery"
+            :filters="filters"
+            :active-filter="activeFilter"
+            :result-count="filteredSections.length"
+            search-placeholder="搜尋故事解剖內容..."
+            :search-suggestions="searchSuggestions"
+            @search-change="handleSearchChange"
+            @filter-change="handleFilterChange"
+            @clear-search="clearSearch"
+            @clear-filters="clearFilters"
+            @reset-all="resetAll"
+            @random-browse="randomBrowse"
+          />
         </div>
       </section>
 
@@ -110,104 +90,50 @@
             <div class="flex-1">
               <div class="space-y-8">
                 
-                <!-- 內容項目 -->
-                <div 
-                  v-for="(section, index) in filteredSections" 
+                <!-- 故事解剖內容 -->
+                <WritingContentCard
+                  v-for="(section, index) in filteredSections"
                   :key="section.id"
-                  :id="section.id"
-                  class="content-section bg-gradient-to-br from-slate-800/60 to-slate-900/60 backdrop-blur-xl rounded-3xl p-8 border border-amber-500/20 shadow-xl hover:border-amber-500/40 transition-all duration-500 animate-slide-in-up"
-                  :style="{ animationDelay: `${index * 100}ms` }"
+                  :content="section"
+                  :variant="getSectionVariant(section.category)"
+                  :categories="categories"
+                  :animation-delay="index * 100"
+                  @favorite="handleFavorite"
+                  @share="handleShare"
+                  @expand="handleExpand"
+                />
+                
+                <!-- 沒有結果提示 -->
+                <div 
+                  v-if="filteredSections.length === 0" 
+                  class="text-center py-16"
                 >
-                  <div class="flex items-start space-x-4">
-                    <!-- 裝飾圖標 -->
-                    <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-xl flex items-center justify-center border border-amber-500/30">
-                      <span class="text-amber-400 text-lg">✦</span>
-                    </div>
-                    
-                    <!-- 內容 -->
-                    <div class="flex-1 min-w-0">
-                      <h3 class="text-2xl font-bold text-amber-400 mb-4 border-b border-amber-500/30 pb-2">
-                        {{ section.title }}
-                      </h3>
-                      
-                      <!-- 渲染 HTML 內容 -->
-                      <div 
-                        class="prose prose-invert prose-amber max-w-none text-gray-300 leading-relaxed"
-                        v-html="section.content"
-                      ></div>
-                    </div>
+                  <div class="w-24 h-24 bg-slate-800/50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <Icon name="heroicons:magnifying-glass" class="w-12 h-12 text-gray-500" />
                   </div>
+                  <h3 class="text-xl font-medium text-gray-400 mb-2">沒有找到相關內容</h3>
+                  <p class="text-gray-500 mb-6">請嘗試調整搜尋條件或篩選設定</p>
+                  <WritingButton
+                    @click="resetAll"
+                    variant="outline"
+                    text="重置篩選"
+                    leftIcon="heroicons:arrow-uturn-left"
+                  />
                 </div>
 
               </div>
             </div>
             
-            <!-- Sidebar -->
-            <div class="w-full lg:w-80 shrink-0">
-              <div class="sticky top-24 space-y-6">
-                
-                <!-- 目錄導航 -->
-                <div class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl rounded-3xl p-6 border border-amber-500/20 shadow-xl">
-                  <h3 class="text-xl font-bold text-amber-400 mb-6 flex items-center">
-                    <Icon name="heroicons:list-bullet" class="w-6 h-6 mr-3" />
-                    目錄導航
-                  </h3>
-                  
-                  <nav class="space-y-2 max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-amber-500/30">
-                    <a
-                      v-for="section in filteredSections"
-                      :key="section.id"
-                      :href="`#${section.id}`"
-                      @click.prevent="scrollToSection(section.id)"
-                      :class="[
-                        'block p-3 rounded-xl text-sm transition-all duration-300 border',
-                        activeTocSection === section.id
-                          ? 'bg-amber-500/20 text-amber-300 border-amber-500/50'
-                          : 'text-gray-400 hover:text-amber-300 hover:bg-amber-500/10 border-transparent hover:border-amber-500/30'
-                      ]"
-                    >
-                      <div class="font-medium truncate">{{ section.title }}</div>
-                      <div class="text-xs text-gray-500 mt-1">{{ getCategoryName(section.category) }}</div>
-                    </a>
-                  </nav>
-                </div>
-
-                <!-- 統計資訊 -->
-                <div class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl rounded-3xl p-6 border border-amber-500/20 shadow-xl">
-                  <h3 class="text-lg font-bold text-amber-400 mb-4 flex items-center">
-                    <Icon name="heroicons:chart-bar" class="w-5 h-5 mr-3" />
-                    統計資訊
-                  </h3>
-                  
-                  <div class="space-y-3">
-                    <div class="flex justify-between items-center">
-                      <span class="text-gray-400">總內容數</span>
-                      <span class="text-amber-400 font-bold">{{ sections.length }}</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-gray-400">分類數</span>
-                      <span class="text-orange-400 font-bold">{{ filters.length - 1 }}</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                      <span class="text-gray-400">顯示中</span>
-                      <span class="text-yellow-400 font-bold">{{ filteredSections.length }}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 返回按鈕 -->
-                <div class="text-center">
-                  <NuxtLink 
-                    to="/writing"
-                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-500/20 to-orange-500/20 backdrop-blur-sm rounded-xl border border-amber-500/30 hover:border-amber-500/50 text-amber-400 hover:text-amber-300 transition-all duration-300 group"
-                  >
-                    <Icon name="heroicons:arrow-left" class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
-                    <span>返回寫作技巧</span>
-                  </NuxtLink>
-                </div>
-
-              </div>
-            </div>
+            <!-- 側邊欄 -->
+            <WritingTableOfContents
+              :toc-items="tocItems"
+              :active-section="activeTocSection"
+              :categories="categories"
+              :filtered-count="filteredSections.length"
+              :reading-progress="scrollProgress"
+              :back-link="{ href: '/writing', text: '返回寫作技巧' }"
+              @section-click="handleSectionClick"
+            />
             
           </div>
         </div>
@@ -215,14 +141,14 @@
     </main>
 
     <!-- Back to Top Button -->
-    <button
-      v-show="showBackToTop"
-      @click="scrollToTop"
-      class="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-500 text-slate-900 rounded-full shadow-lg hover:scale-110 hover:shadow-xl transition-all duration-300 z-50 flex items-center justify-center"
-      aria-label="回到頂部"
-    >
-      <Icon name="heroicons:arrow-up" class="w-5 h-5" />
-    </button>
+    <WritingBackToTop 
+      :progress="scrollProgress"
+      :threshold="500"
+      variant="gradient"
+      size="md"
+      :show-progress="true"
+      :show-glow="true"
+    />
   </div>
 </template>
 
@@ -261,14 +187,24 @@ const activeTocSection = ref('')
 const scrollProgress = ref(0)
 const showBackToTop = ref(false)
 
+// 分類資料
+const categories = [
+  { key: 'writing-techniques', name: '寫作技法', icon: 'heroicons:pencil-square' },
+  { key: 'character-development', name: '角色塑造', icon: 'heroicons:users' },
+  { key: 'story-structure', name: '故事結構', icon: 'heroicons:building-library' },
+  { key: 'creative-process', name: '創作心法', icon: 'heroicons:light-bulb' },
+  { key: 'genre-understanding', name: '類型理解', icon: 'heroicons:book-open' }
+]
+
 // 分類篩選選項
 const filters = [
-  { key: 'all', name: '全部' },
-  { key: 'writing-techniques', name: '寫作技法' },
-  { key: 'character-development', name: '角色塑造' },
-  { key: 'story-structure', name: '故事結構' },
-  { key: 'creative-process', name: '創作心法' },
-  { key: 'genre-understanding', name: '類型理解' }
+  { key: 'all', name: '全部', count: sections.length },
+  ...categories.map(cat => ({ 
+    key: cat.key, 
+    name: cat.name, 
+    icon: cat.icon,
+    count: sections.filter(section => section.category === cat.key).length 
+  }))
 ]
 
 // 故事解剖內容數據
@@ -597,27 +533,100 @@ const filteredSections = computed(() => {
   return filtered
 })
 
+// 搜尋建議
+const searchSuggestions = [
+  '故事結構',
+  '角色塑造',
+  '衝突設計',
+  '主題表達',
+  '創作心法',
+  '觸發事件',
+  '情緒動態',
+  '節拍分析',
+  '類型理解',
+  '寫作焦點'
+]
+
+// 計算屬性
+const tocItems = computed(() => {
+  return filteredSections.value.map(section => ({
+    id: section.id,
+    title: section.title,
+    category: section.category,
+    level: 1
+  }))
+})
+
 // 工具函數
 const getCategoryName = (categoryKey: string) => {
-  const category = filters.find(f => f.key === categoryKey)
+  const category = categories.find(c => c.key === categoryKey)
   return category ? category.name : '其他'
 }
 
-const getFloatingDecorationStyle = (index: number) => {
-  const positions = [
-    { left: '5%', top: '10%' }, { left: '15%', top: '20%' }, { left: '25%', top: '15%' },
-    { left: '35%', top: '25%' }, { left: '45%', top: '18%' }, { left: '55%', top: '22%' },
-    { left: '65%', top: '12%' }, { left: '75%', top: '28%' }, { left: '85%', top: '16%' },
-    { left: '95%', top: '24%' }, { left: '10%', top: '70%' }, { left: '20%', top: '75%' },
-    { left: '30%', top: '68%' }, { left: '40%', top: '80%' }, { left: '50%', top: '72%' }
-  ]
-  
-  const position = positions[(index - 1) % positions.length]
-  return {
-    ...position,
-    animationDelay: `${Math.random() * 5}s`,
-    animationDuration: `${4 + Math.random() * 4}s`
+const getSectionVariant = (category: string) => {
+  const variantMap: Record<string, 'default' | 'highlight' | 'subtle' | 'accent'> = {
+    'writing-techniques': 'default',
+    'character-development': 'highlight',
+    'story-structure': 'accent',
+    'creative-process': 'subtle',
+    'genre-understanding': 'default'
   }
+  return variantMap[category] || 'default'
+}
+
+
+// 事件處理
+const handleSearchChange = (query: string) => {
+  searchQuery.value = query
+}
+
+const handleFilterChange = (filterKey: string) => {
+  activeFilter.value = filterKey
+}
+
+const clearSearch = () => {
+  searchQuery.value = ''
+}
+
+const clearFilters = () => {
+  activeFilter.value = 'all'
+}
+
+const resetAll = () => {
+  searchQuery.value = ''
+  activeFilter.value = 'all'
+}
+
+const randomBrowse = () => {
+  if (sections.length > 0) {
+    const randomIndex = Math.floor(Math.random() * sections.length)
+    const randomSection = sections[randomIndex]
+    scrollToSection(randomSection.id)
+  }
+}
+
+const handleSectionClick = (sectionId: string) => {
+  scrollToSection(sectionId)
+}
+
+const handleFavorite = (contentId: string, favorited: boolean) => {
+  console.log(`${favorited ? '收藏' : '取消收藏'}: ${contentId}`)
+}
+
+const handleShare = (content: any) => {
+  if (navigator.share) {
+    navigator.share({
+      title: content.title,
+      text: content.title,
+      url: window.location.href + '#' + content.id
+    })
+  } else {
+    navigator.clipboard.writeText(window.location.href + '#' + content.id)
+  }
+}
+
+const handleExpand = (contentId: string, expanded: boolean) => {
+  console.log(`${expanded ? '展開' : '收合'}: ${contentId}`)
 }
 
 const scrollToSection = (sectionId: string) => {
@@ -628,12 +637,10 @@ const scrollToSection = (sectionId: string) => {
       block: 'start',
       inline: 'nearest'
     })
+    activeTocSection.value = sectionId
   }
 }
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
 
 const updateScrollProgress = () => {
   const scrollTop = window.pageYOffset
@@ -644,7 +651,7 @@ const updateScrollProgress = () => {
 }
 
 const updateActiveTocSection = () => {
-  const sections = document.querySelectorAll('.content-section')
+  const sections = document.querySelectorAll('[id]')
   let currentSection = ''
   
   sections.forEach(section => {
@@ -670,8 +677,10 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', updateScrollProgress)
-  window.removeEventListener('scroll', updateActiveTocSection)
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('scroll', updateScrollProgress)
+    window.removeEventListener('scroll', updateActiveTocSection)
+  }
 })
 </script>
 
