@@ -120,6 +120,7 @@ const navItems = [
   { name: '醫學、藥物、保健品知識', path: '/medical' },
   { name: '經濟與投資想法', path: '/investment' },
   { name: '政治與思想', path: '/politics' },
+  { name: '寫作技巧', path: '/writing' },
   { name: '心境與學習筆記', path: '/learning' }
 ]
 
