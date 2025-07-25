@@ -87,20 +87,6 @@ export const usePoliticsContent = () => {
 export const useLearningContent = () => {
   const categories: IndexCategory[] = [
     {
-      id: 'stories',
-      name: '故事解剖筆記',
-      description: '深入分析各類故事結構與敘事技巧，探索故事背後的奧秘。',
-      icon: 'heroicons:book-open',
-      color: 'green-500',
-      items: [
-        '敘事結構分析',
-        '角色塑造技巧',
-        '情節發展規律',
-        '主題表達方式'
-      ],
-      buttonText: '閱讀故事筆記'
-    },
-    {
       id: 'quotes',
       name: '名言佳句',
       description: '收錄啟發人心的智慧話語，在字句中尋找生活的指引。',
@@ -117,16 +103,16 @@ export const useLearningContent = () => {
     {
       id: 'posts',
       name: '發文紀錄',
-      description: '記錄學習過程中的思考軌跡，分享成長路上的點點滴滴。',
+      description: '記錄思考軌跡與心境感悟，分享觀點與反思的點點滴滴。',
       icon: 'heroicons:pencil-square',
       color: 'cyan-500',
       items: [
-        '學習心得記錄',
         '思考過程分享',
-        '成長軌跡追蹤',
-        '反思總結筆記'
+        '觀點表達記錄',
+        '心境感悟追蹤',
+        '深度反思筆記'
       ],
-      buttonText: '查看發文紀錄'
+      buttonText: '瀏覽發文紀錄'
     }
   ]
 

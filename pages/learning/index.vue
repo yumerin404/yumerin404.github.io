@@ -24,13 +24,24 @@
 useHead({
   title: '心境與學習筆記 - 夢鈴領域',
   meta: [
-    { name: 'description', content: '心境感悟與學習成長筆記，包含故事分析、名言佳句與個人反思記錄。' }
+    { name: 'description', content: '心境感悟與學習成長筆記，包含名言佳句與發文紀錄。' }
   ]
 })
 
 const { categories } = useLearningContent()
 
 const handleNavigate = (categoryId: string) => {
-  console.log(`導航到學習分類: ${categoryId}`)
+  // 根據分類 ID 導航到對應頁面
+  switch (categoryId) {
+    case 'posts':
+      navigateTo('/learning/posts')
+      break
+    case 'quotes':
+      // TODO: 創建名言佳句頁面
+      console.log('導航到名言佳句頁面')
+      break
+    default:
+      console.log(`導航到學習分類: ${categoryId}`)
+  }
 }
 </script>
