@@ -1,5 +1,6 @@
 <template>
   <article 
+    :id="post.id"
     :class="[
       'group relative overflow-hidden transition-all duration-300',
       'bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl',

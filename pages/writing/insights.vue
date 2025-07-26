@@ -210,9 +210,12 @@
             <div class="flex-1 h-full relative">
               <!-- 目錄組件容器 -->
               <div class="absolute inset-0 p-4">
-                <WritingTableOfContents
+                <UniversalTableOfContents
                   :toc-items="tocData"
                   :active-section="activeSection"
+                  :categories="tocCategories"
+                  title="INSIGHTS_MATRIX"
+                  search-placeholder="搜索寫作心得..."
                   @section-click="scrollToSection"
                 />
               </div>
@@ -404,12 +407,22 @@ const tocData = computed(() => {
     id: insight.id,
     title: insight.title,
     subtitle: insight.quote,
-    category: categories.find(cat => cat.key === insight.category)?.name,
+    category: insight.category, // 使用category key而不是name
     level: 1,
     readTime: insight.readTime,
     wordCount: insight.wordCount
   }))
 })
+
+// 側邊欄專用的分類數據
+const tocCategories = computed(() => [
+  { key: 'rhythm', name: '節奏掌控', icon: 'heroicons:arrow-trending-up' },
+  { key: 'emotion', name: '情感表達', icon: 'heroicons:heart' },
+  { key: 'character', name: '角色描寫', icon: 'heroicons:sparkles' },
+  { key: 'technique', name: '寫作技法', icon: 'heroicons:pencil-square' },
+  { key: 'creativity', name: '創作心法', icon: 'heroicons:light-bulb' },
+  { key: 'other', name: '其他', icon: 'heroicons:ellipsis-horizontal' }
+])
 
 // 側邊欄專用的分類數據
 const categoryData = computed(() => {

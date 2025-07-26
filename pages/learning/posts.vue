@@ -178,6 +178,102 @@
       </section>
     </main>
     
+    <!-- 太空艦橋式導航系統 -->
+    <div 
+      class="fixed top-16 right-0 h-[calc(100vh-4rem)] z-50 transition-all duration-700 ease-out"
+      :class="[
+        showSidebar ? 'w-96' : 'w-16',
+        showSidebar ? 'translate-x-0' : 'translate-x-0'
+      ]"
+    >
+      <!-- 艦橋觸發器 - 全息投影式 -->
+      <div 
+        class="absolute left-0 top-1/2 -translate-y-1/2 h-32 cursor-pointer group transition-all duration-500"
+        :class="showSidebar ? 'w-16 opacity-0 pointer-events-none' : 'w-16 opacity-100'"
+        @click="showSidebar = true"
+        @mouseenter="triggerHover = true"
+        @mouseleave="triggerHover = false"
+      >
+        <!-- 全息投影觸發區域 -->
+        <div class="relative w-full h-full">
+          <!-- 主觸發面板 -->
+          <div 
+            class="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-slate-800/95 to-slate-900/90 backdrop-blur-xl border-l border-y border-cyan-500/40 rounded-l-2xl shadow-2xl transition-all duration-500 overflow-hidden"
+            :class="triggerHover ? 'border-cyan-400/80 shadow-[0_0_30px_rgba(34,211,238,0.3)]' : ''"
+          >
+            
+            <!-- 能量流動條 -->
+            <div class="absolute left-1 top-1/2 -translate-y-1/2 w-1 h-16 bg-gradient-to-b from-cyan-400/60 via-blue-500/80 to-purple-500/60 rounded-full transition-all duration-500"
+                 :class="triggerHover ? 'w-1.5 shadow-[0_0_20px_rgba(34,211,238,0.8)] animate-pulse' : ''">
+              <!-- 能量脈衝點 -->
+              <div class="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-cyan-300 rounded-full animate-ping"></div>
+              <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-purple-300 rounded-full animate-ping" style="animation-delay: 0.7s;"></div>
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-blue-300 rounded-full animate-ping" style="animation-delay: 1.2s;"></div>
+            </div>
+            
+            <!-- 側邊觸發圖示 -->
+            <div class="absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-500"
+                 :class="triggerHover ? 'scale-110 text-cyan-300' : 'text-gray-400'">
+              <Icon name="heroicons:bars-3" class="w-6 h-6" />
+            </div>
+            
+            <!-- 全息提示標籤 -->
+            <div 
+              class="absolute left-20 top-1/2 -translate-y-1/2 transition-all duration-500 transform"
+              :class="triggerHover ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'"
+            >
+              <div class="bg-slate-900/95 backdrop-blur-sm border border-cyan-500/50 rounded-xl px-4 py-2 shadow-2xl">
+                <div class="text-sm text-cyan-300 font-medium">發文導航</div>
+                <div class="text-xs text-gray-400 mt-1">點擊展開</div>
+              </div>
+              <!-- 全息箭頭 -->
+              <div class="absolute right-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-4 border-b-4 border-r-8 border-transparent border-r-cyan-500/50"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 主導航面板 - 艦橋控制台風格 -->
+      <div 
+        class="ml-16 h-full relative transition-all duration-700 ease-out"
+        :class="showSidebar ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'"
+      >
+        <!-- 關閉按鈕 -->
+        <button
+          @click="showSidebar = false"
+          class="absolute -left-12 top-4 w-8 h-8 bg-slate-900/95 backdrop-blur-sm border border-red-500/40 rounded-full flex items-center justify-center text-red-400 hover:text-red-300 hover:border-red-400/60 transition-all duration-300 z-10 group"
+        >
+          <Icon name="heroicons:x-mark" class="w-4 h-4" />
+          <div class="absolute inset-0 bg-red-500/10 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 animate-pulse"></div>
+        </button>
+        
+        <!-- 主面板容器 -->
+        <div class="w-full h-full relative">
+          <!-- 外層能量護盾 -->
+          <div class="absolute -inset-2 bg-gradient-to-br from-cyan-500/10 via-blue-500/5 to-purple-500/10 rounded-2xl blur-lg animate-pulse-slow"></div>
+          
+          <!-- 主面板結構 -->
+          <div class="relative w-full h-full bg-gradient-to-br from-slate-900/98 via-slate-800/95 to-slate-900/98 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl overflow-hidden">
+            
+            <!-- 主內容區域 -->
+            <div class="flex-1 h-full relative">
+              <!-- 目錄組件容器 -->
+              <div class="absolute inset-0 p-4">
+                <UniversalTableOfContents
+                  :toc-items="tocData"
+                  :active-section="activeSection"
+                  :categories="tocCategories"
+                  title="POSTS_MATRIX"
+                  search-placeholder="搜索發文內容..."
+                  @section-click="scrollToSection"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 回到頂部按鈕 -->
     <WritingBackToTop 
       :progress="scrollProgress"
@@ -218,6 +314,9 @@ useHead({
 const searchQuery = ref('')
 const sortBy = ref('date-desc')
 const scrollProgress = ref(0)
+const activeSection = ref('')
+const showSidebar = ref(false)
+const triggerHover = ref(false)
 
 // 發文數據
 const posts = [
@@ -399,7 +498,49 @@ const daysSinceFirst = computed(() => {
   return diffDays + ' 天'
 })
 
+// 側邊欄專用的目錄數據
+const tocData = computed(() => {
+  return filteredPosts.value.map(post => ({
+    id: post.id,
+    title: post.title,
+    subtitle: post.excerpt || post.content.substring(0, 80) + '...',
+    category: determineCategoryByTags(post.tags),
+    level: 1,
+    readTime: post.readTime,
+    wordCount: post.wordCount
+  }))
+})
+
+// 側邊欄專用的分類數據
+const tocCategories = computed(() => [
+  { key: 'political', name: '政治觀察', icon: 'heroicons:building-library' },
+  { key: 'social', name: '社會思考', icon: 'heroicons:users' },
+  { key: 'writing', name: '寫作心得', icon: 'heroicons:pencil-square' },
+  { key: 'philosophy', name: '哲學思辨', icon: 'heroicons:light-bulb' },
+  { key: 'psychology', name: '心理分析', icon: 'heroicons:academic-cap' },
+  { key: 'other', name: '其他', icon: 'heroicons:ellipsis-horizontal' }
+])
+
 // 工具函數
+const determineCategoryByTags = (tags: string[]) => {
+  if (!tags || tags.length === 0) return 'other'
+  
+  const politicalTags = ['政治', '國家治理', '政治觀察', '政治制度', '三權分立', '民主憂慮', '群眾動員']
+  const socialTags = ['社會觀察', '世代差異', '職場觀察', '企業文化', '人才管理', '社會議題', '倫理思辨', '社會心理']
+  const writingTags = ['寫作', '寫作技巧', '創作過程', '思維方式']
+  const philosophyTags = ['哲學思辨', '獨立思考', '古典文學', '價值觀', '自由思考', '理性思考', '智慧']
+  const psychologyTags = ['心理分析', '人性分析', '人際關係', '溝通']
+  
+  for (const tag of tags) {
+    if (politicalTags.some(pt => tag.includes(pt))) return 'political'
+    if (socialTags.some(st => tag.includes(st))) return 'social'
+    if (writingTags.some(wt => tag.includes(wt))) return 'writing'
+    if (philosophyTags.some(pt => tag.includes(pt))) return 'philosophy'
+    if (psychologyTags.some(pt => tag.includes(pt))) return 'psychology'
+  }
+  
+  return 'other'
+}
 const getPostVariant = (post: any, index: number) => {
   if (index === 0) return 'featured'
   if (post.wordCount > 400) return 'default'
@@ -434,6 +575,31 @@ const resetSearch = () => {
   sortBy.value = 'date-desc'
 }
 
+// 側邊欄相關方法
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId)
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    activeSection.value = sectionId
+  }
+}
+
+const updateActiveSection = () => {
+  if (!process.client) return
+  
+  const posts = document.querySelectorAll('[id]')
+  let currentSection = ''
+  
+  posts.forEach(post => {
+    const rect = post.getBoundingClientRect()
+    if (rect.top <= 200 && rect.bottom >= 200) {
+      currentSection = post.id
+    }
+  })
+  
+  activeSection.value = currentSection
+}
+
 const updateScrollProgress = () => {
   if (!process.client) return
   
@@ -445,8 +611,13 @@ const updateScrollProgress = () => {
 // 生命週期
 onMounted(() => {
   if (process.client) {
-    window.addEventListener('scroll', updateScrollProgress, { passive: true })
+    const handleScroll = () => {
+      updateScrollProgress()
+      updateActiveSection()
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
     updateScrollProgress()
+    updateActiveSection()
   }
 })
 

@@ -211,9 +211,12 @@
             <div class="flex-1 h-full relative">
               <!-- 目錄組件容器 -->
               <div class="absolute inset-0 p-4">
-                <WritingTableOfContents
+                <UniversalTableOfContents
                   :toc-items="tocData"
                   :active-section="activeSection"
+                  :categories="tocCategories"
+                  title="ANATOMY_MATRIX"
+                  search-placeholder="搜索故事解剖..."
                   @section-click="scrollToSection"
                 />
               </div>
@@ -650,10 +653,20 @@ const tocData = computed(() => {
     id: section.id,
     title: section.title,
     subtitle: section.content.replace(/<[^>]*>/g, '').substring(0, 50) + '...',
-    category: categories.find(cat => cat.key === section.category)?.name,
+    category: section.category, // 使用category key而不是name
     level: 1
   }))
 })
+
+// 側邊欄專用的分類數據
+const tocCategories = computed(() => [
+  { key: 'writing-techniques', name: '寫作技法', icon: 'heroicons:pencil-square' },
+  { key: 'character-development', name: '角色塑造', icon: 'heroicons:users' },
+  { key: 'story-structure', name: '故事結構', icon: 'heroicons:building-library' },
+  { key: 'creative-process', name: '創作心法', icon: 'heroicons:light-bulb' },
+  { key: 'genre-understanding', name: '類型理解', icon: 'heroicons:book-open' },
+  { key: 'other', name: '其他', icon: 'heroicons:ellipsis-horizontal' }
+])
 
 // 側邊欄專用的分類數據
 const categoryData = computed(() => {

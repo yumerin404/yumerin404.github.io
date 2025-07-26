@@ -84,14 +84,14 @@
               v-for="(quote, index) in filteredQuotes"
               :key="quote.id"
               :id="quote.id"
-              class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl rounded-2xl border border-amber-500/20 shadow-xl hover:border-amber-400/40 hover:shadow-2xl transition-all duration-300 hover:scale-105 h-80 flex flex-col"
+              class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl rounded-2xl border border-amber-500/20 shadow-xl hover:border-amber-400/40 hover:shadow-2xl transition-all duration-300 hover:scale-105 h-80 flex flex-col overflow-hidden"
             >
               <!-- 卡片內容容器 -->
-              <div class="flex-1 flex flex-col p-6">
+              <div class="flex-1 flex flex-col p-6 min-h-0">
                 <!-- 名言內容 - 可滾動 -->
-                <div class="flex-1 mb-4 overflow-y-auto scrollbar-thin scrollbar-thumb-amber-500/30 scrollbar-track-slate-700/30">
-                  <blockquote class="text-lg text-gray-200 leading-relaxed pr-2">
-                    {{ quote.content }}
+                <div class="flex-1 mb-4 overflow-y-auto scrollbar-thin scrollbar-thumb-amber-500/30 scrollbar-track-slate-700/30 min-h-0">
+                  <blockquote class="text-lg text-gray-200 leading-relaxed pr-2 word-break">
+                    <span v-html="formatQuoteContent(quote.content)"></span>
                   </blockquote>
                 </div>
                 
@@ -156,6 +156,102 @@
       </section>
     </main>
 
+    <!-- 太空艦橋式導航系統 -->
+    <div 
+      class="fixed top-16 right-0 h-[calc(100vh-4rem)] z-50 transition-all duration-700 ease-out"
+      :class="[
+        showSidebar ? 'w-96' : 'w-16',
+        showSidebar ? 'translate-x-0' : 'translate-x-0'
+      ]"
+    >
+      <!-- 艦橋觸發器 - 全息投影式 -->
+      <div 
+        class="absolute left-0 top-1/2 -translate-y-1/2 h-32 cursor-pointer group transition-all duration-500"
+        :class="showSidebar ? 'w-16 opacity-0 pointer-events-none' : 'w-16 opacity-100'"
+        @click="showSidebar = true"
+        @mouseenter="triggerHover = true"
+        @mouseleave="triggerHover = false"
+      >
+        <!-- 全息投影觸發區域 -->
+        <div class="relative w-full h-full">
+          <!-- 主觸發面板 -->
+          <div 
+            class="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-slate-800/95 to-slate-900/90 backdrop-blur-xl border-l border-y border-amber-500/40 rounded-l-2xl shadow-2xl transition-all duration-500 overflow-hidden"
+            :class="triggerHover ? 'border-amber-400/80 shadow-[0_0_30px_rgba(245,158,11,0.3)]' : ''"
+          >
+            
+            <!-- 能量流動條 -->
+            <div class="absolute left-1 top-1/2 -translate-y-1/2 w-1 h-16 bg-gradient-to-b from-amber-400/60 via-orange-500/80 to-yellow-500/60 rounded-full transition-all duration-500"
+                 :class="triggerHover ? 'w-1.5 shadow-[0_0_20px_rgba(245,158,11,0.8)] animate-pulse' : ''">
+              <!-- 能量脈衝點 -->
+              <div class="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-amber-300 rounded-full animate-ping"></div>
+              <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-yellow-300 rounded-full animate-ping" style="animation-delay: 0.7s;"></div>
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-orange-300 rounded-full animate-ping" style="animation-delay: 1.2s;"></div>
+            </div>
+            
+            <!-- 側邊觸發圖示 -->
+            <div class="absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-500"
+                 :class="triggerHover ? 'scale-110 text-amber-300' : 'text-gray-400'">
+              <Icon name="heroicons:bars-3" class="w-6 h-6" />
+            </div>
+            
+            <!-- 全息提示標籤 -->
+            <div 
+              class="absolute left-20 top-1/2 -translate-y-1/2 transition-all duration-500 transform"
+              :class="triggerHover ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'"
+            >
+              <div class="bg-slate-900/95 backdrop-blur-sm border border-amber-500/50 rounded-xl px-4 py-2 shadow-2xl">
+                <div class="text-sm text-amber-300 font-medium">名言導航</div>
+                <div class="text-xs text-gray-400 mt-1">點擊展開</div>
+              </div>
+              <!-- 全息箭頭 -->
+              <div class="absolute right-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-4 border-b-4 border-r-8 border-transparent border-r-amber-500/50"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 主導航面板 - 艦橋控制台風格 -->
+      <div 
+        class="ml-16 h-full relative transition-all duration-700 ease-out"
+        :class="showSidebar ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'"
+      >
+        <!-- 關閉按鈕 -->
+        <button
+          @click="showSidebar = false"
+          class="absolute -left-12 top-4 w-8 h-8 bg-slate-900/95 backdrop-blur-sm border border-red-500/40 rounded-full flex items-center justify-center text-red-400 hover:text-red-300 hover:border-red-400/60 transition-all duration-300 z-10 group"
+        >
+          <Icon name="heroicons:x-mark" class="w-4 h-4" />
+          <div class="absolute inset-0 bg-red-500/10 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 animate-pulse"></div>
+        </button>
+        
+        <!-- 主面板容器 -->
+        <div class="w-full h-full relative">
+          <!-- 外層能量護盾 -->
+          <div class="absolute -inset-2 bg-gradient-to-br from-amber-500/10 via-orange-500/5 to-yellow-500/10 rounded-2xl blur-lg animate-pulse-slow"></div>
+          
+          <!-- 主面板結構 -->
+          <div class="relative w-full h-full bg-gradient-to-br from-slate-900/98 via-slate-800/95 to-slate-900/98 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl overflow-hidden">
+            
+            <!-- 主內容區域 -->
+            <div class="flex-1 h-full relative">
+              <!-- 目錄組件容器 -->
+              <div class="absolute inset-0 p-4">
+                <UniversalTableOfContents
+                  :toc-items="tocData"
+                  :active-section="activeSection"
+                  :categories="tocCategories"
+                  title="QUOTES_MATRIX"
+                  search-placeholder="搜索名言佳句..."
+                  @section-click="scrollToSection"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Back to Top Button -->
     <button
       v-if="scrollProgress > 10"
@@ -198,6 +294,9 @@ useHead({
 // 響應式數據
 const searchQuery = ref('')
 const scrollProgress = ref(0)
+const activeSection = ref('')
+const showSidebar = ref(false)
+const triggerHover = ref(false)
 
 // 名言數據
 
@@ -279,6 +378,33 @@ const quotes = [
     tags: ['談判', '說服', '策略'],
     date: '2024-01-23',
     featured: true
+  },
+  {
+    id: 'life-feeling',
+    content: '人生很多事情是要感受的，喪失了感受，很多東西才會看不懂。那不是看懂的事，那就是感受。',
+    author: '佚名',
+    category: 'philosophy',
+    tags: ['感受', '人生', '理解'],
+    date: '2024-01-24',
+    featured: false
+  },
+  {
+    id: 'zero-helpless-thoughts',
+    content: '沒有辦法的想法等於 0。',
+    author: '佚名',
+    category: 'philosophy',
+    tags: ['行動', '思維', '效率'],
+    date: '2024-01-25',
+    featured: false
+  },
+  {
+    id: 'vinegar-dumplings',
+    content: '就是為了這點醋，才包的這頓餃子。',
+    author: '佚名',
+    category: 'philosophy',
+    tags: ['目的', '手段', '策略'],
+    date: '2024-01-26',
+    featured: false
   }
 ]
 
@@ -298,6 +424,51 @@ const filteredQuotes = computed(() => {
 
   return filtered
 })
+
+// 側邊欄專用的目錄數據
+const tocData = computed(() => {
+  return filteredQuotes.value.map(quote => ({
+    id: quote.id,
+    title: `${quote.author}: ${quote.content.substring(0, 20)}...`,
+    subtitle: quote.content.substring(0, 50) + '...',
+    category: quote.category,
+    level: 1
+  }))
+})
+
+// 側邊欄專用的分類數據
+const tocCategories = computed(() => [
+  { key: 'philosophy', name: '哲學思辨', icon: 'heroicons:light-bulb' },
+  { key: 'history', name: '歷史智慧', icon: 'heroicons:book-open' },
+  { key: 'classical', name: '古典文學', icon: 'heroicons:academic-cap' },
+  { key: 'communication', name: '溝通藝術', icon: 'heroicons:chat-bubble-left-right' },
+  { key: 'other', name: '其他', icon: 'heroicons:ellipsis-horizontal' }
+])
+
+// 側邊欄相關方法
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId)
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    activeSection.value = sectionId
+  }
+}
+
+const updateActiveSection = () => {
+  if (!process.client) return
+  
+  const quotes = document.querySelectorAll('[id]')
+  let currentSection = ''
+  
+  quotes.forEach(quote => {
+    const rect = quote.getBoundingClientRect()
+    if (rect.top <= 200 && rect.bottom >= 200) {
+      currentSection = quote.id
+    }
+  })
+  
+  activeSection.value = currentSection
+}
 
 // 事件處理
 const resetAll = () => {
@@ -335,6 +506,11 @@ const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
+const formatQuoteContent = (content: string) => {
+  // 將句號後面添加換行符
+  return content.replace(/。/g, '。<br>')
+}
+
 const updateScrollProgress = () => {
   if (!process.client) return
   
@@ -346,8 +522,13 @@ const updateScrollProgress = () => {
 // 生命週期
 onMounted(() => {
   if (process.client) {
-    window.addEventListener('scroll', updateScrollProgress, { passive: true })
+    const handleScroll = () => {
+      updateScrollProgress()
+      updateActiveSection()
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
     updateScrollProgress()
+    updateActiveSection()
   }
 })
 
@@ -509,5 +690,47 @@ onUnmounted(() => {
   right: 0;
   height: 2px;
   background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.6), transparent);
+}
+
+/* 自定義滾動條樣式 */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: rgba(51, 65, 85, 0.3);
+  border-radius: 10px;
+}
+
+.scrollbar-thumb-amber-500\/30::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.3);
+  border-radius: 10px;
+}
+
+.scrollbar-thumb-amber-500\/30::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 158, 11, 0.5);
+}
+
+.scrollbar-track-slate-700\/30::-webkit-scrollbar-track {
+  background: rgba(51, 65, 85, 0.3);
+}
+
+/* Firefox 滾動條樣式 */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(245, 158, 11, 0.3) rgba(51, 65, 85, 0.3);
+}
+
+/* 文字換行和溢出處理 */
+.word-break {
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* 確保 flex 容器正確處理溢出 */
+.min-h-0 {
+  min-height: 0;
 }
 </style>
