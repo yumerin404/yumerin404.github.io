@@ -132,7 +132,7 @@ const particleColor = computed(() => {
   return colorMap[props.variant]
 })
 
-// 工具函數
+// 工具函數 - 使用固定值避免 hydration mismatch
 const getDecorationStyle = (index: number) => {
   const positions = [
     { left: '5%', top: '10%' }, { left: '15%', top: '20%' }, { left: '25%', top: '15%' },
@@ -143,20 +143,28 @@ const getDecorationStyle = (index: number) => {
     { left: '60%', top: '85%' }, { left: '70%', top: '78%' }, { left: '80%', top: '82%' }
   ]
   
+  const delays = [0.5, 1.2, 2.8, 4.1, 0.9, 3.5, 1.7, 4.6, 2.3, 0.7, 3.9, 1.4, 4.2, 0.3, 2.6, 4.8, 1.9, 3.1]
+  const durations = [5.2, 7.8, 6.1, 4.9, 6.7, 5.5, 7.2, 4.3, 6.9, 5.8, 7.5, 4.7, 6.4, 5.1, 7.9, 4.6, 6.2, 5.9]
+  
   const position = positions[(index - 1) % positions.length]
   return {
     ...position,
-    animationDelay: `${Math.random() * 5}s`,
-    animationDuration: `${4 + Math.random() * 4}s`
+    animationDelay: `${delays[(index - 1) % delays.length]}s`,
+    animationDuration: `${durations[(index - 1) % durations.length]}s`
   }
 }
 
 const getParticleStyle = (index: number) => {
+  const leftPositions = [12, 23, 45, 67, 89, 34, 56, 78, 9, 91, 15, 38, 62, 84, 7, 29, 51, 73, 95, 18]
+  const topPositions = [8, 32, 55, 76, 19, 43, 68, 84, 11, 39, 64, 87, 25, 49, 71, 93, 16, 41, 66, 82]
+  const delays = [0.2, 0.8, 1.5, 2.1, 0.6, 1.9, 2.7, 0.4, 1.3, 2.5, 0.9, 1.7, 2.3, 0.1, 1.1, 2.9, 0.7, 1.6, 2.2, 0.5]
+  const durations = [2.3, 4.1, 3.7, 2.8, 4.5, 3.2, 2.6, 4.8, 3.9, 2.4, 4.2, 3.5, 2.9, 4.6, 3.1, 2.7, 4.3, 3.8, 2.5, 4.4]
+  
   return {
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    animationDelay: `${Math.random() * 3}s`,
-    animationDuration: `${2 + Math.random() * 3}s`
+    left: `${leftPositions[(index - 1) % leftPositions.length]}%`,
+    top: `${topPositions[(index - 1) % topPositions.length]}%`,
+    animationDelay: `${delays[(index - 1) % delays.length]}s`,
+    animationDuration: `${durations[(index - 1) % durations.length]}s`
   }
 }
 </script>

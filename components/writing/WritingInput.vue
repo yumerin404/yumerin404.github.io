@@ -182,7 +182,9 @@ const emit = defineEmits<{
 // 響應式狀態
 const inputRef = ref<HTMLInputElement>()
 const isFocused = ref(false)
-const inputId = `input-${Math.random().toString(36).substr(2, 9)}`
+
+// 使用 useId 生成穩定的 ID，避免 hydration mismatch
+const inputId = useId()
 
 // 計算屬性
 const characterCount = computed(() => {

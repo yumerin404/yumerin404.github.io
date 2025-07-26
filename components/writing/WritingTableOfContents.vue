@@ -1,170 +1,138 @@
 <template>
-  <div class="w-full lg:w-80 shrink-0">
-    <div class="sticky top-24 space-y-6 max-h-[calc(100vh-8rem)] overflow-hidden z-30">
-      
-      <!-- 目錄導航卡片 -->
-      <div class="bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl rounded-3xl p-6 border border-amber-500/30 shadow-2xl hover:border-amber-400/60 hover:shadow-amber-500/10 transition-all duration-500 group">
-        <!-- 標題 -->
-        <div class="flex items-center justify-between mb-6">
-          <h3 class="text-xl font-bold text-amber-400 flex items-center group-hover:text-amber-300 transition-colors duration-300">
-            <Icon name="heroicons:list-bullet" class="w-6 h-6 mr-3 group-hover:scale-110 transition-transform duration-300" />
-            目錄導航
-          </h3>
+  <!-- 純粹太空風格目錄導航 -->
+  <div class="relative w-full h-full">
+    
+    <!-- 主容器 - 太空數據終端風格 -->
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-950/95 via-slate-900/98 to-slate-950/95 backdrop-blur-xl border border-slate-700/60 rounded-2xl shadow-2xl overflow-hidden">
+
+      <!-- 目錄導航區域 -->
+      <div class="flex-1 h-full relative">
+        <div class="absolute inset-0 p-6">
           
-          <!-- 摺疊按鈕 -->
-          <button
-            @click="isCollapsed = !isCollapsed"
-            class="p-2 rounded-lg hover:bg-amber-500/20 hover:text-amber-300 transition-all duration-300 lg:hidden transform hover:scale-110 active:scale-95"
-          >
-            <Icon 
-              :name="isCollapsed ? 'heroicons:chevron-down' : 'heroicons:chevron-up'" 
-              class="w-5 h-5 text-gray-400 transition-transform duration-300"
-            />
-          </button>
-        </div>
-        
-        <!-- 導航內容 -->
-        <div 
-          :class="[
-            'transition-all duration-300 overflow-hidden',
-            isCollapsed ? 'max-h-0 lg:max-h-none' : 'max-h-96'
-          ]"
-        >
-          <!-- 進度條（可選） -->
-          <div v-if="showProgress" class="mb-6">
-            <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
-              <span>閱讀進度</span>
-              <span>{{ Math.round(readingProgress) }}%</span>
-            </div>
-            <div class="w-full bg-slate-700/50 rounded-full h-2 overflow-hidden">
-              <div 
-                class="h-full bg-gradient-to-r from-amber-400 to-orange-400 transition-all duration-300 rounded-full"
-                :style="{ width: `${readingProgress}%` }"
-              ></div>
+          <!-- 目錄標題 -->
+          <div class="mb-6">
+            <div class="flex items-center space-x-2 text-sm text-slate-400 font-mono">
+              <div class="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-pulse shadow-[0_0_6px_rgba(34,211,238,0.6)]"></div>
+              <span class="tracking-wide">TABLE_OF_CONTENTS</span>
+              <div class="flex-1 h-px bg-gradient-to-r from-cyan-500/40 to-transparent"></div>
             </div>
           </div>
           
-          <!-- 目錄清單 -->
-          <nav class="space-y-1 max-h-80 overflow-y-auto scrollbar-thin scrollbar-thumb-amber-500/30">
-            <a
-              v-for="(item, index) in tocItems"
-              :key="item.id || index"
-              :href="`#${item.id}`"
-              @click.prevent="scrollToSection(item.id)"
-              :class="[
-                'group block p-3 rounded-xl text-sm transition-all duration-300 border relative overflow-hidden transform hover:scale-[1.02] active:scale-[0.98]',
-                activeSection === item.id
-                  ? 'bg-gradient-to-r from-amber-500/25 to-orange-500/25 text-amber-200 border-amber-400/60 shadow-lg shadow-amber-500/20'
-                  : 'text-gray-400 hover:text-amber-200 hover:bg-gradient-to-r hover:from-amber-500/15 hover:to-orange-500/15 border-transparent hover:border-amber-500/40 hover:shadow-md hover:shadow-amber-500/10'
-              ]"
-            >
-              <!-- 背景動畫效果 -->
-              <div 
-                v-if="activeSection === item.id"
-                class="absolute inset-0 bg-gradient-to-r from-amber-500/10 to-orange-500/10 animate-pulse"
-              ></div>
-              
-              <!-- 內容 -->
-              <div class="relative z-10">
-                <!-- 標題 -->
-                <div class="font-medium truncate flex items-center">
-                  <!-- 層級指示器 -->
+          <!-- 目錄列表容器 -->
+          <div class="relative h-full overflow-hidden">
+            <!-- 頂部漸變遮罩 -->
+            <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-b from-slate-950 to-transparent z-10 pointer-events-none"></div>
+            <!-- 底部漸變遮罩 -->
+            <div class="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-t from-slate-950 to-transparent z-10 pointer-events-none"></div>
+            
+            <!-- 目錄項目列表 -->
+            <div ref="tocContainer" class="space-y-1 overflow-y-auto scrollbar-terminal pr-2 h-full" @scroll="updateScrollIndicator">
+              <a
+                v-for="(item, index) in tocItems"
+                :key="item.id || index"
+                :href="`#${item.id}`"
+                @click.prevent="handleItemClick(item.id)"
+                class="group block relative transition-all duration-300 ease-out"
+                :class="[
+                  'p-3 rounded-lg border overflow-hidden',
+                  activeSection === item.id
+                    ? 'bg-gradient-to-r from-cyan-500/20 via-blue-500/15 to-cyan-500/20 text-cyan-200 border-cyan-400/50 shadow-lg shadow-cyan-500/20'
+                    : 'text-slate-300 hover:text-cyan-200 bg-slate-800/30 hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-blue-500/10 border-slate-700/40 hover:border-cyan-500/40'
+                ]"
+              >
+                <!-- 全息終端線條 -->
+                <div v-if="activeSection === item.id" class="absolute inset-0 opacity-30">
                   <div 
-                    v-if="item.level && item.level > 1"
-                    class="flex mr-2"
-                  >
-                    <div 
-                      v-for="n in (item.level - 1)" 
-                      :key="n"
-                      class="w-0.5 h-4 bg-gray-600 mr-1 last:mr-0"
-                    ></div>
-                  </div>
-                  
-                  <!-- 項目圖標 -->
-                  <div 
-                    :class="[
-                      'w-2 h-2 rounded-full mr-3 transition-all duration-300',
-                      activeSection === item.id 
-                        ? 'bg-amber-300 shadow-lg shadow-amber-300/60 animate-pulse' 
-                        : 'bg-gray-500 group-hover:bg-amber-400 group-hover:shadow-sm group-hover:shadow-amber-400/40'
-                    ]"
+                    v-for="line in 3" :key="line"
+                    class="absolute w-full h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent animate-data-stream"
+                    :style="{ 
+                      top: `${line * 30}%`,
+                      animationDelay: `${line * 0.5}s`,
+                      animationDuration: `${2 + Math.random()}s`
+                    }"
                   ></div>
-                  
-                  <span class="flex-1 truncate">{{ item.title }}</span>
                 </div>
                 
-                <!-- 副標題或分類 -->
-                <div 
-                  v-if="item.subtitle || item.category"
-                  class="text-xs text-gray-500 mt-1 ml-5 truncate"
-                >
-                  {{ item.subtitle || getCategoryName(item.category) }}
+                <div class="relative z-10">
+                  <div class="flex items-center space-x-3">
+                    <!-- 終端指示器 -->
+                    <div class="flex-shrink-0 relative">
+                      <div 
+                        class="w-3 h-3 rounded border transition-all duration-300 relative overflow-hidden"
+                        :class="activeSection === item.id 
+                          ? 'bg-gradient-to-br from-cyan-400 to-blue-500 border-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.6)]' 
+                          : 'bg-slate-700/60 border-slate-500 group-hover:border-cyan-400 group-hover:bg-cyan-500/20 group-hover:shadow-[0_0_8px_rgba(34,211,238,0.4)]'"
+                      >
+                        <!-- 活躍狀態的終端掃描 -->
+                        <div 
+                          v-if="activeSection === item.id"
+                          class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-terminal-scan"
+                        ></div>
+                      </div>
+                      
+                      <!-- 外圈脈衝 -->
+                      <div 
+                        v-if="activeSection === item.id"
+                        class="absolute inset-0 w-3 h-3 border border-cyan-300/40 rounded animate-ping"
+                      ></div>
+                    </div>
+                    
+                    <!-- 目錄內容 -->
+                    <div class="flex-1 min-w-0">
+                      <div class="font-medium text-base leading-relaxed font-mono">
+                        <span class="block truncate tracking-wide">{{ item.title }}</span>
+                      </div>
+                      
+                    </div>
+                    
+                    <!-- 終端箭頭 -->
+                    <div class="flex-shrink-0">
+                      <div 
+                        class="w-5 h-5 transition-all duration-300 font-mono text-sm flex items-center justify-center"
+                        :class="activeSection === item.id 
+                          ? 'text-cyan-300 transform translate-x-1 scale-110' 
+                          : 'text-slate-500 group-hover:text-cyan-400 group-hover:transform group-hover:translate-x-0.5'"
+                      >
+                        ▶
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              
-              <!-- 右側指示器 -->
+                
+                <!-- 活躍項目終端邊條 -->
+                <div 
+                  v-if="activeSection === item.id"
+                  class="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-12 bg-gradient-to-b from-cyan-400 via-blue-400 to-cyan-400 rounded-r-full shadow-[0_0_12px_rgba(34,211,238,0.8)] animate-glow-pulse"
+                ></div>
+              </a>
+            </div>
+            
+            <!-- 滾動位置終端指示器 -->
+            <div class="absolute right-0 top-2 bottom-2 w-0.5 bg-slate-800/60 rounded-full overflow-hidden">
               <div 
-                v-if="activeSection === item.id"
-                class="absolute right-2 top-1/2 transform -translate-y-1/2 w-1 h-6 bg-gradient-to-b from-amber-400 to-orange-400 rounded-full"
+                ref="scrollIndicator"
+                class="w-full bg-gradient-to-b from-cyan-400 to-blue-400 rounded-full transition-all duration-200 shadow-[0_0_4px_rgba(34,211,238,0.6)]"
+                :style="{ height: scrollPercentage + '%', transform: `translateY(${scrollPosition}px)` }"
               ></div>
-            </a>
-          </nav>
-        </div>
-      </div>
-      
-      <!-- 統計資訊卡片（可選） -->
-      <div 
-        v-if="showStats"
-        class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-xl rounded-3xl p-6 border border-amber-500/20 shadow-xl"
-      >
-        <h3 class="text-lg font-bold text-amber-400 mb-4 flex items-center">
-          <Icon name="heroicons:chart-bar" class="w-5 h-5 mr-3" />
-          統計資訊
-        </h3>
-        
-        <div class="space-y-3">
-          <div class="flex justify-between items-center">
-            <span class="text-gray-400">總內容數</span>
-            <span class="text-amber-400 font-bold">{{ tocItems.length }}</span>
-          </div>
-          <div v-if="categories && categories.length > 0" class="flex justify-between items-center">
-            <span class="text-gray-400">分類數</span>
-            <span class="text-orange-400 font-bold">{{ categories.length }}</span>
-          </div>
-          <div v-if="filteredCount !== undefined" class="flex justify-between items-center">
-            <span class="text-gray-400">顯示中</span>
-            <span class="text-yellow-400 font-bold">{{ filteredCount }}</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- 快捷操作（可選） -->
-      <div v-if="showActions" class="space-y-3">
-        <!-- 回到頂部按鈕 -->
-        <WritingButton
-          variant="outline"
-          size="sm"
-          leftIcon="heroicons:arrow-up"
-          text="回到頂部"
-          @click="scrollToTop"
-          class="w-full"
-        />
-        
-        <!-- 自定義操作插槽 -->
-        <slot name="actions" />
-        
-        <!-- 返回連結 -->
-        <WritingButton
-          v-if="backLink"
-          :href="backLink.href"
-          variant="secondary"
-          size="sm"
-          leftIcon="heroicons:arrow-left"
-          :text="backLink.text || '返回'"
-          class="w-full"
-        />
+      <!-- 底部終端狀態 -->
+      <div class="absolute bottom-0 left-0 right-0 bg-slate-900/60 p-4 border-t border-slate-700/50">
+        <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+          <div class="flex items-center space-x-2">
+            <div class="w-1.5 h-1.5 bg-cyan-400/60 rounded-full animate-pulse"></div>
+            <span class="tracking-wide">READY</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span>{{ tocItems.length }} ENTRIES</span>
+            <div class="w-1 h-1 bg-slate-500 rounded-full"></div>
+            <span class="tracking-widest">{{ Math.round(scrollPercentage) }}%</span>
+          </div>
+        </div>
       </div>
-      
     </div>
   </div>
 </template>
@@ -175,128 +143,133 @@ interface TocItem {
   title: string
   subtitle?: string
   category?: string
-  level?: number // 層級深度，用於嵌套顯示
-}
-
-interface BackLink {
-  href: string
-  text?: string
+  description?: string
+  level?: number
+  readTime?: number
+  wordCount?: number
 }
 
 interface Props {
-  // 必要資料
   tocItems: TocItem[]
   activeSection: string
-  
-  // 可選功能
-  showProgress?: boolean
-  showStats?: boolean
-  showActions?: boolean
-  
-  // 統計資料
-  categories?: Array<{ key: string; name: string }>
-  filteredCount?: number
-  
-  // 返回連結
-  backLink?: BackLink
-  
-  // 進度追蹤
-  readingProgress?: number
 }
 
+// Props
 const props = withDefaults(defineProps<Props>(), {
-  showProgress: true,
-  showStats: true,
-  showActions: true,
-  readingProgress: 0
+  tocItems: () => [],
+  activeSection: ''
 })
 
+// Emits
 const emit = defineEmits<{
-  sectionClick: [sectionId: string]
+  'section-click': [sectionId: string]
 }>()
 
-// 響應式狀態
-const isCollapsed = ref(false)
+// 滾動相關響應式數據
+const tocContainer = ref<HTMLElement>()
+const scrollIndicator = ref<HTMLElement>()
+const scrollPercentage = ref(0)
+const scrollPosition = ref(0)
 
-// 工具函數
-const getCategoryName = (categoryKey?: string) => {
-  if (!categoryKey || !props.categories) return '其他'
-  const category = props.categories.find(c => c.key === categoryKey)
-  return category ? category.name : '其他'
+// 處理項目點擊
+const handleItemClick = (sectionId: string) => {
+  emit('section-click', sectionId)
 }
 
-const scrollToSection = (sectionId: string) => {
-  const element = document.getElementById(sectionId)
-  if (element) {
-    element.scrollIntoView({ 
-      behavior: 'smooth', 
-      block: 'start',
-      inline: 'nearest'
-    })
-    emit('sectionClick', sectionId)
+// 更新滾動指示器
+const updateScrollIndicator = () => {
+  if (!tocContainer.value) return
+  
+  const container = tocContainer.value
+  const scrollTop = container.scrollTop
+  const scrollHeight = container.scrollHeight - container.clientHeight
+  
+  if (scrollHeight > 0) {
+    const percentage = (scrollTop / scrollHeight) * 100
+    scrollPercentage.value = Math.min(100, Math.max(0, percentage))
+    
+    // 計算指示器位置
+    const indicatorTrackHeight = container.clientHeight - 16
+    scrollPosition.value = (scrollTop / scrollHeight) * (indicatorTrackHeight - 20)
   }
 }
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-}
-
-// 響應式處理
+// 生命週期
 onMounted(() => {
-  // 在小屏幕上默認摺疊
-  const handleResize = () => {
-    if (window.innerWidth < 1024) {
-      isCollapsed.value = true
-    } else {
-      isCollapsed.value = false
-    }
+  if (tocContainer.value) {
+    updateScrollIndicator()
   }
-  
-  handleResize()
-  window.addEventListener('resize', handleResize)
-  
-  onUnmounted(() => {
-    window.removeEventListener('resize', handleResize)
-  })
 })
+
+// Debug: 輸出tocItems到console
+watch(() => props.tocItems, (newItems) => {
+  console.log('TOC Items:', newItems)
+}, { immediate: true, deep: true })
 </script>
 
 <style scoped>
-/* 自定義滾動條 */
-.scrollbar-thin::-webkit-scrollbar {
-  width: 6px;
+/* 終端風格滾動條 */
+.scrollbar-terminal {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 211, 238, 0.4) rgba(30, 41, 59, 0.2);
 }
 
-.scrollbar-thin::-webkit-scrollbar-track {
-  background: rgba(30, 41, 59, 0.3);
-  border-radius: 10px;
+.scrollbar-terminal::-webkit-scrollbar {
+  width: 4px;
 }
 
-.scrollbar-thumb-amber-500\/30::-webkit-scrollbar-thumb {
-  background: rgba(245, 158, 11, 0.3);
-  border-radius: 10px;
+.scrollbar-terminal::-webkit-scrollbar-track {
+  background: rgba(30, 41, 59, 0.2);
+  border-radius: 2px;
 }
 
-.scrollbar-thumb-amber-500\/30::-webkit-scrollbar-thumb:hover {
-  background: rgba(245, 158, 11, 0.5);
+.scrollbar-terminal::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(34, 211, 238, 0.4), rgba(59, 130, 246, 0.4));
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgba(34, 211, 238, 0.3);
 }
 
-/* 平滑的高度過渡 */
-.max-h-96 {
-  max-height: 24rem;
+.scrollbar-terminal::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(34, 211, 238, 0.6), rgba(59, 130, 246, 0.6));
+  box-shadow: 0 0 6px rgba(34, 211, 238, 0.5);
 }
 
-.max-h-0 {
-  max-height: 0;
+/* 太空終端動畫 */
+@keyframes terminal-scan {
+  0% { transform: translateX(-100%) skewX(-20deg); }
+  100% { transform: translateX(100%) skewX(-20deg); }
 }
 
-/* 層級指示器動畫 */
-@keyframes level-indicator {
+@keyframes data-stream {
+  0%, 70%, 100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  10%, 60% {
+    opacity: 0.6;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes glow-pulse {
   0%, 100% {
-    opacity: 0.5;
+    box-shadow: 0 0 12px rgba(34, 211, 238, 0.8);
   }
   50% {
-    opacity: 1;
+    box-shadow: 0 0 20px rgba(34, 211, 238, 1), 0 0 30px rgba(34, 211, 238, 0.6);
   }
+}
+
+/* 應用動畫類 */
+.animate-terminal-scan {
+  animation: terminal-scan 1.5s ease-in-out infinite;
+}
+
+.animate-data-stream {
+  animation: data-stream 3s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
 }
 </style>

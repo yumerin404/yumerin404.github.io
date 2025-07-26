@@ -412,6 +412,8 @@ const handleFavorite = (postId: string, favorited: boolean) => {
 }
 
 const handleShare = (post: any) => {
+  if (!process.client) return
+  
   if (navigator.share) {
     navigator.share({
       title: post.title,
@@ -433,6 +435,8 @@ const resetSearch = () => {
 }
 
 const updateScrollProgress = () => {
+  if (!process.client) return
+  
   const scrollTop = window.pageYOffset
   const docHeight = document.documentElement.scrollHeight - window.innerHeight
   scrollProgress.value = (scrollTop / docHeight) * 100
@@ -440,12 +444,16 @@ const updateScrollProgress = () => {
 
 // 生命週期
 onMounted(() => {
-  window.addEventListener('scroll', updateScrollProgress, { passive: true })
-  updateScrollProgress()
+  if (process.client) {
+    window.addEventListener('scroll', updateScrollProgress, { passive: true })
+    updateScrollProgress()
+  }
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', updateScrollProgress)
+  if (process.client) {
+    window.removeEventListener('scroll', updateScrollProgress)
+  }
 })
 </script>
 
