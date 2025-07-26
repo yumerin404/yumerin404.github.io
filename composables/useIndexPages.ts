@@ -89,16 +89,16 @@ export const useLearningContent = () => {
     {
       id: 'quotes',
       name: '名言佳句',
-      description: '收錄啟發人心的智慧話語，在字句中尋找生活的指引。',
-      icon: 'heroicons:chat-bubble-left-right',
-      color: 'pink-500',
+      description: '品味古今智者的思想精華，在名言佳句中汲取人生智慧與哲理光芒。',
+      icon: 'heroicons:academic-cap',
+      color: 'amber-500',
       items: [
-        '人生智慧格言',
-        '學習勵志語錄',
-        '哲學思辨名言',
-        '生活感悟分享'
+        '古典雅典智慧名言',
+        '人生哲理深度思辨',
+        '歷史智者精華語錄',
+        '溝通藝術智慧結晶'
       ],
-      buttonText: '品味名言佳句'
+      buttonText: '進入智慧殿堂'
     },
     {
       id: 'posts',

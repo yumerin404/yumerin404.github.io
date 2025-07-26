@@ -37,8 +37,7 @@ const handleNavigate = (categoryId: string) => {
       navigateTo('/learning/posts')
       break
     case 'quotes':
-      // TODO: 創建名言佳句頁面
-      console.log('導航到名言佳句頁面')
+      navigateTo('/learning/quotes')
       break
     default:
       console.log(`導航到學習分類: ${categoryId}`)
