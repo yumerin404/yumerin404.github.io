@@ -12,7 +12,7 @@
         title-gradient="bg-gradient-to-r from-purple-400 via-indigo-400 to-blue-400"
       />
 
-      <CommonIndexGrid
+      <PoliticsIndexGrid
         :categories="categories"
         @navigate="handleNavigate"
       />
@@ -31,6 +31,21 @@ useHead({
 const { categories } = usePoliticsContent()
 
 const handleNavigate = (categoryId: string) => {
-  console.log(`導航到政治分類: ${categoryId}`)
+  switch (categoryId) {
+    case 'politics':
+      // 政治觀察頁面（待實現）
+      console.log('導航到政治觀察')
+      break
+    case 'thought':
+      // 導航到思維方式頁面
+      navigateTo('/politics/thought')
+      break
+    case 'philosophy':
+      // 哲學思辨頁面（待實現）
+      console.log('導航到哲學思辨')
+      break
+    default:
+      console.log(`導航到政治分類: ${categoryId}`)
+  }
 }
 </script>

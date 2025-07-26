@@ -63,7 +63,7 @@ export const usePoliticsContent = () => {
         '認知偏誤識別',
         '理性決策框架'
       ],
-      buttonText: '提升思維方式'
+      buttonText: '進入思維殿堂'
     },
     {
       id: 'philosophy',
