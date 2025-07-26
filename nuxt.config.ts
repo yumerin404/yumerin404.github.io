@@ -3,10 +3,13 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/ui'],
+  modules: ['@nuxt/ui', '@nuxt/icon'],
   css: ['~/assets/css/main.css'],
   ui: {
     fonts: false
+  },
+  icon: {
+    serverBundle: 'local'
   },
   app: {
     baseURL: '/',
