@@ -1,0 +1,25 @@
+# Allow all web crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://yumerin.org/sitemap.xml
+
+# Optional: Crawl-delay for better performance
+Crawl-delay: 1
+
+# Allow specific pages for better indexing
+Allow: /ai
+Allow: /galgame
+Allow: /investment
+Allow: /learning/
+Allow: /medical
+Allow: /novels
+Allow: /politics/
+Allow: /programming
+Allow: /writing/
+
+# Disallow admin or temporary files if any
+Disallow: /admin/
+Disallow: /.nuxt/
+Disallow: /node_modules/

@@ -1,0 +1,26 @@
+{
+  "name": "Yumerin - 多元學習與創作平台",
+  "short_name": "Yumerin",
+  "description": "Yumerin 是一個多元化的學習與創作平台，涵蓋程式設計、AI技術、醫學知識、投資理財、小說創作等多個領域。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/icon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/images/avatar.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "technology", "lifestyle"],
+  "lang": "zh-TW",
+  "dir": "ltr"
+}
