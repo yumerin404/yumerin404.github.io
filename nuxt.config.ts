@@ -118,17 +118,7 @@ export default defineNuxtConfig({
   vite: {
 	plugins: [
 	  tailwindcss(),
-	],
-	build: {
-	  rollupOptions: {
-		output: {
-		  manualChunks: {
-			vendor: ['vue', 'vue-router'],
-			ui: ['@nuxt/ui']
-		  }
-		}
-	  }
-	}
+	]
   },
   
   routeRules: {
