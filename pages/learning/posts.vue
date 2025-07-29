@@ -142,7 +142,30 @@
       <!-- Content Section -->
       <section class="py-16 px-4">
         <div class="container mx-auto max-w-5xl">
-          <div class="space-y-8">
+          <!-- 載入狀態 -->
+          <div v-if="loading" class="text-center py-16">
+            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-cyan-400 mx-auto mb-4"></div>
+            <p class="text-gray-400">正在載入內容...</p>
+          </div>
+          
+          <!-- 錯誤狀態 -->
+          <div v-else-if="error" class="text-center py-16">
+            <div class="w-24 h-24 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Icon name="heroicons:exclamation-triangle" class="w-12 h-12 text-red-400" />
+            </div>
+            <h3 class="text-xl font-medium text-red-400 mb-2">載入失敗</h3>
+            <p class="text-gray-500 mb-6">{{ error }}</p>
+            <button
+              @click="loadMarkdownFiles"
+              class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 bg-red-500/20 border border-red-500/60 text-red-400 hover:bg-red-500/30 hover:border-red-400"
+            >
+              <Icon name="heroicons:arrow-path" class="w-4 h-4 mr-2" />
+              重新載入
+            </button>
+          </div>
+          
+          <!-- 內容區域 -->
+          <div v-else class="space-y-8">
             <!-- 發文卡片 -->
             <LearningPostCard
               v-for="(post, index) in filteredPosts"
@@ -288,26 +311,11 @@
 
 <script setup lang="ts">
 // SEO 設定
-useHead({
+useSEO({
   title: '發文紀錄 - 夢鈴領域',
-  meta: [
-    { 
-      name: 'description', 
-      content: '思考軌跡與心境感悟的發文紀錄，分享觀點與反思的點點滴滴。' 
-    },
-    { 
-      name: 'keywords', 
-      content: '發文紀錄, 思考軌跡, 心境感悟, 觀點分享, 深度反思' 
-    },
-    {
-      property: 'og:title',
-      content: '發文紀錄 - 夢鈴領域'
-    },
-    {
-      property: 'og:description',
-      content: '思考軌跡與心境感悟的發文紀錄，分享觀點與反思的點點滴滴。'
-    }
-  ]
+  description: '思考軌跡與心境感悟的發文紀錄，分享觀點與反思的點點滴滴。',
+  keywords: '發文紀錄, 思考軌跡, 心境感悟, 觀點分享, 深度反思',
+  type: 'website'
 })
 
 // 響應式數據
@@ -318,8 +326,18 @@ const activeSection = ref('')
 const showSidebar = ref(false)
 const triggerHover = ref(false)
 
-// 發文數據
-const posts = [
+// 使用內容管理系統
+const { 
+  posts: markdownPosts, 
+  loading, 
+  error, 
+  loadMarkdownFiles, 
+  searchPosts,
+  getStatistics 
+} = useMarkdownContent()
+
+// 預設的發文數據（作為後備）
+const defaultPosts = [
   {
     id: 'civil-war-necessity',
     title: '國家內戰的必然性',
@@ -447,9 +465,24 @@ const posts = [
   }
 ]
 
+// 合併 markdown 內容和預設內容
+const posts = computed(() => {
+  const combined = [...markdownPosts.value, ...defaultPosts]
+  // 根據日期排序並去重（優先使用 markdown 內容）
+  const unique = combined.reduce((acc, post) => {
+    const existing = acc.find(p => p.id === post.id)
+    if (!existing) {
+      acc.push(post)
+    }
+    return acc
+  }, [] as any[])
+  
+  return unique.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+})
+
 // 計算屬性
 const filteredPosts = computed(() => {
-  let filtered = [...posts]
+  let filtered = [...posts.value]
 
   // 搜尋篩選
   if (searchQuery.value.trim()) {
@@ -481,16 +514,18 @@ const filteredPosts = computed(() => {
 })
 
 const totalWords = computed(() => {
-  return posts.reduce((sum, post) => sum + post.wordCount, 0).toLocaleString()
+  return posts.value.reduce((sum, post) => sum + post.wordCount, 0).toLocaleString()
 })
 
 const averageReadTime = computed(() => {
-  const total = posts.reduce((sum, post) => sum + post.readTime, 0)
-  return Math.round(total / posts.length) + ' 分鐘'
+  const total = posts.value.reduce((sum, post) => sum + post.readTime, 0)
+  return posts.value.length > 0 ? Math.round(total / posts.value.length) + ' 分鐘' : '0 分鐘'
 })
 
 const daysSinceFirst = computed(() => {
-  const firstPost = posts.reduce((earliest, post) => {
+  if (posts.value.length === 0) return '0 天'
+  
+  const firstPost = posts.value.reduce((earliest, post) => {
     return new Date(post.date) < new Date(earliest.date) ? post : earliest
   })
   const diffTime = new Date().getTime() - new Date(firstPost.date).getTime()
@@ -609,7 +644,10 @@ const updateScrollProgress = () => {
 }
 
 // 生命週期
-onMounted(() => {
+onMounted(async () => {
+  // 載入 markdown 檔案
+  await loadMarkdownFiles()
+  
   if (process.client) {
     const handleScroll = () => {
       updateScrollProgress()

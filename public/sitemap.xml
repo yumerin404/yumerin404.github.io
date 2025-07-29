@@ -46,7 +46,13 @@
     <loc>https://yumerin.org/medical</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2025-07-28</lastmod>
+    <lastmod>2025-07-29</lastmod>
+  </url>
+  <url>
+    <loc>https://yumerin.org/medical/supplements</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2025-07-29</lastmod>
   </url>
   <url>
     <loc>https://yumerin.org/novels</loc>
