@@ -483,19 +483,48 @@ const loadSupplementData = () => {
       category: 'eye-health',
       usage: '一天一顆',
       manufacturer: 'California Gold Nutrition',
-      productName: 'Astalif 純冰島蝦青素',
-      description: '強效抗氧化，保護視力和皮膚',
-      benefits: ['抗氧化', '視網膜保護', '皮膚健康', '關節保護'],
-      dosage: '每日 1 粒隨含脂餐服用',
+      productName: 'Astalif® 純冰島蝦青素 12 mg',
+      url: 'https://tw.iherb.com/pr/california-gold-nutrition-astaxanthin-astalif-pure-icelandic-12-mg-30-veggie-softgels/71683',
+      description: '強效抗氧化劑，保護視力、皮膚和心血管健康',
+      benefits: ['抗氧化', '視網膜保護', '皮膚健康', '關節保護', '心血管'],
+      dosage: '每日 1 粒／植物軟膠囊',
+      tags: ['抗氧化', '眼部健康', '皮膚', '運動', '心血管'],
       content: `
 **製造商**：California Gold Nutrition (美國)
 
-**主要功效**：
-- 高效清除ROS/RNS，抗氧化力約β-胡蘿蔔素10倍、維生素E 50倍
-- 可跨越血腦與血視網膜屏障，保護神經、視網膜細胞
-- 支援皮膚、心血管、關節與眼睛健康
+**成分（每 1 植物軟膠囊）**：
+- **蝦青素（Astaxanthin，Haematococcus pluvialis Extract）12 mg** — DV 未建立
+  - 來源：Astalif® 純冰島微藻，零溶劑超臨界 CO₂ 萃取；含 ≥ 99 % (3S, 3'S) 生物活性異構體
 
-**使用方法**：成人每日 1 粒，隨含脂肪之餐食吞服
+**主要功效**：
+1. **高效清除 ROS/RNS**：抗氧化力約 β‑胡蘿蔔素 10 倍、維生素 E 50 倍
+2. **跨越生理屏障**：可跨越血腦與血視網膜屏障，保護神經、視網膜細胞不受氧化與光毒傷害
+3. **多系統保護**：支援皮膚、心血管、關節與眼睛健康，降低紫外線與發炎損傷
+
+**機制與細節**：
+- **膜內外雙向抗氧化**：極性末端插入磷脂頭部，非極性多烯鏈橫跨脂雙層，犧牲性捕捉 ¹O₂、•OH
+- **Nrf2 ↑ / NF‑κB ↓**：提升內源抗氧化酶 (SOD, CAT) 並抑制 COX‑2、IL‑6、CRP
+- **LDL 氧化抑制 & eNOS 活化**：減少 LDL‑ox，改善血管內皮功能與微循環
+- **視覺與神經保護**：在視桿細胞、黃斑部累積，減少藍光誘導 ROS
+
+**臨床證據**：
+- 皮膚護理 RCT 8 週：彈性↑12 %，TEWL↓14 %
+- VDT 眼疲勞 RCT 4 週：眼疲勞指數↓32 %，VA 恢復↑
+- 膝關節 OA RCT 12 週：WOMAC‑Pain ↓18 %
+
+**其他成分**：葵花籽油、植物膠囊殼（純化水、卡拉膠、改性澱粉、植物甘油、山梨醇）
+
+**使用方法**：成人每日 1 粒，隨含脂肪之餐食吞服；高強度紫外線曝露或劇烈運動期間可酌情增至 2 粒
+
+**注意事項**：
+- 僅供 18 歲以上成人使用
+- 孕哺期、血液疾患或使用抗凝血藥者須先諮詢醫師
+- 高劑量可能導致輕微膚色變深，停用後可恢復
+- 手術前兩週內建議停用
+
+**品質保證**：純素軟膠囊、Non‑GMO、無麩質及大豆；iTested® 第三方檢驗
+
+**保存條件**：密封置於 15–25 °C 陰涼乾燥避光處；開封後 3 個月內使用完畢
       `
     },
     {
@@ -800,7 +829,7 @@ const loadSupplementData = () => {
     }
   ]
 
-  // 使用時間安排
+  // 使用時間安排 - 完全依照 supple.md 的安排
   usageSchedule.value = {
     '早上睡醒': [
       'L-瓜胺酸 (L-Citrulline)',
@@ -819,10 +848,10 @@ const loadSupplementData = () => {
       '小檗鹼 (Berberine)',
       '洋薊萃取 (Artichoke Extract)',
       '薑根萃取 (Ginger Root)',
-      '益生菌組合 (Solgar Dophilus)',
+      '益生菌組合',
       '[每週特定日] 鋅甘胺酸螯合 (Zinc Glycinate)',
-      '[每週特定日] 維生素 D3 + K2 (Mega D-3)',
-      '[每週特定日] 阿利納明醫療金強錠 (Alinamin)'
+      '[每週特定日] 維生素 D3 + K2',
+      '[每週特定日] 合利他命 (Alinamin Medical Gold) - 各 1 顆'
     ],
     '午餐中': [
       '全方位消化酵素 (Super Enzymes)'
@@ -834,13 +863,12 @@ const loadSupplementData = () => {
     '晚餐後': [
       '小檗鹼 (Berberine)',
       '洋薊萃取 (Artichoke Extract)',
-      '薑根萃取 (Ginger Root)',
-      '布拉氏酵母 + MOS (S. boulardii)'
+      '薑根萃取 (Ginger Root)'
     ]
   }
 }
 
-// 保健品分類映射
+// 保健品分類映射 - 完全對應 supple.md 的分類結構
 const categoryIconMap: Record<string, string> = {
   'amino-acids': 'heroicons:bolt',
   'fish-oil': 'heroicons:water',
@@ -850,19 +878,19 @@ const categoryIconMap: Record<string, string> = {
   'vitamins': 'heroicons:sparkles',
   'others': 'heroicons:star',
   'enzymes': 'heroicons:beaker',
-  'probiotics': 'heroicons:leaf'
+  'probiotics': 'heroicons:squares-plus'
 }
 
 const categoryNameMap: Record<string, string> = {
-  'amino-acids': '胺基酸類',
-  'fish-oil': '魚油補充劑',
-  'eye-health': '眼部健康',
-  'stomach-protection': '胃部保護',
-  'minerals': '礦物質',
-  'vitamins': '維生素',
+  'amino-acids': '胺基酸類補充劑',
+  'fish-oil': '魚油補充劑', 
+  'eye-health': '眼部健康補充劑',
+  'stomach-protection': '保護胃部',
+  'minerals': '礦物質補充劑',
+  'vitamins': '維生素補充劑',
   'others': '其他類補充',
-  'enzymes': '酵素',
-  'probiotics': '益生菌'
+  'enzymes': '酶',
+  'probiotics': '益生菌補充劑'
 }
 
 // 保健品分類
