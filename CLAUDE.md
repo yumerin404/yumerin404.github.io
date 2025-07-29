@@ -93,10 +93,38 @@ yarn preview
 所有靜態資源放在 `public/` 目錄，可直接透過根路徑存取。
 
 ## SEO 設定
+
+### 基礎 SEO
 - 所有 meta 資訊在 `nuxt.config.ts` 中設定
-- 使用結構化資料 (JSON-LD)
-- 靜態 sitemap.xml
-- robots.txt 已設定
+- 使用 `useSEO` composable 管理頁面 SEO
+- 靜態 sitemap.xml (手動維護)
+- 增強版 robots.txt (包含圖片允許、爬蟲指令)
+- Canonical URL 設定和 301 重新導向
+
+### 結構化資料 (Schema.org)
+- 網站組織資料 (`useOrganization`)
+- 麵包屑導航 (`useBreadcrumb`) 
+- 技術文章標記 (TechArticle)
+- 網站導航元素 (SiteNavigationElement)
+- 創作者資訊 (Person)
+- 搜尋功能 (SearchAction)
+
+### 多語言與地區化
+- hreflang 標籤設定 (zh-TW, zh, x-default)
+- 中文繁體內容優化
+- 地區化 meta 標籤
+
+### 爬蟲優化
+- 進階 robots meta 標籤
+- Googlebot/Bingbot 專用指令
+- 圖片索引優化 (max-image-preview:large)
+- 片段長度最大化 (max-snippet:-1)
+
+### 性能 SEO
+- 靜態生成 (SSG) 所有頁面
+- 圖片壓縮與最佳化
+- Code splitting 和 chunk 優化
+- Core Web Vitals 友善設定
 
 ## 注意事項
 - 使用 ESM 模組格式

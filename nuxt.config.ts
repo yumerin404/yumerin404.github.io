@@ -23,8 +23,13 @@ export default defineNuxtConfig({
         { hid: 'description', name: 'description', content: 'Yumerin 是一個多元化的學習與創作平台，涵蓋程式設計、AI技術、醫學知識、投資理財、小說創作等多個領域。' },
         { hid: 'keywords', name: 'keywords', content: 'Yumerin, 程式設計, AI, 醫學, 投資, 小說, 學習平台, 創作, 技術分享' },
         { name: 'author', content: 'Yumerin' },
-        { name: 'robots', content: 'index, follow' },
+        { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
         { name: 'language', content: 'zh-TW' },
+        { name: 'googlebot', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
+        { name: 'bingbot', content: 'index, follow' },
+        { name: 'rating', content: 'General' },
+        { name: 'distribution', content: 'Global' },
+        { name: 'revisit-after', content: '7 days' },
         
         // Open Graph
         { hid: 'og:type', property: 'og:type', content: 'website' },
@@ -56,7 +61,10 @@ export default defineNuxtConfig({
         { rel: 'canonical', href: 'https://yumerin.org/' },
         { rel: 'icon', type: 'image/x-icon', href: '/images/icon.ico' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/images/icon.ico' },
-        { rel: 'manifest', href: '/site.webmanifest' }
+        { rel: 'manifest', href: '/site.webmanifest' },
+        { rel: 'alternate', hreflang: 'zh-TW', href: 'https://yumerin.org/' },
+        { rel: 'alternate', hreflang: 'zh', href: 'https://yumerin.org/' },
+        { rel: 'alternate', hreflang: 'x-default', href: 'https://yumerin.org/' }
       ],
       script: [
         {
@@ -105,7 +113,17 @@ export default defineNuxtConfig({
   },
   
   experimental: {
-    payloadExtraction: false
+    payloadExtraction: false,
+    inlineSSRStyles: false
+  },
+  
+  // 性能優化
+  optimization: {
+    splitChunks: {
+      layouts: true,
+      pages: true,
+      commons: true
+    }
   },
   
   ssr: true,
@@ -123,6 +141,7 @@ export default defineNuxtConfig({
   
   routeRules: {
     '/': { prerender: true, headers: { 'cache-control': 's-maxage=0' } },
+    '/index.html': { redirect: { to: '/', statusCode: 301 } },
     '/ai': { prerender: true },
     '/galgame': { prerender: true },
     '/investment': { prerender: true },

@@ -36,23 +36,43 @@
 </template>
 
 <script setup lang="ts">
-// SEO Meta
+// SEO 設定
+useSEO({
+  title: '程式設計技術分享 - 夢鈴領域',
+  description: '分享程式設計技術、開發經驗與工具推薦。涵蓋前端、後端、資料庫、DevOps 等全端開發知識。',
+  keywords: '程式設計, 軟體開發, JavaScript, TypeScript, Python, Vue, React, Node.js, 全端開發',
+  type: 'website'
+})
+
+// 結構化資料 - 程式設計頁面
 useHead({
-  title: '程式與工具 - 夢鈴幻想',
-  meta: [
-    {
-      name: 'description',
-      content: '黑客風格的程式工具集合，包含自動化腳本、性能優化工具和安全監控系統。'
-    },
-    {
-      property: 'og:title',
-      content: '程式與工具 - 夢鈴幻想'
-    },
-    {
-      property: 'og:description',
-      content: '提供高效的程式開發工具和自動化腳本，提升您的開發效率。'
-    }
-  ]
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'TechArticle',
+      headline: '程式設計技術分享',
+      description: '分享程式設計技術、開發經驗與工具推薦',
+      url: 'https://yumerin.org/programming',
+      dateModified: '2025-07-28',
+      author: {
+        '@type': 'Person',
+        name: 'Yumerin',
+        url: 'https://yumerin.org'
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: '夢鈴領域',
+        url: 'https://yumerin.org'
+      },
+      about: {
+        '@type': 'Thing',
+        name: '程式設計技術'
+      },
+      keywords: ['程式設計', '軟體開發', 'JavaScript', 'TypeScript', 'Python'],
+      inLanguage: 'zh-TW'
+    })
+  }]
 })
 
 // 使用工具數據管理

@@ -33,22 +33,42 @@
 
 <script setup lang="ts">
 // SEO 設定
-useHead({
+useSEO({
   title: 'AI 技巧與心得 - 夢鈴領域',
-  meta: [
-    { 
-      name: 'description', 
-      content: '探索人工智能的前沿技術，分享 AI 工具使用心得與深度學習經驗。包含機器學習、深度學習、自然語言處理等技術分享。' 
-    },
-    {
-      property: 'og:title',
-      content: 'AI 技巧與心得 - 夢鈴領域'
-    },
-    {
-      property: 'og:description',
-      content: '最前沿的人工智能技術分享與實戰心得，探索 AI 的無限可能。'
-    }
-  ]
+  description: '探索人工智能的前沿技術，分享 AI 工具使用心得與深度學習經驗。包含機器學習、深度學習、自然語言處理等技術分享。',
+  keywords: 'AI, 人工智能, 機器學習, 深度學習, 自然語言處理, ChatGPT, Claude, 神經網路, 技術分享',
+  type: 'website'
+})
+
+// 結構化資料 - AI 技術頁面
+useHead({
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'TechArticle',
+      headline: 'AI 技巧與心得',
+      description: '探索人工智能的前沿技術，分享 AI 工具使用心得與深度學習經驗',
+      url: 'https://yumerin.org/ai',
+      dateModified: '2025-07-28',
+      author: {
+        '@type': 'Person',
+        name: 'Yumerin',
+        url: 'https://yumerin.org'
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: '夢鈴領域',
+        url: 'https://yumerin.org'
+      },
+      about: {
+        '@type': 'Thing',
+        name: '人工智能技術'
+      },
+      keywords: ['AI', '人工智能', '機器學習', '深度學習', '自然語言處理'],
+      inLanguage: 'zh-TW'
+    })
+  }]
 })
 
 // 使用 AI 內容管理
