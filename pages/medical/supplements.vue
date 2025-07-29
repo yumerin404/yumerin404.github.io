@@ -350,30 +350,47 @@ const supplementContent = ref('')
 const supplements = ref<any[]>([])
 const usageSchedule = ref<Record<string, string[]>>({})
 
-// 直接嵌入 supple.md 的數據
+// 完整的保健品數據，基於 supple.md 內容
 const loadSupplementData = () => {
-  // 直接提供保健品分類數據
   supplements.value = [
+    // 胺基酸類補充劑
     {
       id: 'l-citrulline',
       title: 'NOW Foods - L-瓜胺酸 750mg',
       category: 'amino-acids',
       usage: '一天兩顆',
       manufacturer: 'NOW Foods',
-      productName: 'L-瓜胺酸 750mg',
-      description: '支持血管擴張、增加末梢血流與運動表現',
+      productName: 'L‑瓜胺酸 750 mg (L‑Citrulline)',
+      url: 'https://tw.iherb.com/pr/now-foods-l-citrulline-750-mg-180-veg-capsules/14209',
+      description: '支持血管擴張、增加末梢血流與運動表現的胺基酸補充劑',
       benefits: ['尿素循環', '一氧化氮前驅物', '血壓調節', '組織修復'],
-      dosage: '每日 1-2 次，每次 1-2 粒',
+      dosage: '每日 1–2 次，每次 1–2 粒／植物膠囊',
+      tags: ['血管健康', '運動表現', '血壓', '循環'],
       content: `
 **製造商**：NOW Foods (美國)
 
-**主要功效**：
-- 尿素循環：於肝臟轉為精胺酸後參與尿素循環，有助於清除多餘氨
-- 一氧化氮前驅物：促血管擴張、增加末梢血流與運動泵感
-- 血壓調節：每日 3-6g 持續 4-8 週可降低收縮壓 3-6 mmHg
-- 組織修復：促進傷口再上皮化與膠原沉積
+**成分（每 1 植物膠囊）**：
+- **L‑瓜胺酸（L‑Citrulline）750 mg** — DV 未建立
+  - 來源：以玉米澱粉等植物性糖源經發酵純化之游離型胺基酸
 
-**使用方法**：成人每日 1-2 粒，建議兩餐間或運動前 30-60 分鐘空腹服用
+**主要功效**：
+1. **尿素循環**：於肝臟轉為精胺酸後參與尿素循環，有助於清除多餘氨
+2. **一氧化氮前驅物**：經 Arg‑NOS 路徑提升 NO 生合成，促血管擴張、增加末梢血流與運動泵感
+3. **血壓調節**：多項臨床試驗顯示每日 3–6g 持續 4–8 週可降低收縮壓 3–6 mmHg
+4. **組織修復**：動物研究顯示可促進傷口再上皮化與膠原沉積
+
+**機制與細節**：
+- **Arginine sparing**：CIT 於腸肝循環不被高度代謝，可有效提升血中 Arg 濃度
+- **NO／CGMP 軸**：增加內皮 NOS 基質 → NO ↑ → sGC 活化 → cGMP↑ → 血管平滑肌鬆弛
+
+**使用方法**：成人每日 1–2 粒，1–2 次，建議兩餐間或運動前 30–60 分鐘空腹服用
+
+**注意事項**：
+- 僅供 18 歲以上成人
+- 孕哺婦、低血壓、腎功能不全者應先諮詢醫師
+- 可能出現輕微胃腸不適、頭暈
+
+**保存條件**：開封後置於 15–25 °C 陰涼乾燥避光處，6 個月內食用完畢
       `
     },
     {
@@ -382,19 +399,39 @@ const loadSupplementData = () => {
       category: 'amino-acids',
       usage: '一天兩顆',
       manufacturer: 'NOW Foods',
-      productName: 'L-麩醯胺酸 500mg',
-      description: '維護腸道屏障、支持免疫系統',
+      productName: 'L‑麩醯胺酸 500 mg (L‑Glutamine)',
+      url: 'https://tw.iherb.com/pr/now-foods-l-glutamine-500-mg-120-veg-capsules/622',
+      description: '維護腸道屏障、支持免疫系統和運動恢復的條件必需胺基酸',
       benefits: ['腸道屏障', '免疫支持', '組織修復', '運動恢復'],
-      dosage: '每日 1-3 粒',
+      dosage: '每日 1‑3 粒／植物膠囊',
+      tags: ['腸道健康', '免疫', '運動恢復', '蛋白質合成'],
       content: `
 **製造商**：NOW Foods (美國)
 
-**主要功效**：
-- 維護腸道屏障：降低腸漏並改善腸黏膜修復
-- 支持免疫：為T/B淋巴球與腸上皮的首要能量來源
-- 促進組織修復：維持正氮平衡，降低肌肉損傷
+**成分（每 1 膠囊）**：
+- **L‑麩醯胺酸（L‑Glutamine，游離型）500 mg** — DV 未建立
+  - 來源：以植物性葡萄糖發酵純化之游離胺基酸；純素、Non‑GMO
 
-**使用方法**：成人每日 1-3 粒，建議兩餐間空腹服用
+**主要功效**：
+1. **維護腸道屏障**：降低腸漏並改善腸黏膜修復
+2. **支持免疫**：為 T/B 淋巴球與腸上皮的首要能量來源，可提升黏膜 IgA 與減少上呼吸道感染
+3. **促進組織修復與運動恢復**：作為氮運載體，維持正氮平衡；運動後補充可降低肌肉損傷與延遲性痠痛
+
+**機制與細節**：
+1. **腸屏障**：增加 tight‑junction 蛋白表達，抑制 NF‑κB 發炎訊號，強化屏障功能
+2. **免疫代謝**：供應免疫細胞醣解後所需的碳源與 NADPH，促進淋巴球增殖與抗體生成
+3. **肌肉保護**：運動後可抑制肌肉蛋白分解標誌物，透過 mTOR/4E‑BP1 途徑促進蛋白質合成
+
+**其他成分**：Hypromellose（植物纖維膠囊殼）、米粉、Ascorbyl Palmitate（抗氧化劑）
+
+**使用方法**：成人每日 1–3 粒，建議兩餐間空腹服用；若用於運動恢復，可於運動結束後 30 分鐘內補充
+
+**注意事項**：
+- 僅供 18 歲以上成人使用
+- 孕哺婦、肝腎功能不全、肝性腦病變患者請先諮詢醫師
+- 偶見腹脹、噁心等輕微腸胃不適
+
+**保存條件**：置於 15–25 °C 陰涼乾燥處，避免高溫潮濕與陽光直射
       `
     },
     {
@@ -403,19 +440,41 @@ const loadSupplementData = () => {
       category: 'fish-oil',
       usage: '一天一顆',
       manufacturer: 'California Gold Nutrition',
-      productName: 'Omega 800 超濃縮魚油',
-      description: '富含EPA+DHA，支持心血管和大腦健康',
+      productName: 'Omega 800 超濃縮 Omega‑3 魚油 1,000 mg',
+      url: 'https://tw.iherb.com/pr/california-gold-nutrition-omega-800-ultra-concentrated-omega-3-fish-oil-kd-pur-triglyceride-form-30-fish-gelatin-softgels-1-000-mg-per-softgel/82845',
+      description: '高純度 TG 型魚油，富含 EPA+DHA，支持心血管和大腦健康',
       benefits: ['心血管健康', '抗發炎', '腦部支持', '視網膜保護'],
-      dosage: '每日 1 粒隨含脂肪餐服用',
+      dosage: '每日 1 粒／魚明膠軟膠囊',
+      tags: ['心血管', 'Omega-3', 'EPA', 'DHA', '抗發炎'],
       content: `
-**製造商**：California Gold Nutrition (美國)
+**製造商**：California Gold Nutrition (美國) — kd‑pür® 高純度魚油濃縮物由 KD Pharma (德國) 精製
+
+**成分（每 1 魚明膠軟膠囊）**：
+- **高純度 Omega‑3 魚油濃縮物（kd‑pür® TG，沙丁魚／鯷魚／鯖魚）1,000 mg**
+  - 含 **EPA 480 mg + DHA 320 mg → 總 ω‑3 840 mg** — DV 未建立
+  - 來源：秘魯、智利野生小型遠洋魚 → 德國超臨界分子蒸餾，保持天然三酸甘油酯 (TG) 型態
 
 **主要功效**：
-- 心血管：降低三酸甘油脂 15-30%，減少動脈硬化風險
-- 抗發炎：EPA/DHA代謝為resolvin、protectin，下調NF-κB
-- 腦部與視網膜：DHA為神經突觸與視紫質結構要素
+1. **心血管**：中高劑量 EPA+DHA 可降低三酸甘油脂 15–30 %、輔助調節血壓及血小板活性，減少動脈硬化風險
+2. **抗發炎**：EPA/DHA 代謝為 resolvin、protectin、maresin，下調 NF‑κB 與 NLRP3，改善系統性發炎
+3. **腦部與視網膜**：DHA 為神經突觸與視紫質結構要素，支持認知、情緒與視覺功能
 
-**使用方法**：成人每日 1 粒隨含脂肪餐服用
+**機制與細節**：
+- **TG 型態生體可利用率↑**：交叉試驗顯示 TG 魚油 EPA/DHA 血漿 AUC 高於 EE 型 20–50 %
+- 活化 PPAR‑α/γ ⇒ β‑氧化↑；競爭抑制 AA 炎性 eicosanoid；GPR120 介導抗發炎訊號
+
+**其他成分**：魚明膠 (Tilapia)、植物甘油、水；混合生育醇 (< 0.2 %) 抗氧化
+
+**使用方法**：成人每日 1 粒隨含脂肪餐服用；欲進一步降低血脂或發炎指標者，可依醫囑增至每日 2–3 粒
+
+**注意事項**：
+- 對魚類或大豆過敏者請避免使用
+- 併用抗凝血劑或手術前兩週，須諮詢醫師
+- 孕哺婦與兒童應控制 EPA 攝取
+
+**品質保證**：IFOS® 5 星、重金屬與二噁英檢測 < 0.1 ppb；MSC 可持續漁獲；Non‑GMO、無麩質、低過敏性
+
+**保存條件**：密封置於 15–25 °C 陰涼乾燥處，避免日光與潮濕；開封後建議 6 個月內食用完畢
       `
     },
     {
