@@ -259,7 +259,11 @@ const handleClick = (event: MouseEvent) => {
 <style scoped>
 /* 自定義載入動畫 */
 .medical-spinner {
-  @apply h-4 w-4 border-2 border-current border-t-transparent rounded-full;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
   animation: medical-spin 1s linear infinite;
 }
 
@@ -281,24 +285,24 @@ const handleClick = (event: MouseEvent) => {
 /* 高對比度模式支援 */
 @media (prefers-contrast: high) {
   .medical-button {
-    @apply border-2;
+    border-width: 2px;
   }
 }
 
 /* 減少動畫偏好支援 */
 @media (prefers-reduced-motion: reduce) {
   .medical-button {
-    @apply transition-none;
+    transition: none;
   }
   
   .medical-spinner {
     animation: none;
-    @apply border-l-transparent;
+    border-left-color: transparent;
   }
 }
 
 /* Focus-visible 支援 */
 .medical-button:focus-visible {
-  @apply ring-2 ring-offset-2 ring-offset-gray-900;
+  box-shadow: 0 0 0 2px rgb(17 24 39), 0 0 0 4px rgb(20 184 166);
 }
 </style>
