@@ -323,105 +323,19 @@
       </section>
     </main>
 
-    <!-- 古典雅典智慧導航系統 -->
-    <div 
-      class="fixed top-16 right-0 h-[calc(100vh-4rem)] z-50 transition-all duration-700 ease-out"
-      :class="[
-        showSidebar ? 'w-96' : 'w-16',
-        showSidebar ? 'translate-x-0' : 'translate-x-0'
-      ]"
-    >
-      <!-- 智慧之門觸發器 - 古典雅典風格 -->
-      <div 
-        class="absolute left-0 top-1/2 -translate-y-1/2 h-32 cursor-pointer group transition-all duration-500"
-        :class="showSidebar ? 'w-16 opacity-0 pointer-events-none' : 'w-16 opacity-100'"
-        @click="showSidebar = true"
-        @mouseenter="triggerHover = true"
-        @mouseleave="triggerHover = false"
-      >
-        <!-- 古典之門觸發區域 -->
-        <div class="relative w-full h-full">
-          <!-- 主觸發面板 -->
-          <div 
-            class="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-amber-900/20 to-slate-900/90 backdrop-blur-xl border-l border-y border-amber-500/40 rounded-l-2xl shadow-2xl transition-all duration-500 overflow-hidden"
-            :class="triggerHover ? 'border-amber-400/80 shadow-[0_0_30px_rgba(251,191,36,0.3)]' : ''"
-          >
-            
-            <!-- 古典金紋流動條 -->
-            <div class="absolute left-1 top-1/2 -translate-y-1/2 w-1 h-16 bg-gradient-to-b from-amber-400/60 via-yellow-500/80 to-amber-500/60 rounded-full transition-all duration-500"
-                 :class="triggerHover ? 'w-1.5 shadow-[0_0_20px_rgba(251,191,36,0.8)] animate-pulse' : ''">
-              <!-- 智慧光點 -->
-              <div class="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-amber-300 rounded-full animate-ping"></div>
-              <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-yellow-300 rounded-full animate-ping" style="animation-delay: 0.7s;"></div>
-              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-amber-400 rounded-full animate-ping" style="animation-delay: 1.2s;"></div>
-            </div>
-            
-            <!-- 側邊觸發圖示 -->
-            <div class="absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-500"
-                 :class="triggerHover ? 'scale-110 text-amber-300' : 'text-gray-400'">
-              <Icon name="heroicons:bars-3" class="w-6 h-6" />
-            </div>
-            
-            <!-- 古典提示標籤 -->
-            <div 
-              class="absolute left-20 top-1/2 -translate-y-1/2 transition-all duration-500 transform"
-              :class="triggerHover ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'"
-            >
-              <div class="bg-slate-900/95 backdrop-blur-sm border border-amber-500/50 rounded-xl px-4 py-2 shadow-2xl">
-                <div class="text-sm text-amber-300 font-medium">智慧目錄</div>
-                <div class="text-xs text-gray-400 mt-1">點擊展開</div>
-              </div>
-              <!-- 古典箭頭 -->
-              <div class="absolute right-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-4 border-b-4 border-r-8 border-transparent border-r-amber-500/50"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- 主導航面板 - 古典雅典智慧殿堂風格 -->
-      <div 
-        class="ml-16 h-full relative transition-all duration-700 ease-out"
-        :class="showSidebar ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-full pointer-events-none'"
-      >
-        <!-- 關閉按鈕 -->
-        <button
-          @click="showSidebar = false"
-          class="absolute -left-12 top-4 w-8 h-8 bg-slate-900/95 backdrop-blur-sm border border-amber-500/40 rounded-full flex items-center justify-center text-amber-400 hover:text-amber-300 hover:border-amber-400/60 transition-all duration-300 z-10 group"
-        >
-          <Icon name="heroicons:x-mark" class="w-4 h-4" />
-          <div class="absolute inset-0 bg-amber-500/10 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 animate-pulse"></div>
-        </button>
-        
-        <!-- 主面板容器 -->
-        <div class="w-full h-full relative">
-          <!-- 外層古典光暈 -->
-          <div class="absolute -inset-2 bg-gradient-to-br from-amber-500/10 via-yellow-500/5 to-amber-500/10 rounded-2xl blur-lg animate-pulse-slow"></div>
-          
-          <!-- 主面板結構 -->
-          <div class="relative w-full h-full bg-gradient-to-br from-slate-900/98 via-slate-800/95 to-slate-900/98 backdrop-blur-xl border border-amber-700/30 rounded-2xl shadow-2xl overflow-hidden">
-            
-            <!-- 主內容區域 -->
-            <div class="flex-1 h-full relative">
-              <!-- 目錄組件容器 -->
-              <div class="absolute inset-0 p-4">
-                <UniversalSidebar
-                  :items="tocData"
-                  :categories="tocCategories"
-                  :active-item="activeSection"
-                  :loading="contentLoading"
-                  theme="learning"
-                  trigger-icon="heroicons:academic-cap"
-                  trigger-title="政治智慧導航"
-                  system-title="WISDOM_MATRIX"
-                  search-placeholder="搜索古典智慧..."
-                  @item-click="scrollToSection"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- UniversalSidebar Component -->
+    <UniversalSidebar
+      :items="tocData"
+      :categories="tocCategories"
+      :active-item="activeSection"
+      :loading="contentLoading"
+      theme="learning"
+      trigger-icon="heroicons:academic-cap"
+      trigger-title="政治智慧導航"
+      system-title="WISDOM_MATRIX"
+      search-placeholder="搜索古典智慧..."
+      @item-click="scrollToSection"
+    />
 
     <!-- 回到頂部按鈕 - 古典風格 -->
     <Transition
@@ -480,8 +394,6 @@ const searchQuery = ref('')
 const scrollProgress = ref(0)
 const activeSection = ref('')
 const searchFocused = ref(false)
-const showSidebar = ref(false)
-const triggerHover = ref(false)
 const contentLoading = ref(true)
 
 // 政治人物危機處理能力分類數據
