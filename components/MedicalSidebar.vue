@@ -318,7 +318,7 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits<Emits>()
 
 // 響應式狀態
-const isCollapsed = ref(false)
+const isCollapsed = ref(true)
 const triggerHover = ref(false)
 const searchQuery = ref('')
 const searchFocused = ref(false)

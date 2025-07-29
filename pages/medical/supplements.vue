@@ -350,28 +350,434 @@ const supplementContent = ref('')
 const supplements = ref<any[]>([])
 const usageSchedule = ref<Record<string, string[]>>({})
 
-// 載入保健品數據
-const loadSupplementData = async () => {
-  try {
-    // 獲取 supple.md 內容
-    const content = await $fetch('/content/supple.md', { 
-      responseType: 'text' 
-    }) as string
-    
-    supplementContent.value = content
-    
-    // 解析保健品段落
-    const sections = parseSupplementSections(content)
-    supplements.value = sections
-    
-    // 提取使用時間安排
-    usageSchedule.value = extractUsageSchedule(content)
-    
-  } catch (error) {
-    console.error('載入保健品數據失敗:', error)
-    // 提供備用數據
-    supplements.value = []
-    usageSchedule.value = {}
+// 直接嵌入 supple.md 的數據
+const loadSupplementData = () => {
+  // 直接提供保健品分類數據
+  supplements.value = [
+    {
+      id: 'l-citrulline',
+      title: 'NOW Foods - L-瓜胺酸 750mg',
+      category: 'amino-acids',
+      usage: '一天兩顆',
+      manufacturer: 'NOW Foods',
+      productName: 'L-瓜胺酸 750mg',
+      description: '支持血管擴張、增加末梢血流與運動表現',
+      benefits: ['尿素循環', '一氧化氮前驅物', '血壓調節', '組織修復'],
+      dosage: '每日 1-2 次，每次 1-2 粒',
+      content: `
+**製造商**：NOW Foods (美國)
+
+**主要功效**：
+- 尿素循環：於肝臟轉為精胺酸後參與尿素循環，有助於清除多餘氨
+- 一氧化氮前驅物：促血管擴張、增加末梢血流與運動泵感
+- 血壓調節：每日 3-6g 持續 4-8 週可降低收縮壓 3-6 mmHg
+- 組織修復：促進傷口再上皮化與膠原沉積
+
+**使用方法**：成人每日 1-2 粒，建議兩餐間或運動前 30-60 分鐘空腹服用
+      `
+    },
+    {
+      id: 'l-glutamine',
+      title: 'NOW Foods - L-麩醯胺酸 500mg',
+      category: 'amino-acids',
+      usage: '一天兩顆',
+      manufacturer: 'NOW Foods',
+      productName: 'L-麩醯胺酸 500mg',
+      description: '維護腸道屏障、支持免疫系統',
+      benefits: ['腸道屏障', '免疫支持', '組織修復', '運動恢復'],
+      dosage: '每日 1-3 粒',
+      content: `
+**製造商**：NOW Foods (美國)
+
+**主要功效**：
+- 維護腸道屏障：降低腸漏並改善腸黏膜修復
+- 支持免疫：為T/B淋巴球與腸上皮的首要能量來源
+- 促進組織修復：維持正氮平衡，降低肌肉損傷
+
+**使用方法**：成人每日 1-3 粒，建議兩餐間空腹服用
+      `
+    },
+    {
+      id: 'omega-3',
+      title: 'California Gold Nutrition - Omega 800 魚油',
+      category: 'fish-oil',
+      usage: '一天一顆',
+      manufacturer: 'California Gold Nutrition',
+      productName: 'Omega 800 超濃縮魚油',
+      description: '富含EPA+DHA，支持心血管和大腦健康',
+      benefits: ['心血管健康', '抗發炎', '腦部支持', '視網膜保護'],
+      dosage: '每日 1 粒隨含脂肪餐服用',
+      content: `
+**製造商**：California Gold Nutrition (美國)
+
+**主要功效**：
+- 心血管：降低三酸甘油脂 15-30%，減少動脈硬化風險
+- 抗發炎：EPA/DHA代謝為resolvin、protectin，下調NF-κB
+- 腦部與視網膜：DHA為神經突觸與視紫質結構要素
+
+**使用方法**：成人每日 1 粒隨含脂肪餐服用
+      `
+    },
+    {
+      id: 'astaxanthin',
+      title: 'California Gold Nutrition - 蝦青素 12mg',
+      category: 'eye-health',
+      usage: '一天一顆',
+      manufacturer: 'California Gold Nutrition',
+      productName: 'Astalif 純冰島蝦青素',
+      description: '強效抗氧化，保護視力和皮膚',
+      benefits: ['抗氧化', '視網膜保護', '皮膚健康', '關節保護'],
+      dosage: '每日 1 粒隨含脂餐服用',
+      content: `
+**製造商**：California Gold Nutrition (美國)
+
+**主要功效**：
+- 高效清除ROS/RNS，抗氧化力約β-胡蘿蔔素10倍、維生素E 50倍
+- 可跨越血腦與血視網膜屏障，保護神經、視網膜細胞
+- 支援皮膚、心血管、關節與眼睛健康
+
+**使用方法**：成人每日 1 粒，隨含脂肪之餐食吞服
+      `
+    },
+    {
+      id: 'lutein',
+      title: "Doctor's Best - 葉黃素 20mg",
+      category: 'eye-health',
+      usage: '一天一顆',
+      manufacturer: "Doctor's Best",
+      productName: '葉黃素 20mg',
+      description: '保護黃斑部，過濾藍光',
+      benefits: ['黃斑保護', '藍光過濾', '視力支持', '抗氧化'],
+      dosage: '每日 1 粒',
+      content: `
+**製造商**：Doctor's Best (美國)
+
+**主要功效**：
+- 在視網膜黃斑部形成「黃斑色素光篩」，濾除400-500nm高能藍光
+- 具強力singlet-oxygen與自由基清除能力
+- 每日10-20mg，12-24週可顯著提升黃斑色素光密度
+
+**使用方法**：成人每日 1 粒，可隨餐或空腹吞服
+      `
+    },
+    {
+      id: 'bilberry-grape',
+      title: 'Jarrow Formulas - 越橘+葡萄皮多酚',
+      category: 'eye-health',
+      usage: '一天一顆',
+      manufacturer: 'Jarrow Formulas',
+      productName: '全素三桑子+葡萄皮多酚',
+      description: '支持視覺健康和循環系統',
+      benefits: ['視覺疲勞', '夜間視力', '血管彈性', '抗氧化'],
+      dosage: '每日 1-2 次，每次 1 粒',
+      content: `
+**製造商**：Jarrow Formulas (美國)
+
+**主要功效**：
+- 減輕螢幕使用導致的視覺疲勞與睫狀肌痙攣
+- 促進暗適應、夜間視覺靈敏度與對比感知
+- 支援微血管彈性、降低毛細血管脆性
+
+**使用方法**：成人每日 1 粒，隨餐或餐後配150-250mL溫水吞服
+      `
+    },
+    {
+      id: 'dgl-aloe',
+      title: 'NOW Foods - DGL甘草萃取含蘆薈',
+      category: 'stomach-protection',
+      usage: '一天兩顆',
+      manufacturer: 'NOW Foods',
+      productName: 'DGL with Aloe Vera 400mg',
+      description: '保護胃腸黏膜，舒緩胃酸逆流',
+      benefits: ['胃黏膜保護', '潰瘍癒合', '胃酸逆流', '消化支持'],
+      dosage: '每日 2 粒，餐前 20-30 分鐘',
+      content: `
+**製造商**：NOW Foods (美國)
+
+**主要功效**：
+- 支持胃腸黏膜屏障、舒緩胃酸逆流等不適感
+- 已去除甘草酸，降低對血壓及電解質的潛在影響
+- 增強胃與十二指腸黏膜屏障、促進潰瘍癒合
+
+**使用方法**：成人每日 2 粒，建議於餐前20-30分鐘配200mL溫水吞服
+      `
+    },
+    {
+      id: 'mastic-gum',
+      title: 'Jarrow Formulas - 希臘乳香樹脂',
+      category: 'stomach-protection',
+      usage: '一天兩顆',
+      manufacturer: 'Jarrow Formulas',
+      productName: 'Vegan Mastic Gum 500mg',
+      description: '保護胃部，抑制幽門螺旋桿菌',
+      benefits: ['胃黏膜保護', '抗菌', '消化不良', '潰瘍癒合'],
+      dosage: '每日 2 粒，餐前 15-30 分鐘',
+      content: `
+**製造商**：Jarrow Formulas (美國)
+
+**主要功效**：
+- 保護胃與十二指腸黏膜，促進潰瘍癒合
+- 抑制幽門螺旋桿菌黏附與增殖
+- 舒緩功能性消化不良、胃酸逆流與胃痛
+
+**使用方法**：成人每日 2 粒，建議早餐前15-30分鐘空腹配≈200mL溫開水
+      `
+    },
+    {
+      id: 'super-enzymes',
+      title: 'NOW Foods - Super Enzymes 全方位消化酵素',
+      category: 'enzymes',
+      usage: '中餐一顆',
+      manufacturer: 'NOW Foods',
+      productName: 'Super Enzymes 全方位消化酵素',
+      description: '全方位消化酵素，支持三大營養素消化',
+      benefits: ['蛋白質消化', '脂肪消化', '澱粉消化', '減少脹氣'],
+      dosage: '隨每餐 1 粒',
+      content: `
+**製造商**：NOW Foods (美國)
+
+**主要成分**：
+- Betaine HCl 200mg：提升胃酸，協助蛋白質變性
+- Ox Bile Extract 100mg：促進脂質乳化與脂溶性維生素吸收
+- Pancreatin 11X 134mg：全面分解三大營養素
+- Bromelain 40mg：蛋白水解＋抗發炎
+
+**主要功效**：
+- 改善營養吸收，減少飯後沉重感
+- 分解麩質胜肽，減少麩質敏感不適
+- 支持高蛋白飲食的蛋白質利用率
+
+**使用方法**：隨每餐 1 粒，與第一口食物同服
+      `
+    },
+    {
+      id: 'zinc-glycinate',
+      title: 'NOW Foods - 鋅甘胺酸螯合 30mg',
+      category: 'minerals',
+      usage: '一週一顆',
+      manufacturer: 'NOW Foods',
+      productName: 'Zinc Glycinate 30mg + 冷壓南瓜籽油',
+      description: '高生物利用率鋅補充劑，支持免疫與前列腺健康',
+      benefits: ['免疫支持', '前列腺健康', '傷口癒合', '抗氧化'],
+      dosage: '每日 1 粒隨含脂正餐',
+      content: `
+**製造商**：NOW Foods (美國)
+
+**主要成分**：
+- 鋅（雙甘胺酸螯合）30mg - 273% DV
+- 冷壓南瓜籽油 250mg
+
+**主要功效**：
+- 支援先天／後天免疫、維持黏膜屏障
+- 促進 >300 種鋅酶活性
+- 參與賀爾蒙生成、精子品質與前列腺健康
+- 加速傷口癒合並抑制氧化壓力
+
+**使用方法**：成人每日 1 粒，隨含脂正餐吞服
+      `
+    },
+    {
+      id: 'vitamin-d3-k2',
+      title: 'NOW Foods - Mega D-3 5,000 IU + MK-7 180μg',
+      category: 'vitamins',
+      usage: '一週一顆',
+      manufacturer: 'NOW Foods',
+      productName: 'Mega D-3 & MK-7',
+      description: '維生素D3與K2的完美組合，支持骨骼與心血管健康',
+      benefits: ['骨骼健康', '免疫調節', '心血管保護', '鈣質調節'],
+      dosage: '每日 1 粒餐中或餐後',
+      content: `
+**製造商**：NOW Foods (美國)
+
+**主要成分**：
+- 維生素 D₃（膽鈣化醇）125μg (5,000 IU) - 625% DV
+- 維生素 K₂-MK-7 180μg
+
+**主要功效**：
+- 鈣／磷吸收與骨骼礦化：刺激腸上皮轉運子，提升 BMD
+- 免疫調節：活化 VDR→抑制 NF-κB，促進先天免疫
+- 骨鈣素 γ-羧化：促鈣質沉積於骨基質
+- 基質 Gla 蛋白活化：抑制血管與軟組織鈣化
+
+**使用方法**：成人每日 1 粒，餐中或餐後含 ≥5g 脂肪食物併服
+      `
+    },
+    {
+      id: 'alinamin-medical-gold',
+      title: 'アリナミン製薬 - 阿利納明醫療金強錠',
+      category: 'vitamins',
+      usage: '一個禮拜一錠',
+      manufacturer: 'アリナミン製薬',
+      productName: 'Alinamin Medical Gold',
+      description: '高劑量活性維生素配方，改善神經肌肉代謝症狀',
+      benefits: ['眼睛疲勞', '肩頸僵硬', '神經功能', '能量代謝'],
+      dosage: '每日 3 次，每次 1 錠',
+      content: `
+**製造商**：アリナミン製薬株式会社（日本）
+
+**主要成分（每錠）**：
+- 富司硫胺 33.3mg (活性維生素 B₁)
+- 磷酸吡哆醛 20mg (活性維生素 B₆)
+- 甲鈷胺 0.5mg (活性維生素 B₁₂)
+- d-α-生育醇琥珀酸酯 33.3mg
+- γ-穀維素 3.33mg
+- 葉酸 0.333mg
+
+**主要功效**：
+- 改善眼睛疲勞、肩頸僵硬、腰背痠痛等症狀
+- 支援醣類→能量代謝、提高耐力
+- 修復髓鞘、促進軸突再生
+- 調節自律神經、緩和焦慮
+
+**使用方法**：成人每日 3 次，每次 1 錠，餐後整錠吞服
+      `
+    },
+    {
+      id: 'berberine',
+      title: 'Natural Factors - WellBetX 小檗鹼 500mg',
+      category: 'others',
+      usage: '一天兩顆',
+      manufacturer: 'Natural Factors',
+      productName: 'WellBetX Berberine 500mg',
+      description: '血糖調節與心血管支持',
+      benefits: ['血糖控制', '胰島素敏感度', '血脂調節', '體重管理'],
+      dosage: '每日 2 次，每次 1 粒',
+      content: `
+**製造商**：Natural Factors (加拿大)
+
+**主要成分**：
+- 小檗鹼鹽酸鹽 500mg（≥90% berberine HCl）
+
+**主要功效**：
+- 改善空腹與餐後血糖、提升胰島素敏感度
+- 降低總膽固醇、LDL-C、三酸甘油酯
+- 輔助體重與脂肪肝管理
+- AMPK 活化→葡萄糖攝取↑、脂肪生成↓
+
+**使用方法**：成人每日 2 次、每次 1 粒，建議隨餐或餐後 15 分鐘內吞服
+      `
+    },
+    {
+      id: 'probiotics-dophilus',
+      title: 'Solgar - Advanced Multi-Billion Dophilus 5×10⁹ CFU',
+      category: 'probiotics',
+      usage: '一天一顆',
+      manufacturer: 'Solgar',
+      productName: 'Advanced Multi-Billion Dophilus',
+      description: '四株專利益生菌複合配方',
+      benefits: ['腸道健康', '免疫支持', '抗生素相關腹瀉預防', '消化改善'],
+      dosage: '每日 1-2 粒',
+      content: `
+**製造商**：Solgar (美國)
+
+**主要成分**：
+- 總活菌數：5×10⁹ CFU
+- Lactobacillus acidophilus LA-5® 1.25×10⁹ CFU
+- Bifidobacterium animalis subsp. lactis BB-12® 1.25×10⁹ CFU
+- Lacticaseibacillus paracasei L. CASEI 431® 1.25×10⁹ CFU
+- Lacticaseibacillus rhamnosus GG (LGG®) 1.25×10⁹ CFU
+
+**主要功效**：
+- 優化腸道菌叢、改善腹脹與排便規律
+- 預防／減輕抗生素相關腹瀉
+- 調節腸道與呼吸道黏膜免疫
+- 提高上呼吸道感染防禦
+
+**使用方法**：成人每日 1 粒；需求高時可增至 2 粒
+      `
+    },
+    {
+      id: 'saccharomyces-boulardii',
+      title: 'Jarrow Formulas - 純素布拉氏酵母 + MOS 5×10⁹ CFU',
+      category: 'probiotics',
+      usage: '一天一顆',
+      manufacturer: 'Jarrow Formulas',
+      productName: 'Vegan Saccharomyces boulardii + MOS',
+      description: '益生酵母與甘露寡糖組合，支持腸道健康',
+      benefits: ['急性腹瀉', '抗生素相關腹瀉', '旅遊者腹瀉', 'CDI輔助'],
+      dosage: '每日 1 粒',
+      content: `
+**製造商**：Jarrow Formulas (美國)
+
+**主要成分**：
+- 布拉氏酵母 S. boulardii CNCM I-745：5×10⁹ CFU
+- MOS（甘露寡糖）200mg
+
+**主要功效**：
+- 縮短急性感染性與抗生素相關腹瀉病程
+- 降低兒科與成人 AAD 發生率
+- 輔助治療 C. difficile 感染
+- 抗毒素作用：水解 C. difficile 毒素 A/B
+
+**使用方法**：成人每日 1 粒可隨餐或空腹；抗生素併用請錯開 ≥2 小時
+      `
+    },
+    {
+      id: 'coq10-pqq',
+      title: "Doctor's Best - CoQ10 + PQQ",
+      category: 'others',
+      usage: '一天一顆',
+      manufacturer: "Doctor's Best",
+      productName: 'High Absorption CoQ10 Plus PQQ',
+      description: '支持細胞能量生產和線粒體健康',
+      benefits: ['ATP生成', '線粒體保護', '心臟支持', '神經保護'],
+      dosage: '每日 1 粒隨含脂餐服用',
+      content: `
+**製造商**：Doctor's Best (美國)
+
+**主要成分**：
+- 輔酶 Q10 100mg
+- 吡咯醌醌二鈉鹽（PQQ）20mg
+- 黑胡椒萃取（BioPerine）5mg
+
+**主要功效**：
+- 參與電子傳遞鏈，促進ATP生成，支持心肌收縮與全身能量
+- 具脂溶性抗氧化能力，保護線粒體與細胞膜脂質
+- PQQ刺激線粒體新生，增強細胞能量
+- 改善因 statin 與老化導致的 CoQ10 耗竭
+
+**使用方法**：成人每日 1 粒，隨含脂肪餐服用可進一步增強吸收
+      `
+    }
+  ]
+
+  // 使用時間安排
+  usageSchedule.value = {
+    '早上睡醒': [
+      'L-瓜胺酸 (L-Citrulline)',
+      'L-麩醯胺酸 (L-Glutamine)'
+    ],
+    '早餐前 30 分鐘': [
+      '希臘乳香樹脂 (Mastic Gum)',
+      'DGL 甘草萃取＋蘆薈'
+    ],
+    '早餐後（配合脂肪）': [
+      'Omega-3 魚油 (Omega 800)',
+      '蝦青素 (Astaxanthin)',
+      '葉黃素 (Lutein)',
+      'Jarrow 越橘＋葡萄皮',
+      '輔酶 CoQ10 + PQQ',
+      '小檗鹼 (Berberine)',
+      '洋薊萃取 (Artichoke Extract)',
+      '薑根萃取 (Ginger Root)',
+      '益生菌組合 (Solgar Dophilus)',
+      '[每週特定日] 鋅甘胺酸螯合 (Zinc Glycinate)',
+      '[每週特定日] 維生素 D3 + K2 (Mega D-3)',
+      '[每週特定日] 阿利納明醫療金強錠 (Alinamin)'
+    ],
+    '午餐中': [
+      '全方位消化酵素 (Super Enzymes)'
+    ],
+    '晚餐前 30 分鐘': [
+      '希臘乳香樹脂 (Mastic Gum)',
+      'DGL 甘草萃取＋蘆薈'
+    ],
+    '晚餐後': [
+      '小檗鹼 (Berberine)',
+      '洋薊萃取 (Artichoke Extract)',
+      '薑根萃取 (Ginger Root)',
+      '布拉氏酵母 + MOS (S. boulardii)'
+    ]
   }
 }
 
