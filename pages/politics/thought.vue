@@ -404,13 +404,17 @@
             <div class="flex-1 h-full relative">
               <!-- 目錄組件容器 -->
               <div class="absolute inset-0 p-4">
-                <UniversalTableOfContents
-                  :toc-items="tocData"
-                  :active-section="activeSection"
+                <UniversalSidebar
+                  :items="tocData"
                   :categories="tocCategories"
-                  title="WISDOM_INDEX"
+                  :active-item="activeSection"
+                  :loading="contentLoading"
+                  theme="learning"
+                  trigger-icon="heroicons:academic-cap"
+                  trigger-title="政治智慧導航"
+                  system-title="WISDOM_MATRIX"
                   search-placeholder="搜索古典智慧..."
-                  @section-click="scrollToSection"
+                  @item-click="scrollToSection"
                 />
               </div>
             </div>
@@ -478,6 +482,7 @@ const activeSection = ref('')
 const searchFocused = ref(false)
 const showSidebar = ref(false)
 const triggerHover = ref(false)
+const contentLoading = ref(true)
 
 // 政治人物危機處理能力分類數據
 const crisisLevels = [
@@ -620,7 +625,14 @@ const updateActiveSection = () => {
 }
 
 // 生命週期
-onMounted(() => {
+onMounted(async () => {
+  try {
+    // 模擬載入延遲
+    await new Promise(resolve => setTimeout(resolve, 500))
+  } finally {
+    contentLoading.value = false
+  }
+  
   if (process.client) {
     const handleScroll = () => {
       updateScrollProgress()
