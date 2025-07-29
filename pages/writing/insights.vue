@@ -210,13 +210,16 @@
             <div class="flex-1 h-full relative">
               <!-- 目錄組件容器 -->
               <div class="absolute inset-0 p-4">
-                <UniversalTableOfContents
-                  :toc-items="tocData"
-                  :active-section="activeSection"
+                <UniversalSidebar
+                  :items="tocData"
                   :categories="tocCategories"
-                  title="INSIGHTS_MATRIX"
+                  :active-item="activeSection"
+                  theme="writing"
+                  trigger-icon="heroicons:light-bulb"
+                  trigger-title="寫作心得導航"
+                  system-title="INSIGHTS_MATRIX"
                   search-placeholder="搜索寫作心得..."
-                  @section-click="scrollToSection"
+                  @item-click="scrollToSection"
                 />
               </div>
             </div>

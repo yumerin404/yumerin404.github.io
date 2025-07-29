@@ -237,13 +237,16 @@
             <div class="flex-1 h-full relative">
               <!-- 目錄組件容器 -->
               <div class="absolute inset-0 p-4">
-                <UniversalTableOfContents
-                  :toc-items="tocData"
-                  :active-section="activeSection"
+                <UniversalSidebar
+                  :items="tocData"
                   :categories="tocCategories"
-                  title="QUOTES_MATRIX"
+                  :active-item="activeSection"
+                  theme="learning"
+                  trigger-icon="heroicons:academic-cap"
+                  trigger-title="名言導航"
+                  system-title="QUOTES_MATRIX"
                   search-placeholder="搜索名言佳句..."
-                  @section-click="scrollToSection"
+                  @item-click="scrollToSection"
                 />
               </div>
             </div>

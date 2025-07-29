@@ -258,12 +258,17 @@
       </section>
     </main>
 
-    <!-- 醫療側邊欄 -->
-    <MedicalSidebar
-      :toc-items="tocItems"
+    <!-- 通用側邊欄 -->
+    <UniversalSidebar
+      :items="tocItems"
       :categories="supplementCategories"
-      :active-section="activeSection"
-      @section-click="scrollToSection"
+      :active-item="activeSection"
+      theme="medical"
+      trigger-icon="heroicons:heart"
+      trigger-title="保健品目錄"
+      system-title="SUPPLEMENT_MATRIX"
+      search-placeholder="搜索保健品..."
+      @item-click="scrollToSection"
       @category-change="handleCategoryChange"
     />
 

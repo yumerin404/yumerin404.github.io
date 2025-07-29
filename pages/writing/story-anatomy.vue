@@ -211,13 +211,16 @@
             <div class="flex-1 h-full relative">
               <!-- 目錄組件容器 -->
               <div class="absolute inset-0 p-4">
-                <UniversalTableOfContents
-                  :toc-items="tocData"
-                  :active-section="activeSection"
+                <UniversalSidebar
+                  :items="tocData"
                   :categories="tocCategories"
-                  title="ANATOMY_MATRIX"
+                  :active-item="activeSection"
+                  theme="writing"
+                  trigger-icon="heroicons:book-open"
+                  trigger-title="故事解剖導航"
+                  system-title="ANATOMY_MATRIX"
                   search-placeholder="搜索故事解剖..."
-                  @section-click="scrollToSection"
+                  @item-click="scrollToSection"
                 />
               </div>
             </div>
