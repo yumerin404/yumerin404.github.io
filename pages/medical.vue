@@ -64,7 +64,7 @@ const {
 const handleNavigateToCategory = (categoryId: string) => {
   console.log(`導航到 ${categoryId} 分類`)
   
-  // 這裡可以導航到對應的子頁面
+  // 導航到對應的子頁面
   switch(categoryId) {
     case 'health':
       // navigateTo('/medical/health')
@@ -73,7 +73,7 @@ const handleNavigateToCategory = (categoryId: string) => {
       // navigateTo('/medical/medicine')
       break
     case 'supplement':
-      // navigateTo('/medical/supplement')
+      navigateTo('/medical/supplements')
       break
     default:
       console.warn(`Unknown category: ${categoryId}`)
