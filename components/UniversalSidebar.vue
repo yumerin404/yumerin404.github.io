@@ -21,14 +21,14 @@
           class="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95 backdrop-blur-xl border-l border-y rounded-l-2xl shadow-2xl transition-all duration-500 overflow-hidden"
           :class="[
             triggerHover ? 'shadow-[0_0_30px_rgba(59,130,246,0.3)]' : '',
-            borderColorClass
+            themeClasses.borderColor
           ]"
         >
           <!-- 能量指示條 -->
           <div 
             class="absolute left-1 top-1/2 -translate-y-1/2 w-1 h-16 rounded-full transition-all duration-500"
             :class="[
-              energyBarClass,
+              themeClasses.energyBar,
               triggerHover ? 'w-1.5 animate-pulse' : ''
             ]"
           >
@@ -41,7 +41,7 @@
           <!-- 圖示 -->
           <div 
             class="absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-500"
-            :class="triggerHover ? `scale-110 ${iconColorClass}` : 'text-gray-400'"
+            :class="triggerHover ? `scale-110 ${themeClasses.iconColor}` : 'text-gray-400'"
           >
             <Icon :name="triggerIcon" class="w-6 h-6" />
           </div>
@@ -52,13 +52,13 @@
             :class="triggerHover ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'"
           >
             <div class="bg-slate-900/95 backdrop-blur-sm border rounded-xl px-4 py-2 shadow-2xl"
-                 :class="borderColorClass">
-              <div class="text-sm font-medium" :class="textColorClass">{{ triggerTitle }}</div>
+                 :class="themeClasses.borderColor">
+              <div class="text-sm font-medium" :class="themeClasses.textColor">{{ triggerTitle }}</div>
               <div class="text-xs text-gray-400 mt-1">點擊展開</div>
             </div>
             <!-- 箭頭 -->
             <div class="absolute right-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-4 border-b-4 border-r-8 border-transparent"
-                 :class="arrowColorClass"></div>
+                 :class="themeClasses.arrowColor"></div>
           </div>
         </div>
       </div>
@@ -82,14 +82,14 @@
       <div class="w-full h-full relative">
         <!-- 外層能量護盾 -->
         <div class="absolute -inset-2 rounded-2xl blur-lg animate-pulse-slow"
-             :class="auraClass"></div>
+             :class="themeClasses.aura"></div>
         
         <!-- 主面板結構 -->
         <div class="relative w-full h-full bg-gradient-to-br from-slate-900/98 via-slate-800/95 to-slate-900/98 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl overflow-hidden">
           
           <!-- 狀態條 -->
           <div class="absolute top-0 left-0 right-0 h-1"
-               :class="statusBarClass">
+               :class="themeClasses.statusBar">
             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-scan-line"></div>
           </div>
           
@@ -99,7 +99,7 @@
             <div class="flex items-center justify-between mb-3">
               <div class="flex items-center space-x-2 text-sm text-slate-400 font-mono">
                 <div class="w-1.5 h-1.5 rounded-full animate-pulse shadow-[0_0_6px_rgba(59,130,246,0.6)]"
-                     :class="pulseClass"></div>
+                     :class="themeClasses.pulse"></div>
                 <span class="tracking-wide">{{ systemTitle }}</span>
               </div>
               <div class="text-xs font-mono text-slate-500">{{ totalItems }} ITEMS</div>
@@ -112,21 +112,21 @@
                 type="text"
                 :placeholder="searchPlaceholder"
                 class="w-full bg-slate-800/60 border border-slate-600/40 rounded-lg px-3 py-2 pl-10 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-1 transition-all duration-300"
-                :class="focusColorClass"
+                :class="themeClasses.focusColor"
                 @focus="searchFocused = true"
                 @blur="searchFocused = false"
               />
               <Icon 
                 name="heroicons:magnifying-glass" 
                 class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 transition-colors duration-300"
-                :class="searchFocused ? focusIconClass : 'text-slate-400'"
+                :class="searchFocused ? themeClasses.focusIcon : 'text-slate-400'"
               />
               <!-- 搜尋清除按鈕 -->
               <button
                 v-if="searchQuery"
                 @click="searchQuery = ''"
                 class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 transition-colors duration-200"
-                :class="hoverIconClass"
+                :class="themeClasses.hoverIcon"
               >
                 <Icon name="heroicons:x-mark" class="w-4 h-4" />
               </button>
@@ -142,8 +142,8 @@
                   @click="selectedCategory = category.key"
                   class="px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-300 border"
                   :class="selectedCategory === category.key 
-                    ? activeFilterClass
-                    : inactiveFilterClass"
+                    ? themeClasses.activeFilter
+                    : themeClasses.inactiveFilter"
                 >
                   <Icon :name="category.icon" class="w-3 h-3 inline mr-1" />
                   {{ category.name }}
@@ -159,7 +159,7 @@
             <div 
               ref="scrollContainer"
               class="h-full overflow-y-auto scrollbar-thin scrollbar-track-slate-800/30 px-2 py-2"
-              :class="scrollbarClass"
+              :class="themeClasses.scrollbar"
               @scroll="updateScrollPosition"
             >
               <div class="space-y-1">
@@ -169,7 +169,7 @@
                     
                     <!-- 分類標題 -->
                     <div 
-                      v-if="category.items.length > 0"
+                      v-if="category.sections.length > 0"
                       class="sticky top-0 z-10 bg-slate-900/95 backdrop-blur-sm border-b border-slate-700/40 py-2 px-3 -mx-2 mb-2"
                     >
                       <button
@@ -177,19 +177,19 @@
                         class="flex items-center justify-between w-full text-left group"
                       >
                         <div class="flex items-center space-x-2">
-                          <Icon :name="category.icon" class="w-4 h-4" :class="categoryIconClass" />
+                          <Icon :name="category.icon" class="w-4 h-4" :class="themeClasses.categoryIcon" />
                           <span class="text-sm font-medium text-slate-300 group-hover:transition-colors duration-200"
-                                :class="categoryHoverClass">
+                                :class="themeClasses.categoryHover">
                             {{ category.name }}
                           </span>
                           <span class="text-xs text-slate-500 bg-slate-800/60 px-1.5 py-0.5 rounded">
-                            {{ category.items.length }}
+                            {{ category.sections.length }}
                           </span>
                         </div>
                         <Icon 
                           :name="collapsedCategories.has(category.key) ? 'heroicons:chevron-right' : 'heroicons:chevron-down'" 
                           class="w-4 h-4 text-slate-400 group-hover:transition-all duration-200"
-                          :class="categoryHoverIconClass"
+                          :class="themeClasses.categoryHoverIcon"
                         />
                       </button>
                     </div>
@@ -197,7 +197,7 @@
                     <!-- 目錄項目 -->
                     <div v-if="!collapsedCategories.has(category.key)" class="space-y-1">
                       <div
-                        v-for="(item, index) in category.items"
+                        v-for="(item, index) in category.sections"
                         :key="item.id"
                         class="group relative"
                       >
@@ -216,7 +216,7 @@
                                 animationDelay: `${line * 0.8}s`,
                                 animationDuration: '3s'
                               }"
-                              :class="flowColorClass"
+                              :class="themeClasses.flowColor"
                             ></div>
                           </div>
                           
@@ -226,8 +226,8 @@
                               <div 
                                 class="w-1 h-4 transition-all duration-300"
                                 :class="activeItem === item.id 
-                                  ? activeIndicatorClass
-                                  : inactiveIndicatorClass"
+                                  ? themeClasses.activeIndicator
+                                  : themeClasses.inactiveIndicator"
                               >
                                 <!-- 活躍狀態掃描效果 -->
                                 <div 
@@ -241,7 +241,7 @@
                             <div class="flex-1 min-w-0">
                               <span 
                                 class="text-sm leading-relaxed transition-colors duration-200 block"
-                                :class="activeItem === item.id ? activeTextClass : inactiveTextClass"
+                                :class="activeItem === item.id ? themeClasses.activeText : themeClasses.inactiveText"
                               >
                                 {{ item.title }}
                               </span>
@@ -293,8 +293,8 @@
                           <div 
                             class="w-1 h-4 transition-all duration-300"
                             :class="activeItem === item.id 
-                              ? activeIndicatorClass
-                              : inactiveIndicatorClass"
+                              ? themeClasses.activeIndicator
+                              : themeClasses.inactiveIndicator"
                           >
                             <!-- 活躍狀態掃描效果 -->
                             <div 
@@ -333,7 +333,7 @@
                   <button 
                     @click="searchQuery = ''"
                     class="text-xs transition-colors duration-200 mt-1"
-                    :class="clearButtonClass"
+                    :class="themeClasses.clearButton"
                   >
                     清除搜索
                   </button>
@@ -345,7 +345,7 @@
             <div class="absolute right-1 top-2 bottom-2 w-1 bg-slate-800/40 rounded-full overflow-hidden">
               <div 
                 class="w-full rounded-full transition-all duration-300"
-                :class="scrollIndicatorClass"
+                :class="themeClasses.scrollIndicator"
                 :style="{ 
                   height: scrollPercentage + '%', 
                   transform: `translateY(${scrollPosition}px)` 
@@ -360,9 +360,9 @@
               <div class="flex items-center justify-between text-xs font-mono text-slate-400">
                 <div class="flex items-center space-x-2">
                   <div class="w-1 h-1 rounded-full animate-pulse"
-                       :class="statusPulseClass"></div>
+                       :class="themeClasses.statusPulse"></div>
                   <span class="tracking-wide">READY</span>
-                  <span v-if="searchQuery" :class="statusActiveClass">| SEARCH_ACTIVE</span>
+                  <span v-if="searchQuery" :class="themeClasses.statusActive">| SEARCH_ACTIVE</span>
                 </div>
                 <div class="flex items-center space-x-2">
                   <span>{{ filteredItems.length }}/{{ totalItems }}</span>
@@ -386,6 +386,9 @@ interface SidebarItem {
   category?: string
   level?: number
   progress?: number
+  frequency?: string
+  readTime?: number
+  wordCount?: number
 }
 
 interface SidebarCategory {
@@ -477,33 +480,124 @@ const themeColors = computed(() => {
   return themes[props.theme]
 })
 
-// 動態樣式類別
-const borderColorClass = computed(() => `border-${themeColors.value.primary}-500/40`)
-const energyBarClass = computed(() => `bg-gradient-to-b from-${themeColors.value.primary}-400/60 via-${themeColors.value.accent}-500/80 to-${themeColors.value.secondary}-500/60`)
-const iconColorClass = computed(() => `text-${themeColors.value.primary}-300`)
-const textColorClass = computed(() => `text-${themeColors.value.primary}-300`)
-const arrowColorClass = computed(() => `border-r-${themeColors.value.primary}-500/50`)
-const auraClass = computed(() => `bg-gradient-to-br from-${themeColors.value.primary}-500/10 via-${themeColors.value.accent}-500/5 to-${themeColors.value.secondary}-500/10`)
-const statusBarClass = computed(() => `bg-gradient-to-r from-${themeColors.value.primary}-500/60 via-${themeColors.value.accent}-500/80 to-${themeColors.value.secondary}-500/60`)
-const pulseClass = computed(() => `bg-${themeColors.value.primary}-400`)
-const focusColorClass = computed(() => `focus:border-${themeColors.value.primary}-400/60 focus:ring-${themeColors.value.primary}-400/40`)
-const focusIconClass = computed(() => `text-${themeColors.value.primary}-400`)
-const hoverIconClass = computed(() => `hover:text-${themeColors.value.primary}-400`)
-const activeFilterClass = computed(() => `bg-${themeColors.value.primary}-500/20 border-${themeColors.value.primary}-400/60 text-${themeColors.value.primary}-300 shadow-[0_0_8px_rgba(59,130,246,0.3)]`)
-const inactiveFilterClass = computed(() => `bg-slate-800/40 border-slate-600/40 text-slate-400 hover:bg-${themeColors.value.primary}-500/10 hover:border-${themeColors.value.primary}-500/40 hover:text-${themeColors.value.primary}-300`)
-const scrollbarClass = computed(() => `scrollbar-thumb-${themeColors.value.primary}-500/30`)
-const categoryIconClass = computed(() => `text-${themeColors.value.accent}-400`)
-const categoryHoverClass = computed(() => `group-hover:text-${themeColors.value.primary}-300`)
-const categoryHoverIconClass = computed(() => `group-hover:text-${themeColors.value.primary}-400`)
-const flowColorClass = computed(() => `text-${themeColors.value.primary}-400/60`)
-const activeIndicatorClass = computed(() => `bg-gradient-to-b from-${themeColors.value.primary}-400 to-${themeColors.value.accent}-400 shadow-[0_0_8px_rgba(59,130,246,0.6)]`)
-const inactiveIndicatorClass = computed(() => `bg-slate-600/60 group-hover:bg-${themeColors.value.primary}-500/40`)
-const activeTextClass = computed(() => `text-${themeColors.value.primary}-200 font-medium`)
-const inactiveTextClass = computed(() => `text-slate-300 group-hover:text-${themeColors.value.primary}-300`)
-const clearButtonClass = computed(() => `text-${themeColors.value.primary}-400 hover:text-${themeColors.value.primary}-300`)
-const scrollIndicatorClass = computed(() => `bg-gradient-to-b from-${themeColors.value.primary}-400 to-${themeColors.value.accent}-400 shadow-[0_0_4px_rgba(59,130,246,0.4)]`)
-const statusPulseClass = computed(() => `bg-${themeColors.value.primary}-400/60`)
-const statusActiveClass = computed(() => `text-${themeColors.value.primary}-400`)
+// 動態樣式類別 - 使用固定的 Tailwind 類別
+const themeClasses = computed(() => {
+  const themes = {
+    medical: {
+      borderColor: 'border-teal-500/40',
+      energyBar: 'bg-gradient-to-b from-teal-400/60 via-cyan-500/80 to-emerald-500/60',
+      iconColor: 'text-teal-300',
+      textColor: 'text-teal-300',
+      arrowColor: 'border-r-teal-500/50',
+      aura: 'bg-gradient-to-br from-teal-500/10 via-cyan-500/5 to-emerald-500/10',
+      statusBar: 'bg-gradient-to-r from-teal-500/60 via-cyan-500/80 to-emerald-500/60',
+      pulse: 'bg-teal-400',
+      focusColor: 'focus:border-teal-400/60 focus:ring-teal-400/40',
+      focusIcon: 'text-teal-400',
+      hoverIcon: 'hover:text-teal-400',
+      activeFilter: 'bg-teal-500/20 border-teal-400/60 text-teal-300 shadow-[0_0_8px_rgba(20,184,166,0.3)]',
+      inactiveFilter: 'bg-slate-800/40 border-slate-600/40 text-slate-400 hover:bg-teal-500/10 hover:border-teal-500/40 hover:text-teal-300',
+      scrollbar: 'scrollbar-thumb-teal-500/30',
+      categoryIcon: 'text-emerald-400',
+      categoryHover: 'group-hover:text-teal-300',
+      categoryHoverIcon: 'group-hover:text-teal-400',
+      flowColor: 'text-teal-400/60',
+      activeIndicator: 'bg-gradient-to-b from-teal-400 to-emerald-400 shadow-[0_0_8px_rgba(20,184,166,0.6)]',
+      inactiveIndicator: 'bg-slate-600/60 group-hover:bg-teal-500/40',
+      activeText: 'text-teal-200 font-medium',
+      inactiveText: 'text-slate-300 group-hover:text-teal-300',
+      clearButton: 'text-teal-400 hover:text-teal-300',
+      scrollIndicator: 'bg-gradient-to-b from-teal-400 to-emerald-400 shadow-[0_0_4px_rgba(20,184,166,0.4)]',
+      statusPulse: 'bg-teal-400/60',
+      statusActive: 'text-teal-400'
+    },
+    writing: {
+      borderColor: 'border-amber-500/40',
+      energyBar: 'bg-gradient-to-b from-amber-400/60 via-orange-500/80 to-yellow-500/60',
+      iconColor: 'text-amber-300',
+      textColor: 'text-amber-300',
+      arrowColor: 'border-r-amber-500/50',
+      aura: 'bg-gradient-to-br from-amber-500/10 via-orange-500/5 to-yellow-500/10',
+      statusBar: 'bg-gradient-to-r from-amber-500/60 via-orange-500/80 to-yellow-500/60',
+      pulse: 'bg-amber-400',
+      focusColor: 'focus:border-amber-400/60 focus:ring-amber-400/40',
+      focusIcon: 'text-amber-400',
+      hoverIcon: 'hover:text-amber-400',
+      activeFilter: 'bg-amber-500/20 border-amber-400/60 text-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.3)]',
+      inactiveFilter: 'bg-slate-800/40 border-slate-600/40 text-slate-400 hover:bg-amber-500/10 hover:border-amber-500/40 hover:text-amber-300',
+      scrollbar: 'scrollbar-thumb-amber-500/30',
+      categoryIcon: 'text-orange-400',
+      categoryHover: 'group-hover:text-amber-300',
+      categoryHoverIcon: 'group-hover:text-amber-400',
+      flowColor: 'text-amber-400/60',
+      activeIndicator: 'bg-gradient-to-b from-amber-400 to-orange-400 shadow-[0_0_8px_rgba(245,158,11,0.6)]',
+      inactiveIndicator: 'bg-slate-600/60 group-hover:bg-amber-500/40',
+      activeText: 'text-amber-200 font-medium',
+      inactiveText: 'text-slate-300 group-hover:text-amber-300',
+      clearButton: 'text-amber-400 hover:text-amber-300',
+      scrollIndicator: 'bg-gradient-to-b from-amber-400 to-orange-400 shadow-[0_0_4px_rgba(245,158,11,0.4)]',
+      statusPulse: 'bg-amber-400/60',
+      statusActive: 'text-amber-400'
+    },
+    learning: {
+      borderColor: 'border-cyan-500/40',
+      energyBar: 'bg-gradient-to-b from-cyan-400/60 via-blue-500/80 to-purple-500/60',
+      iconColor: 'text-cyan-300',
+      textColor: 'text-cyan-300',
+      arrowColor: 'border-r-cyan-500/50',
+      aura: 'bg-gradient-to-br from-cyan-500/10 via-blue-500/5 to-purple-500/10',
+      statusBar: 'bg-gradient-to-r from-cyan-500/60 via-blue-500/80 to-purple-500/60',
+      pulse: 'bg-cyan-400',
+      focusColor: 'focus:border-cyan-400/60 focus:ring-cyan-400/40',
+      focusIcon: 'text-cyan-400',
+      hoverIcon: 'hover:text-cyan-400',
+      activeFilter: 'bg-cyan-500/20 border-cyan-400/60 text-cyan-300 shadow-[0_0_8px_rgba(34,211,238,0.3)]',
+      inactiveFilter: 'bg-slate-800/40 border-slate-600/40 text-slate-400 hover:bg-cyan-500/10 hover:border-cyan-500/40 hover:text-cyan-300',
+      scrollbar: 'scrollbar-thumb-cyan-500/30',
+      categoryIcon: 'text-blue-400',
+      categoryHover: 'group-hover:text-cyan-300',
+      categoryHoverIcon: 'group-hover:text-cyan-400',
+      flowColor: 'text-cyan-400/60',
+      activeIndicator: 'bg-gradient-to-b from-cyan-400 to-blue-400 shadow-[0_0_8px_rgba(34,211,238,0.6)]',
+      inactiveIndicator: 'bg-slate-600/60 group-hover:bg-cyan-500/40',
+      activeText: 'text-cyan-200 font-medium',
+      inactiveText: 'text-slate-300 group-hover:text-cyan-300',
+      clearButton: 'text-cyan-400 hover:text-cyan-300',
+      scrollIndicator: 'bg-gradient-to-b from-cyan-400 to-blue-400 shadow-[0_0_4px_rgba(34,211,238,0.4)]',
+      statusPulse: 'bg-cyan-400/60',
+      statusActive: 'text-cyan-400'
+    },
+    default: {
+      borderColor: 'border-blue-500/40',
+      energyBar: 'bg-gradient-to-b from-blue-400/60 via-indigo-500/80 to-purple-500/60',
+      iconColor: 'text-blue-300',
+      textColor: 'text-blue-300',
+      arrowColor: 'border-r-blue-500/50',
+      aura: 'bg-gradient-to-br from-blue-500/10 via-indigo-500/5 to-purple-500/10',
+      statusBar: 'bg-gradient-to-r from-blue-500/60 via-indigo-500/80 to-purple-500/60',
+      pulse: 'bg-blue-400',
+      focusColor: 'focus:border-blue-400/60 focus:ring-blue-400/40',
+      focusIcon: 'text-blue-400',
+      hoverIcon: 'hover:text-blue-400',
+      activeFilter: 'bg-blue-500/20 border-blue-400/60 text-blue-300 shadow-[0_0_8px_rgba(59,130,246,0.3)]',
+      inactiveFilter: 'bg-slate-800/40 border-slate-600/40 text-slate-400 hover:bg-blue-500/10 hover:border-blue-500/40 hover:text-blue-300',
+      scrollbar: 'scrollbar-thumb-blue-500/30',
+      categoryIcon: 'text-indigo-400',
+      categoryHover: 'group-hover:text-blue-300',
+      categoryHoverIcon: 'group-hover:text-blue-400',
+      flowColor: 'text-blue-400/60',
+      activeIndicator: 'bg-gradient-to-b from-blue-400 to-indigo-400 shadow-[0_0_8px_rgba(59,130,246,0.6)]',
+      inactiveIndicator: 'bg-slate-600/60 group-hover:bg-blue-500/40',
+      activeText: 'text-blue-200 font-medium',
+      inactiveText: 'text-slate-300 group-hover:text-blue-300',
+      clearButton: 'text-blue-400 hover:text-blue-300',
+      scrollIndicator: 'bg-gradient-to-b from-blue-400 to-indigo-400 shadow-[0_0_4px_rgba(59,130,246,0.4)]',
+      statusPulse: 'bg-blue-400/60',
+      statusActive: 'text-blue-400'
+    }
+  }
+  return themes[props.theme]
+})
 
 // 計算屬性
 const filteredItems = computed(() => {
@@ -529,25 +623,14 @@ const filteredItems = computed(() => {
 const categorizedItems = computed(() => {
   if (!props.enableCategorization) return []
   
-  const categoryMap = new Map()
+  const categorized = props.categories.map(category => ({
+    ...category,
+    sections: filteredItems.value.filter(item => 
+      (item.category || 'other') === category.key
+    )
+  }))
   
-  // 初始化分類
-  props.categories.forEach(cat => {
-    categoryMap.set(cat.key, {
-      ...cat,
-      items: []
-    })
-  })
-  
-  // 將項目分配到分類
-  filteredItems.value.forEach(item => {
-    const categoryKey = item.category || 'other'
-    if (categoryMap.has(categoryKey)) {
-      categoryMap.get(categoryKey).items.push(item)
-    }
-  })
-  
-  return Array.from(categoryMap.values()).filter(category => category.items.length > 0)
+  return categorized.filter(category => category.sections.length > 0)
 })
 
 const totalItems = computed(() => props.items.length)
@@ -566,10 +649,11 @@ const toggleCategory = (categoryKey: string) => {
 }
 
 const getItemClasses = (item: SidebarItem) => {
+  const theme = themeClasses.value
   if (props.activeItem === item.id) {
-    return `bg-gradient-to-r from-${themeColors.value.primary}-500/10 to-transparent border-${themeColors.value.primary}-400/70 text-${themeColors.value.primary}-200`
+    return `bg-gradient-to-r ${theme.activeText} border-l-2 ${theme.borderColor} rounded-r-lg`
   }
-  return `text-slate-300 hover:text-${themeColors.value.primary}-300 hover:bg-slate-800/20 border-transparent hover:border-${themeColors.value.primary}-500/30`
+  return `${theme.inactiveText} hover:bg-slate-800/20 border-l-2 border-transparent hover:${theme.borderColor} rounded-r-lg`
 }
 
 const updateScrollPosition = () => {
