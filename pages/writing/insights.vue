@@ -214,6 +214,7 @@
                   :items="tocData"
                   :categories="tocCategories"
                   :active-item="activeSection"
+                  :loading="contentLoading"
                   theme="writing"
                   trigger-icon="heroicons:light-bulb"
                   trigger-title="寫作心得導航"
@@ -273,6 +274,7 @@ const showBackToTop = ref(false)
 const readingProgress = ref(0)
 const showSidebar = ref(false)
 const triggerHover = ref(false)
+const contentLoading = ref(true)
 
 // 分類篩選選項
 const categories = [
@@ -555,7 +557,14 @@ const updateActiveSection = () => {
 }
 
 // 生命週期
-onMounted(() => {
+onMounted(async () => {
+  try {
+    // 模擬載入延遲
+    await new Promise(resolve => setTimeout(resolve, 500))
+  } finally {
+    contentLoading.value = false
+  }
+  
   if (process.client) {
     window.addEventListener('scroll', () => {
       updateScrollProgress()

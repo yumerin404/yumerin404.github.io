@@ -286,6 +286,7 @@
                   :items="tocData"
                   :categories="tocCategories"
                   :active-item="activeSection"
+                  :loading="contentLoading"
                   theme="learning"
                   trigger-icon="heroicons:pencil-square"
                   trigger-title="發文導航"
@@ -328,6 +329,7 @@ const scrollProgress = ref(0)
 const activeSection = ref('')
 const showSidebar = ref(false)
 const triggerHover = ref(false)
+const contentLoading = ref(true)
 
 // 使用內容管理系統
 const { 
@@ -648,8 +650,14 @@ const updateScrollProgress = () => {
 
 // 生命週期
 onMounted(async () => {
-  // 載入 markdown 檔案
-  await loadMarkdownFiles()
+  try {
+    // 載入 markdown 檔案
+    await loadMarkdownFiles()
+    // 模擬載入延遲
+    await new Promise(resolve => setTimeout(resolve, 500))
+  } finally {
+    contentLoading.value = false
+  }
   
   if (process.client) {
     const handleScroll = () => {

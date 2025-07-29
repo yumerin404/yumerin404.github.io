@@ -263,6 +263,7 @@
       :items="tocItems"
       :categories="supplementCategories"
       :active-item="activeSection"
+      :loading="contentLoading"
       theme="medical"
       trigger-icon="heroicons:heart"
       trigger-title="保健品目錄"
@@ -354,6 +355,7 @@ const scrollProgress = ref(0)
 const supplementContent = ref('')
 const supplements = ref<any[]>([])
 const usageSchedule = ref<Record<string, string[]>>({})
+const contentLoading = ref(true)
 
 // 完整的保健品數據，基於 supple.md 內容
 const loadSupplementData = () => {
@@ -1064,7 +1066,13 @@ const updateActiveSection = () => {
 
 // 生命週期
 onMounted(async () => {
-  await loadSupplementData()
+  try {
+    await loadSupplementData()
+    // 模擬載入延遲
+    await new Promise(resolve => setTimeout(resolve, 500))
+  } finally {
+    contentLoading.value = false
+  }
   
   if (process.client) {
     window.addEventListener('scroll', () => {

@@ -10,8 +10,12 @@
     <!-- 收合觸發器 -->
     <div 
       v-if="isCollapsed"
-      class="absolute left-0 top-1/2 -translate-y-1/2 h-32 w-16 cursor-pointer group transition-all duration-500"
-      @click="isCollapsed = false"
+      class="absolute left-0 top-1/2 -translate-y-1/2 h-32 w-16 transition-all duration-500"
+      :class="[
+        props.loading || totalItems === 0 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
+        'group'
+      ]"
+      @click="handleTriggerClick"
       @mouseenter="triggerHover = true"
       @mouseleave="triggerHover = false"
     >
@@ -38,12 +42,16 @@
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-current rounded-full animate-ping" style="animation-delay: 1.2s;"></div>
           </div>
           
-          <!-- 圖示 -->
+          <!-- 圖示或載入指示器 -->
           <div 
             class="absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-500"
             :class="triggerHover ? `scale-110 ${themeClasses.iconColor}` : 'text-gray-400'"
           >
-            <Icon :name="triggerIcon" class="w-6 h-6" />
+            <div 
+              v-if="props.loading"
+              class="animate-spin w-6 h-6 border-2 border-current border-t-transparent rounded-full"
+            ></div>
+            <Icon v-else :name="triggerIcon" class="w-6 h-6" />
           </div>
           
           <!-- 提示標籤 -->
@@ -54,7 +62,9 @@
             <div class="bg-slate-900/95 backdrop-blur-sm border rounded-xl px-4 py-2 shadow-2xl"
                  :class="themeClasses.borderColor">
               <div class="text-sm font-medium" :class="themeClasses.textColor">{{ triggerTitle }}</div>
-              <div class="text-xs text-gray-400 mt-1">點擊展開</div>
+              <div class="text-xs text-gray-400 mt-1">
+                {{ props.loading ? '載入中...' : totalItems === 0 ? '內容空白' : '點擊展開' }}
+              </div>
             </div>
             <!-- 箭頭 -->
             <div class="absolute right-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-4 border-b-4 border-r-8 border-transparent"
@@ -158,11 +168,25 @@
             <!-- 滾動容器 -->
             <div 
               ref="scrollContainer"
-              class="h-full overflow-y-auto scrollbar-thin scrollbar-track-slate-800/30 px-2 py-2"
+              class="h-full overflow-y-auto scrollbar-thin scrollbar-track-slate-800/30 px-2 py-2 overscroll-contain"
               :class="themeClasses.scrollbar"
               @scroll="updateScrollPosition"
+              style="scroll-behavior: smooth;"
             >
-              <div class="space-y-1">
+              <!-- 載入狀態 -->
+              <div v-if="props.loading" class="flex flex-col items-center justify-center py-8 space-y-4">
+                <div class="animate-spin w-8 h-8 border-2 border-gray-300 border-t-transparent rounded-full"></div>
+                <div class="text-sm text-gray-400">載入內容中...</div>
+              </div>
+              
+              <!-- 無內容狀態 -->
+              <div v-else-if="totalItems === 0" class="flex flex-col items-center justify-center py-8 space-y-4">
+                <Icon name="heroicons:document-text" class="w-8 h-8 text-gray-500" />
+                <div class="text-sm text-gray-400">暫無內容</div>
+              </div>
+              
+              <!-- 正常內容 -->
+              <div v-else class="space-y-1">
                 <!-- 有分類的顯示方式 -->
                 <template v-if="enableCategorization && categorizedItems.length > 0">
                   <template v-for="(category, categoryIndex) in categorizedItems" :key="category.key">
@@ -418,6 +442,9 @@ interface Props {
   triggerIcon?: string
   triggerTitle?: string
   systemTitle?: string
+  
+  // 載入狀態
+  loading?: boolean
 }
 
 interface Emits {
@@ -437,7 +464,8 @@ const props = withDefaults(defineProps<Props>(), {
   theme: 'default',
   triggerIcon: 'heroicons:bars-3',
   triggerTitle: '導航控制台',
-  systemTitle: 'NAVIGATION_MATRIX'
+  systemTitle: 'NAVIGATION_MATRIX',
+  loading: false
 })
 
 const emit = defineEmits<Emits>()
@@ -636,6 +664,13 @@ const categorizedItems = computed(() => {
 const totalItems = computed(() => props.items.length)
 
 // 方法
+const handleTriggerClick = () => {
+  if (props.loading || totalItems.value === 0) {
+    return
+  }
+  isCollapsed.value = false
+}
+
 const handleItemClick = (itemId: string) => {
   emit('item-click', itemId)
 }
