@@ -140,77 +140,109 @@
       </section>
 
       <!-- Content Section -->
-      <section class="py-16 px-4 relative">
-        <div class="container mx-auto max-w-7xl">
-          <div class="flex flex-col lg:flex-row gap-8">
-            
-            <!-- Main Content -->
-            <div class="flex-1">
-              <div class="space-y-8">
-                
-                <!-- 使用時間安排 -->
-                <div v-if="selectedCategory === 'all' && !searchQuery" class="mb-12">
-                  <div class="bg-gradient-to-br from-slate-900/80 to-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8 shadow-2xl">
-                    <h2 class="text-3xl font-bold text-white mb-6 flex items-center">
-                      <Icon name="heroicons:clock" class="w-8 h-8 text-teal-400 mr-3" />
-                      每日使用時間安排
-                    </h2>
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      <div
-                        v-for="(items, timeSlot) in usageSchedule"
-                        :key="timeSlot"
-                        class="bg-slate-800/40 rounded-xl p-6 border border-slate-700/30 hover:border-teal-500/30 transition-all duration-300"
-                      >
-                        <h3 class="text-lg font-semibold text-teal-300 mb-4 flex items-center">
-                          <Icon name="heroicons:clock" class="w-5 h-5 mr-2" />
-                          {{ timeSlot }}
-                        </h3>
-                        <ul class="space-y-2">
-                          <li 
-                            v-for="item in items" 
-                            :key="item"
-                            class="text-sm text-gray-300 flex items-start"
-                          >
-                            <Icon name="heroicons:check" class="w-4 h-4 text-teal-400 mr-2 mt-0.5 flex-shrink-0" />
-                            {{ item }}
-                          </li>
-                        </ul>
-                      </div>
+      <section class="py-12 px-4 relative">
+        <div class="container mx-auto max-w-8xl">
+          <!-- 使用時間安排 - 改進佈局 -->
+          <div v-if="selectedCategory === 'all' && !searchQuery" class="mb-16">
+            <div class="bg-gradient-to-br from-slate-900/90 to-slate-800/70 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 shadow-2xl">
+              <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 flex items-center justify-center">
+                  <Icon name="heroicons:clock" class="w-8 h-8 text-teal-400 mr-3" />
+                  每日使用時間安排
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-teal-400 to-cyan-400 mx-auto rounded-full"></div>
+              </div>
+              
+              <!-- 時間排程網格 - 響應式改進 -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 md:gap-6">
+                <div
+                  v-for="(items, timeSlot, index) in usageSchedule"
+                  :key="timeSlot"
+                  class="bg-slate-800/40 rounded-2xl p-5 border border-slate-700/30 hover:border-teal-500/40 hover:bg-slate-800/60 transition-all duration-500 group"
+                  :class="`animate-fade-in-up delay-${(index * 100) % 600}`"
+                >
+                  <div class="text-center mb-4">
+                    <div class="w-12 h-12 bg-teal-500/15 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-teal-500/25 transition-colors duration-300">
+                      <Icon name="heroicons:clock" class="w-6 h-6 text-teal-400" />
+                    </div>
+                    <h3 class="text-sm font-semibold text-teal-300 leading-tight">
+                      {{ timeSlot }}
+                    </h3>
+                  </div>
+                  
+                  <div class="space-y-2">
+                    <div 
+                      v-for="item in items.slice(0, 3)" 
+                      :key="item"
+                      class="text-xs text-gray-300 flex items-start leading-relaxed"
+                    >
+                      <Icon name="heroicons:check-circle" class="w-3 h-3 text-teal-400 mr-2 mt-0.5 flex-shrink-0" />
+                      <span class="truncate">{{ item.replace(/\(.+?\)/g, '') }}</span>
+                    </div>
+                    <div v-if="items.length > 3" class="text-xs text-slate-400 text-center pt-2">
+                      +{{ items.length - 3 }} 項目
                     </div>
                   </div>
                 </div>
-                
-                <!-- 保健品內容 - 使用新的 SupplementCard 組件 -->
-                <SupplementCard
-                  v-for="(supplement, index) in filteredSupplements"
-                  :key="supplement.id"
-                  :id="supplement.id"
-                  :supplement="supplement"
-                  :style="{ animationDelay: `${index * 100}ms` }"
-                  class="animate-fade-in-up"
-                />
-                
-                <!-- 沒有結果提示 -->
-                <div 
-                  v-if="filteredSupplements.length === 0" 
-                  class="text-center py-16"
-                >
-                  <div class="w-24 h-24 bg-slate-800/50 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Icon name="heroicons:magnifying-glass" class="w-12 h-12 text-gray-500" />
-                  </div>
-                  <h3 class="text-xl font-medium text-gray-400 mb-2">沒有找到相關保健品</h3>
-                  <p class="text-gray-500 mb-6">請嘗試調整搜尋條件或篩選設定</p>
-                  <MedicalButton
-                    @click="resetFilters"
-                    variant="outline"
-                    text="重置篩選"
-                    left-icon="heroicons:arrow-uturn-left"
-                  />
-                </div>
-
+              </div>
+            </div>
+          </div>
+          
+          <!-- 保健品卡片網格 - 全新響應式佈局 -->
+          <div class="relative">
+            <!-- 統計資訊顯示 -->
+            <div v-if="filteredSupplements.length > 0" class="mb-8 text-center">
+              <div class="inline-flex items-center bg-slate-800/40 rounded-2xl px-6 py-3 border border-slate-700/30">
+                <Icon name="heroicons:squares-2x2" class="w-5 h-5 text-teal-400 mr-3" />
+                <span class="text-slate-300">
+                  顯示 <span class="text-teal-400 font-semibold">{{ filteredSupplements.length }}</span> 個保健品
+                  <span v-if="searchQuery || selectedCategory !== 'all'" class="text-slate-400">
+                    / 共 {{ supplements.length }} 個
+                  </span>
+                </span>
               </div>
             </div>
             
+            <!-- 保健品卡片網格 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+              <SupplementCard
+                v-for="(supplement, index) in filteredSupplements"
+                :key="supplement.id"
+                :supplement="supplement"
+                :class="[
+                  'animate-fade-in-up transition-all duration-500',
+                  `delay-${(index * 100) % 600}`
+                ]"
+                :style="{ 
+                  animationDelay: `${(index * 100)}ms`,
+                  animationFillMode: 'both'
+                }"
+              />
+            </div>
+            
+            <!-- 沒有結果提示 - 改進設計 -->
+            <div 
+              v-if="filteredSupplements.length === 0" 
+              class="text-center py-20"
+            >
+              <div class="max-w-md mx-auto">
+                <div class="w-32 h-32 bg-slate-800/30 rounded-full flex items-center justify-center mx-auto mb-8 relative">
+                  <div class="absolute inset-0 bg-teal-500/10 rounded-full animate-pulse"></div>
+                  <Icon name="heroicons:magnifying-glass" class="w-16 h-16 text-slate-500 relative z-10" />
+                </div>
+                <h3 class="text-2xl font-bold text-slate-300 mb-4">沒有找到相關保健品</h3>
+                <p class="text-slate-400 mb-8 leading-relaxed">
+                  請嘗試調整搜尋條件或選擇不同的分類篩選
+                </p>
+                <button
+                  @click="resetFilters"
+                  class="inline-flex items-center px-6 py-3 bg-teal-500/20 border border-teal-500/40 rounded-xl text-teal-300 font-medium hover:bg-teal-500/30 hover:border-teal-400/60 transition-all duration-300 group"
+                >
+                  <Icon name="heroicons:arrow-uturn-left" class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" />
+                  重置篩選條件
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1314,10 +1346,70 @@ onUnmounted(() => {
   background: rgba(20, 184, 166, 0.6);
 }
 
-/* 響應式調整 */
+/* 新增的醫療頁面特色動畫 */
+@keyframes medical-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(20, 184, 166, 0.1);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(20, 184, 166, 0.3), 0 0 40px rgba(20, 184, 166, 0.1);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes grid-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes stats-counter {
+  0% { opacity: 0; transform: scale(0.8); }
+  50% { opacity: 0.7; transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-medical-pulse {
+  animation: medical-pulse 3s ease-in-out infinite;
+}
+
+.animate-grid-fade-in {
+  animation: grid-fade-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.animate-stats-counter {
+  animation: stats-counter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* 延遲動畫類別擴充 */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+
+/* 響應式調整 - 增強版 */
+@media (max-width: 1024px) {
+  .animate-fade-in-up {
+    animation-duration: 0.6s;
+  }
+  
+  .animate-grid-fade-in {
+    animation-duration: 0.7s;
+  }
+}
+
 @media (max-width: 768px) {
   .animate-fade-in-up {
-    animation-delay: 0.2s;
+    animation-delay: 0.1s;
+    animation-duration: 0.5s;
   }
   
   .prose :deep(h2) {
@@ -1326,6 +1418,18 @@ onUnmounted(() => {
   
   .prose :deep(h3) {
     font-size: 1.25rem;
+  }
+  
+  /* 行動裝置減少動畫效果 */
+  .animate-medical-pulse {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .delay-100, .delay-200, .delay-300, 
+  .delay-400, .delay-500, .delay-600 {
+    animation-delay: 0ms;
   }
 }
 
