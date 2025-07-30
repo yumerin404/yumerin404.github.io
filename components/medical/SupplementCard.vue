@@ -14,7 +14,7 @@
       
       <div class="relative z-10">
         <!-- 主要標題區域 -->
-        <div class="flex items-start justify-between mb-4">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-0 mb-4">
           <div class="flex items-center space-x-4 flex-1 min-w-0">
             <!-- 增強的圖示設計 -->
             <div class="relative flex-shrink-0">
@@ -53,7 +53,7 @@
         </div>
         
         <!-- 重新設計的標籤區域 -->
-        <div class="flex flex-wrap items-center gap-2">
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3">
           <!-- 分類標籤 -->
           <div class="inline-flex items-center px-3 py-2 rounded-xl text-xs font-semibold bg-teal-500/15 border border-teal-500/30 text-teal-300 hover:bg-teal-500/25 transition-colors duration-300">
             <Icon :name="categoryIcon" class="w-3 h-3 mr-1.5" />
@@ -85,7 +85,7 @@
     >
       <!-- 快速資訊卡片區域 - 全新設計 -->
       <div class="px-6 py-6 bg-gradient-to-r from-slate-800/20 to-slate-700/10 border-b border-slate-700/30">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
           <!-- 建議劑量卡片 -->
           <div class="bg-gradient-to-br from-slate-800/60 to-slate-700/40 rounded-2xl p-5 border border-slate-600/30 hover:border-teal-500/40 transition-all duration-300 group/info">
             <div class="flex items-center space-x-3 mb-3">
@@ -105,11 +105,11 @@
               </div>
               <h4 class="text-base font-bold text-emerald-300">主要益處</h4>
             </div>
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-1.5 sm:gap-2">
               <span 
                 v-for="benefit in supplement.benefits?.slice(0, 4)" 
                 :key="benefit"
-                class="inline-block px-3 py-1.5 bg-emerald-500/15 text-emerald-200 text-xs font-medium rounded-lg border border-emerald-500/20 hover:bg-emerald-500/25 transition-colors duration-200"
+                class="inline-block px-2.5 py-1 sm:px-3 sm:py-1.5 bg-emerald-500/15 text-emerald-200 text-xs font-medium rounded-lg border border-emerald-500/20 hover:bg-emerald-500/25 transition-colors duration-200"
               >
                 {{ benefit }}
               </span>
@@ -261,11 +261,11 @@
     
     <!-- 精美的標籤區域 -->
     <div v-if="supplement.tags && supplement.tags.length > 0" class="px-6 py-5 border-t border-slate-700/30 bg-gradient-to-r from-slate-800/10 to-slate-700/5">
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-1.5 sm:gap-2">
         <span
           v-for="(tag, index) in supplement.tags"
           :key="tag"
-          class="inline-flex items-center px-3 py-2 rounded-xl text-xs font-semibold bg-slate-700/40 text-slate-300 border border-slate-600/30 hover:bg-slate-600/50 hover:border-slate-500/60 hover:text-white transition-all duration-300 hover:scale-105 group"
+          class="inline-flex items-center px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl text-xs font-semibold bg-slate-700/40 text-slate-300 border border-slate-600/30 hover:bg-slate-600/50 hover:border-slate-500/60 hover:text-white transition-all duration-300 hover:scale-105 group"
           :style="{ animationDelay: `${index * 50}ms` }"
         >
           <Icon name="heroicons:tag" class="w-3 h-3 mr-1.5 group-hover:rotate-12 transition-transform duration-200" />
@@ -540,6 +540,11 @@ const renderSupplementContent = (content: string) => {
   .medical-content :deep(.medical-info-block) {
     padding: 1.25rem;
   }
+  
+  /* 時間安排網格優化 */
+  .medical-supplement-card .grid {
+    gap: 1rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -568,6 +573,22 @@ const renderSupplementContent = (content: string) => {
   .medical-content :deep(.info-value),
   .medical-content :deep(.info-content) {
     font-size: 0.825rem;
+  }
+  
+  /* 快速資訊區域優化 */
+  .medical-supplement-card .grid.grid-cols-1.sm\:grid-cols-1.md\:grid-cols-3 {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  /* 標籤縮小 */
+  .medical-supplement-card .text-xs {
+    font-size: 0.7rem;
+  }
+  
+  .medical-supplement-card .px-3 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
 

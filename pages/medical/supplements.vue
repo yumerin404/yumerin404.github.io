@@ -82,8 +82,8 @@
       <!-- 搜尋和篩選區域 -->
       <section class="py-8 px-4 relative">
         <div class="container mx-auto max-w-7xl">
-          <div class="bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 shadow-2xl">
-            <div class="flex flex-col lg:flex-row gap-6 items-center">
+          <div class="bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-4 sm:p-6 shadow-2xl">
+            <div class="flex flex-col lg:flex-row gap-4 lg:gap-6 items-stretch lg:items-center">
               <!-- 搜尋框 -->
               <div class="flex-1 relative">
                 <input
@@ -103,12 +103,12 @@
               </div>
               
               <!-- 分類篩選 -->
-              <div class="flex flex-wrap gap-2">
+              <div class="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start">
                 <button
                   v-for="category in supplementCategories"
                   :key="category.key"
                   @click="selectedCategory = category.key"
-                  class="px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 border flex items-center space-x-2"
+                  class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-lg transition-all duration-300 border flex items-center space-x-1.5 sm:space-x-2"
                   :class="selectedCategory === category.key 
                     ? 'bg-teal-500/20 border-teal-400/60 text-teal-300 shadow-[0_0_8px_rgba(20,184,166,0.3)]' 
                     : 'bg-slate-800/40 border-slate-600/40 text-slate-400 hover:bg-teal-500/10 hover:border-teal-500/40 hover:text-teal-300'"
@@ -140,8 +140,8 @@
       </section>
 
       <!-- Content Section -->
-      <section class="py-8 px-4 relative">
-        <div class="container mx-auto max-w-[1600px]">
+      <section class="py-8 px-3 sm:px-4 lg:px-6 relative">
+        <div class="container mx-auto max-w-7xl">
           <!-- 使用時間安排 - 改進佈局 -->
           <div v-if="selectedCategory === 'all' && !searchQuery" class="mb-16">
             <div class="bg-gradient-to-br from-slate-900/90 to-slate-800/70 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 shadow-2xl">
@@ -153,8 +153,8 @@
                 <div class="w-24 h-1 bg-gradient-to-r from-teal-400 to-cyan-400 mx-auto rounded-full"></div>
               </div>
               
-              <!-- 時間排程網格 - 響應式改進 -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 md:gap-6">
+              <!-- 時間排程網格 - 全新響應式設計 -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-5">
                 <div
                   v-for="(items, timeSlot, index) in usageSchedule"
                   :key="timeSlot"
@@ -203,8 +203,8 @@
               </div>
             </div>
             
-            <!-- 保健品卡片網格 - 完全響應式 -->
-            <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 auto-rows-fr">
+            <!-- 保健品卡片網格 - 優化響應式佈局 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 auto-rows-fr">
               <SupplementCard
                 v-for="(supplement, index) in filteredSupplements"
                 :key="supplement.id"
@@ -1430,6 +1430,38 @@ onUnmounted(() => {
   .delay-100, .delay-200, .delay-300, 
   .delay-400, .delay-500, .delay-600 {
     animation-delay: 0ms;
+  }
+  
+  /* 行動裝置特定優化 */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* 網格關間距優化 */
+  .grid {
+    gap: 0.75rem;
+  }
+  
+  /* 時間安排區域 */
+  .grid.grid-cols-1.sm\:grid-cols-2.md\:grid-cols-3.lg\:grid-cols-4.xl\:grid-cols-5.\32xl\:grid-cols-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* 保健品卡片網格 */
+  .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-2.xl\:grid-cols-3.\32xl\:grid-cols-3.\33xl\:grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  /* 標題字型優化 */
+  h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  /* 搜尋按鈕優化 */
+  .flex.flex-wrap.gap-2 {
+    justify-content: center;
   }
 }
 
