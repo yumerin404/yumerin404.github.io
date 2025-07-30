@@ -643,4 +643,92 @@ const renderSupplementContent = (content: string) => {
 .glow-effect:hover::before {
   left: 100%;
 }
+
+/* 響應式設計大幅改進 */
+@media (max-width: 640px) {
+  .medical-supplement-card {
+    border-radius: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .medical-supplement-card:hover {
+    transform: none;
+    scale: 1;
+  }
+  
+  .tab-content {
+    font-size: 0.875rem;
+    padding: 1rem;
+  }
+  
+  /* 移動端圖示優化 */
+  .medical-supplement-card .w-16 {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  
+  .medical-supplement-card .text-xl {
+    font-size: 1.125rem;
+    line-height: 1.4;
+  }
+  
+  /* 減少移動端動畫 */
+  .medical-supplement-card * {
+    animation-duration: 0.3s !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .medical-supplement-card {
+    border-radius: 2rem;
+  }
+  
+  .medical-supplement-card:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+}
+
+@media (min-width: 1025px) {
+  .medical-supplement-card {
+    border-radius: 2.5rem;
+  }
+  
+  .medical-supplement-card:hover {
+    transform: translateY(-6px) scale(1.02);
+  }
+}
+
+/* 無障礙和性能優化 */
+@media (prefers-reduced-motion: reduce) {
+  .medical-supplement-card,
+  .medical-supplement-card *,
+  .expandable-content {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .medical-supplement-card:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .medical-supplement-card {
+    border-width: 2px;
+    border-color: rgba(20, 184, 166, 0.8);
+  }
+}
+
+/* Focus 和觸控優化 */
+.medical-supplement-card:focus-within {
+  outline: 2px solid rgba(20, 184, 166, 0.6);
+  outline-offset: 4px;
+}
+
+/* GPU 加速優化 */
+.medical-supplement-card {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
 </style>

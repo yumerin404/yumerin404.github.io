@@ -140,8 +140,8 @@
       </section>
 
       <!-- Content Section -->
-      <section class="py-12 px-4 relative">
-        <div class="container mx-auto max-w-8xl">
+      <section class="py-8 px-4 relative">
+        <div class="container mx-auto max-w-[1600px]">
           <!-- 使用時間安排 - 改進佈局 -->
           <div v-if="selectedCategory === 'all' && !searchQuery" class="mb-16">
             <div class="bg-gradient-to-br from-slate-900/90 to-slate-800/70 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 shadow-2xl">
@@ -203,8 +203,8 @@
               </div>
             </div>
             
-            <!-- 保健品卡片網格 -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+            <!-- 保健品卡片網格 - 完全響應式 -->
+            <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 auto-rows-fr">
               <SupplementCard
                 v-for="(supplement, index) in filteredSupplements"
                 :key="supplement.id"
