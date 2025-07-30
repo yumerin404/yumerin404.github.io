@@ -164,11 +164,11 @@
           </div>
           
           <!-- 目錄內容區域 -->
-          <div class="flex-1 overflow-hidden relative">
+          <div class="flex-1 relative" style="height: calc(100% - 120px);">
             <!-- 滾動容器 -->
             <div 
               ref="scrollContainer"
-              class="h-full overflow-y-auto scrollbar-thin scrollbar-track-slate-800/30 px-2 py-2 overscroll-contain"
+              class="absolute inset-0 overflow-y-auto scrollbar-thin scrollbar-track-slate-800/30 px-2 py-2 overscroll-contain"
               :class="themeClasses.scrollbar"
               @scroll="updateScrollPosition"
               style="scroll-behavior: smooth;"
