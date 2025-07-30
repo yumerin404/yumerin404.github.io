@@ -184,6 +184,7 @@
                 <SupplementCard
                   v-for="(supplement, index) in filteredSupplements"
                   :key="supplement.id"
+                  :id="supplement.id"
                   :supplement="supplement"
                   :style="{ animationDelay: `${index * 100}ms` }"
                   class="animate-fade-in-up"
@@ -842,6 +843,9 @@ const loadSupplementData = () => {
   }
 }
 
+// 立即載入數據
+loadSupplementData()
+
 // 保健品分類映射 - 完全對應 supple.md 的分類結構
 const categoryIconMap: Record<string, string> = {
   'amino-acids': 'heroicons:bolt',
@@ -904,15 +908,34 @@ const supplementCategories = computed(() => {
 // 增強的保健品數據，包含解析後的結構化資訊
 const enhancedSupplements = computed(() => {
   return supplements.value.map(supplement => {
-    const quickInfo = extractQuickInfo(supplement)
-    const summary = generateContentSummary(supplement.content)
-    
-    return {
-      ...supplement,
-      description: summary,
-      benefits: quickInfo.benefits,
-      dosage: quickInfo.dosage,
-      quickInfo
+    try {
+      const quickInfo = extractQuickInfo(supplement)
+      const summary = generateContentSummary(supplement.content)
+      
+      return {
+        ...supplement,
+        description: summary || supplement.description,
+        benefits: quickInfo.benefits || supplement.benefits || [],
+        dosage: quickInfo.dosage || supplement.dosage,
+        quickInfo
+      }
+    } catch (error) {
+      console.warn('Error processing supplement:', supplement.title, error)
+      // 如果解析失败，直接返回原始數據
+      return {
+        ...supplement,
+        description: supplement.description || '詳細資訊請展開查看。',
+        benefits: supplement.benefits || [],
+        dosage: supplement.dosage || '請參考產品標籤',
+        quickInfo: {
+          dosage: supplement.dosage || '請參考產品標籤',
+          timing: supplement.usage || '依醫囑使用',
+          benefits: supplement.benefits || [],
+          warnings: [],
+          manufacturer: supplement.manufacturer || '未指定',
+          category: supplement.category || 'other'
+        }
+      }
     }
   })
 })
@@ -1052,7 +1075,6 @@ const updateActiveSection = () => {
 // 生命週期
 onMounted(async () => {
   try {
-    await loadSupplementData()
     // 模擬載入延遲
     await new Promise(resolve => setTimeout(resolve, 500))
   } finally {

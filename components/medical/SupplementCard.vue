@@ -1,5 +1,6 @@
 <template>
   <div 
+    :id="supplement.id"
     class="bg-gradient-to-br from-slate-900/90 to-slate-800/70 backdrop-blur-xl border border-slate-700/50 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:border-teal-500/40 hover:shadow-[0_0_40px_rgba(20,184,166,0.15)] group medical-card"
     :class="{ 'expanded': isExpanded }"
   >
