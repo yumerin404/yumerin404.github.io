@@ -180,57 +180,14 @@
                   </div>
                 </div>
                 
-                <!-- 保健品內容 -->
-                <div
+                <!-- 保健品內容 - 使用新的 SupplementCard 組件 -->
+                <SupplementCard
                   v-for="(supplement, index) in filteredSupplements"
                   :key="supplement.id"
-                  :id="supplement.id"
-                  class="bg-gradient-to-br from-slate-900/80 to-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8 shadow-2xl transition-all duration-500 hover:border-teal-500/30 hover:shadow-[0_0_30px_rgba(20,184,166,0.1)] group"
+                  :supplement="supplement"
                   :style="{ animationDelay: `${index * 100}ms` }"
-                >
-                  <!-- 保健品標題 -->
-                  <div class="flex items-start justify-between mb-6">
-                    <div class="flex items-start space-x-4">
-                      <div class="w-12 h-12 bg-teal-500/20 rounded-xl flex items-center justify-center border border-teal-500/30 group-hover:border-teal-400/50 transition-all duration-300">
-                        <Icon :name="getCategoryIcon(supplement.category)" class="w-6 h-6 text-teal-400" />
-                      </div>
-                      <div class="flex-1">
-                        <h2 class="text-2xl font-bold text-white mb-2 group-hover:text-teal-100 transition-colors duration-300">
-                          {{ supplement.title }}
-                        </h2>
-                        <div class="flex flex-wrap items-center gap-3 mb-2">
-                          <span class="text-sm text-slate-400">{{ getCategoryName(supplement.category) }}</span>
-                          <span class="text-slate-500">•</span>
-                          <span class="text-sm text-cyan-300">{{ supplement.manufacturer }}</span>
-                        </div>
-                        <div class="text-sm text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 rounded-lg px-3 py-1 inline-block">
-                          {{ supplement.usage }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- 保健品詳細內容 -->
-                  <div class="prose prose-invert max-w-none">
-                    <div 
-                      v-html="renderSupplementContent(supplement.content)"
-                      class="text-gray-300 leading-relaxed"
-                    ></div>
-                  </div>
-                  
-                  <!-- 標籤 -->
-                  <div v-if="supplement.tags && supplement.tags.length > 0" class="mt-6 pt-6 border-t border-slate-700/50">
-                    <div class="flex flex-wrap gap-2">
-                      <span
-                        v-for="tag in supplement.tags"
-                        :key="tag"
-                        class="text-xs bg-slate-700/40 text-slate-300 px-3 py-1 rounded-full border border-slate-600/30"
-                      >
-                        {{ tag }}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                  class="animate-fade-in-up"
+                />
                 
                 <!-- 沒有結果提示 -->
                 <div 
@@ -316,6 +273,9 @@
 </template>
 
 <script setup lang="ts">
+// 導入組件
+import SupplementCard from '~/components/medical/SupplementCard.vue'
+
 // SEO 設定
 useHead({
   title: '營養補充品指南 - 醫學知識 - 夢鈴領域',
@@ -346,6 +306,13 @@ const {
   generateSupplementTOC,
   extractUsageSchedule
 } = useMarkdownContent()
+
+// 導入醫療內容解析器
+const {
+  parseMedicalContent,
+  extractQuickInfo,
+  generateContentSummary
+} = useMedicalContentParser()
 
 // 響應式數據
 const activeSection = ref('')
@@ -934,9 +901,25 @@ const supplementCategories = computed(() => {
   return Array.from(categories.values())
 })
 
+// 增強的保健品數據，包含解析後的結構化資訊
+const enhancedSupplements = computed(() => {
+  return supplements.value.map(supplement => {
+    const quickInfo = extractQuickInfo(supplement)
+    const summary = generateContentSummary(supplement.content)
+    
+    return {
+      ...supplement,
+      description: summary,
+      benefits: quickInfo.benefits,
+      dosage: quickInfo.dosage,
+      quickInfo
+    }
+  })
+})
+
 // 計算屬性
 const filteredSupplements = computed(() => {
-  let filtered = supplements.value
+  let filtered = enhancedSupplements.value
   
   // 按分類篩選
   if (selectedCategory.value !== 'all') {
@@ -951,7 +934,9 @@ const filteredSupplements = computed(() => {
       supplement.content.toLowerCase().includes(query) ||
       (supplement.manufacturer && supplement.manufacturer.toLowerCase().includes(query)) ||
       (supplement.productName && supplement.productName.toLowerCase().includes(query)) ||
-      (supplement.tags && supplement.tags.some((tag: string) => tag.toLowerCase().includes(query)))
+      (supplement.description && supplement.description.toLowerCase().includes(query)) ||
+      (supplement.tags && supplement.tags.some((tag: string) => tag.toLowerCase().includes(query))) ||
+      (supplement.benefits && supplement.benefits.some((benefit: string) => benefit.toLowerCase().includes(query)))
     )
   }
   
