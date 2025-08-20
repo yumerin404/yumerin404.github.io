@@ -152,10 +152,10 @@
                 </button>
               </div>
               
-                <!-- 專業分類篩選 -->
-                <div class="lg:min-w-[300px]">
-                  <div class="grid grid-cols-2 lg:grid-cols-1 gap-2">
-                    <button
+              <!-- 專業分類篩選 -->
+              <div class="lg:min-w-[300px]">
+                <div class="grid grid-cols-2 lg:grid-cols-1 gap-2">
+                  <button
                       v-for="category in supplementCategories"
                       :key="category.key"
                       @click="selectedCategory = category.key"
@@ -164,51 +164,50 @@
                         ? 'bg-emerald-500/15 border-emerald-400/60 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)]' 
                         : 'bg-slate-800/40 border-slate-600/40 text-slate-400 hover:bg-emerald-500/10 hover:border-emerald-500/40 hover:text-emerald-300'"
                     >
-                      <!-- 背景動畫 -->
-                      <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <Icon :name="category.icon" class="w-4 h-4 relative z-10 group-hover:scale-110 transition-transform duration-300" />
-                      <div class="flex-1 text-left relative z-10">
-                        <span class="block">{{ category.name }}</span>
-                        <span class="text-xs opacity-60">({{ category.count }} 種)</span>
-                      </div>
-                      <!-- 選中指示器 -->
-                      <div v-if="selectedCategory === category.key" class="w-2 h-2 bg-emerald-400 rounded-full relative z-10 animate-pulse"></div>
-                    </button>
-                  </div>
+                    <!-- 背景動畫 -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <Icon :name="category.icon" class="w-4 h-4 relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                    <div class="flex-1 text-left relative z-10">
+                      <span class="block">{{ category.name }}</span>
+                      <span class="text-xs opacity-60">({{ category.count }} 種)</span>
+                    </div>
+                    <!-- 選中指示器 -->
+                    <div v-if="selectedCategory === category.key" class="w-2 h-2 bg-emerald-400 rounded-full relative z-10 animate-pulse"></div>
+                  </button>
                 </div>
               </div>
             </div>
-            
-            <!-- 搜尋結果統計 -->
-            <div v-if="searchQuery || selectedCategory !== 'all'" class="mt-6 pt-6 border-t border-emerald-500/20">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <div class="flex items-center space-x-4">
-                  <div class="text-sm text-slate-300">
-                    找到 <span class="text-emerald-400 font-semibold text-lg">{{ filteredSupplements.length }}</span> 個相關保健品
-                    <span v-if="searchQuery" class="block sm:inline mt-1 sm:mt-0">包含「<span class="text-cyan-400 font-medium">{{ searchQuery }}</span>」</span>
-                  </div>
-                  <!-- 篩選狀態指示 -->
-                  <div v-if="selectedCategory !== 'all'" class="flex items-center space-x-2">
-                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                    <span class="text-xs text-emerald-300">{{ getCategoryName(selectedCategory) }}</span>
-                  </div>
+          </div>
+          
+          <!-- 搜尋結果統計 -->
+          <div v-if="searchQuery || selectedCategory !== 'all'" class="mt-6 pt-6 border-t border-emerald-500/20">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div class="flex items-center space-x-4">
+                <div class="text-sm text-slate-300">
+                  找到 <span class="text-emerald-400 font-semibold text-lg">{{ filteredSupplements.length }}</span> 個相關保健品
+                  <span v-if="searchQuery" class="block sm:inline mt-1 sm:mt-0">包含「<span class="text-cyan-400 font-medium">{{ searchQuery }}</span>」</span>
                 </div>
-                <div class="flex items-center space-x-3">
-                  <button
-                    v-if="searchQuery"
-                    @click="clearSearch"
-                    class="px-3 py-1 text-xs bg-slate-700/50 text-slate-300 rounded-lg hover:bg-slate-600/50 transition-all duration-200"
-                  >
-                    清除搜尋
-                  </button>
-                  <button
-                    @click="resetFilters"
-                    class="px-4 py-2 text-sm bg-emerald-500/10 text-emerald-300 rounded-lg hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-400/50 transition-all duration-200 flex items-center space-x-2"
-                  >
-                    <Icon name="heroicons:arrow-uturn-left" class="w-4 h-4" />
-                    <span>重置篩選</span>
-                  </button>
+                <!-- 篩選狀態指示 -->
+                <div v-if="selectedCategory !== 'all'" class="flex items-center space-x-2">
+                  <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                  <span class="text-xs text-emerald-300">{{ getCategoryName(selectedCategory) }}</span>
                 </div>
+              </div>
+              <div class="flex items-center space-x-3">
+                <button
+                  v-if="searchQuery"
+                  @click="clearSearch"
+                  class="px-3 py-1 text-xs bg-slate-700/50 text-slate-300 rounded-lg hover:bg-slate-600/50 transition-all duration-200"
+                >
+                  清除搜尋
+                </button>
+                <button
+                  @click="resetFilters"
+                  class="px-4 py-2 text-sm bg-emerald-500/10 text-emerald-300 rounded-lg hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-400/50 transition-all duration-200 flex items-center space-x-2"
+                >
+                  <Icon name="heroicons:arrow-uturn-left" class="w-4 h-4" />
+                  <span>重置篩選</span>
+                </button>
               </div>
             </div>
           </div>
@@ -231,11 +230,11 @@
               
               <!-- 時間排程網格 - 專業醫療設計 -->
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4 lg:gap-6">
-                  <div
-                    v-for="(items, timeSlot, index) in usageSchedule"
-                    :key="timeSlot"
-                    class="relative bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/40 hover:border-emerald-500/50 hover:bg-slate-800/70 transition-all duration-500 group overflow-hidden"
-                    :class="`animate-fade-in-up delay-${(index * 100) % 600}`"
+                <div
+                  v-for="(items, timeSlot, index) in usageSchedule"
+                  :key="timeSlot"
+                  class="relative bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/40 hover:border-emerald-500/50 hover:bg-slate-800/70 transition-all duration-500 group overflow-hidden"
+                  :class="`animate-fade-in-up delay-${(index * 100) % 600}`"
                   >
                     <!-- 時間卡片背景 -->
                     <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -271,7 +270,6 @@
                         </div>
                       </div>
                     </div>
-                  </div>
                 </div>
               </div>
             </div>
