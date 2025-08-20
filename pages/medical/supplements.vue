@@ -1,17 +1,20 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-950 via-teal-950/20 to-slate-900 text-white relative overflow-hidden">
-    <!-- 醫療背景效果 -->
-    <div class="absolute inset-0 opacity-5">
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,_rgba(20,184,166,0.3)_0%,transparent_50%)]"></div>
-      <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,_rgba(59,130,246,0.2)_0%,transparent_50%)]"></div>
-      <!-- 醫療網格背景 -->
-      <div class="absolute inset-0 bg-[linear-gradient(rgba(20,184,166,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(20,184,166,0.05)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+  <div class="min-h-screen bg-gradient-to-br from-slate-950 via-emerald-950/20 to-slate-900 text-white relative overflow-hidden">
+    <!-- 專業醫療背景效果 -->
+    <div class="absolute inset-0 opacity-[0.03]">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_25%_75%,_rgba(16,185,129,0.4)_0%,transparent_50%)]"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,_rgba(6,182,212,0.3)_0%,transparent_50%)]"></div>
+      <!-- 醫療分子結構背景 -->
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.08)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+      <!-- 醫療圖案裝飾 -->
+      <div class="absolute top-20 left-10 w-32 h-32 border border-emerald-500/10 rounded-full animate-pulse-medical"></div>
+      <div class="absolute bottom-20 right-10 w-24 h-24 border border-cyan-500/10 rounded-full animate-pulse-medical" style="animation-delay: 2s"></div>
     </div>
 
-    <!-- 滾動進度條 -->
-    <div class="fixed top-0 left-0 right-0 h-1 bg-slate-900/50 z-50">
+    <!-- 專業醫療進度條 -->
+    <div class="fixed top-0 left-0 right-0 h-[2px] bg-slate-900/80 z-50 backdrop-blur-sm">
       <div 
-        class="h-full bg-gradient-to-r from-teal-400 via-cyan-400 to-emerald-400 transition-all duration-300 shadow-[0_0_10px_rgba(20,184,166,0.5)]"
+        class="h-full bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 transition-all duration-500 shadow-[0_0_15px_rgba(16,185,129,0.6)] animate-glow-pulse"
         :style="{ width: scrollProgress + '%' }"
       ></div>
     </div>
@@ -25,11 +28,20 @@
       <section class="py-4 px-4">
         <div class="container mx-auto max-w-7xl">
           <nav class="flex items-center space-x-2 text-sm text-gray-400">
-            <NuxtLink to="/" class="hover:text-teal-400 transition-colors duration-300">首頁</NuxtLink>
-            <Icon name="heroicons:chevron-right" class="w-4 h-4" />
-            <NuxtLink to="/medical" class="hover:text-teal-400 transition-colors duration-300">醫學知識</NuxtLink>
-            <Icon name="heroicons:chevron-right" class="w-4 h-4" />
-            <span class="text-teal-400">保健品資訊</span>
+            <NuxtLink to="/" class="hover:text-emerald-400 transition-colors duration-300 flex items-center space-x-1">
+              <Icon name="heroicons:home" class="w-3 h-3" />
+              <span>首頁</span>
+            </NuxtLink>
+            <Icon name="heroicons:chevron-right" class="w-4 h-4 text-slate-500" />
+            <NuxtLink to="/medical" class="hover:text-emerald-400 transition-colors duration-300 flex items-center space-x-1">
+              <Icon name="heroicons:heart" class="w-3 h-3" />
+              <span>醫學知識</span>
+            </NuxtLink>
+            <Icon name="heroicons:chevron-right" class="w-4 h-4 text-slate-500" />
+            <span class="text-emerald-400 flex items-center space-x-1">
+              <Icon name="heroicons:beaker" class="w-3 h-3" />
+              <span>營養補充品指南</span>
+            </span>
           </nav>
         </div>
       </section>
@@ -38,41 +50,79 @@
       <section class="py-16 px-4 relative">
         <div class="container mx-auto max-w-5xl text-center">
           <div class="mb-12 animate-fade-in-up">
-            <!-- 醫療圖標 -->
+            <!-- 專業醫療圖標組合 -->
             <div class="flex justify-center items-center mb-8">
-              <div class="relative w-24 h-24 bg-gradient-to-br from-teal-500/20 to-cyan-500/20 rounded-3xl flex items-center justify-center backdrop-blur-sm border border-teal-500/30">
-                <div class="absolute inset-0 bg-gradient-to-br from-teal-400/10 to-cyan-400/10 rounded-3xl animate-pulse-gentle"></div>
-                <!-- 醫療脈衝圈 -->
-                <div class="absolute inset-0 rounded-3xl border border-teal-400/30 animate-ping"></div>
-                <Icon name="heroicons:heart" class="relative z-10 w-12 h-12 text-teal-400" />
+              <div class="relative">
+                <!-- 主要圖標 -->
+                <div class="relative w-28 h-28 bg-gradient-to-br from-emerald-500/15 to-teal-500/15 rounded-[2rem] flex items-center justify-center backdrop-blur-sm border border-emerald-500/25 shadow-2xl">
+                  <div class="absolute inset-0 bg-gradient-to-br from-emerald-400/5 to-teal-400/5 rounded-[2rem] animate-pulse-gentle"></div>
+                  <!-- 醫療脈衝效果 -->
+                  <div class="absolute inset-0 rounded-[2rem] border border-emerald-400/20 animate-ping"></div>
+                  <div class="absolute inset-0 rounded-[2rem] border border-teal-400/15 animate-ping" style="animation-delay: 1s"></div>
+                  <Icon name="heroicons:beaker" class="relative z-10 w-14 h-14 text-emerald-400" />
+                </div>
+                <!-- 裝飾性小圖標 -->
+                <div class="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-br from-cyan-500/20 to-emerald-500/20 rounded-xl flex items-center justify-center border border-cyan-400/30 animate-float">
+                  <Icon name="heroicons:plus" class="w-4 h-4 text-cyan-400" />
+                </div>
+                <div class="absolute -bottom-2 -left-2 w-6 h-6 bg-gradient-to-br from-teal-500/20 to-emerald-500/20 rounded-lg flex items-center justify-center border border-teal-400/30 animate-float" style="animation-delay: 0.5s">
+                  <Icon name="heroicons:sparkles" class="w-3 h-3 text-teal-400" />
+                </div>
               </div>
             </div>
             
-            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-              <span class="bg-gradient-to-r from-teal-300 via-cyan-300 via-emerald-300 to-teal-300 bg-clip-text text-transparent animate-gradient-shift">
-                營養補充品指南
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight">
+              <span class="bg-gradient-to-r from-emerald-300 via-teal-300 via-cyan-300 to-emerald-300 bg-clip-text text-transparent animate-gradient-shift">
+                營養補充品
+              </span>
+              <br>
+              <span class="bg-gradient-to-r from-cyan-300 via-emerald-300 via-teal-300 to-cyan-300 bg-clip-text text-transparent animate-gradient-shift" style="animation-delay: 0.5s">
+                專業指南
               </span>
             </h1>
             
-            <div class="w-32 h-1 bg-gradient-to-r from-teal-400 to-cyan-400 mx-auto rounded-full mb-8 animate-glow-soft"></div>
+            <div class="flex justify-center items-center space-x-2 mb-8">
+              <div class="w-12 h-[2px] bg-gradient-to-r from-transparent to-emerald-400 rounded-full animate-glow-soft"></div>
+              <div class="w-16 h-[3px] bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full animate-glow-soft"></div>
+              <div class="w-4 h-4 bg-gradient-to-br from-emerald-400 to-teal-400 rounded-full animate-pulse-gentle"></div>
+              <div class="w-16 h-[3px] bg-gradient-to-r from-teal-400 to-cyan-400 rounded-full animate-glow-soft"></div>
+              <div class="w-12 h-[2px] bg-gradient-to-r from-cyan-400 to-transparent rounded-full animate-glow-soft"></div>
+            </div>
             
-            <p class="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              基於科學證據的完整保健品分析，提供專業使用建議與安全指導
+            <p class="text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed mb-8">
+              基於科學證據的完整保健品分析<br>
+              提供專業使用建議與安全指導
             </p>
             
-            <!-- 統計資訊 -->
-            <div class="flex flex-wrap justify-center gap-8 mt-12">
-              <div class="text-center">
-                <div class="text-3xl font-bold text-teal-400 mb-1">{{ supplementStatistics.totalProducts }}</div>
-                <div class="text-sm text-gray-400">種保健品</div>
+            <!-- 專業認證標誌 -->
+            <div class="flex flex-wrap justify-center items-center gap-6 mt-8 opacity-60">
+              <div class="flex items-center space-x-2 text-sm text-slate-400">
+                <Icon name="heroicons:shield-check" class="w-5 h-5 text-emerald-400" />
+                <span>科學實證</span>
               </div>
-              <div class="text-center">
-                <div class="text-3xl font-bold text-cyan-400 mb-1">{{ supplementStatistics.totalCategories }}</div>
-                <div class="text-sm text-gray-400">個分類</div>
+              <div class="flex items-center space-x-2 text-sm text-slate-400">
+                <Icon name="heroicons:academic-cap" class="w-5 h-5 text-teal-400" />
+                <span>專業分析</span>
               </div>
-              <div class="text-center">
-                <div class="text-3xl font-bold text-emerald-400 mb-1">{{ supplementStatistics.totalManufacturers }}</div>
-                <div class="text-sm text-gray-400">個品牌</div>
+              <div class="flex items-center space-x-2 text-sm text-slate-400">
+                <Icon name="heroicons:heart" class="w-5 h-5 text-cyan-400" />
+                <span>安全指導</span>
+              </div>
+            </div>
+            
+            <!-- 統計資訊卡片 -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 max-w-2xl mx-auto">
+              <div class="bg-slate-800/40 backdrop-blur-sm border border-emerald-500/20 rounded-2xl p-6 text-center hover:border-emerald-400/40 transition-all duration-300 group">
+                <div class="text-3xl font-bold text-emerald-400 mb-2 group-hover:scale-110 transition-transform duration-300">{{ supplementStatistics.totalProducts }}</div>
+                <div class="text-sm text-slate-400 group-hover:text-slate-300 transition-colors duration-300">種保健品</div>
+              </div>
+              <div class="bg-slate-800/40 backdrop-blur-sm border border-teal-500/20 rounded-2xl p-6 text-center hover:border-teal-400/40 transition-all duration-300 group">
+                <div class="text-3xl font-bold text-teal-400 mb-2 group-hover:scale-110 transition-transform duration-300">{{ supplementStatistics.totalCategories }}</div>
+                <div class="text-sm text-slate-400 group-hover:text-slate-300 transition-colors duration-300">個分類</div>
+              </div>
+              <div class="bg-slate-800/40 backdrop-blur-sm border border-cyan-500/20 rounded-2xl p-6 text-center hover:border-cyan-400/40 transition-all duration-300 group">
+                <div class="text-3xl font-bold text-cyan-400 mb-2 group-hover:scale-110 transition-transform duration-300">{{ supplementStatistics.totalManufacturers }}</div>
+                <div class="text-sm text-slate-400 group-hover:text-slate-300 transition-colors duration-300">個品牌</div>
               </div>
             </div>
           </div>
@@ -102,37 +152,63 @@
                 </button>
               </div>
               
-              <!-- 分類篩選 -->
-              <div class="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start">
-                <button
-                  v-for="category in supplementCategories"
-                  :key="category.key"
-                  @click="selectedCategory = category.key"
-                  class="px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-lg transition-all duration-300 border flex items-center space-x-1.5 sm:space-x-2"
-                  :class="selectedCategory === category.key 
-                    ? 'bg-teal-500/20 border-teal-400/60 text-teal-300 shadow-[0_0_8px_rgba(20,184,166,0.3)]' 
-                    : 'bg-slate-800/40 border-slate-600/40 text-slate-400 hover:bg-teal-500/10 hover:border-teal-500/40 hover:text-teal-300'"
-                >
-                  <Icon :name="category.icon" class="w-4 h-4" />
-                  <span>{{ category.name }}</span>
-                  <span class="text-xs opacity-70">({{ category.count }})</span>
-                </button>
+                <!-- 專業分類篩選 -->
+                <div class="lg:min-w-[300px]">
+                  <div class="grid grid-cols-2 lg:grid-cols-1 gap-2">
+                    <button
+                      v-for="category in supplementCategories"
+                      :key="category.key"
+                      @click="selectedCategory = category.key"
+                      class="px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 border flex items-center space-x-3 group relative overflow-hidden"
+                      :class="selectedCategory === category.key 
+                        ? 'bg-emerald-500/15 border-emerald-400/60 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)]' 
+                        : 'bg-slate-800/40 border-slate-600/40 text-slate-400 hover:bg-emerald-500/10 hover:border-emerald-500/40 hover:text-emerald-300'"
+                    >
+                      <!-- 背景動畫 -->
+                      <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <Icon :name="category.icon" class="w-4 h-4 relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                      <div class="flex-1 text-left relative z-10">
+                        <span class="block">{{ category.name }}</span>
+                        <span class="text-xs opacity-60">({{ category.count }} 種)</span>
+                      </div>
+                      <!-- 選中指示器 -->
+                      <div v-if="selectedCategory === category.key" class="w-2 h-2 bg-emerald-400 rounded-full relative z-10 animate-pulse"></div>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
             
             <!-- 搜尋結果統計 -->
-            <div v-if="searchQuery || selectedCategory !== 'all'" class="mt-4 pt-4 border-t border-slate-700/50">
-              <div class="flex items-center justify-between text-sm text-slate-400">
-                <span>
-                  找到 <span class="text-teal-400 font-medium">{{ filteredSupplements.length }}</span> 個相關保健品
-                  <span v-if="searchQuery">包含「<span class="text-cyan-400">{{ searchQuery }}</span>」</span>
-                </span>
-                <button
-                  @click="resetFilters"
-                  class="text-teal-400 hover:text-teal-300 transition-colors duration-200"
-                >
-                  重置篩選
-                </button>
+            <div v-if="searchQuery || selectedCategory !== 'all'" class="mt-6 pt-6 border-t border-emerald-500/20">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div class="flex items-center space-x-4">
+                  <div class="text-sm text-slate-300">
+                    找到 <span class="text-emerald-400 font-semibold text-lg">{{ filteredSupplements.length }}</span> 個相關保健品
+                    <span v-if="searchQuery" class="block sm:inline mt-1 sm:mt-0">包含「<span class="text-cyan-400 font-medium">{{ searchQuery }}</span>」</span>
+                  </div>
+                  <!-- 篩選狀態指示 -->
+                  <div v-if="selectedCategory !== 'all'" class="flex items-center space-x-2">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span class="text-xs text-emerald-300">{{ getCategoryName(selectedCategory) }}</span>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <button
+                    v-if="searchQuery"
+                    @click="clearSearch"
+                    class="px-3 py-1 text-xs bg-slate-700/50 text-slate-300 rounded-lg hover:bg-slate-600/50 transition-all duration-200"
+                  >
+                    清除搜尋
+                  </button>
+                  <button
+                    @click="resetFilters"
+                    class="px-4 py-2 text-sm bg-emerald-500/10 text-emerald-300 rounded-lg hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-400/50 transition-all duration-200 flex items-center space-x-2"
+                  >
+                    <Icon name="heroicons:arrow-uturn-left" class="w-4 h-4" />
+                    <span>重置篩選</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -153,34 +229,47 @@
                 <div class="w-24 h-1 bg-gradient-to-r from-teal-400 to-cyan-400 mx-auto rounded-full"></div>
               </div>
               
-              <!-- 時間排程網格 - 全新響應式設計 -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-5">
-                <div
-                  v-for="(items, timeSlot, index) in usageSchedule"
-                  :key="timeSlot"
-                  class="bg-slate-800/40 rounded-2xl p-5 border border-slate-700/30 hover:border-teal-500/40 hover:bg-slate-800/60 transition-all duration-500 group"
-                  :class="`animate-fade-in-up delay-${(index * 100) % 600}`"
-                >
-                  <div class="text-center mb-4">
-                    <div class="w-12 h-12 bg-teal-500/15 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-teal-500/25 transition-colors duration-300">
-                      <Icon name="heroicons:clock" class="w-6 h-6 text-teal-400" />
-                    </div>
-                    <h3 class="text-sm font-semibold text-teal-300 leading-tight">
-                      {{ timeSlot }}
-                    </h3>
-                  </div>
-                  
-                  <div class="space-y-2">
-                    <div 
-                      v-for="item in items.slice(0, 3)" 
-                      :key="item"
-                      class="text-xs text-gray-300 flex items-start leading-relaxed"
-                    >
-                      <Icon name="heroicons:check-circle" class="w-3 h-3 text-teal-400 mr-2 mt-0.5 flex-shrink-0" />
-                      <span class="truncate">{{ item.replace(/\(.+?\)/g, '') }}</span>
-                    </div>
-                    <div v-if="items.length > 3" class="text-xs text-slate-400 text-center pt-2">
-                      +{{ items.length - 3 }} 項目
+              <!-- 時間排程網格 - 專業醫療設計 -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-4 lg:gap-6">
+                  <div
+                    v-for="(items, timeSlot, index) in usageSchedule"
+                    :key="timeSlot"
+                    class="relative bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/40 hover:border-emerald-500/50 hover:bg-slate-800/70 transition-all duration-500 group overflow-hidden"
+                    :class="`animate-fade-in-up delay-${(index * 100) % 600}`"
+                  >
+                    <!-- 時間卡片背景 -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <div class="relative z-10">
+                      <div class="text-center mb-5">
+                        <div class="relative inline-block">
+                          <div class="w-14 h-14 bg-gradient-to-br from-emerald-500/15 to-teal-500/15 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-emerald-500/25 group-hover:scale-105 transition-all duration-300 border border-emerald-500/20">
+                            <Icon name="heroicons:clock" class="w-7 h-7 text-emerald-400" />
+                          </div>
+                          <!-- 時間指示器 -->
+                          <div class="absolute -top-1 -right-1 w-4 h-4 bg-emerald-400/30 rounded-full animate-pulse"></div>
+                        </div>
+                        <h3 class="text-sm font-semibold text-emerald-300 leading-tight mb-1">
+                          {{ timeSlot }}
+                        </h3>
+                        <div class="w-8 h-[1px] bg-gradient-to-r from-emerald-400/50 to-teal-400/50 mx-auto"></div>
+                      </div>
+                      
+                      <div class="space-y-2.5">
+                        <div 
+                          v-for="(item, itemIndex) in items.slice(0, 3)" 
+                          :key="item"
+                          class="text-xs text-slate-300 flex items-start leading-relaxed group-hover:text-slate-200 transition-colors duration-300"
+                          :style="{ animationDelay: `${(index * 100 + itemIndex * 50)}ms` }"
+                        >
+                          <Icon name="heroicons:check-circle" class="w-3 h-3 text-emerald-400 mr-2 mt-0.5 flex-shrink-0 group-hover:text-emerald-300" />
+                          <span class="truncate font-medium">{{ item.replace(/\(.+?\)/g, '') }}</span>
+                        </div>
+                        <div v-if="items.length > 3" class="text-xs text-slate-400 text-center pt-2 flex items-center justify-center space-x-1">
+                          <Icon name="heroicons:ellipsis-horizontal" class="w-3 h-3" />
+                          <span>+{{ items.length - 3 }} 項目</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -188,59 +277,198 @@
             </div>
           </div>
           
-          <!-- 保健品卡片網格 - 全新響應式佈局 -->
+          <!-- 專業保健品展示區域 -->
           <div class="relative">
             <!-- 統計資訊顯示 -->
-            <div v-if="filteredSupplements.length > 0" class="mb-8 text-center">
-              <div class="inline-flex items-center bg-slate-800/40 rounded-2xl px-6 py-3 border border-slate-700/30">
-                <Icon name="heroicons:squares-2x2" class="w-5 h-5 text-teal-400 mr-3" />
-                <span class="text-slate-300">
-                  顯示 <span class="text-teal-400 font-semibold">{{ filteredSupplements.length }}</span> 個保健品
-                  <span v-if="searchQuery || selectedCategory !== 'all'" class="text-slate-400">
+            <div v-if="filteredSupplements.length > 0" class="mb-12 text-center">
+              <div class="inline-flex items-center bg-slate-800/60 backdrop-blur-sm rounded-2xl px-8 py-4 border border-emerald-500/25 shadow-lg">
+                <Icon name="heroicons:beaker" class="w-6 h-6 text-emerald-400 mr-4" />
+                <span class="text-slate-200 text-lg">
+                  顯示 <span class="text-emerald-400 font-bold text-2xl">{{ filteredSupplements.length }}</span> 個保健品
+                  <span v-if="searchQuery || selectedCategory !== 'all'" class="text-slate-400 ml-2">
                     / 共 {{ supplements.length }} 個
                   </span>
                 </span>
               </div>
             </div>
             
-            <!-- 保健品卡片網格 - 優化響應式佈局 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 auto-rows-fr">
-              <SupplementCard
+            <!-- 專業保健品卡片網格 -->
+            <div class="space-y-8">
+              <div
                 v-for="(supplement, index) in filteredSupplements"
                 :key="supplement.id"
-                :supplement="supplement"
+                :id="supplement.id"
+                class="relative bg-slate-900/80 backdrop-blur-xl border border-emerald-500/20 rounded-3xl p-8 shadow-2xl hover:border-emerald-400/40 hover:bg-slate-900/90 transition-all duration-500 group overflow-hidden"
                 :class="[
-                  'animate-fade-in-up transition-all duration-500',
-                  `delay-${(index * 100) % 600}`
+                  'animate-fade-in-up',
+                  `delay-${(index * 150) % 600}`
                 ]"
                 :style="{ 
-                  animationDelay: `${(index * 100)}ms`,
+                  animationDelay: `${(index * 150)}ms`,
                   animationFillMode: 'both'
                 }"
-              />
+              >
+                <!-- 背景裝飾 -->
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="absolute -top-20 -right-20 w-40 h-40 border border-emerald-500/10 rounded-full animate-spin-slow opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <!-- 主要內容 -->
+                <div class="relative z-10">
+                  <!-- 標頭區域 -->
+                  <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
+                    <div class="flex-1">
+                      <div class="flex items-center space-x-3 mb-4">
+                        <!-- 分類標誌 -->
+                        <div class="px-4 py-2 bg-emerald-500/15 border border-emerald-400/30 rounded-xl flex items-center space-x-2">
+                          <Icon :name="getCategoryIcon(supplement.category)" class="w-4 h-4 text-emerald-400" />
+                          <span class="text-emerald-300 text-sm font-medium">{{ getCategoryName(supplement.category) }}</span>
+                        </div>
+                        <!-- 使用頻率 -->
+                        <div class="px-3 py-1 bg-slate-700/50 rounded-lg">
+                          <span class="text-slate-300 text-xs">{{ supplement.usage }}</span>
+                        </div>
+                      </div>
+                      
+                      <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3 group-hover:text-emerald-100 transition-colors duration-300">
+                        {{ supplement.title }}
+                      </h3>
+                      
+                      <p class="text-slate-300 text-lg leading-relaxed group-hover:text-slate-200 transition-colors duration-300">
+                        {{ supplement.description }}
+                      </p>
+                    </div>
+                    
+                    <!-- 動作按鈕組 -->
+                    <div class="flex items-center space-x-3 mt-6 lg:mt-0 lg:ml-8">
+                      <button
+                        @click="scrollToSection(supplement.id)"
+                        class="px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-400/30 hover:border-emerald-400/50 rounded-xl text-emerald-300 hover:text-emerald-200 transition-all duration-300 flex items-center space-x-2 group/btn"
+                      >
+                        <Icon name="heroicons:eye" class="w-4 h-4 group-hover/btn:scale-110 transition-transform duration-200" />
+                        <span>查看詳情</span>
+                      </button>
+                      
+                      <button
+                        v-if="supplement.url"
+                        @click="window.open(supplement.url, '_blank')"
+                        class="px-4 py-2 bg-teal-500/10 hover:bg-teal-500/20 border border-teal-400/30 hover:border-teal-400/50 rounded-xl text-teal-300 hover:text-teal-200 transition-all duration-300 flex items-center space-x-2 group/btn"
+                      >
+                        <Icon name="heroicons:arrow-top-right-on-square" class="w-4 h-4 group-hover/btn:scale-110 transition-transform duration-200" />
+                        <span>原厂連結</span>
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <!-- 詳細資訊區域 -->
+                  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- 主要功效 -->
+                    <div class="lg:col-span-2">
+                      <h4 class="text-lg font-semibold text-emerald-300 mb-4 flex items-center">
+                        <Icon name="heroicons:sparkles" class="w-5 h-5 mr-2" />
+                        主要功效
+                      </h4>
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div
+                          v-for="benefit in supplement.benefits"
+                          :key="benefit"
+                          class="flex items-center space-x-3 p-3 bg-slate-800/50 rounded-xl border border-slate-700/40 hover:border-emerald-500/30 hover:bg-slate-800/70 transition-all duration-300 group/benefit"
+                        >
+                          <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                          <span class="text-slate-300 group-hover/benefit:text-slate-200 transition-colors duration-300">{{ benefit }}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- 使用資訊 -->
+                    <div>
+                      <h4 class="text-lg font-semibold text-teal-300 mb-4 flex items-center">
+                        <Icon name="heroicons:information-circle" class="w-5 h-5 mr-2" />
+                        使用資訊
+                      </h4>
+                      <div class="space-y-4">
+                        <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700/40">
+                          <div class="flex items-center space-x-2 mb-2">
+                            <Icon name="heroicons:clock" class="w-4 h-4 text-teal-400" />
+                            <span class="text-sm font-medium text-slate-300">使用頻率</span>
+                          </div>
+                          <p class="text-slate-400 text-sm">{{ supplement.usage }}</p>
+                        </div>
+                        
+                        <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700/40">
+                          <div class="flex items-center space-x-2 mb-2">
+                            <Icon name="heroicons:beaker" class="w-4 h-4 text-emerald-400" />
+                            <span class="text-sm font-medium text-slate-300">建議用量</span>
+                          </div>
+                          <p class="text-slate-400 text-sm">{{ supplement.dosage }}</p>
+                        </div>
+                        
+                        <div v-if="supplement.manufacturer" class="p-4 bg-slate-800/50 rounded-xl border border-slate-700/40">
+                          <div class="flex items-center space-x-2 mb-2">
+                            <Icon name="heroicons:building-office" class="w-4 h-4 text-cyan-400" />
+                            <span class="text-sm font-medium text-slate-300">製造商</span>
+                          </div>
+                          <p class="text-slate-400 text-sm">{{ supplement.manufacturer }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- 標籤區域 -->
+                  <div v-if="supplement.tags && supplement.tags.length > 0" class="mt-8 pt-6 border-t border-slate-700/50">
+                    <div class="flex flex-wrap gap-2">
+                      <div
+                        v-for="tag in supplement.tags"
+                        :key="tag"
+                        class="px-3 py-1 bg-slate-800/50 border border-slate-600/40 rounded-lg text-slate-400 text-xs hover:bg-emerald-500/10 hover:border-emerald-500/30 hover:text-emerald-300 transition-all duration-200"
+                      >
+                        {{ tag }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             
-            <!-- 沒有結果提示 - 改進設計 -->
+            <!-- 沒有結果提示 -->
             <div 
               v-if="filteredSupplements.length === 0" 
-              class="text-center py-20"
+              class="text-center py-24"
             >
-              <div class="max-w-md mx-auto">
-                <div class="w-32 h-32 bg-slate-800/30 rounded-full flex items-center justify-center mx-auto mb-8 relative">
-                  <div class="absolute inset-0 bg-teal-500/10 rounded-full animate-pulse"></div>
-                  <Icon name="heroicons:magnifying-glass" class="w-16 h-16 text-slate-500 relative z-10" />
+              <div class="max-w-lg mx-auto">
+                <div class="relative">
+                  <div class="w-40 h-40 bg-slate-800/40 rounded-full flex items-center justify-center mx-auto mb-8 relative border border-slate-700/40">
+                    <div class="absolute inset-0 bg-emerald-500/10 rounded-full animate-pulse"></div>
+                    <div class="absolute inset-4 border border-emerald-500/20 rounded-full animate-ping"></div>
+                    <Icon name="heroicons:beaker" class="w-20 h-20 text-slate-500 relative z-10" />
+                  </div>
+                  <!-- 裝飾元素 -->
+                  <div class="absolute top-8 left-8 w-4 h-4 bg-emerald-400/30 rounded-full animate-float"></div>
+                  <div class="absolute bottom-8 right-8 w-3 h-3 bg-teal-400/30 rounded-full animate-float" style="animation-delay: 1s"></div>
                 </div>
-                <h3 class="text-2xl font-bold text-slate-300 mb-4">沒有找到相關保健品</h3>
-                <p class="text-slate-400 mb-8 leading-relaxed">
-                  請嘗試調整搜尋條件或選擇不同的分類篩選
+                
+                <h3 class="text-3xl font-bold text-slate-300 mb-6">沒有找到相關保健品</h3>
+                <p class="text-slate-400 mb-10 leading-relaxed text-lg">
+                  請嘗試調整搜尋條件或選擇不同的分類篩選<br>
+                  或者瀏覽我們的完整保健品指南
                 </p>
-                <button
-                  @click="resetFilters"
-                  class="inline-flex items-center px-6 py-3 bg-teal-500/20 border border-teal-500/40 rounded-xl text-teal-300 font-medium hover:bg-teal-500/30 hover:border-teal-400/60 transition-all duration-300 group"
-                >
-                  <Icon name="heroicons:arrow-uturn-left" class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" />
-                  重置篩選條件
-                </button>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                  <button
+                    @click="clearSearch"
+                    class="inline-flex items-center px-6 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-slate-300 font-medium hover:bg-slate-600/50 hover:border-slate-500/50 transition-all duration-300 group"
+                  >
+                    <Icon name="heroicons:x-mark" class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" />
+                    清除搜尋
+                  </button>
+                  
+                  <button
+                    @click="resetFilters"
+                    class="inline-flex items-center px-8 py-3 bg-emerald-500/15 border border-emerald-500/30 rounded-xl text-emerald-300 font-medium hover:bg-emerald-500/25 hover:border-emerald-400/50 transition-all duration-300 group"
+                  >
+                    <Icon name="heroicons:arrow-uturn-left" class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" />
+                    重置所有篩選
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -248,59 +476,116 @@
       </section>
     </main>
 
-    <!-- 通用側邊欄 -->
+    <!-- 專業醫療側邊欄 -->
     <UniversalSidebar
       :items="tocItems"
-      :categories="supplementCategories"
+      :categories="tocCategories"
       :active-item="activeSection"
       :loading="contentLoading"
       theme="medical"
-      trigger-icon="heroicons:heart"
-      trigger-title="保健品目錄"
-      system-title="SUPPLEMENT_MATRIX"
-      search-placeholder="搜索保健品..."
+      trigger-icon="heroicons:beaker"
+      trigger-title="營養補充品導航"
+      system-title="NUTRITION_MATRIX"
+      search-placeholder="搜索保健品成分..."
       @item-click="scrollToSection"
       @category-change="handleCategoryChange"
     />
 
-    <!-- 免責聲明 -->
-    <section class="py-12 px-4 bg-slate-900/90 border-t border-slate-700/50">
-      <div class="container mx-auto max-w-6xl">
-        <div class="bg-red-500/10 border border-red-500/30 rounded-2xl p-8 backdrop-blur-sm">
-          <h3 class="text-red-300 font-semibold mb-4 flex items-center justify-center text-xl">
-            <Icon name="heroicons:exclamation-triangle" class="w-6 h-6 mr-3" />
-            重要醫療免責聲明
-          </h3>
-          <div class="grid md:grid-cols-2 gap-6 text-sm text-gray-300 leading-relaxed">
-            <div>
-              <p class="mb-3">
-                <strong class="text-red-200">本頁面提供的保健品資訊僅供教育和參考目的</strong>，不能替代專業醫療建議、診斷或治療。
-              </p>
-              <p class="mb-3">
-                所有保健品的效果因個人體質、健康狀況和生活方式而異。使用任何保健品前，請諮詢合格的醫療專業人員。
-              </p>
+    <!-- 專業醫療免責聲明 -->
+    <section class="py-16 px-4 bg-slate-900/95 border-t border-emerald-500/20 relative overflow-hidden">
+      <!-- 背景裝飾 -->
+      <div class="absolute inset-0 bg-gradient-to-r from-red-500/5 to-orange-500/5"></div>
+      <div class="absolute -top-10 -left-10 w-32 h-32 border border-red-500/10 rounded-full animate-spin-slow"></div>
+      
+      <div class="container mx-auto max-w-7xl relative z-10">
+        <div class="bg-gradient-to-br from-red-500/10 to-orange-500/10 border border-red-500/25 rounded-3xl p-10 backdrop-blur-sm shadow-2xl">
+          <!-- 標頭 -->
+          <div class="text-center mb-10">
+            <div class="flex items-center justify-center mb-6">
+              <div class="w-16 h-16 bg-red-500/15 rounded-2xl flex items-center justify-center border border-red-500/25">
+                <Icon name="heroicons:exclamation-triangle" class="w-8 h-8 text-red-400" />
+              </div>
             </div>
-            <div>
-              <p class="mb-3">
-                <strong class="text-red-200">特別注意：</strong>孕婦、哺乳期婦女、兒童、老年人或患有慢性疾病者，在使用任何保健品前必須先諮詢醫師。
-              </p>
-              <p>
-                本網站不對因使用這些資訊而導致的任何後果承擔責任。如有健康問題，請立即尋求專業醫療協助。
-              </p>
+            <h3 class="text-3xl font-bold text-red-300 mb-4">
+              重要醫療免責聲明
+            </h3>
+            <div class="w-24 h-[2px] bg-gradient-to-r from-red-400 to-orange-400 mx-auto rounded-full"></div>
+          </div>
+          
+          <!-- 內容 -->
+          <div class="grid md:grid-cols-2 gap-8 text-slate-300 leading-relaxed">
+            <div class="space-y-6">
+              <div class="p-6 bg-slate-800/40 rounded-2xl border border-slate-700/40">
+                <h4 class="text-red-200 font-semibold mb-3 flex items-center">
+                  <Icon name="heroicons:information-circle" class="w-5 h-5 mr-2" />
+                  資訊性質
+                </h4>
+                <p>
+                  本頁面提供的保健品資訊<strong class="text-red-200">僅供教育和參考目的</strong>，不能替代專業醫療建議、診斷或治療。
+                </p>
+              </div>
+              
+              <div class="p-6 bg-slate-800/40 rounded-2xl border border-slate-700/40">
+                <h4 class="text-red-200 font-semibold mb-3 flex items-center">
+                  <Icon name="heroicons:user" class="w-5 h-5 mr-2" />
+                  個人差異
+                </h4>
+                <p>
+                  所有保健品的效果因個人體質、健康狀況和生活方式而異。使用任何保健品前，請諮詢合格的醫療專業人員。
+                </p>
+              </div>
+            </div>
+            
+            <div class="space-y-6">
+              <div class="p-6 bg-slate-800/40 rounded-2xl border border-slate-700/40">
+                <h4 class="text-red-200 font-semibold mb-3 flex items-center">
+                  <Icon name="heroicons:shield-exclamation" class="w-5 h-5 mr-2" />
+                  特殊群體注意
+                </h4>
+                <p>
+                  孕婦、哺乳期婦女、兒童、老年人或患有慢性疾病者，在使用任何保健品前<strong class="text-red-200">必須先諮詢醫師</strong>。
+                </p>
+              </div>
+              
+              <div class="p-6 bg-slate-800/40 rounded-2xl border border-slate-700/40">
+                <h4 class="text-red-200 font-semibold mb-3 flex items-center">
+                  <Icon name="heroicons:heart" class="w-5 h-5 mr-2" />
+                  緊急情況
+                </h4>
+                <p>
+                  本網站不對因使用這些資訊而導致的任何後果承擔責任。<strong class="text-red-200">如有健康問題，請立即尋求專業醫療協助</strong>。
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 緊急聯絡資訊 -->
+          <div class="mt-10 pt-8 border-t border-red-500/20 text-center">
+            <div class="flex flex-wrap justify-center items-center gap-6 text-sm text-red-200">
+              <div class="flex items-center space-x-2">
+                <Icon name="heroicons:phone" class="w-4 h-4" />
+                <span>緊急醫療諮詢：119</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <Icon name="heroicons:building-office-2" class="w-4 h-4" />
+                <span>藥物不良反應通報：02-2396-0100</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 回到頂部按鈕 -->
+    <!-- 專業醫療回到頂部按鈕 -->
     <button
-      v-if="scrollProgress > 10"
+      v-if="scrollProgress > 15"
       @click="scrollToTop"
-      class="fixed bottom-8 right-8 w-12 h-12 bg-teal-500/20 backdrop-blur-sm border border-teal-500/30 rounded-full flex items-center justify-center text-teal-400 hover:bg-teal-500/30 hover:border-teal-400/50 transition-all duration-300 z-40 group"
+      class="fixed bottom-8 right-8 w-14 h-14 bg-emerald-500/20 backdrop-blur-xl border border-emerald-500/30 rounded-2xl flex items-center justify-center text-emerald-400 hover:bg-emerald-500/30 hover:border-emerald-400/50 transition-all duration-500 z-40 group shadow-2xl"
     >
-      <Icon name="heroicons:arrow-up" class="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
-      <div class="absolute inset-0 bg-teal-500/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+      <Icon name="heroicons:arrow-up" class="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+      <div class="absolute inset-0 bg-emerald-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+      <!-- 進度指示 -->
+      <div class="absolute inset-0 rounded-2xl" style="background: conic-gradient(transparent, transparent {{ scrollProgress * 3.6 }}deg, rgba(16, 185, 129, 0.3) {{ scrollProgress * 3.6 }}deg)"></div>
     </button>
   </div>
 </template>
@@ -1004,9 +1289,23 @@ const tocItems = computed(() => {
     title: supplement.title,
     subtitle: supplement.content.replace(/<[^>]*>/g, '').substring(0, 80) + '...',
     category: supplement.category,
-    frequency: supplement.usage ? 'high' : 'medium'
+    frequency: supplement.usage ? 'high' : 'medium',
+    level: 1
   }))
 })
+
+// 側邊欄專用的分類數據
+const tocCategories = computed(() => [
+  { key: 'amino-acids', name: '胺基酸類', icon: 'heroicons:bolt' },
+  { key: 'fish-oil', name: '魚油', icon: 'heroicons:water' },
+  { key: 'eye-health', name: '眼部健康', icon: 'heroicons:eye' },
+  { key: 'stomach-protection', name: '胃部保護', icon: 'heroicons:heart' },
+  { key: 'minerals', name: '礦物質', icon: 'heroicons:cube' },
+  { key: 'vitamins', name: '維生素', icon: 'heroicons:sparkles' },
+  { key: 'others', name: '其他', icon: 'heroicons:star' },
+  { key: 'enzymes', name: '酵素', icon: 'heroicons:beaker' },
+  { key: 'probiotics', name: '益生菌', icon: 'heroicons:squares-plus' }
+])
 
 // 統計資訊
 const supplementStatistics = computed(() => {
@@ -1019,6 +1318,24 @@ const supplementStatistics = computed(() => {
     totalProducts,
     totalCategories,
     totalManufacturers
+  }
+})
+
+// 搜尋建議和載入狀態
+const searchSuggestions = ref<string[]>([
+  '胺基酸', '魚油', '維生素', '葉黃素', '蝦青素', 
+  '益生菌', '消化酵素', '鋅', 'CoQ10', '小檗鹼'
+])
+const isSearching = ref(false)
+
+// 監聽搜尋變化
+watch(searchQuery, (newQuery) => {
+  if (newQuery.trim()) {
+    isSearching.value = true
+    // 模擬搜尋延遲
+    setTimeout(() => {
+      isSearching.value = false
+    }, 300)
   }
 })
 
@@ -1058,6 +1375,12 @@ const renderSupplementContent = (content: string) => {
   return html
 }
 
+// 清除搜尋功能
+const clearSearch = () => {
+  searchQuery.value = ''
+  isSearching.value = false
+}
+
 // 事件處理
 const scrollToSection = (sectionId: string) => {
   const element = document.getElementById(sectionId)
@@ -1074,6 +1397,7 @@ const handleCategoryChange = (categoryKey: string) => {
 const resetFilters = () => {
   searchQuery.value = ''
   selectedCategory.value = 'all'
+  isSearching.value = false
 }
 
 const scrollToTop = () => {
