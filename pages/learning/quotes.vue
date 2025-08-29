@@ -322,6 +322,24 @@ const quotes = [
     tags: ['目的', '手段', '策略'],
     date: '2024-01-26',
     featured: false
+  },
+  {
+    id: 'wise-adaptability',
+    content: '識時務者為俊傑。',
+    author: '佚名',
+    category: 'classical',
+    tags: ['智慧', '時機', '適應'],
+    date: '2025-08-29',
+    featured: true
+  },
+  {
+    id: 'three-realms-scholarship',
+    content: '昨夜西風凋碧樹。獨上高樓，望盡天涯路。此第一境界也。衣帶漸寬終不悔，為伊消得人憔悴。此第二境界也。眾裡尋他千百度，驀然回首，那人卻在，燈火闌珊處。此第三境界也。',
+    author: '王國維',
+    category: 'classical',
+    tags: ['治學', '境界', '古典文學'],
+    date: '2025-08-29',
+    featured: true
   }
 ]
 
